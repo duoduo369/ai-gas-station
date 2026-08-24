@@ -26,13 +26,11 @@ labels: wayfinder:map
 - [T-002 对象目录的索引与正文契约](./tickets/T-002-index-and-note-contract.md) — 每个对象目录用 `README.md` 做主题化索引，条目最小字段为名称/可选原始链接/一句话注释/可选本地笔记链接；只有产生明确沉淀时才单开同目录深度笔记
 - [T-003 命名、链接与附件规范](./tickets/T-003-naming-linking-and-assets.md) — 正文文件默认用自然中文标题、索引固定 `README.md`、本地引用统一标准 Markdown 相对路径；不存在目标不预链接，`assets/` 保留英文并采用日期加英文短语命名
 - [T-004 初始化最小仓库骨架](./tickets/T-004-bootstrap-minimal-skeleton.md) — 已落地第一版空骨架：根入口、AI 入口、规范文档、`书籍/`、`演讲/`、`技能/`、`playbook/`、`assets/` 的目录与 `README.md` 均已建立
+- [T-005 在当前目录初始化 Git 并接入 Gitee 远端](./tickets/T-005-init-git-and-gitee-remote.md) — 已在 `D:\live\AI加油站` 初始化 Git、绑定 `origin`、建立首个提交并成功推送 `master` 到 Gitee
 
 ## Not yet specified
 
-- 第一版之外的对象类型如何扩展，例如课程、文章、工具、案例、提示词；等核心结构跑顺后再决定是否升为独立目录。
-- awesome 风格 Markdown 索引之外，后续是否需要更结构化的数据格式（表格、YAML、脚本可读清单）。
-- 未来是否需要一个面向发布或浏览的展示层，而不只依赖 Obsidian 与 GitHub。
-- 资料采集与沉淀的自动化入口是否要做成脚本或 skill；等手动流程稳定后再说。
+- 当前为空。第一版最小骨架已经完成；后续若要扩对象类型、结构化数据格式、展示层或自动化入口，建议另开新 effort。
 
 ## Out of scope
 
