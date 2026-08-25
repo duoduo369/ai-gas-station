@@ -18,14 +18,15 @@ AI 协作入口见 [AGENTS.md](./AGENTS.md)。长期结构决策见 [docs/wayfin
 | --- | --- |
 | `书籍/` | 书的索引与单本学习笔记 |
 | `演讲/` | 演讲、分享、播客等内容的索引与学习笔记 |
-| `技能/` | skill、工具能力、使用方法的学习与实践记录 |
+| `skills/` | agent skills 的学习、拆解与实践记录 |
+| `概念/` | AI 概念、术语与机制解释 |
 | `playbook/` | 已验证、可复用的方法、流程、套路 |
 | `assets/` | 功能性附件，如截图、PDF、讲义 |
 | `docs/` | 机制与规范文档 |
 
 ## 使用约定
 
-- 对象目录用中文命名，少数机制目录保留英文，如 `playbook/`、`assets/`、`docs/`。
+- 对象目录默认使用中文命名；`skills/` 因直接对应 agent skills 保留英文，机制目录也保留英文，如 `playbook/`、`assets/`、`docs/`。
 - 每个对象目录都用 `README.md` 作为索引入口。
 - 索引条目最少包含：名称、一句话注释；原始链接与本地笔记链接都是可选项。
 - 只有当真的形成了学习收获、摘录或实践记录时，才单开深度笔记。
@@ -39,5 +40,6 @@ AI 协作入口见 [AGENTS.md](./AGENTS.md)。长期结构决策见 [docs/wayfin
 - 开始记录内容：
   - [书籍](./书籍/README.md)
   - [演讲](./演讲/README.md)
-  - [技能](./技能/README.md)
+  - [skills](./skills/README.md)
+  - [概念](./概念/README.md)
   - [playbook](./playbook/README.md)

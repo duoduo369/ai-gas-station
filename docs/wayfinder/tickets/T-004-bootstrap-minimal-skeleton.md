@@ -27,9 +27,9 @@ assignee: codex
 
 已在仓库内完成第一版最小骨架初始化：
 
-- 建立顶层对象目录：`书籍/`、`演讲/`、`技能/`
+- 建立顶层对象目录：`书籍/`、`演讲/`、`skills/`
 - 建立横切目录：`playbook/`、`assets/`
 - 写出根入口文件：[README.md](../../README.md) 与 [AGENTS.md](../../AGENTS.md)
 - 写出结构与记录规范：[docs/conventions.md](../../docs/conventions.md)
-- 给 `书籍/`、`演讲/`、`技能/`、`playbook/`、`assets/` 补上 `README.md`
+- 给 `书籍/`、`演讲/`、`skills/`、`playbook/`、`assets/` 补上 `README.md`
 - 保持仓库为轻量空骨架，只提供说明、约定和占位小节，不预填大量真实内容

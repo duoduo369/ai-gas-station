@@ -1,56 +1,53 @@
 # AGENTS.md
 
-> 给 AI 读的渐进式加载入口。给人看的总说明在 [README.md](./README.md)。
-> 本文件只放路由和不变量，正文沉到对应目录与规范文件里。
+> 给 AI 的渐进式加载入口。给人看的总说明在 [README.md](./README.md)。
+> 这里只放不变量、分支路由、默认动作；解释性正文沉到被指向的文件里。
 
-## 项目是什么
+## 仓库目标
 
-这是一个面向 AI 学习沉淀的个人知识库，不围绕固定学习计划展开，而是围绕“看到值得留的内容后，如何持续沉淀”来组织。
-
-AI 在这里的职责不是替代学习，而是：
-
-- 快速读到正确的背景和约定；
-- 帮助归类、整理、补充结构；
-- 在已有沉淀上继续总结、对比、提炼出可复用打法。
+这是一个面向 AI 学习沉淀的个人知识库。你的职责是帮助归类、维护索引、补充已形成的学习沉淀，并把重复验证过的方法提炼进 `playbook/`。
 
 ## 全局不变量
 
-- 第一版结构采用“对象目录 + 横切目录”混合方式。
-- 第一版对象目录只有：`书籍/`、`演讲/`、`技能/`。
-- 第一版横切目录保留：`playbook/`、`assets/`、`docs/`。
+- 顶层结构采用“对象目录 + 横切目录”混合方式。
+- 对象目录只有：`书籍/`、`演讲/`、`skills/`、`概念/`。
+- 横切目录保留：`playbook/`、`assets/`、`docs/`。
 - 不建 `资源/`、`主题/`、`plans/`、`收件箱/`。
-- 对象目录与正文文件中文优先；少数机制目录保留英文，如 `playbook/`、`assets/`、`docs/`。
+- 对象目录与正文文件中文优先；`skills/` 因直接对应 agent skills 保留英文，机制目录也保留英文，如 `playbook/`、`assets/`、`docs/`。
 - 每个对象目录都以 `README.md` 作为索引入口，索引风格参考 awesome 项目。
 - 索引条目最小字段 = 名称 + 一句话注释；原始链接与本地笔记链接都可选。
 - 只有当已经形成明确学习收获、摘录或实践记录时，才单开深度笔记。
 - 本地引用统一使用标准 Markdown 相对路径，不依赖 Obsidian 双链承载关键结构。
 - 不对不存在的目标预先加链接，避免 Obsidian 误建空文件。
 - 附件统一放 `assets/`，文件名采用“日期 + 英文短语”。
-- 长期结构决策放在 [docs/wayfinder/MAP.md](./docs/wayfinder/MAP.md)；新增结构分歧时，优先补决策票而不是直接拍脑袋扩目录。
+- 涉及顶层结构、机制变化或新增目录时，先看 [docs/wayfinder/MAP.md](./docs/wayfinder/MAP.md)，优先补决策票而不是直接扩目录。
 
-## 路由表
+## 分支路由
 
-| 用户意图 | 先读 |
-| --- | --- |
-| 想看整体结构、仓库入口 | [README.md](./README.md) |
-| 想继续结构决策、推进 ticket | [docs/wayfinder/MAP.md](./docs/wayfinder/MAP.md) |
-| 想确认术语是什么意思 | [CONTEXT.md](./CONTEXT.md) |
-| 想看记录规则、命名、链接、附件规范 | [docs/conventions.md](./docs/conventions.md) |
-| 想收录一本书或补书籍笔记 | [书籍/README.md](./书籍/README.md) |
-| 想收录一场演讲、播客或分享 | [演讲/README.md](./演讲/README.md) |
-| 想记录某个 skill 或工具能力的学习过程 | [技能/README.md](./技能/README.md) |
-| 想沉淀已验证的方法、流程、套路 | [playbook/README.md](./playbook/README.md) |
-| 想放截图、PDF、讲义等功能性材料 | `assets/` |
+- `整体结构`、`仓库入口`、`从哪里开始` -> [README.md](./README.md)
+- `术语`、`对象目录`、`索引`、`深度笔记`、`playbook` 的含义 -> [CONTEXT.md](./CONTEXT.md)
+- `命名`、`链接`、`附件规则`、`README 写法` -> [docs/conventions.md](./docs/conventions.md)
+- `书`、`阅读笔记`、`书摘`、`作者相关内容` -> [书籍/README.md](./书籍/README.md)
+- `演讲`、`播客`、`访谈`、`分享` -> [演讲/README.md](./演讲/README.md)
+- `skill`、`agent skill`、`技能经验`、`skills 目录` -> [skills/README.md](./skills/README.md)
+- `概念`、`名词解释`、`机制解释`、`agent 是什么`、`token 是什么` -> [概念/README.md](./概念/README.md)
+- `方法`、`流程`、`套路`、`准则`、`可复用经验` -> [playbook/README.md](./playbook/README.md)
+- `截图`、`PDF`、`讲义`、`附件` -> [assets/README.md](./assets/README.md)
+- `扩目录`、`改顶层结构`、`新增机制`、`结构分歧`、`ticket` -> [docs/wayfinder/MAP.md](./docs/wayfinder/MAP.md)
 
 ## 默认加载链
 
-本文件 → 命中的对象目录 `README.md` 或 [docs/conventions.md](./docs/conventions.md) → 最相关的 1–2 个正文文件 → 涉及长期结构问题时再看 [docs/wayfinder/MAP.md](./docs/wayfinder/MAP.md)。
+本文件 -> 命中的目录 `README.md` 或 [docs/conventions.md](./docs/conventions.md) -> 最相关的 1-2 个正文文件 -> 只有涉及结构决策时再看 [docs/wayfinder/MAP.md](./docs/wayfinder/MAP.md)。
 
-## 高频工作流
+## 默认动作
 
-- **收录内容**：先判断属于 `书籍/`、`演讲/`、`技能/` 还是 `playbook/` → 在对应 `README.md` 追加索引条目 → 若已经产生明确沉淀，再补同目录正文文件。
-- **整理结构**：先对照 [docs/conventions.md](./docs/conventions.md) → 若只是局部补充，直接改；若涉及顶层结构或机制变化，先回到 [docs/wayfinder/MAP.md](./docs/wayfinder/MAP.md)。
-- **沉淀打法**：只有当某种方法已经重复验证、值得复用时，才进入 `playbook/`。
+- 收录内容时：先判断属于 `书籍/`、`演讲/`、`skills/`、`概念/` 还是 `playbook/`，再修改对应 `README.md` 索引。
+- `skills/` 只收与 agent skills 直接相关的学习、拆解、踩坑和复用经验；不作为泛化工具目录。
+- `概念/` 收不依附于单一本资源或单个 skill 的概念解释、术语拆解与机制理解。
+- 只有在已经形成明确学习收获、摘录或实践记录时，才新增或补充同目录正文文件；否则停在索引条目。
+- 涉及命名、链接、附件、索引写法时，先对照 [docs/conventions.md](./docs/conventions.md)。
+- 涉及方法沉淀时，只有“重复验证、下次还能直接复用”的内容才进入 `playbook/`。
+- 涉及顶层结构或机制变化时，不直接拍脑袋扩目录，先回到 [docs/wayfinder/MAP.md](./docs/wayfinder/MAP.md)。
 
 ## 维护
 

@@ -29,6 +29,7 @@ labels: wayfinder:map
 - [T-005 在当前目录初始化 Git 并接入 Gitee 远端](./tickets/T-005-init-git-and-gitee-remote.md) — 已在 `D:\live\AI加油站` 初始化 Git、绑定 `origin`、建立首个提交并成功推送 `master` 到 Gitee
 - [T-006 为概念性知识点新增顶层对象目录](./tickets/T-006-concepts-directory-for-knowledge-notes.md) — 新增 `概念/` 作为第四个对象目录，用于承接不依附于单一本资源或 skill 的概念解释、术语拆解与机制理解
 - [T-007 `skills/` 学习文档的自包含附录契约](./tickets/T-007-skill-learning-note-self-contained-appendix-contract.md) — 具体 skill 学习文档默认采用“顶部导航 + 主体拆解 + 底部附录”的自包含结构，文末保留原始 `SKILL.md` 与中文翻译，并用显式锚点支持文内跳转
+- [T-008 将主维护远端切换到 GitHub](./tickets/T-008-switch-primary-remote-to-github.md) — 保留最初接入 Gitee 的历史事实，但后续仓库维护统一以 `git@github.com:duoduo369/ai-gas-station.git` 作为主远端
 
 ## Not yet specified
 

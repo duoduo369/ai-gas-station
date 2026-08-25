@@ -1,0 +1,13 @@
+# Obsidian local configuration
+.obsidian/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Editor temp files
+*.swp
+*.swo
+*~
