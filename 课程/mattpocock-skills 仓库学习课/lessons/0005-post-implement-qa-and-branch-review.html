@@ -13,10 +13,10 @@
       <section class="hero">
         <p class="eyebrow">Lesson 0005</p>
         <h1>所有 ticket 做完后，整体怎么验收</h1>
-        <p class="lede">你已经走完 <code>wayfinder</code> / <code>grill-with-docs</code> → <code>to-spec</code> → <code>to-tickets</code> → 一张张 <code>implement</code>。每张票收尾时似乎都做过 code review。真正缺的不是再发明一个 QA skill，而是看清：单票评审覆盖什么、整分支对照 spec 覆盖什么、哪些验收其实只能由你来关。</p>
+        <p class="lede">你已经走完 <code>wayfinder</code> / <code>grill-with-docs</code> → <code>to-spec</code> → <code>to-tickets</code> → 一张张 <code>implement</code>。这一课把验收收成一件事：单票评审为什么不够、整分支 <code>/code-review</code> 到底在查什么、spec 有缺口时要不要新开，以及本地 <code>.scratch</code> 里要不要跑 <code>/triage</code>。</p>
         <div class="pill-row">
-          <span class="pill">预计 12 分钟</span>
-          <span class="pill">目标：会做整分支收尾</span>
+          <span class="pill">预计 16 分钟</span>
+          <span class="pill">目标：会读两轴并分流后续工作</span>
           <span class="pill">速查：<a href="../reference/post-implement-qa-and-branch-review.html">整分支验收速查</a></span>
         </div>
       </section>
@@ -43,6 +43,28 @@
           <article class="card">
             <h3 class="card-title">因为每张票看起来已经 review 过</h3>
             <p><code>implement</code> 的最后一拍确实是跑 <code>/code-review</code> 再 commit。于是很容易以为整条链路已经自带验收，不再需要人上场。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>这一课里的 seam 是什么</h2>
+        <div class="callout">
+          <p><strong>seam 是你观察行为的那条公开边界：站在接口外面看它做什么，不伸手进模块里面。</strong></p>
+          <p>测试住在 seam 上，不住在内部实现上。所以单票说“在约定 seam 上红绿过关”，指的不是“所有测试都绿了”，而是：事先说好从哪条公开边界验行为，并且只在那里验。</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">为什么验收会碰到这个词</h3>
+            <p><code>to-spec</code> 写正文前就要先跟你确认测试 seam；<code>tdd</code> 只在这些事先约定的 seam 上写测试；<code>code-review</code> 对照 spec 时，没约定却用上的 seam 会变成发现。三者绑在同一份 spec 上。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">越高越好，越少越好</h3>
+            <p>优先用已经存在的 seam，能站在更高处观察就不要往下拆。一次改动里，理想数量是一个。新开很多 seam，通常意味着测试开始贴实现。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">它不是“模块边界”的同义词</h3>
+            <p>仓库刻意不用 boundary 这个词，避免和 DDD 的 bounded context 搅在一起。seam 说的是：行为在哪被替换、被观察。更完整的深模块词汇在 <code>codebase-design</code>，这一课只需要验收用得上的这层。</p>
           </article>
         </div>
       </section>
@@ -98,25 +120,123 @@
           </article>
           <article class="card">
             <h3 class="card-title">3. 对分支点跑 <code>/code-review</code></h3>
-            <p>fixed point 用 <code>main</code> 或这个功能分支的起点。把 <code>to-spec</code> 那份 parent spec 的路径或 issue 明确喂进去，不要让它只靠某张子票去猜。</p>
+            <p>fixed point 用 <code>main</code> 或这个功能分支的起点。把 <code>to-spec</code> 那份 parent spec 明确喂进去；本地就是 <code>.scratch/&lt;feature&gt;/spec.md</code>。</p>
           </article>
           <article class="card">
             <h3 class="card-title">4. 两轴分开读，不要揉成一句</h3>
-            <p><strong>Spec 轴</strong>就是你要的“有没有跑偏”：缺了什么、多做了什么、看起来做了但做歪了。<strong>Standards 轴</strong>问的是拼完之后代码还像不像这个仓库该有的样子。两轴故意不合并，免得一轴过了把另一轴盖掉。</p>
+            <p>报告必须是 <code>## Standards</code> 和 <code>## Spec</code> 两块。一轴过了不能把另一轴盖掉。下一节把这两轴拆开讲。</p>
           </article>
           <article class="card">
             <h3 class="card-title">5. 你自己把 demo 走一遍</h3>
-            <p>vertical slice 的设计就是：每张票落地时都该能单独演示。整分支收尾时，对照每张票的 acceptance criteria 和 spec 里的 user stories，用真实路径看一遍。agent 的 Spec 轴是假设，不是证据。</p>
+            <p>vertical slice 的设计就是：每张票落地时都该能单独演示。agent 的 Spec 轴是假设，不是证据；spec 里根本没写的缺口，它也看不见。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">6. 发现了就当新工作，不要空转</h3>
-            <p><code>code-review</code> 没有“直到干净为止”的收敛保证。带着引用的发现再开票或小范围 <code>implement</code>；不要循环到它再也挑不出东西。</p>
+            <h3 class="card-title">6. 发现了就分流，不要空转</h3>
+            <p><code>code-review</code> 没有“直到干净为止”的收敛保证。带着引用的发现，按后面的分流表处理；不要循环到它再也挑不出东西。</p>
           </article>
         </div>
       </section>
 
       <section>
-        <h2>两件容易一起混掉的事</h2>
+        <h2><code>code-review</code> 跟传统人审不是同一件事</h2>
+        <div class="callout">
+          <p><strong>它重点查的是“做没做对的东西”，不是“这段代码里有没有空指针”。</strong></p>
+          <p>你的直觉对了一半：Spec 轴确实是在问 agent 有没有按 spec 做成。但要校正一句——它查的是 spec 里锁住的<strong>行为、决策和 seam</strong>，不是“实现手法像不像你脑子里的写法”。<code>to-spec</code> 自己就禁止把文件路径和代码片段写进 spec。传统人审爱抓的 null、race、off-by-one，文档明确说那是 Claude Code 自带的 review，不是这个 skill。</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Standards 轴</th>
+                <th>Spec 轴</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>问的问题</td>
+                <td>写得像不像这个仓库该有的样子？</td>
+                <td>做的是不是 spec 要的那个东西？</td>
+              </tr>
+              <tr>
+                <td>对照什么</td>
+                <td>仓库自己的标准文档，外加一组 Fowler code smell 底线</td>
+                <td>originating spec / issue 的原文</td>
+              </tr>
+              <tr>
+                <td>会报什么</td>
+                <td>违反已写标准（可以是硬伤），以及 smell（永远是判断题）</td>
+                <td>spec 要了但没做成、多做了（scope creep）、看起来做了但做歪了</td>
+              </tr>
+              <tr>
+                <td>每条发现必须带</td>
+                <td>标准文件里的那条规则，或 smell 名加 hunk</td>
+                <td>spec 里被引用的那一行</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>两轴故意跑在<strong>互相看不见的 sub-agent</strong> 里，最后也不合并、不排名。代码可以“标准全过、东西做错”，也可以“东西做对、风格不像这个仓库”。揉成一个总分，就是过的那轴把没过的盖掉。</p>
+        <p>还有一个验收时特别容易漏的点：<strong>Spec 轴看不见 spec 里根本没写的需求。</strong>“缺了”的意思是 spec 要了、代码没有。你点 demo 时才发现“当初漏了登录过期”，这条不会作为 Spec 失败出现——因为它不在对照物里。</p>
+      </section>
+
+      <section>
+        <h2>验收发现问题时，要不要新开 spec</h2>
+        <p>默认答案是<strong>不要</strong>。spec 是当时的决策快照，不是活文档。<code>to-spec</code> 写得很清楚：一开工它就会过期；真正该留下的是 <code>CONTEXT.md</code> 和 ADR。目的地没变，就在同一份 spec 下面补工作。</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>你看到的</th>
+                <th>这意味着</th>
+                <th>接下来做什么</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Spec 轴：要了但没做成 / 做成了但做歪了</td>
+                <td>spec 仍是对的，实现跑偏了</td>
+                <td>对着<strong>同一份</strong> spec 再开一张票，或小范围 <code>/implement</code>。不要新开 spec。</td>
+              </tr>
+              <tr>
+                <td>Spec 轴：多做了（scope creep）</td>
+                <td>agent 做了 spec 没要的东西</td>
+                <td>先问你自己：这是该删掉，还是你其实想要？想要就当成新决策，而不是“评审通过”。</td>
+              </tr>
+              <tr>
+                <td>人走 demo 才发现 spec 漏了、写得不够</td>
+                <td>对照物本身不完整。Spec 轴通常不会替你喊出来</td>
+                <td>目的地没变：缺的决策需要的话先 <code>/grill-with-docs</code>，再在同一个 <code>.scratch/&lt;feature&gt;/issues/</code> 里补票。学到的长期判断写进 <code>CONTEXT.md</code> / ADR，不要去改那份已经开工的 spec 当活文档。</td>
+              </tr>
+              <tr>
+                <td>目的地变了，原来那份 spec 会让你吃惊</td>
+                <td>这是 pivot，不是修票</td>
+                <td>删掉没做完的 tickets，<strong>旧 spec 留着当快照</strong>。重新 grill，需要跨 session 再 <code>/to-spec</code>。文档原话：pivot 时删未完成的票、留着 spec。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>判断句就一句：<strong>还是同一个 destination，就补票；destination 换了，才配得上新 spec。</strong> 漏掉一个验收条件、需求写得不够圆，通常都还是同一趟。</p>
+      </section>
+
+      <section>
+        <h2><code>triage</code> 是干嘛的？本地 <code>.scratch</code> 用得上吗</h2>
+        <div class="callout">
+          <p><strong><code>/triage</code> 是外来工单的上坡入口，不是你这条主线的验收步骤。</strong></p>
+          <p>它只处理<strong>不是你创建的</strong>原始报告：别人提的 bug、外部功能请求、突然扔进来的 PR。它走一套状态机（<code>needs-triage</code> → 核实 → 必要时 grill → 写成 agent brief 或关掉），然后并回主线的同一扇门：<code>ready-for-agent</code>。<code>to-tickets</code> 拆出来的票已经是 agent-ready，再跑一遍 triage 是浪费。</p>
+        </div>
+        <p>你本地看到的 <code>.scratch/</code>，就是这套技能的<strong>本地 markdown tracker</strong>，和 GitHub Issues 是二选一，不是两层。一份功能大概长这样：</p>
+        <ul>
+          <li><code>.scratch/&lt;feature&gt;/spec.md</code> — parent spec</li>
+          <li><code>.scratch/&lt;feature&gt;/issues/01-xxx.md</code> — 一张票一个文件</li>
+          <li>票上的 <code>Status:</code> 行，就是 triage 状态在本地的落点</li>
+        </ul>
+        <p>所以：<strong>tracker 能跑 triage，不代表你这条工作流该跑。</strong> 文档自己也说了——如果 tracker 里的东西都来自你自己的规划，你会很少打开 <code>/triage</code>。它真正值钱的场景是开源仓库、团队往你这里扔原始 issue。本地独唱、票都是 <code>to-tickets</code> 写进 <code>.scratch</code> 的，验收时发现缺口，直接在同一个 <code>issues/</code> 里补票，或先 grill 再补；不要把这些票再送去 triage。</p>
+        <p>只有一种本地情况它才开始有用：tracker 里突然多了一条<strong>还没被你规划过的原始备注</strong>——同事丢来的、用户反馈、你随手记下但完全没拆过的东西。那时 triage 的核实、去重、agent brief 才帮得上忙。</p>
+      </section>
+
+      <section>
+        <h2>不要拿错工具</h2>
         <div class="table-wrap">
           <table>
             <thead>
@@ -133,19 +253,33 @@
                 <td>已删除的 <code>/qa</code>，或再对每张票重复 implement</td>
               </tr>
               <tr>
-                <td>我边点边发现新 bug / 新缺口</td>
-                <td>现在走 <code>/triage</code> 或直接拆成新 tickets</td>
-                <td>假装这还是同一张旧票的“验收步骤”</td>
+                <td>实现做错，spec 仍对</td>
+                <td>同一份 spec 下补票 / 小范围 <code>/implement</code></td>
+                <td>新开一份 spec</td>
+              </tr>
+              <tr>
+                <td>demo 时发现 spec 漏了，目的地没变</td>
+                <td>必要时 grill，然后在同一个 <code>.scratch/&lt;feature&gt;/issues/</code> 补票</td>
+                <td><code>/triage</code>，或把旧 spec 当活文档改来改去</td>
+              </tr>
+              <tr>
+                <td>目的地变了</td>
+                <td>删未完成的票，留旧 spec 当快照，重新 grill / <code>to-spec</code></td>
+                <td>在旧票上硬修，假装还是同一趟</td>
+              </tr>
+              <tr>
+                <td>别人丢来的原始 bug / 请求</td>
+                <td><code>/triage</code>（本地 <code>.scratch</code> 也能跑，但你要先真有一条外来 issue）</td>
+                <td>对 <code>to-tickets</code> 产出的票再 triage 一遍</td>
               </tr>
               <tr>
                 <td>整个代码库都漂了，不只这一支 diff</td>
                 <td><code>/improve-codebase-architecture</code></td>
-                <td><code>/code-review</code>。它只看一段 diff，不看全库。</td>
+                <td><code>/code-review</code>。它只看一段 diff。</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p>还有一个连带事实：spec 在开始写代码后就会过期。<code>to-spec</code> 文档说它是当时的快照，真正该留下的是 <code>CONTEXT.md</code> 和 ADR。所以整分支评审对照的是“当时锁住的 spec”，不是一份会自动跟着实现改写的活文档。</p>
       </section>
 
       <section class="quiz">
@@ -160,20 +294,38 @@
             <p class="feedback" aria-live="polite"></p>
           </div>
 
-          <div class="quiz-item" data-quiz-answer="票与票的交互" data-quiz-explanation="文档写明：单票评审让 Spec 轴对着一张票；整分支总评才抓票与票拼起来才出现的交互。">
-            <h3>2. 每张票 implement 时已经跑过 code-review，整分支再看一次主要是为了抓什么？</h3>
+          <div class="quiz-item" data-quiz-answer="测行为的公开边界" data-quiz-explanation="tdd 原文：seam 是你观察行为、但不伸进内部的那条公开边界。测试住在 seam 上，不住在实现细节上。">
+            <h3>2. 这一课里的 seam，指的是什么？</h3>
             <div class="options">
-              <button class="quiz-option" type="button" data-choice="票与票的交互">票与票的交互</button>
-              <button class="quiz-option" type="button" data-choice="单票里的语法">单票里的语法</button>
+              <button class="quiz-option" type="button" data-choice="模块内部的实现细节">模块内部的实现细节</button>
+              <button class="quiz-option" type="button" data-choice="测行为的公开边界">测行为的公开边界</button>
             </div>
             <p class="feedback" aria-live="polite"></p>
           </div>
 
-          <div class="quiz-item" data-quiz-answer="新开干净会话" data-quiz-explanation="同一实现会话里审自己会带上刚写代码时的假设。文档建议在新鲜 session 里对分支点跑 `/code-review`。">
-            <h3>3. 整分支对照 spec 的评审，更应该放在哪种 session？</h3>
+          <div class="quiz-item" data-quiz-answer="是不是对的东西" data-quiz-explanation="Spec 轴问的是 the right thing：有没有按 spec 的行为和决策做成。传统人审爱抓的 bug，以及“实现手法像不像”，都不是它的主业。">
+            <h3>3. 这个 <code>/code-review</code> 的 Spec 轴，核心在问什么？</h3>
             <div class="options">
-              <button class="quiz-option" type="button" data-choice="沿用实现会话">沿用实现会话</button>
-              <button class="quiz-option" type="button" data-choice="新开干净会话">新开干净会话</button>
+              <button class="quiz-option" type="button" data-choice="是不是抓空指针">是不是抓空指针</button>
+              <button class="quiz-option" type="button" data-choice="是不是对的东西">是不是对的东西</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-quiz-answer="同一份里补票" data-quiz-explanation="目的地没变就补票，不要新开 spec。spec 是快照，不是活文档；destination 换了才配得上重新 to-spec。">
+            <h3>4. 验收时发现 spec 漏了一个需求，但功能目的地没变，默认怎么做？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="立刻新开一份">立刻新开一份</button>
+              <button class="quiz-option" type="button" data-choice="同一份里补票">同一份里补票</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-quiz-answer="不用再跑它" data-quiz-explanation="to-tickets 写进 .scratch 的票已经是 agent-ready。triage 只处理外来的原始报告；本地独唱规划流里你会很少打开它。">
+            <h3>5. 本地 <code>.scratch</code> 里那些由 <code>to-tickets</code> 拆出来的票，验收时要不要再跑 <code>/triage</code>？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="不用再跑它">不用再跑它</button>
+              <button class="quiz-option" type="button" data-choice="还要再跑它">还要再跑它</button>
             </div>
             <p class="feedback" aria-live="polite"></p>
           </div>
@@ -181,7 +333,7 @@
       </section>
 
       <section>
-        <h2>这一课结束时，你应该能说出的 4 句话</h2>
+        <h2>这一课结束时，你应该能说出的 7 句话</h2>
         <div class="grid">
           <article class="card">
             <h3 class="card-title">1. QA 是阶段，不是命令</h3>
@@ -192,24 +344,38 @@
             <p>它看不见票间交互，也不会替你关票、勾验收框。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">3. 总评就是对分支点的 code-review</h3>
-            <p>新鲜 session，fixed point 用 <code>main</code>，Spec 轴对着 parent spec。</p>
+            <h3 class="card-title">3. seam 是测和审共用的公开边界</h3>
+            <p>站在接口外观察行为。spec 先约定它，tdd 只在那里测，review 会查有没有跑到没约定的地方。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">4. 人还要走一遍真实路径</h3>
-            <p>sub-agent 报告是假设；demo 和验收框才是你签字的那一层。</p>
+            <h3 class="card-title">4. 总评是两轴，不是传统人审</h3>
+            <p>Spec 轴问对不对的东西，Standards 轴问像不像这个仓库。它不主抓空指针。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">5. spec 看不见自己漏掉的需求</h3>
+            <p>人走 demo 才补得上这块。Spec 轴只对照已经写下来的句子。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">6. 目的地没变就补票</h3>
+            <p>不要默认新开 spec。pivot 才删未完成的票、留旧快照、再 grill。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">7. 本地 <code>.scratch</code> 很少需要 triage</h3>
+            <p>它能跑，但只对外来原始工单有用。你自己拆的票已经 agent-ready。</p>
           </article>
         </div>
       </section>
 
       <section>
         <h2>主资料</h2>
-        <p>这一课最值得你亲自回去看的是 <a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/code-review.md">docs/engineering/code-review.md</a>。里面有一节直接回答 “After every ticket, or once at the end?”：两种都要，吃不准就每张票看一次，最后再对分支点做一次。</p>
+        <p>这一课最值得你亲自回去看的是 <a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/code-review.md">docs/engineering/code-review.md</a>。seam 的最短定义在 <a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md">tdd/SKILL.md</a>：公开边界上观察行为，不伸进内部。<code>to-spec</code> 则规定这些 seam 必须事先约定，并顺着 spec 传到 tdd 和 code-review。</p>
         <ol class="source-list">
           <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/code-review.md">docs/engineering/code-review.md</a></li>
           <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/implement.md">docs/engineering/implement.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/to-spec.md">docs/engineering/to-spec.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/triage.md">docs/engineering/triage.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md">tdd/SKILL.md</a>（seam 的最短定义）</li>
           <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md">code-review/SKILL.md</a></li>
-          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/PHASE-BOUNDARIES.md">PHASE-BOUNDARIES.md</a></li>
         </ol>
       </section>
 

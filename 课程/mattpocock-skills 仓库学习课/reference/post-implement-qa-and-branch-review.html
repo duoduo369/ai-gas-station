@@ -12,7 +12,7 @@
       <section class="hero">
         <p class="eyebrow">Reference</p>
         <h1>所有 ticket 做完后怎么验收</h1>
-        <p class="lede">忘了主线收尾该做什么时，先抓一句：没有独立的整分支 <code>/qa</code>。单票 <code>code-review</code> 必要但不完整；整分支对照 spec 的动作，是新开干净 session，对分支点再跑一次 <code>/code-review</code>。</p>
+        <p class="lede">忘了主线收尾该做什么时，先抓一句：没有独立的整分支 <code>/qa</code>。单票评审必要但不完整；整分支对照 spec 的动作，是新开干净 session，对分支点再跑一次两轴 <code>/code-review</code>。目的地没变就补票，不要默认新开 spec；本地 <code>.scratch</code> 里自己拆的票不必再跑 <code>/triage</code>。</p>
       </section>
 
       <section>
@@ -20,20 +20,56 @@
         <div class="grid">
           <article class="card">
             <h3 class="card-title">单票 <code>implement</code> 里的 review</h3>
-            <p>看这一张票的小 diff：这张票有没有做成、有没有坏仓库标准。漏掉票与票的交互。</p>
+            <p>看这一张票的小 diff。漏掉票与票的交互，也看不见 spec 里没写的需求。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">整分支 <code>/code-review</code></h3>
-            <p>fixed point 用 <code>main</code> 或功能起点，Spec 轴对着 parent spec。专门抓拼装后的跑偏和交互。</p>
+            <h3 class="card-title">整分支两轴 <code>/code-review</code></h3>
+            <p>Spec 轴：是不是对的东西。Standards 轴：像不像这个仓库。不是传统抓 bug 的人审。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">已删除的 <code>/qa</code></h3>
-            <p>旧技能是边用边报 bug、帮你开 issue，不是 ship 闸门。职责现在落在 <code>/triage</code> 和 <code>/to-tickets</code>。</p>
+            <h3 class="card-title"><code>/triage</code></h3>
+            <p>外来原始工单的上坡入口。不是验收步骤，也不该套在 <code>to-tickets</code> 产出的票上。</p>
           </article>
           <article class="card">
             <h3 class="card-title">你自己走的验收</h3>
-            <p>关票、勾验收框、按 demo path 点一遍。这些 <code>implement</code> 都不会做。</p>
+            <p>关票、勾验收框、按 demo 点一遍。spec 漏掉的需求，通常只有这里能看见。</p>
           </article>
+          <article class="card">
+            <h3 class="card-title">seam</h3>
+            <p>观察行为的公开边界，不伸进内部。spec 先约定，tdd 只在那里测，review 会查有没有用上没约定的 seam。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>两轴对照</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Standards</th>
+                <th>Spec</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>问题</td>
+                <td>Is it built right?</td>
+                <td>Is it the right thing?</td>
+              </tr>
+              <tr>
+                <td>发现类型</td>
+                <td>违反仓库标准；Fowler smell（判断题）</td>
+                <td>缺了 / 多做了 / 做歪了</td>
+              </tr>
+              <tr>
+                <td>看不见什么</td>
+                <td>东西做错但风格合格</td>
+                <td>spec 里根本没写的需求</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
@@ -50,7 +86,7 @@
             <tbody>
               <tr>
                 <td>关票</td>
-                <td>自己勾验收框、关掉已完成的 ticket。frontier 靠这个往前走。</td>
+                <td>自己勾验收框、关掉已完成的 ticket。</td>
               </tr>
               <tr>
                 <td>换窗口</td>
@@ -58,19 +94,19 @@
               </tr>
               <tr>
                 <td>总评</td>
-                <td><code>/code-review</code>：fixed point = 分支点；spec = <code>to-spec</code> 那份 parent spec。</td>
+                <td><code>/code-review</code>：fixed point = 分支点；spec = <code>.scratch/&lt;feature&gt;/spec.md</code> 或对应 issue。</td>
               </tr>
               <tr>
                 <td>分轴读</td>
-                <td>Spec 轴看跑偏（缺、多、做错）；Standards 轴看拼完后的代码形状。不要揉成一个总分。</td>
+                <td>两块报告不要揉成总分。每条发现先核对它引用的那一行。</td>
               </tr>
               <tr>
                 <td>人走路径</td>
-                <td>对照每张票的 acceptance criteria 和 spec 的 user stories，真实点一遍。</td>
+                <td>对照 acceptance criteria 和 user stories 真实点一遍。</td>
               </tr>
               <tr>
-                <td>停得住</td>
-                <td>有引用的发现再开新工作。不要把 review 循环到“再也挑不出东西”。</td>
+                <td>分流</td>
+                <td>按下面的表处理。不要把 review 循环到“再也挑不出东西”。</td>
               </tr>
             </tbody>
           </table>
@@ -78,42 +114,46 @@
       </section>
 
       <section>
-        <h2>调用时要喂给它的两样东西</h2>
-        <div class="callout">
-          <p><strong>fixed point</strong>：通常是 <code>main</code>，比较命令是 <code>git diff main...HEAD</code>（三点，相对 merge-base）。</p>
-          <p><strong>spec 源</strong>：优先显式给出 <code>to-spec</code> 产出的 parent spec / issue。不要只让它从某一张子票的 commit message 去猜整段功能。</p>
-        </div>
-      </section>
-
-      <section>
-        <h2>不要拿错工具</h2>
+        <h2>发现问题之后</h2>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
                 <th>情况</th>
-                <th>用</th>
+                <th>做</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>这支功能有没有按 spec 做成</td>
-                <td>整分支 <code>/code-review</code> + 人走 demo</td>
+                <td>实现跑偏，spec 仍对</td>
+                <td>同一份 spec 下补票</td>
               </tr>
               <tr>
-                <td>点着点着发现新 bug</td>
-                <td><code>/triage</code>，或拆成新 tickets</td>
+                <td>spec 漏了，destination 没变</td>
+                <td>必要时 grill，然后在同一个 <code>issues/</code> 补票；长期判断写进 <code>CONTEXT.md</code> / ADR</td>
               </tr>
               <tr>
-                <td>不是这一支 diff，是全库都漂了</td>
-                <td><code>/improve-codebase-architecture</code></td>
+                <td>destination 变了</td>
+                <td>删未完成的票，留旧 spec 当快照，重新 grill / <code>to-spec</code></td>
               </tr>
               <tr>
-                <td>已经坏了，不知道为什么</td>
-                <td><code>/diagnosing-bugs</code></td>
+                <td>别人丢来的原始报告</td>
+                <td><code>/triage</code></td>
+              </tr>
+              <tr>
+                <td>你自己 <code>to-tickets</code> 拆出来的票</td>
+                <td>不要 triage</td>
               </tr>
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>本地 <code>.scratch</code> 记什么</h2>
+        <div class="callout">
+          <p>这是本地 markdown tracker，和 GitHub Issues 二选一。</p>
+          <p><code>spec.md</code> 是 parent spec；<code>issues/&lt;NN&gt;-&lt;slug&gt;.md</code> 是一张票；<code>Status:</code> 行是状态落点。独唱规划流里，验收缺口补在同一个 <code>issues/</code> 即可。</p>
         </div>
       </section>
 
@@ -121,8 +161,9 @@
         <h2>主资料</h2>
         <ol class="source-list">
           <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/code-review.md">docs/engineering/code-review.md</a></li>
-          <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/implement.md">docs/engineering/implement.md</a></li>
-          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md">code-review/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md">tdd/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/to-spec.md">docs/engineering/to-spec.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/triage.md">docs/engineering/triage.md</a></li>
           <li><a href="../lessons/0005-post-implement-qa-and-branch-review.html">回到这一课</a></li>
         </ol>
       </section>
