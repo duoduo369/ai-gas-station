@@ -59,7 +59,6 @@ AI 很擅长在局部加速，但如果没有中间产物，它也很容易在�
 相关参考：
 
 - [grilling 学习拆解](../skills/grilling 学习拆解.md)
-- [docs/wayfinder/MAP.md](../docs/wayfinder/MAP.md)
 
 ## 2. Spec：把目标写成可持续读取的文档
 

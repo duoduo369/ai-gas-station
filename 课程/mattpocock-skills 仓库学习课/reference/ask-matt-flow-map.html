@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ask-matt 流程速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>ask-matt 流程速查</h1>
+        <p class="lede">这页是第二课的压缩卡片。忘了 `ask-matt` 在做什么时，不要回忆每句原文，先回来找这四个问题：主线是什么？哪些是上坡入口？哪些技能独立存在？phase boundary 怎么选？</p>
+      </section>
+
+      <section>
+        <h2>一句话记住 ask-matt</h2>
+        <div class="callout">
+          <p><strong>`ask-matt` 不是列 skill 名单，而是把这些 skill 排成“何时走哪条路”的路由图。</strong></p>
+        </div>
+      </section>
+
+      <section>
+        <h2>主线</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>阶段</th>
+                <th>作用</th>
+                <th>关键判断</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="path">grill-with-docs</span></td>
+                <td>先把想法磨清楚，并把 glossary / ADR 之类的文档顺手沉淀下来。</td>
+                <td>只要在工作目录里，就优先从这里起步。</td>
+              </tr>
+              <tr>
+                <td><span class="path">prototype</span></td>
+                <td>当一个问题必须靠可运行原型来判断时，先做 throwaway prototype。</td>
+                <td>它是主线里的绕路，不是默认步骤。</td>
+              </tr>
+              <tr>
+                <td><span class="path">to-spec</span></td>
+                <td>把已有讨论综合成 spec，并明确测试 seam。</td>
+                <td>不重新 interview，只综合已有上下文。</td>
+              </tr>
+              <tr>
+                <td><span class="path">to-tickets</span></td>
+                <td>把 spec 拆成 tracer-bullet vertical slices，标出 blocking edges。</td>
+                <td>多 session 构建优先走这里。</td>
+              </tr>
+              <tr>
+                <td><span class="path">implement</span></td>
+                <td>按 spec 或 ticket 实现，内部驱动 `tdd`，收尾跑 `code-review`。</td>
+                <td>单 session 可以直接进入；多 session 应先拆票。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>三个常见上坡入口</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">triage</h3>
+            <p>处理“不是你自己想出来，而是外部送来的工作”。目标是把原始 issue / PR 变成 agent-ready brief。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">diagnosing-bugs</h3>
+            <p>处理“系统坏了”。它先要求 tight feedback loop，再进入 minimisation、hypothesis、instrument、fix。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">wayfinder</h3>
+            <p>处理“工作太大、太模糊，一个 session 装不下”。先做 decision map，地图清楚后再并回主线。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>独立技能与底层词汇层</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">独立技能</h3>
+            <p>`grill-me`、`grilling`、`prototype`、`research`、`to-questionnaire`、`wizard`、`wait-what`、`teach`、`writing-for-agents` 等，都可以脱离主线直接被用。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">词汇层</h3>
+            <p>`domain-modeling` 管项目语言，`codebase-design` 管深模块与 seam 的语言。上层 skill 会拉它们进来，但它们自己也能单独使用。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>phase boundary 五选一</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>选项</th>
+                <th>什么时候优先考虑</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="path">Continue</span></td>
+                <td>下一阶段还需要当前阶段作为 primary source，或者上下文窗口还足够。</td>
+              </tr>
+              <tr>
+                <td><span class="path">/clear</span></td>
+                <td>当前上下文对下一步完全无关，丢掉也不心疼。</td>
+              </tr>
+              <tr>
+                <td><span class="path">/handoff</span></td>
+                <td>需要跨 harness、跨目录、交给同事，或中途分叉侧任务。</td>
+              </tr>
+              <tr>
+                <td><span class="path">Subagent</span></td>
+                <td>任务范围紧，且你可以离开键盘让它自己跑完。</td>
+              </tr>
+              <tr>
+                <td><span class="path">/compact</span></td>
+                <td>前面四项都不合适时的默认兜底。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>最值得回读的原始材料</h2>
+        <ol class="source-list">
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">ask-matt/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/PHASE-BOUNDARIES.md">PHASE-BOUNDARIES.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/to-tickets/SKILL.md">to-tickets/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md">triage/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnosing-bugs/SKILL.md">diagnosing-bugs/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder/SKILL.md">wayfinder/SKILL.md</a></li>
+        </ol>
+      </section>
+    </main>
+  </body>
+</html>

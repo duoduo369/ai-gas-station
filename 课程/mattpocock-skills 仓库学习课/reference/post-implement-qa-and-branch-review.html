@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>整分支验收速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>所有 ticket 做完后怎么验收</h1>
+        <p class="lede">忘了主线收尾该做什么时，先抓一句：没有独立的整分支 <code>/qa</code>。单票 <code>code-review</code> 必要但不完整；整分支对照 spec 的动作，是新开干净 session，对分支点再跑一次 <code>/code-review</code>。</p>
+      </section>
+
+      <section>
+        <h2>一句话区分</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">单票 <code>implement</code> 里的 review</h3>
+            <p>看这一张票的小 diff：这张票有没有做成、有没有坏仓库标准。漏掉票与票的交互。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">整分支 <code>/code-review</code></h3>
+            <p>fixed point 用 <code>main</code> 或功能起点，Spec 轴对着 parent spec。专门抓拼装后的跑偏和交互。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">已删除的 <code>/qa</code></h3>
+            <p>旧技能是边用边报 bug、帮你开 issue，不是 ship 闸门。职责现在落在 <code>/triage</code> 和 <code>/to-tickets</code>。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">你自己走的验收</h3>
+            <p>关票、勾验收框、按 demo path 点一遍。这些 <code>implement</code> 都不会做。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>推荐收尾顺序</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>步骤</th>
+                <th>做什么</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>关票</td>
+                <td>自己勾验收框、关掉已完成的 ticket。frontier 靠这个往前走。</td>
+              </tr>
+              <tr>
+                <td>换窗口</td>
+                <td>新开干净 session，不要沿用最后一张票的实现上下文。</td>
+              </tr>
+              <tr>
+                <td>总评</td>
+                <td><code>/code-review</code>：fixed point = 分支点；spec = <code>to-spec</code> 那份 parent spec。</td>
+              </tr>
+              <tr>
+                <td>分轴读</td>
+                <td>Spec 轴看跑偏（缺、多、做错）；Standards 轴看拼完后的代码形状。不要揉成一个总分。</td>
+              </tr>
+              <tr>
+                <td>人走路径</td>
+                <td>对照每张票的 acceptance criteria 和 spec 的 user stories，真实点一遍。</td>
+              </tr>
+              <tr>
+                <td>停得住</td>
+                <td>有引用的发现再开新工作。不要把 review 循环到“再也挑不出东西”。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>调用时要喂给它的两样东西</h2>
+        <div class="callout">
+          <p><strong>fixed point</strong>：通常是 <code>main</code>，比较命令是 <code>git diff main...HEAD</code>（三点，相对 merge-base）。</p>
+          <p><strong>spec 源</strong>：优先显式给出 <code>to-spec</code> 产出的 parent spec / issue。不要只让它从某一张子票的 commit message 去猜整段功能。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>不要拿错工具</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>情况</th>
+                <th>用</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>这支功能有没有按 spec 做成</td>
+                <td>整分支 <code>/code-review</code> + 人走 demo</td>
+              </tr>
+              <tr>
+                <td>点着点着发现新 bug</td>
+                <td><code>/triage</code>，或拆成新 tickets</td>
+              </tr>
+              <tr>
+                <td>不是这一支 diff，是全库都漂了</td>
+                <td><code>/improve-codebase-architecture</code></td>
+              </tr>
+              <tr>
+                <td>已经坏了，不知道为什么</td>
+                <td><code>/diagnosing-bugs</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <ol class="source-list">
+          <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/code-review.md">docs/engineering/code-review.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/implement.md">docs/engineering/implement.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md">code-review/SKILL.md</a></li>
+          <li><a href="../lessons/0005-post-implement-qa-and-branch-review.html">回到这一课</a></li>
+        </ol>
+      </section>
+    </main>
+  </body>
+</html>

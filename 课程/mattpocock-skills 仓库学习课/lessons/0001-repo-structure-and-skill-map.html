@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lesson 0001 · 项目结构与 Skill 地图</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/classify-quiz.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Lesson 0001</p>
+        <h1>先建立这个仓库的地图感</h1>
+        <p class="lede">这一课只做一件事：帮你把 <code>mattpocock-skills</code> 看成一个有清晰分层的技能仓库，而不是一堆零散的 <code>SKILL.md</code>。学完后，你应该能说清它的目录结构、主要分桶、两条分类轴，以及主流程是怎么串起来的。</p>
+        <div class="pill-row">
+          <span class="pill">预计 8 分钟</span>
+          <span class="pill">目标：建立全局地图</span>
+          <span class="pill">回看资料：<a href="../reference/project-map.html">速查地图</a></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>先记住一句总判断</h2>
+        <div class="callout">
+          <p><strong>这个仓库不是“一个超级技能”，而是一套可组合的小技能系统。</strong></p>
+          <p>所以你理解它的关键，不是逐字背每个 skill，而是先认出它用什么方式把 skills 组织起来：先分 bucket，再分调用方式，再放进一条或几条 flow 里。这个判断来自仓库总览和 `ask-matt` 的流程描述。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>第一层：顶层结构在说什么</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">README.md 是总入口</h3>
+            <p>先讲“为什么会有这套 skills”，再讲安装方式、项目哲学和技能总表。你第一次看项目时，这里负责建立全局感。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">CLAUDE.md 是维护规则</h3>
+            <p>它告诉你 bucket 怎么分、哪些 skill 算 promoted、以及 README、docs、插件 manifest 之间必须保持怎样的同步。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">skills/ 才是主内容区</h3>
+            <p>真正的 skill 都在这里，而且不是随便平铺，而是分到 `engineering`、`productivity` 等五个桶里。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">plugin.json 是发布视角</h3>
+            <p>它不是教学文档，而是最直接的“出货清单”：哪些 skill 真会进 Claude 插件，一眼就能看到。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>第二层：先看 bucket，再看单个 skill</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Bucket</th>
+                <th>你可以怎么理解它</th>
+                <th>当前读法</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>engineering</code></td>
+                <td>工程主线技能</td>
+                <td>和“从想法到交付”的流程最相关，优先看。</td>
+              </tr>
+              <tr>
+                <td><code>productivity</code></td>
+                <td>通用协作技能</td>
+                <td>像 `teach`、`handoff`、`wait-what` 这种跨场景能力在这里。</td>
+              </tr>
+              <tr>
+                <td><code>misc</code></td>
+                <td>保留区</td>
+                <td>知道它存在即可，不把它当主航道。</td>
+              </tr>
+              <tr>
+                <td><code>in-progress</code></td>
+                <td>公开试验区</td>
+                <td>适合观察新方向，但不当稳定接口。</td>
+              </tr>
+              <tr>
+                <td><code>deprecated</code></td>
+                <td>退役区</td>
+                <td>知道它被放弃了，比精读更重要。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>这里最值钱的判断不是名字本身，而是 <strong>promoted buckets 只有两个：`engineering` 和 `productivity`</strong>。这两个桶必须进顶层 README，也必须进插件 manifest；其他三个桶不能混进去。</p>
+      </section>
+
+      <section>
+        <h2>第三层：再抓第二条分类轴</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">user-invoked</h3>
+            <p>只有用户明确输入时才会走到。它们通常承担“编排流程”的职责，比如 `/ask-matt`、`/grill-with-docs`、`/teach`。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">model-invoked</h3>
+            <p>模型自己也可以在合适时机调用。它们更像可复用的底层 discipline，比如 `tdd`、`code-review`、`grilling`。</p>
+          </article>
+        </div>
+        <p>一个很实用的记忆法是：<strong>user-invoked 更像“入口和流程”，model-invoked 更像“方法与约束”。</strong></p>
+      </section>
+
+      <section>
+        <h2>第四层：用 ask-matt 把主线串起来</h2>
+        <div class="callout">
+          <p><strong>主线是：idea → grill-with-docs → to-spec → to-tickets → implement</strong></p>
+          <p>`ask-matt` 最有价值的地方，是它不只是告诉你“仓库里有什么”，而是告诉你“这些 skill 在什么时候接力”。这就是为什么它像路由器，而不是单纯索引。</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">triage</h3>
+            <p>当工作从外部 issue 涌进来，不是你自己发起的想法时，先 triage 再并回主线。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">diagnosing-bugs</h3>
+            <p>当问题是“出 bug 了”，先建立能可靠变红的反馈回路，再谈修复，而不是直接凭感觉改。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">wayfinder</h3>
+            <p>当工作大到一个 session 装不下时，先做决策地图，等 fog 被推开后再回到主线。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="quiz">
+        <h2>3 分钟自测</h2>
+        <p>先不追求全懂，只检查你有没有抓住最关键的判断轴。</p>
+        <div class="quiz-list">
+          <div class="quiz-item" data-quiz-answer="用户触发" data-quiz-explanation="`teach` 的 frontmatter 带有 `disable-model-invocation: true`，它属于只能由用户显式发起的 skill。">
+            <h3>1. `teach` 默认属于哪类调用方式？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="用户触发">用户触发</button>
+              <button class="quiz-option" type="button" data-choice="模型触发">模型触发</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-quiz-answer="不应出现" data-quiz-explanation="`misc`、`in-progress`、`deprecated` 都不该出现在顶层 README 和插件 manifest。主线只有 promoted buckets。">
+            <h3>2. `misc` 里的 skill 对顶层 README 和插件清单来说应该怎样？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="应该出现">应该出现</button>
+              <button class="quiz-option" type="button" data-choice="不应出现">不应出现</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-quiz-answer="先转票据" data-quiz-explanation="在多 session 的构建里，`ask-matt` 建议先 `to-spec`，再 `to-tickets`，最后才由 `implement` 按 ticket 去做。">
+            <h3>3. 一个多轮次的大功能构建，在进入 `implement` 前更推荐哪一步？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="直接开写">直接开写</button>
+              <button class="quiz-option" type="button" data-choice="先转票据">先转票据</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>这一课学完，你至少该带走什么</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">1. 这是组合系统</h3>
+            <p>重点不在某一个“神技”，而在 skills 之间的接力关系。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2. 先抓两条轴</h3>
+            <p>先分 promoted / non-promoted，再分 user-invoked / model-invoked。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3. ask-matt 是地图</h3>
+            <p>它把 README 里的 skill 列表变成了“何时用谁”的流程图。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>下一步怎么学最顺</h2>
+        <p>建议你下一课继续学这三个点中的一个：</p>
+        <ol class="source-list">
+          <li>精读 `ask-matt`，把主流程和各个 on-ramp 真正串熟。</li>
+          <li>挑一个 user-invoked skill 看它怎么编排底层 skills，例如 `grill-with-docs` 或 `teach`。</li>
+          <li>挑一个 model-invoked skill 看“方法论是怎么被封装的”，例如 `grilling`、`tdd` 或 `code-review`。</li>
+        </ol>
+        <p>如果你愿意，我下一轮可以直接带你进 `ask-matt`，把它拆成一张更细的流程图。</p>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <p>这一课最值得你亲自读的主资料是 <a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">ask-matt/SKILL.md</a>。原因很简单：README 告诉你“这里有什么”，但 `ask-matt` 告诉你“什么时候该走哪条路”。</p>
+        <ol class="source-list">
+          <li><a href="https://github.com/mattpocock/skills/blob/main/README.md">README.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/CLAUDE.md">CLAUDE.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/README.md">skills/engineering/README.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/README.md">skills/productivity/README.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">skills/engineering/ask-matt/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/.claude-plugin/plugin.json">.claude-plugin/plugin.json</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/package.json">package.json</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">有任何地方觉得抽象、像术语堆在一起，下一条直接问我。我会继续把它拆成更贴近你当前理解的版本。</p>
+    </main>
+  </body>
+</html>

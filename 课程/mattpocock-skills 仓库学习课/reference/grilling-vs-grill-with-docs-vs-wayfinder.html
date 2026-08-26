@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>grilling / grill-with-docs / wayfinder 对照表</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>grilling / grill-with-docs / wayfinder 对照表</h1>
+        <p class="lede">忘了三者怎么选时，不要先回忆术语，先问四件事：我现在是在做原语级追问，还是在带文档地磨清一个想法，还是在给巨大而有雾的项目先找路？这页是给这种判断用的。</p>
+      </section>
+
+      <section>
+        <h2>一句话区分</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">grilling</h3>
+            <p>最底层的访谈原语。核心是 design tree、frontier、按 round 追问。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">grill-with-docs</h3>
+            <p>把 `grilling` 放进工作目录，并同步拉起 `domain-modeling`，让澄清结果留下 glossary / ADR 之类的文档痕迹。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">wayfinder</h3>
+            <p>当工作大到一个 session 装不下时，基于 `grilling` 和 `domain-modeling` 先建 decision map，而不是直接把它写成 spec 或开始实现。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>怎么选</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>问题状态</th>
+                <th>更像谁</th>
+                <th>为什么</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>我只想把一个计划或想法问清楚</td>
+                <td><span class="path">grilling</span></td>
+                <td>此时你要的是追问机制本身，不一定需要工作目录文档或 issue map。</td>
+              </tr>
+              <tr>
+                <td>我在工作目录里，要把一个可在单个 session 里 hold 住的想法磨清楚</td>
+                <td><span class="path">grill-with-docs</span></td>
+                <td>它仍然是 grilling，但会把结果沉淀进 `CONTEXT.md` / ADR，而不是只停在对话里。</td>
+              </tr>
+              <tr>
+                <td>目标太大、有雾、要跨多个 session，连路线都还没看清</td>
+                <td><span class="path">wayfinder</span></td>
+                <td>它不是先做 spec，而是先建 map，把 fog、frontier、decision tickets 排出来。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>和 to-spec 的关系</h2>
+        <div class="callout">
+          <p><strong>`wayfinder` 清图之后，按设计会 hand off 到 `to-spec`；`grill-with-docs` 不一定。</strong></p>
+          <p>`wayfinder` 解决的是“先找路”，所以地图清楚之后需要有人把那些 linked decisions 折叠成 buildable plan，这就是 `to-spec` 的位置。`grill-with-docs` 则是主流程默认起点：如果工作要跨多个 session，接 `to-spec`；如果范围足够小，也可以直接进 `implement`。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>最值得回读的原始材料</h2>
+        <ol class="source-list">
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md">grilling/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md">grill-with-docs/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder/SKILL.md">wayfinder/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">ask-matt/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/to-spec/SKILL.md">to-spec/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/domain-modeling/SKILL.md">domain-modeling/SKILL.md</a></li>
+        </ol>
+      </section>
+    </main>
+  </body>
+</html>

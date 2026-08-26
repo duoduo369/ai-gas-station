@@ -1,6 +1,9 @@
 # Obsidian local configuration
 .obsidian/
 
+# Local planning / scratch (not part of the repo)
+.scratch/
+
 # OS metadata
 .DS_Store
 Thumbs.db

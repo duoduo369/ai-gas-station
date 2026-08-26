@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lesson 0002 · ask-matt 主流程与上坡入口</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/classify-quiz.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Lesson 0002</p>
+        <h1>把 ask-matt 读成一张路线图</h1>
+        <p class="lede">上一课你已经知道这个仓库有地图感；这一课更进一步，专门学 `ask-matt` 怎么把一堆 skills 组织成“idea 到 ship”的主线，以及什么时候该从 triage、diagnosing-bugs、wayfinder 这些入口并回主线。</p>
+        <div class="pill-row">
+          <span class="pill">预计 10 分钟</span>
+          <span class="pill">目标：会读主流程</span>
+          <span class="pill">速查：<a href="../reference/ask-matt-flow-map.html">ask-matt 流程速查</a></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>先抓最核心的一句</h2>
+        <div class="callout">
+          <p><strong>`ask-matt` 的价值，不是回答“仓库里有哪些 skill”，而是回答“在你当前这类问题里，下一步应该走哪条路”。</strong></p>
+          <p>所以读它时，别把它当字典；把它当一个路由器。它把不同问题状态分流，再把它们并到合适的位置。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>主线：从 idea 到 ship</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>阶段</th>
+                <th>为什么先做它</th>
+                <th>这一棒真正负责什么</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>grill-with-docs</code></td>
+                <td>想法还不够硬，直接写 spec 很容易把模糊假设写死。</td>
+                <td>通过 `grilling` + `domain-modeling` 把想法磨清楚，并留下 glossary / ADR 这类纸面痕迹。</td>
+              </tr>
+              <tr>
+                <td><code>prototype</code></td>
+                <td>有些问题只能靠“跑起来看”判断，而不是靠嘴说清。</td>
+                <td>回答一个设计问题，再把学习结果 handoff 回主线。</td>
+              </tr>
+              <tr>
+                <td><code>to-spec</code></td>
+                <td>当共识已足够，才进入“把它写成可交付说明”。</td>
+                <td>综合当前对话和代码库理解，产出 spec，并提前想清测试 seam。</td>
+              </tr>
+              <tr>
+                <td><code>to-tickets</code></td>
+                <td>多 session 构建如果不先拆 vertical slices，很容易上下文污染、粒度失控。</td>
+                <td>把工作拆成 tracer-bullet tickets，并显式写出 blocking edges。</td>
+              </tr>
+              <tr>
+                <td><code>implement</code></td>
+                <td>到了这一步，输入应该已经是相对稳定的 spec 或 tickets。</td>
+                <td>真正实施；内部驱动 `tdd`，结束前再跑 `code-review`。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>这里最容易忽略的一点是：<strong>`implement` 不是单兵作战 skill，它默认站在前面几步已经做过的前提上。</strong></p>
+      </section>
+
+      <section>
+        <h2>为什么多 session 更推荐先 to-tickets</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">一个 ticket = 一个新鲜上下文窗口</h3>
+            <p>`ask-matt` 明确建议每个 `implement` 尽量从新鲜上下文开始。这样每次实现只吃一小块、已经 agent-ready 的工作。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">ticket 不是水平切片</h3>
+            <p>`to-tickets` 要求的是 vertical slice：一个 ticket 应该打通 schema、API、UI、test 的完整窄路径，而不是“先全做后端，再全做前端”。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">blocking edges 让顺序显式化</h3>
+            <p>不是凭感觉排先后，而是把“谁阻塞谁”写出来。这样工作 frontier 才清楚。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>三个上坡入口分别在解决什么前置问题</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">triage</h3>
+            <p>你的问题不是“我有一个想法”，而是“外面来了一个 issue / PR，我要先判断它值不值得进入主流程”。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">diagnosing-bugs</h3>
+            <p>你的问题不是“我们做什么”，而是“到底什么坏了，如何先把 bug 稳定复现”。它的第一原则是 tight feedback loop。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">wayfinder</h3>
+            <p>你的问题不是“下一步实现哪块”，而是“这个目标太大、太雾，我连地图都还没有”。它先产出 decisions，不直接产出 deliverables。</p>
+          </article>
+        </div>
+        <p>一个很好用的判断法是：<strong>当你连“主线该从哪一段开始”都说不清时，通常你需要的不是更快执行，而是先走上坡入口。</strong></p>
+      </section>
+
+      <section>
+        <h2>独立技能：不在主线里，不等于不重要</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">真正独立</h3>
+            <p>`research`、`prototype`、`to-questionnaire`、`wizard`、`wait-what`、`teach`、`writing-for-agents` 都能单独被拿出来解决特定卡点。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">底层词汇层</h3>
+            <p>`domain-modeling` 和 `codebase-design` 更像“底层语言包”。它们不是主线入口，但上层很多 skill 都靠它们统一说话方式。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>phase boundary：什么时候不要急着 compact</h2>
+        <div class="callout">
+          <p><strong>`/compact` 是默认兜底，不是第一反应。</strong></p>
+          <p>`PHASE-BOUNDARIES.md` 把五个选项排成顺序树，第一问永远是：还能不能继续留在当前 session 里？只有前面几项都不合适时，才落到 compact。</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>选项</th>
+                <th>你可以怎样理解它</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>Continue</code></td>
+                <td>如果下一阶段还需要当前推理过程做 primary source，那就尽量不断开。</td>
+              </tr>
+              <tr>
+                <td><code>/clear</code></td>
+                <td>如果当前上下文对下一步完全没价值，就直接清空，最便宜。</td>
+              </tr>
+              <tr>
+                <td><code>/handoff</code></td>
+                <td>只有在跨 harness、跨目录、交给别人、或中途分叉任务时才值得写。</td>
+              </tr>
+              <tr>
+                <td><code>Subagent</code></td>
+                <td>如果任务范围小、你又不需要在旁边盯着，那就外包给子代理。</td>
+              </tr>
+              <tr>
+                <td><code>/compact</code></td>
+                <td>相关上下文仍重要，但又必须切会话，这时才压缩总结。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="quiz">
+        <h2>3 分钟自测</h2>
+        <div class="quiz-list">
+          <div class="quiz-item" data-quiz-answer="先澄清" data-quiz-explanation="`grill-with-docs` 的作用就是先通过 grilling 和 domain-modeling 把问题磨清楚，而不是一开始就把模糊想法写成 spec。">
+            <h3>1. 当一个想法还很模糊时，主线为什么不建议直接从 `to-spec` 开始？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="先澄清">先澄清</button>
+              <button class="quiz-option" type="button" data-choice="先编码">先编码</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-quiz-answer="ticket 切片" data-quiz-explanation="多 session 构建要先拆成 tracer-bullet tickets，让每次 implement 都在一块自洽、可验证的 vertical slice 上工作。">
+            <h3>2. 多轮次的大功能实现前，哪一步最能帮助你把每个 session 缩到可控范围？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="ticket 切片">ticket 切片</button>
+              <button class="quiz-option" type="button" data-choice="直接提交">直接提交</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-quiz-answer="先继续" data-quiz-explanation="phase boundary 的第一问永远是能不能继续留在当前 session，因为 Continue 不损失 primary source。">
+            <h3>3. 面对 phase boundary，五个选项里最先该排查的是哪一个？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="先 compact">先 compact</button>
+              <button class="quiz-option" type="button" data-choice="先继续">先继续</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>这一课结束时，你应该能说出的 4 句话</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">1. ask-matt 是 router</h3>
+            <p>它不是清单，而是“当前处境该走哪条流”的判断器。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2. implement 站在前置工作上</h3>
+            <p>它不是从模糊想法直接开干，而是吃已经澄清、拆票后的输入。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3. on-ramp 解决前置状态</h3>
+            <p>`triage`、`diagnosing-bugs`、`wayfinder` 分别处理不同类型的“还进不了主线”的情况。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">4. compact 不是第一反应</h3>
+            <p>phase boundary 的顺序树提醒你，先判断能不能继续，再谈压缩。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <p>这一课最值得你亲自慢慢读的原始文件，仍然是 <a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">ask-matt/SKILL.md</a>，但这次建议连同 <a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/PHASE-BOUNDARIES.md">PHASE-BOUNDARIES.md</a> 一起看，因为后者补足了“何时切上下文”的关键判断。</p>
+        <ol class="source-list">
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">ask-matt/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/PHASE-BOUNDARIES.md">PHASE-BOUNDARIES.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md">grill-with-docs/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/to-spec/SKILL.md">to-spec/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/to-tickets/SKILL.md">to-tickets/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/implement/SKILL.md">implement/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/triage/SKILL.md">triage/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnosing-bugs/SKILL.md">diagnosing-bugs/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/wayfinder/SKILL.md">wayfinder/SKILL.md</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">如果你想继续顺着主线学，下一课最自然的是精读 `grill-with-docs` 与它背后的 `grilling` / `domain-modeling` 配合；如果你更想学实现侧，也可以转去拆 `to-tickets` 和 `implement` 的接口边界。</p>
+    </main>
+  </body>
+</html>

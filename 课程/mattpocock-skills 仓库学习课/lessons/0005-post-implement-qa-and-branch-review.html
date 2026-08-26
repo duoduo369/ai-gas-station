@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lesson 0005 · 所有 ticket 做完后怎么验收</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/classify-quiz.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Lesson 0005</p>
+        <h1>所有 ticket 做完后，整体怎么验收</h1>
+        <p class="lede">你已经走完 <code>wayfinder</code> / <code>grill-with-docs</code> → <code>to-spec</code> → <code>to-tickets</code> → 一张张 <code>implement</code>。每张票收尾时似乎都做过 code review。真正缺的不是再发明一个 QA skill，而是看清：单票评审覆盖什么、整分支对照 spec 覆盖什么、哪些验收其实只能由你来关。</p>
+        <div class="pill-row">
+          <span class="pill">预计 12 分钟</span>
+          <span class="pill">目标：会做整分支收尾</span>
+          <span class="pill">速查：<a href="../reference/post-implement-qa-and-branch-review.html">整分支验收速查</a></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>先抓一句最重要的纠偏</h2>
+        <div class="callout">
+          <p><strong>仓库里没有独立的 <code>/qa</code> 来做“全部 ticket 做完后的整体验收”。</strong></p>
+          <p>主线写到 ship 时，收尾 skill 是 <code>/code-review</code>。文档里的推荐也写得很直白：单票评审和整分支评审都要，吃不准时就“每张票看一次，最后再对分支点做一次总评”。你直觉里那句“对当前分支所有提交做一次整体 review，看有没有跑偏 spec”，正好就是这条。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>为什么你会觉得“应该有个 QA 流程”</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">因为 phase 名叫 QA</h3>
+            <p><code>ask-matt</code> 把一个 session 里的阶段说成“grilling、implementation、the QA”。这是阶段名，不是 slash command。到了实现和验收的边界，例子甚至是 <code>/compact we're going to QA this area</code>。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">因为以前真的有 <code>/qa</code></h3>
+            <p>它已经被删掉了。旧 skill 做的是“你边用边报问题，agent 帮你把 bug 开成 issue”，不是“功能做完后闸门式验收”。所以它被吸收进了 <code>/triage</code> 和 <code>/to-tickets</code>。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">因为每张票看起来已经 review 过</h3>
+            <p><code>implement</code> 的最后一拍确实是跑 <code>/code-review</code> 再 commit。于是很容易以为整条链路已经自带验收，不再需要人上场。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>单票 review 覆盖什么，漏掉什么</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>层</th>
+                <th>它能证明什么</th>
+                <th>它证明不了什么</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>单票 <code>tdd</code> + 全量测试</td>
+                <td>这张票承诺的行为，在约定 seam 上是红绿过关的。</td>
+                <td>别的票拼上来之后，组合路径是否还成立。</td>
+              </tr>
+              <tr>
+                <td>单票 <code>code-review</code></td>
+                <td>这一小段 diff 有没有违反仓库标准，有没有漏掉<strong>这张票</strong>的要求。</td>
+                <td>票与票之间的交互、整段功能有没有从 parent spec 跑偏。</td>
+              </tr>
+              <tr>
+                <td>同会话里的自评</td>
+                <td>作者 agent 记得自己刚写完的假设。</td>
+                <td>独立评审。文档原话是：同一上下文审自己，不是 review，是带着 slash command 的确认偏差。</td>
+              </tr>
+              <tr>
+                <td>ticket 上的验收框</td>
+                <td>拆票时写下了“怎样才算这张票完成”。</td>
+                <td><code>implement</code> 不会勾这些框，也不会关票。frontier 要你自己往前推。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>所以：<strong>单票 review 是必要的，但不是整分支验收。</strong> 文档把整分支总评的独特价值说成一件事：抓住那些“每张票单独看都过、拼在一起才露馅”的交互。</p>
+      </section>
+
+      <section>
+        <h2>整分支验收实际怎么走</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">1. 人先把票关上</h3>
+            <p><code>implement</code> 停在 commit。关票、勾验收框是你的事。不关的话，<code>to-tickets</code> 的 frontier 看起来会一直堵着。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2. 新开干净 session</h3>
+            <p>不要沿用最后一张票的实现窗口。phase boundary 上，自动评审的标准动作是丢给 subagent / 新窗口，让当前实现上下文不要污染评审。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3. 对分支点跑 <code>/code-review</code></h3>
+            <p>fixed point 用 <code>main</code> 或这个功能分支的起点。把 <code>to-spec</code> 那份 parent spec 的路径或 issue 明确喂进去，不要让它只靠某张子票去猜。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">4. 两轴分开读，不要揉成一句</h3>
+            <p><strong>Spec 轴</strong>就是你要的“有没有跑偏”：缺了什么、多做了什么、看起来做了但做歪了。<strong>Standards 轴</strong>问的是拼完之后代码还像不像这个仓库该有的样子。两轴故意不合并，免得一轴过了把另一轴盖掉。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">5. 你自己把 demo 走一遍</h3>
+            <p>vertical slice 的设计就是：每张票落地时都该能单独演示。整分支收尾时，对照每张票的 acceptance criteria 和 spec 里的 user stories，用真实路径看一遍。agent 的 Spec 轴是假设，不是证据。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">6. 发现了就当新工作，不要空转</h3>
+            <p><code>code-review</code> 没有“直到干净为止”的收敛保证。带着引用的发现再开票或小范围 <code>implement</code>；不要循环到它再也挑不出东西。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>两件容易一起混掉的事</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>你想问的</th>
+                <th>该用什么</th>
+                <th>不该用什么</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>这支功能有没有按 spec 做成</td>
+                <td>对分支点的 <code>/code-review</code> Spec 轴 + 你自己走 demo</td>
+                <td>已删除的 <code>/qa</code>，或再对每张票重复 implement</td>
+              </tr>
+              <tr>
+                <td>我边点边发现新 bug / 新缺口</td>
+                <td>现在走 <code>/triage</code> 或直接拆成新 tickets</td>
+                <td>假装这还是同一张旧票的“验收步骤”</td>
+              </tr>
+              <tr>
+                <td>整个代码库都漂了，不只这一支 diff</td>
+                <td><code>/improve-codebase-architecture</code></td>
+                <td><code>/code-review</code>。它只看一段 diff，不看全库。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>还有一个连带事实：spec 在开始写代码后就会过期。<code>to-spec</code> 文档说它是当时的快照，真正该留下的是 <code>CONTEXT.md</code> 和 ADR。所以整分支评审对照的是“当时锁住的 spec”，不是一份会自动跟着实现改写的活文档。</p>
+      </section>
+
+      <section class="quiz">
+        <h2>3 分钟自测</h2>
+        <div class="quiz-list">
+          <div class="quiz-item" data-quiz-answer="没有独立命令" data-quiz-explanation="独立 `/qa` 已经退役。旧 skill 是边用边报 bug 再开 issue，不是整分支验收闸门。主线收尾用的是 `/code-review`。">
+            <h3>1. 所有 ticket 都 implement 完以后，仓库里有没有专门的 <code>/qa</code> 做整分支验收？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="还有专门命令">还有专门命令</button>
+              <button class="quiz-option" type="button" data-choice="没有独立命令">没有独立命令</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-quiz-answer="票与票的交互" data-quiz-explanation="文档写明：单票评审让 Spec 轴对着一张票；整分支总评才抓票与票拼起来才出现的交互。">
+            <h3>2. 每张票 implement 时已经跑过 code-review，整分支再看一次主要是为了抓什么？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="票与票的交互">票与票的交互</button>
+              <button class="quiz-option" type="button" data-choice="单票里的语法">单票里的语法</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-quiz-answer="新开干净会话" data-quiz-explanation="同一实现会话里审自己会带上刚写代码时的假设。文档建议在新鲜 session 里对分支点跑 `/code-review`。">
+            <h3>3. 整分支对照 spec 的评审，更应该放在哪种 session？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="沿用实现会话">沿用实现会话</button>
+              <button class="quiz-option" type="button" data-choice="新开干净会话">新开干净会话</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>这一课结束时，你应该能说出的 4 句话</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">1. QA 是阶段，不是命令</h3>
+            <p>旧 <code>/qa</code> 管的是报 bug 开 issue；整分支验收不靠它。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2. 单票 review 必要但不完整</h3>
+            <p>它看不见票间交互，也不会替你关票、勾验收框。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3. 总评就是对分支点的 code-review</h3>
+            <p>新鲜 session，fixed point 用 <code>main</code>，Spec 轴对着 parent spec。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">4. 人还要走一遍真实路径</h3>
+            <p>sub-agent 报告是假设；demo 和验收框才是你签字的那一层。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <p>这一课最值得你亲自回去看的是 <a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/code-review.md">docs/engineering/code-review.md</a>。里面有一节直接回答 “After every ticket, or once at the end?”：两种都要，吃不准就每张票看一次，最后再对分支点做一次。</p>
+        <ol class="source-list">
+          <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/code-review.md">docs/engineering/code-review.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/implement.md">docs/engineering/implement.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md">code-review/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/PHASE-BOUNDARIES.md">PHASE-BOUNDARIES.md</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">如果还想继续，下一课可以专门拆 <code>to-tickets</code> 的 vertical slice：为什么验收框必须在基线 commit 上是红的，以及一张票“能单独演示”到底长什么样。</p>
+    </main>
+  </body>
+</html>

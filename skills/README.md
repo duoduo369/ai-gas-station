@@ -17,6 +17,11 @@
 
 - [writing-for-agents](https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL.md) - 系统讲 agent 文档怎么写：context pointer、信息层级、completion criteria、leading words 与 pruning；[学习拆解](<./writing-for-agents 学习拆解.md>)
 
+## 仓库地图
+
+- [mattpocock-skills 项目结构与 skill 地图](<./mattpocock-skills 项目结构与 skill 地图.md>) - 先建立这个 skills 仓库的地图感：顶层结构、五个 bucket、两条分类轴，以及 `ask-matt` 主流程的最短记法。
+- [ask-matt 主流程与上坡入口](<./ask-matt 主流程与上坡入口.md>) - 把 `ask-matt` 读成路由器而不是索引：主线、on-ramp、独立技能，以及 phase boundary 的五选一判断。
+
 ## skills 写作与维护
 
 - 当前目录优先记录已经形成明确学习收获的 skill；如果只是先留入口，可以只在索引里放原始链接和一句判断。

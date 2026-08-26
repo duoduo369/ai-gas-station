@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>handoff 与 phase boundary 速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>handoff 与 phase boundary 速查</h1>
+        <p class="lede">忘了 `handoff` 到底是什么时，先抓一句：它首先是一个可携带交接文档，不是自动结束当前 session 的开关。这页用来快速对照 `handoff`、`/clear`、`/compact`、subagent 的边界。</p>
+      </section>
+
+      <section>
+        <h2>一句话区分</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">`/handoff`</h3>
+            <p>生成 portable markdown 文档，给另一个 agent、另一个目录、另一个 harness 或旁支任务接手用。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">`/clear`</h3>
+            <p>清空当前窗口，适合当前上下文对下一步完全无关时使用。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">`/compact`</h3>
+            <p>把当前 session 压成总结再继续，适合相关上下文仍重要但窗口快满时。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">Subagent</h3>
+            <p>把一个你暂时不用盯着的小范围任务外包出去，当前 session 保持不变。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>为什么 `/handoff` 后 agent 还会继续</h2>
+        <div class="callout">
+          <p><strong>因为 `handoff` skill 原文只要求“写一份 handoff document 并保存到系统临时目录”，并没有要求“写完后必须停止当前 session”。</strong></p>
+          <p>所以它默认是一个“产物动作”，不是“终止动作”。如果你在当前窗口里调用它，agent 很可能会在生成文档后，继续响应你当前窗口后面的目标，除非你明确把当前窗口停在这里或转去新的窗口。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>什么时候真的该用 `/handoff`</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>场景</th>
+                <th>为什么是 handoff</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>换 harness</td>
+                <td>比如 Claude 和 Codex 之间切换，需要可携带的文档作为桥。</td>
+              </tr>
+              <tr>
+                <td>换目录或仓库</td>
+                <td>因为上下文不只要“压缩”，还要能带走到别的地方。</td>
+              </tr>
+              <tr>
+                <td>交给同事或另一位 agent</td>
+                <td>因为目标是让别人接手，而不是你自己继续。</td>
+              </tr>
+              <tr>
+                <td>中途分叉一条侧任务</td>
+                <td>当前主线不想被打断，但旁支需要一份可独立运行的起始材料。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>什么时候不该把 handoff 当成默认动作</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">你其实还能继续</h3>
+            <p>如果下一阶段还需要当前 session 作为 primary source，按 phase boundaries 的顺序，第一反应应该是 Continue。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">你只是想换一个干净窗口</h3>
+            <p>那更像 `/clear` 或 `/compact` 的问题，不一定需要 portability。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">你期待的是“调用完立刻切走”</h3>
+            <p>这是一种 harness 体验期待，不是 `handoff` skill 文本本身承诺的行为。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>最值得回读的原始材料</h2>
+        <ol class="source-list">
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md">handoff/SKILL.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/PHASE-BOUNDARIES.md">PHASE-BOUNDARIES.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">ask-matt/SKILL.md</a></li>
+        </ol>
+      </section>
+    </main>
+  </body>
+</html>

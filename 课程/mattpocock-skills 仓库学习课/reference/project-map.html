@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>mattpocock-skills 速查地图</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>mattpocock-skills 速查地图</h1>
+        <p class="lede">这是给回看用的压缩版资料：当你忘了这个仓库怎么分层、哪个 skill 处在主流程哪一段、哪些目录才算“对外主线”时，先翻这一页。</p>
+      </section>
+
+      <section>
+        <h2>先抓四个判断轴</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">1. 这是 skills 仓库，不是应用仓库</h3>
+            <p>顶层只有少量版本与插件脚本，重心在 <span class="path">skills/</span>、说明文档、以及插件清单，而不是运行时业务代码。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2. 先看 promoted / non-promoted</h3>
+            <p><span class="path">engineering/</span> 和 <span class="path">productivity/</span> 是 promoted buckets；它们必须同时出现在顶层 README 和插件清单里。其他桶不能混进去。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3. 再看 user / model</h3>
+            <p>skill 还沿着“谁能触发”这条轴再切一刀。user-invoked 负责编排流程，model-invoked 装的是可复用 discipline。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">4. ask-matt 是路线图</h3>
+            <p>如果 README 是总览，<span class="path">skills/engineering/ask-matt/SKILL.md</span> 就是流程地图：主线、上坡入口、独立技能、底层词汇层都在这里。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>顶层结构怎么读</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>位置</th>
+                <th>你该把它当成什么</th>
+                <th>为什么重要</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="path">README.md</span></td>
+                <td>总入口</td>
+                <td>讲安装方式、项目哲学、skill 总表，以及 user/model 两类 skill 的基本划分。</td>
+              </tr>
+              <tr>
+                <td><span class="path">CLAUDE.md</span></td>
+                <td>仓库维护规则</td>
+                <td>解释 bucket 规则、promoted set、README 与插件 manifest 必须同步的约束。</td>
+              </tr>
+              <tr>
+                <td><span class="path">skills/</span></td>
+                <td>核心内容区</td>
+                <td>真正的 skill 文件都在这里，按 bucket 组织。</td>
+              </tr>
+              <tr>
+                <td><span class="path">.claude-plugin/plugin.json</span></td>
+                <td>发布清单</td>
+                <td>列出插件会真正打包出去的 promoted skills。</td>
+              </tr>
+              <tr>
+                <td><span class="path">docs/</span></td>
+                <td>对外文档镜像</td>
+                <td>promoted buckets 下的 skill 还要同步一份 human-facing docs 页。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>五个 bucket 的含义</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Bucket</th>
+                <th>角色</th>
+                <th>是否进入顶层 README / 插件</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="path">engineering/</span></td>
+                <td>日常代码工作主线</td>
+                <td>是</td>
+              </tr>
+              <tr>
+                <td><span class="path">productivity/</span></td>
+                <td>通用工作流主线</td>
+                <td>是</td>
+              </tr>
+              <tr>
+                <td><span class="path">misc/</span></td>
+                <td>保留但不主推</td>
+                <td>否</td>
+              </tr>
+              <tr>
+                <td><span class="path">in-progress/</span></td>
+                <td>公开 beta，欢迎反馈</td>
+                <td>否</td>
+              </tr>
+              <tr>
+                <td><span class="path">deprecated/</span></td>
+                <td>不再使用</td>
+                <td>否</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>主流程的最短记法</h2>
+        <div class="callout">
+          <p><strong>idea → grill-with-docs → to-spec → to-tickets → implement</strong></p>
+          <p>这里的核心不是“一个神奇大招包打天下”，而是把对齐、拆分、实现、复盘拆成若干个小 skill 组合起来。`implement` 又会内部调用 `tdd` 和 `code-review`，所以真正的 discipline 是被层层下沉的。</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">上坡入口 1：triage</h3>
+            <p>当工作源头不是你自己提出的想法，而是外来 issue、bug report、feature request 时，先把它们变成 agent-ready issues，再并回主流程。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">上坡入口 2：diagnosing-bugs</h3>
+            <p>当问题是“东西坏了”，就先建立能稳定变红的反馈回路，再谈修复，而不是直接猜。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">巨大模糊项目：wayfinder</h3>
+            <p>当工作大到单个 session 根本装不下时，先画 decision map；等地图清楚后，再回到 `to-spec` 开始进入可构建阶段。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>如果你只看 5 个文件</h2>
+        <ol class="source-list">
+          <li><a href="https://github.com/mattpocock/skills/blob/main/README.md">README.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/CLAUDE.md">CLAUDE.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/README.md">skills/engineering/README.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/README.md">skills/productivity/README.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">skills/engineering/ask-matt/SKILL.md</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">来源：<a href="https://github.com/mattpocock/skills/blob/main/README.md">README.md</a>、<a href="https://github.com/mattpocock/skills/blob/main/CLAUDE.md">CLAUDE.md</a>、<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/README.md">engineering README</a>、<a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/README.md">productivity README</a>、<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">ask-matt</a>、<a href="https://github.com/mattpocock/skills/blob/main/.claude-plugin/plugin.json">plugin.json</a>、<a href="https://github.com/mattpocock/skills/blob/main/package.json">package.json</a>。</p>
+    </main>
+  </body>
+</html>
