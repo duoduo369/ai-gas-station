@@ -252,11 +252,6 @@ tr:last-child td {
   line-height: 1.5;
 }
 
-.course-nav-bottom {
-  margin-top: 40px;
-  margin-bottom: 0;
-}
-
 .course-nav-row {
   display: flex;
   flex-wrap: wrap;
@@ -312,25 +307,6 @@ tr:last-child td {
   justify-content: space-between;
 }
 
-.flow-figure {
-  margin: 20px 0 8px;
-}
-
-.flow-figure img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 18px;
-  border: 1px solid rgba(83, 98, 85, 0.16);
-  background: #fbf8f1;
-}
-
-.flow-caption {
-  margin: 8px 0 24px;
-  font-size: 0.9rem;
-  color: var(--muted);
-}
-
 .prompt-doc {
   margin: 20px 0;
   padding: 18px 20px 8px;
@@ -376,14 +352,6 @@ tr:last-child td {
   border-radius: 999px;
 }
 
-.path {
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  font-size: 0.94rem;
-  background: rgba(23, 76, 60, 0.08);
-  padding: 0.15rem 0.4rem;
-  border-radius: 0.35rem;
-}
-
 @media (max-width: 640px) {
   main {
     width: min(calc(100% - 20px), var(--max));
@@ -393,8 +361,7 @@ tr:last-child td {
   .hero,
   .card,
   .callout,
-  .quiz,
-  .prompt-doc {
+  .quiz {
     padding: 18px;
     border-radius: 20px;
   }

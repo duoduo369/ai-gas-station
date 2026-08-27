@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SwarmForge 速查地图</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>SwarmForge 速查地图</h1>
+        <p class="lede">回看用的压缩版：忘了 <code>main</code> 和 pack 怎么分、卡片怎么走到 Done、共享宪法能不能被覆盖时，先翻这一页。对应课件：<a href="../lessons/0001-swarmforge-map.html">Lesson 0001</a>。</p>
+      </section>
+
+      <section>
+        <h2>先抓四个判断轴</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">1. main 是底座，pack 是流水线</h3>
+            <p><span class="path">main</span> 放共享脚本和三篇核心宪法。可运行的 <span class="path">swarmforge.conf</span> 与角色提示在 pack 分支。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2. swarmforge/ 三件套</h3>
+            <p>宪法文章、交接协议、scripts。agent 不手写 tmux；helper + <code>handoffd</code> 才是通道。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3. 角色数 = 质量闸数</h3>
+            <p><code>two-pack</code> / <code>four-pack</code> / <code>six-pack</code> 按你要拆开多少个质量关注点来选，不按模型品牌。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">4. 卡片跟着交接走</h3>
+            <p>New Task 进 master 泳道；合法 <code>git_handoff</code> 移动卡片；最后一棒 <code>to:</code> 所有其他角色才进 Done。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>main 上 swarmforge/ 怎么读</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>位置</th>
+                <th>当成什么</th>
+                <th>为什么重要</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="path">constitution/articles/</span></td>
+                <td>共享法律</td>
+                <td>入口 <code>constitution.prompt</code> 在 pack 上（main 没有这份）。它要求读 <code>articles/</code> 里每一个文件。三篇共享法只能从 main 来；全文在 <a href="../lessons/0001-swarmforge-map.html#beat-constitution">0001</a>。</td>
+              </tr>
+              <tr>
+                <td><span class="path">handoff-protocol.md</span></td>
+                <td>给人的协议全文</td>
+                <td>audit、inbox 生命周期、task/batch 的权威说明。</td>
+              </tr>
+              <tr>
+                <td><span class="path">scripts/</span></td>
+                <td>启动与交接运行时</td>
+                <td>合成进每个角色 worktree 后进 PATH。</td>
+              </tr>
+              <tr>
+                <td><span class="path">get-swarm-forge</span>（仓库根）</td>
+                <td>合成器</td>
+                <td>main 共享件 + pack 覆盖/追加 = 可运行目录。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>pack 角色链</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Pack</th>
+                <th>链</th>
+                <th>Master</th>
+                <th>人类规格闸</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>two-pack</td>
+                <td>coder → cleaner</td>
+                <td>coder</td>
+                <td>无 specifier，交接直接送</td>
+              </tr>
+              <tr>
+                <td>four-pack</td>
+                <td>specifier → coder → refactorer → architect</td>
+                <td>specifier</td>
+                <td>Attention 里 Approve / Reject</td>
+              </tr>
+              <tr>
+                <td>six-pack</td>
+                <td>specifier → coder → cleaner → architect → hardender → QA</td>
+                <td>specifier</td>
+                <td>同上</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>同名角色在不同 pack 里宽窄不同。two-pack 的 cleaner 几乎包办清理+架构+加固；six-pack 拆成 cleaner / architect / hardender。</p>
+      </section>
+
+      <section>
+        <h2>每个角色一句话</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>角色</th>
+                <th>干什么</th>
+                <th>出现在</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>specifier</td>
+                <td>把意图写成 Gherkin / 验收标准</td>
+                <td>four、six</td>
+              </tr>
+              <tr>
+                <td>coder</td>
+                <td>按批准切片做 TDD 实现</td>
+                <td>全部 pack</td>
+              </tr>
+              <tr>
+                <td>cleaner</td>
+                <td>保行为清理；two-pack 还兼架构和变异</td>
+                <td>two、six</td>
+              </tr>
+              <tr>
+                <td>refactorer</td>
+                <td>four-pack 的清理+属性测试支架</td>
+                <td>four</td>
+              </tr>
+              <tr>
+                <td>architect</td>
+                <td>模块边界与依赖方向；four 兼末棒变异</td>
+                <td>four、six</td>
+              </tr>
+              <tr>
+                <td>hardender</td>
+                <td>语言变异与软 Gherkin 变异</td>
+                <td>six</td>
+              </tr>
+              <tr>
+                <td>QA</td>
+                <td>把 QA 步骤做成脚本，从 UI 做末检</td>
+                <td>six</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>agent 日常三命令</h2>
+        <ol class="source-list">
+          <li><code>swarm_handoff.sh &lt;draft&gt;</code> — 校验并排队发出</li>
+          <li><code>ready_for_next.sh</code> — 按 task 或 batch 接下工作</li>
+          <li><code>done_with_current.sh</code> — 结束当前项；<code>MAIL_WAITING</code> 就再 ready</li>
+        </ol>
+      </section>
+
+      <p class="footer-note"><a href="./glossary.html">术语速查</a> · <a href="../README.md">课程入口</a></p>
+    </main>
+  </body>
+</html>

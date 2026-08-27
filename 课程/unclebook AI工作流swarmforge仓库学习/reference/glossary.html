@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SwarmForge 术语速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>术语速查</h1>
+        <p class="lede">后续课件沿用这里的叫法。角色与编排词压缩自仓库 README 和 pack 提示；<a href="#bdd">BDD</a> / <a href="#gherkin">Gherkin</a> / <a href="#crap">CRAP</a> 是行业通用概念，下面单独展开并给例子。<code>git_handoff</code> 是本项目的交接格式。对应课件：<a href="../lessons/0001-swarmforge-map.html">0001</a> · <a href="../lessons/0002-two-pack-complete-loop.html">0002</a> · <a href="../lessons/0003-four-pack-complete-loop.html">0003</a> · <a href="../lessons/0004-six-pack-complete-loop.html">0004</a>。</p>
+      </section>
+
+      <section>
+        <h2>角色（工种）</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>术语</th>
+                <th>在本课里指什么</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>specifier</td>
+                <td>规格员。把用户意图写成 Gherkin 和验收标准；four/six 的 master。交出后等人在 Attention 批准。</td>
+              </tr>
+              <tr>
+                <td>coder</td>
+                <td>实现员。按已批准切片做 TDD 实现；two-pack 的 master。不跑 CRAP / DRY / 变异测试。</td>
+              </tr>
+              <tr>
+                <td>cleaner</td>
+                <td>清理员。保行为、收拾代码。two-pack 还兼架构和变异加固；six-pack 只做局部清理，不跑变异测试。</td>
+              </tr>
+              <tr>
+                <td>refactorer</td>
+                <td>重构员。仅 four-pack。接近 six-pack 的 cleaner，外加属性测试支架；不引入新功能。</td>
+              </tr>
+              <tr>
+                <td>architect</td>
+                <td>架构员。模块边界与依赖方向（高层不依赖 IO）。four-pack 兼变异、是末棒；six-pack 改完结构交给 hardender。</td>
+              </tr>
+              <tr>
+                <td>hardender</td>
+                <td>加固员。仅 six-pack。语言变异 + 软 Gherkin 变异，再复查 CRAP/DRY。</td>
+              </tr>
+              <tr>
+                <td>QA</td>
+                <td>验收员。仅 six-pack。把 specifier 的 QA 步骤做成脚本，从 UI 跑端到端；末棒全员交接进 Done。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>编排与工程词</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>术语</th>
+                <th>在本课里指什么</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>pack</td>
+                <td>一条可运行工作流分支：<code>two-pack</code>、<code>four-pack</code> 或 <code>six-pack</code>。</td>
+              </tr>
+              <tr>
+                <td>main</td>
+                <td>纪录片分支：共享 scripts 与三篇核心宪法，不是完整项目工作流。</td>
+              </tr>
+              <tr>
+                <td>constitution</td>
+                <td>分层法律。入口是 <code>constitution.prompt</code>，条款在 <code>constitution/articles/</code>。</td>
+              </tr>
+              <tr>
+                <td>local-*.prompt</td>
+                <td>pack 对共享条款的叠加或收窄，禁止用同名文件覆盖共享篇。</td>
+              </tr>
+              <tr>
+                <td>role</td>
+                <td><code>swarmforge.conf</code> 里的一个窗口/工种，对应 <code>roles/&lt;role&gt;.prompt</code>。</td>
+              </tr>
+              <tr>
+                <td>master agent</td>
+                <td>worktree 名为 <code>master</code> 的角色；New Task 和聊天只找它。</td>
+              </tr>
+              <tr>
+                <td>质量闸</td>
+                <td>单独拆成一个角色的质量关注点。闸的数量决定选哪个 pack。</td>
+              </tr>
+              <tr>
+                <td><a href="#bdd">BDD</a></td>
+                <td>行为驱动开发：先写可观察行为，再自动化验证。Gherkin 是常用写法。详见下方。</td>
+              </tr>
+              <tr>
+                <td><a href="#gherkin">Gherkin</a></td>
+                <td>BDD 常用的规格语言（Given / When / Then）。本仓库走 APS。详见下方。</td>
+              </tr>
+              <tr>
+                <td><a href="#crap">CRAP</a></td>
+                <td>改代码风险 = 复杂度 × 缺测试。本仓库目标 ≤ 6。详见下方。</td>
+              </tr>
+              <tr>
+                <td><a href="#git-handoff">git_handoff</a></td>
+                <td>本项目交接格式：四行头指向一次 commit。详见下方。</td>
+              </tr>
+              <tr>
+                <td>TDD</td>
+                <td>先写会失败的聚焦单元测试，再写刚好够过的产品代码。</td>
+              </tr>
+              <tr>
+                <td>DRY</td>
+                <td>宪法指定的重复检测工具，用来减有意义的重复。</td>
+              </tr>
+              <tr>
+                <td>变异测试</td>
+                <td>故意改程序，看测试会不会抓住；抓不住的 survivor 要被补测试或改设计杀死。</td>
+              </tr>
+              <tr>
+                <td>worktree</td>
+                <td>同一仓库的另一份工作目录。非 master 一般在 <code>.worktrees/&lt;name&gt;</code>。</td>
+              </tr>
+              <tr>
+                <td>note</td>
+                <td>一行短消息交接。默认不要发，除非用户、角色或宪法明确要求。</td>
+              </tr>
+              <tr>
+                <td>handoffd</td>
+                <td>守护进程：搬文件、发通用唤醒，独占 tmux socket 访问。</td>
+              </tr>
+              <tr>
+                <td>task / batch</td>
+                <td>接收模式。task 一次一项；batch 把当前同等优先级的交接打成一批。</td>
+              </tr>
+              <tr>
+                <td>Attention</td>
+                <td>仪表盘上等人批规格或回答澄清的区域。</td>
+              </tr>
+              <tr>
+                <td>pack cockpit</td>
+                <td>本地仪表盘：New Task、Attention、泳道看板、Work Queue、聊天、Teardown。</td>
+              </tr>
+              <tr>
+                <td>tmux</td>
+                <td>终端会话复用器；agent 跑在项目专用 tmux 里。</td>
+              </tr>
+              <tr>
+                <td>window-invisible</td>
+                <td>角色只在 tmux 里跑，不弹 Terminal。pack 默认。</td>
+              </tr>
+              <tr>
+                <td>末棒广播</td>
+                <td>最后一角色的 <code>git_handoff</code>，<code>to:</code> 为每一个其他角色。two-pack 里就是 cleaner → coder。卡片因此进 Done。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="bdd">
+        <h2>BDD（通用概念）</h2>
+        <p>BDD = <strong>Behavior-Driven Development</strong>（行为驱动开发）。Dan North 在 2000 年代前后把 TDD 往「用业务能读懂的语言描述行为」推了一步：测试不再只写「这个函数返回什么」，而是写「系统在某种情况下应该怎样表现」。Cucumber 文档把 Gherkin 称为 BDD 的「通用语言」；Martin Fowler 把 Given / When / Then 称为 BDD 里常用的规格结构（见 <a href="https://martinfowler.com/bliki/GivenWhenThen.html">GivenWhenThen</a>）。</p>
+        <p>和本课里其它词的关系，可以这样记：</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>词</th>
+                <th>管什么</th>
+                <th>典型写法</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>TDD</td>
+                <td>一小块产品代码该怎么通过测试</td>
+                <td>单元测试（coder 在 SwarmForge 里默认这么做）</td>
+              </tr>
+              <tr>
+                <td>BDD</td>
+                <td>对外可见的行为对不对</td>
+                <td>场景化描述 + 可执行的验收测试</td>
+              </tr>
+              <tr>
+                <td>Gherkin</td>
+                <td>BDD 场景的一种<strong>文件格式</strong></td>
+                <td><code>.feature</code> 里的 Feature / Scenario / Given / When / Then</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>BDD 不是要取代 TDD。在 four/six-pack 里，specifier 用 Gherkin 写<strong>验收规格</strong>（外面看得见的行为），coder 仍用 TDD 写<strong>单元测试</strong>（里面怎么实现）；engineering 宪法也写明：生成的验收测试不能代替单元测试。two-pack 连 Gherkin 都关掉，只剩 coder 的 TDD + cleaner 的质量工具。</p>
+        <p>一句话例子：TDD 可能测「<code>hashPassword</code> 对同一输入总得到同一摘要」；BDD（Gherkin）会写「用户在登录页输入正确密码后，应进入首页」——后者不关心你用的是 bcrypt 还是别的，只关心用户能观察到的结果。</p>
+      </section>
+
+      <section id="gherkin">
+        <h2>Gherkin（通用概念）</h2>
+        <p>Gherkin 是 Cucumber 一系 BDD 工具用的<strong>领域语言</strong>（不是编程语言）：用接近自然语言的句子描述<a href="#bdd">BDD</a>里的可观察行为，而不是点哪个按钮、调哪条 API。权威结构见 <a href="https://cucumber.netlify.app/docs/gherkin/reference/">Cucumber Gherkin Reference</a>。</p>
+        <p>最小例子（登录）：</p>
+        <pre class="prompt-zh">Feature: 用户登录
+
+  Scenario: 用正确账号登录
+    Given 用户停在登录页
+    When 用户输入有效的邮箱和密码
+    Then 用户应被带到首页</pre>
+        <p>带例子表（同一场景多组数据）时，会写成 <code>Scenario Outline</code> + <code>Examples</code>。Fowler 文中的股票例子更长：先 Given 持仓和开市，When 卖出，Then 持仓和委托都对得上。</p>
+        <p><strong>在 SwarmForge 里还多一层：</strong> 规格必须符合 <a href="https://github.com/unclebob/Acceptance-Pipeline-Specification">Acceptance Pipeline Specification</a>。agent 用 <code>gherkin-parser</code> 把 feature 变成 IR，再用 <code>gherkin-mutator</code> 去改例子值，看验收测试会不会抓住。所以 specifier 会被要求：可变字段写成参数、删掉不能改善变异的相同列。two-pack 的 <code>project.prompt</code> 整段关掉 Gherkin；four/six-pack 打开。</p>
+      </section>
+
+      <section id="crap">
+        <h2>CRAP（通用概念）</h2>
+        <p>CRAP = <strong>Change Risk Anti-Patterns</strong>（也有文献写成 Change Risk Analysis and Prediction）。Alberto Savoia 与 Bob Evans 在 2007 年前后提出：一段函数「改起来有多危险」，由<strong>圈复杂度</strong>和<strong>自动化测试覆盖率</strong>一起决定。原始说明见 <a href="https://www.artima.com/weblogs/viewpost.jsp?thread=210575">Pardon My French, But This Code Is C.R.A.P.</a>。Uncle Bob 后来在 <a href="https://github.com/unclebob/crap4java">crap4java</a> 等工具里沿用同一公式。</p>
+        <p>公式（覆盖率写成 0–1 的小数）：</p>
+        <pre class="prompt-zh">CRAP = CC² × (1 − coverage)³ + CC</pre>
+        <p>直觉：</p>
+        <ul>
+          <li>覆盖率 → 100% 时，公式退化成 <code>CRAP = CC</code>：再复杂也有测试护着，但复杂本身仍有改动风险。</li>
+          <li>覆盖率 → 0 时，近似 <code>CC² + CC</code>：没测试时，复杂度平方放大风险。</li>
+        </ul>
+        <p>数字例子（同一函数 CC = 10）：</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>覆盖率</th>
+                <th>CRAP</th>
+                <th>怎么读</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>100%</td>
+                <td>10</td>
+                <td>只剩复杂度本身</td>
+              </tr>
+              <tr>
+                <td>50%</td>
+                <td>10²×0.5³ + 10 = 22.5</td>
+                <td>缺测开始发力</td>
+              </tr>
+              <tr>
+                <td>0%</td>
+                <td>110</td>
+                <td>先补测试，再考虑拆函数</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>门槛各家不同：早期 crap4j 常用 30；<a href="https://github.com/unclebob/crap4java/blob/main/spec.md">crap4java spec</a> 默认超过 8.0 失败。SwarmForge 清理岗（two-pack cleaner、four-pack refactorer、six-pack cleaner）写的是把 CRAP 降到 <strong>6 或以下</strong>，比上述默认更严。工具必须用宪法表里的 <code>crap4clj</code> / <code>crap4go</code> / <code>crap4java</code>，不要自制 <code>bb crap</code>。</p>
+      </section>
+
+      <section id="git-handoff">
+        <h2>git_handoff（本项目概念）</h2>
+        <p>这不是 Git 自带的子命令，也不是行业通用词。它是 SwarmForge 规定的<strong>一种交接消息类型</strong>：载荷是发送方 worktree 上<strong>已经提交</strong>的 HEAD，不是聊天记录、不是 PR 描述。完整协议在 <a href="https://github.com/unclebob/swarm-forge/blob/main/swarmforge/handoff-protocol.md">handoff-protocol.md</a>；agent 日常跟的是 <a href="https://github.com/unclebob/swarm-forge/blob/main/swarmforge/constitution/articles/handoffs.prompt">handoffs.prompt</a>。</p>
+        <p>agent 只准写四行头，SHA 由 helper 填：</p>
+        <pre class="prompt-zh">type: git_handoff
+to: cleaner
+priority: 50
+task: add-login</pre>
+        <p>之后它跑 <code>swarm_handoff.sh ./tmp/草稿</code>。下游被唤醒后跑 <code>ready_for_next.sh</code>，helper 把那个 commit merge 进自己的 worktree。看板卡片用同一个 <code>task:</code> 名字跟着跳泳道。</p>
+        <p>对比：<code>note</code> 也是交接，但只有一行 ≤80 字符的 <code>message:</code>，默认禁止发。末棒那一次 <code>to:</code> 必须列出每一个其他角色（例如 six-pack 的 QA 列五个人），卡片才进 Done。</p>
+      </section>
+
+      <p class="footer-note"><a href="./swarmforge-map.html">速查地图</a> · <a href="./two-pack-flow.html">two-pack 流程</a> · <a href="../lessons/0001-swarmforge-map.html">0001</a></p>
+    </main>
+  </body>
+</html>

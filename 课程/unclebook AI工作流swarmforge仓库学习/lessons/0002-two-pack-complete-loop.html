@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lesson 0002 · 把 two-pack 走完一遍</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/classify-quiz.js" defer></script>
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Lesson 0002</p>
+        <h1>按调用顺序看 agent 实际在读什么</h1>
+        <p class="lede">two-pack 仍然是「实现 → 清理加固 → 回传」。这一课把概述换成运行细节：启动器先生成一份指令文件塞进 Codex，agent 再按文件里的顺序去读宪法和角色 prompt。下面每份 prompt 都给出<strong>全量中文</strong>，放在它真正被读到的那一拍。英文原文一律链 GitHub。</p>
+        <div class="pill-row">
+          <span class="pill">预计 25 分钟</span>
+          <span class="pill">目标：能跟着 prompt 走完一轮</span>
+          <span class="pill">回看：<a href="../reference/two-pack-flow.html">two-pack 流程速查</a></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>开机后，prompt 是按这个顺序被读的</h2>
+        <div class="callout">
+          <p><strong>没有人把角色 prompt 单独丢给模型。</strong> <a href="https://github.com/unclebob/swarm-forge/blob/main/swarmforge/scripts/swarmforge.bb">swarmforge.bb</a> 会写一份 <span class="path">.swarmforge/prompts/&lt;role&gt;.md</span>，再用 <code>codex … "$(cat 那份文件)"</code> 启动。文件头两句是硬指令：先递归读宪法，再读本角色 prompt。</p>
+        </div>
+        <ol class="source-list">
+          <li>生成的启动指令（含 Tool Startup）</li>
+          <li><code>constitution.prompt</code> → 它要求读 <code>articles/</code> 下每一篇</li>
+          <li>合成后的文章：<code>engineering</code>、<code>handoffs</code>、<code>workflow</code>（来自 main）+ <code>project</code>（来自 two-pack）</li>
+          <li><code>roles/coder.prompt</code> 或 <code>roles/cleaner.prompt</code></li>
+          <li>之后每一跳交接，靠的是已经读进上下文的 <code>handoffs.prompt</code> + 角色自己的 Handoff 节，而不是再加载一份新系统提示</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>拓扑仍是两行 conf</h2>
+        <p><a href="https://github.com/unclebob/swarm-forge/blob/two-pack/swarmforge/swarmforge.conf">swarmforge.conf</a>：coder 在 <code>master</code>、默认 task、<code>codex --yolo</code>；cleaner 在 <code>.worktrees/cleaner</code>、显式 <code>batch</code>。New Task 只进 coder。没有规格批准。</p>
+      </section>
+
+      <section id="beat-boot">
+        <p class="beat-label">第 0 拍 · 启动器写入</p>
+        <h2>coder 启动时真正先看到的全文</h2>
+        <p>下面是 <code>write-agent-instruction-file!</code> 给 <strong>coder</strong> 拼出来的内容（two-pack 里 coder 不是末棒；工具表里 coder 仍被写上 <code>gherkin-parser</code>）。读完再看 project.prompt：本 pack <strong>禁止</strong> 做 Gherkin。运行时要以 pack 本地宪法收窄启动模板，不要看见 parser 就开始写验收规格。</p>
+        <article class="prompt-doc">
+          <h3 class="card-title">生成文件 · coder.md（中文全量）</h3>
+          <p class="prompt-cap">生成逻辑：<a href="https://github.com/unclebob/swarm-forge/blob/main/swarmforge/scripts/swarmforge.bb">swarmforge.bb</a> 中 <code>write-agent-instruction-file!</code> 与 <code>tool-startup-section</code></p>
+          <pre class="prompt-zh">请阅读 swarmforge/constitution.prompt，再递归阅读它指向的每一个文件，并遵守那些指令。
+请阅读 swarmforge/roles/coder.prompt，再递归阅读它指向的每一个文件，并遵循那些指令。
+
+## 工具启动
+
+- 不要在 `$HOME` 里搜索，也不要用 `find` 去找 APS 工具。
+- `gherkin-parser`（Gherkin 解析）：`swarm_tool.sh require gherkin-parser`
+  若缺失，精确运行：`swarm_tool.sh ensure gherkin-parser`
+- 用双参数形式解析：`gherkin-parser &lt;feature&gt; ./tmp/&lt;stem&gt;.json`
+- 草稿和临时文件写在本角色 worktree 的 `./tmp/`。
+- 不要把 `/tmp` 或 `.swarmforge/handoffs/outbox/tmp/` 当草稿纸。
+- 用 `ready_for_next.sh` 接收。用 `swarm_handoff.sh ./tmp/&lt;draft&gt;` 发送。
+- 不要在仓库树或 `$HOME` 里找这些脚本。
+- 不要写成 `./swarmforge/scripts/...` 去调 helper，它们已经在 PATH 上。
+- 看板卡片在 `.swarmforge/board/tasks.tsv`。用那张卡片的名字当 `task:`。
+- 操作者任务文档在 `tasks/&lt;task-name&gt;.md`。把它当操作者意图重读。master agent 在该任务第一次 git 工作时把它提交进去。
+- 重试审计可能在具名文档上留下补救评论。把那些评论当发现来读。
+- 不要在自己的 worktree 里搜 `.swarmforge/board/tasks.tsv`。那份文件在项目（master）上。
+- `task:` 用 `ready_for_next.sh` 打出的 TASK_NAME，或入站头里的 `task:`。若是 batch，名字取第一项。helper 会从进行中的 batch 填 `task:`，否则用发送方泳道的卡片。
+- 不要自己发明名字，也不要去翻 `sessions.tsv`。
+- 宪法工具：`swarm_tool.sh require crap4clj`（以及 dry4clj、clj-mutate、cloverage、speclj、speclj-structure-check、APS，或语言表里的工具）。缺失则 `swarm_tool.sh ensure &lt;tool&gt;`。不要发明项目里的 `bb` 代理。
+- 宪法工具一次只跑一个。有 worker 上限的工具用 `--max-workers 4` 或 `--workers 4`。变异是相对清单的差分：不要 `--mutate-all`，不要 `--level full`。
+- 不要把那些仓库 clone 进 `./tmp`。
+- 若 `merge_and_process.sh` 或 `ready_for_next` 报合并冲突：解决冲突文件、`git add`、提交。不要自己发明一套 `git merge`。同一棵树上的并行卡片会冲突，这是预期。
+- 操作者跟进以窗格里的 `[id] text` 到达。用 `pack_dashboard_request.sh answer &lt;id&gt; ./tmp/answer.txt` 回答。
+- 问操作者用 `pack_dashboard_request.sh clarify ./tmp/question.txt`。不要在窗格里问。
+- 不要在窗格里求批准。排队 `git_handoff`；操作者走 Attention。</pre>
+        </article>
+        <p>cleaner 的生成文件只有三处不同：第二句改读 <code>roles/cleaner.prompt</code>；工具表里 <strong>没有</strong> 给 cleaner 预置 APS 行；并且因为它是 conf 里最后一个角色，会多一句末棒纪律（见第 5 拍）。</p>
+      </section>
+
+      <section id="beat-constitution">
+        <p class="beat-label">第 1 拍 · 两句硬指令之后</p>
+        <h2>宪法入口：只做一件事——去读 articles/</h2>
+        <p>agent 按启动文件第一句打开这份。它自己几乎没有规则，但声明<strong>本文件优先于文章</strong>：文章之间打架时，以入口文件的「去读并遵守全部文章」为准，不能只挑角色 prompt。</p>
+        <article class="prompt-doc">
+          <h3 class="card-title">constitution.prompt（中文全量）</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/unclebob/swarm-forge/blob/two-pack/swarmforge/constitution.prompt">two-pack constitution.prompt</a></p>
+          <pre class="prompt-zh"># SwarmForge 宪法
+
+本文件优先于各篇文章。
+阅读并遵守 `swarmforge/constitution/articles/` 下的每一个文件。</pre>
+        </article>
+      </section>
+
+      <section id="beat-articles">
+        <p class="beat-label">第 2 拍 · 递归读完四篇文章</p>
+        <h2>合成后 articles/ 里实际有这四份</h2>
+        <p>三篇共享法（<code>workflow</code> / <code>handoffs</code> / <code>engineering</code>）中文全文已在 <a href="./0001-swarmforge-map.html#beat-constitution">0001</a> 嵌过，本课不重复粘贴。对照：<a href="./0001-swarmforge-map.html#zh-workflow">workflow</a> · <a href="./0001-swarmforge-map.html#zh-handoffs">handoffs</a> · <a href="./0001-swarmforge-map.html#zh-engineering">engineering</a>。下面只嵌 two-pack <strong>独有</strong>的 <code>project.prompt</code>（会收窄共享工程法：禁止 Gherkin）。</p>
+
+        <article class="prompt-doc" id="zh-project">
+          <h3 class="card-title">project.prompt（中文全量）</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/unclebob/swarm-forge/blob/two-pack/swarmforge/constitution/articles/project.prompt">two-pack project.prompt</a> · <strong>这是 two-pack 对上面三篇共享法的收窄。</strong> 共享 engineering 大谈验收管线；本篇直接禁止 Gherkin。共享 handoffs 说「做完入站必须向前传」；本篇的 Cleaner Handoffs 规定：货若来自 cleaner，coder 不得再向下发。</p>
+          <pre class="prompt-zh"># 项目规则
+
+## 项目形态
+- 本项目配置为 SwarmForge，两个由 Codex 驱动的 agent：coder 与 cleaner。
+- coder 是 master worktree 角色。
+- 项目语言：Babashka。
+
+## 本地配置
+- 把项目本地的 SwarmForge 配置保持在 `swarmforge/` 下。
+- swarm 状态放 `.swarmforge/`，worktree 放 `.worktrees/`，共享脚本放 `swarmforge/scripts/`。
+
+## 工作流
+- cleaner 以 batch 模式接收 coder 的交接。
+- 不要创建或使用 Gherkin、IR、验收测试、Gherkin 变异或属性测试。
+- 只用单元测试和语言本地验证。
+
+## 交接
+- 交接要短、明确，报告状态并请求适合该角色的审查。
+- 不要包含发送方的过程叙述。
+
+## 来自 cleaner 的交接
+- 当 helper 交付的任务来自 cleaner 时，`ready_for_next.sh` 已经合并了那个 commit。跑单元测试并修好失败。然后运行 `done_with_current.sh`。不要再向下发送 `git_handoff`。不要发明 `git merge`。除验证外，不要对这份来自 cleaner 的交接再做其他角色专项工作。
+
+## 所有权
+- 未经用户明确指示，不要改另一个角色的 prompt 或工作流所有权。</pre>
+        </article>
+      </section>
+
+      <section id="beat-coder">
+        <p class="beat-label">第 3 拍 · New Task 落到 coder</p>
+        <h2>这时才读 coder.prompt，并按其 Handoff 节干活</h2>
+        <p>仪表盘把任务名写进卡片，并往 coder 窗格塞 <code>(New Task)</code>。coder 已经读完宪法。它现在按下面这份「你是 coder」来做：TDD 实现 → 单测 → 提交 → 草稿只含四行头 → <code>swarm_handoff.sh</code> 给 cleaner，priority 50。</p>
+        <p>第一次有效 <code>git_handoff</code> 常会打印 <code>AUDIT_REQUIRED</code>（运行时脚本在 main 的 helper 里）：同一份草稿再交一次才会真正入队。改了草稿、任务、接收方或 commit，审计作废重来。</p>
+        <article class="prompt-doc" id="zh-coder">
+          <h3 class="card-title">coder.prompt（中文全量）</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/unclebob/swarm-forge/blob/two-pack/swarmforge/roles/coder.prompt">two-pack coder.prompt</a></p>
+          <pre class="prompt-zh">你是 coder。
+
+## 拥有
+- 用项目语言实现被请求的行为。
+- 拥有聚焦的行为切片，以及定义这些切片的单元测试。
+- 保持产品代码可测；把 IO 和环境细节放在小的适配器边界后面。
+
+## 实现
+- 用 TDD：先写能表达所请求可观察行为、并且能让一种说得通的错误实现失败的聚焦单元测试；再只写刚好让这些测试通过的产品代码；对本切片里碰到的代码做局部清理。
+- 名字要清楚，控制流要简单，碰到的代码里重复要低。
+- 除非大扫除挡住了本行为切片，否则不要做大范围清理。
+
+## 不拥有
+- 不要创建、运行或维护验收测试、Gherkin、IR、Gherkin 变异、属性测试、CRAP、DRY 或语言变异。
+
+## 交接
+- 被通知或重启时运行 `ready_for_next.sh`。它会合并入站 `git_handoff`。不要发明 `git merge`。
+- 若入站 `git_handoff` 来自 cleaner：跑单元测试、修好失败、运行 `done_with_current.sh`。不要发送 `git_handoff`。
+- 否则跑单元测试和相关的本地验证。
+- 提交行为改动。
+- 向 `cleaner` 发送 `git_handoff`，priority 为 `50`。
+- 用 `swarm_handoff.sh &lt;草稿文件&gt;` 排队。草稿头只有 `type`、`to`、`priority`、`task`。不要手打 SHA 或 `SWARMFORGE_ROLE`。
+- 然后运行 `done_with_current.sh`。</pre>
+        </article>
+        <p>这一拍 coder 实际会写的草稿是：</p>
+        <pre class="prompt-zh">type: git_handoff
+to: cleaner
+priority: 50
+task: &lt;你在 New Task 里起的那个短名&gt;</pre>
+        <p>写完后 <code>done_with_current.sh</code>。若打印 <code>MAIL_WAITING</code>，再 <code>ready_for_next.sh</code>。对 New Task 这条路径，通常没有下一项。</p>
+      </section>
+
+      <section id="beat-cleaner">
+        <p class="beat-label">第 4–5 拍 · cleaner 被唤醒</p>
+        <h2>batch 吃货，然后按 Cleanup Order 跑完再末棒回传</h2>
+        <p><code>handoffd</code> 把文件拷进 cleaner 的 inbox 并通用唤醒。cleaner 的生成指令里多了末棒句。它跑 <code>ready_for_next.sh</code>，因为 conf 是 batch：同等 priority 的交接会打成一批。<code>PAYLOAD</code> 来自 helper 打印，不要自己去翻 inbox。</p>
+        <article class="prompt-doc">
+          <h3 class="card-title">cleaner 启动文件多出来的末棒句（中文全量）</h3>
+          <p class="prompt-cap">同一函数，<code>last-pack-role?</code> 为真时追加。conf 里 cleaner 是最后一行。</p>
+          <pre class="prompt-zh">- 你是本 pack 的最后一个角色。这一棒之后，只发一次 `git_handoff`，接收方是每一个其他角色。接收方只合并。卡片进 Done。不要再额外给「下一个角色」单独发一份 `git_handoff`。</pre>
+        </article>
+        <article class="prompt-doc" id="zh-cleaner">
+          <h3 class="card-title">cleaner.prompt（中文全量）</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/unclebob/swarm-forge/blob/two-pack/swarmforge/roles/cleaner.prompt">two-pack cleaner.prompt</a> · Cleanup Order 就是运行时的检查清单：覆盖率 → CRAP≤6 → DRY → 架构边界 → 对弱覆盖做语言变异 → 补测试杀死 mutant。不要调换顺序去「先变异再收拾」。</p>
+          <pre class="prompt-zh">你是 cleaner。
+
+## 拥有
+- 在 coder 交接之后，在保持行为不变的前提下提升质量。
+- 把 helper 交付的 coder 交接当作一批，一次清理。
+- 拥有清理、减少重复、架构结构、封装、关注点分离，以及变异加固。
+
+## 清理顺序
+- 跑覆盖率，并在合理范围内补上未覆盖的已改行为。
+- 跑语言 CRAP 工具，把 CRAP 保持在 `6` 或以下。
+- 跑语言 DRY 工具，减少有意义的重复。
+- 审查并修正模块结构、边界、依赖方向、封装、信息隐藏和关注点分离。
+- 对未覆盖或覆盖很弱的已改行为跑语言变异。
+- 增加或改进单元测试，直到相关 mutant 被杀死。
+
+## 架构规则
+- 让高层策略独立于 IO、UI、框架、文件系统、数据库、网络和设备细节。
+- 让低层适配器向内依赖稳定的高层概念。
+- 拆开混了无关职责、或把实现细节漏过边界的模块。
+- 偏好窄接口和私有表示。
+
+## 不拥有
+- 不要引入新行为。
+- 不要创建、运行或维护验收测试、Gherkin、IR、Gherkin 变异或属性测试。
+
+## 交接
+- 被通知或重启时运行 `ready_for_next.sh`。它会合并入站 `git_handoff`。不要发明 `git merge`。
+- 跑单元测试和相关的本地验证。
+- 提交清理和加固改动。
+- 向 `coder` 发送 `git_handoff`，priority 为 `00`。
+- 用 `swarm_handoff.sh &lt;草稿文件&gt;` 排队。草稿头只有 `type`、`to`、`priority`、`task`。不要手打 SHA 或 `SWARMFORGE_ROLE`。
+- 然后运行 `done_with_current.sh`。</pre>
+        </article>
+        <p>two-pack 里「每一个其他角色」只有 coder，所以末棒草稿是：</p>
+        <pre class="prompt-zh">type: git_handoff
+to: coder
+priority: 00
+task: &lt;同一张卡片名&gt;</pre>
+        <p><code>00</code> 比 coder 发出的 <code>50</code> 更先处理：加固结果要插到 coder 队列前面，而不是排在新功能后面。</p>
+      </section>
+
+      <section id="beat-return">
+        <p class="beat-label">第 6 拍 · 货回到 coder</p>
+        <h2>两份 prompt 一起关掉闭环</h2>
+        <p>coder 再次被唤醒，<code>ready_for_next.sh</code> 已经 merge。它不会重新读一遍磁盘上的 prompt，但启动时读进上下文的两段会同时生效：</p>
+        <ul>
+          <li><a href="#zh-coder">coder.prompt</a> 的「若来自 cleaner……不要发送 git_handoff」</li>
+          <li><a href="#zh-project">project.prompt</a> 的「来自 cleaner 的交接」：只验证，不做实现专项</li>
+        </ul>
+        <p>于是运行时动作收成：跑单测 → 修好 → <code>done_with_current.sh</code> → 停。再发给 cleaner 就违反末棒，也会把卡片循环打回去。</p>
+      </section>
+
+      <section>
+        <h2>把六拍收成一条时间线</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>拍</th>
+                <th>谁在动</th>
+                <th>脑子里应响起哪份全文</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0–2</td>
+                <td>两个 Codex 启动</td>
+                <td>生成指令 → 宪法入口 → 四篇文章</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>你点 New Task</td>
+                <td>coder.prompt 的实现 + 交接；草稿 to cleaner / 50</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>handoffd 送达</td>
+                <td>handoffs.prompt 的接收节；ready_for_next 打出 BATCH</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>cleaner 干活</td>
+                <td>cleaner.prompt 的清理顺序 + 末棒句；草稿 to coder / 00</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>coder 再醒</td>
+                <td>coder.prompt「来自 cleaner」+ project.prompt 同节；不再转发</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="quiz">
+        <h2>3 分钟自测</h2>
+        <p>按「启动时读到的全文」来答，不要只背角色名字。</p>
+        <div class="quiz-list">
+          <div class="quiz-item" data-quiz-answer="宪法角色" data-quiz-explanation="生成的 .md 头两句：先递归读 constitution.prompt，再读 roles/该角色.prompt。">
+            <h3>1. Codex 进程一启动，被要求先读哪两类文件？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="宪法角色">宪法角色</button>
+              <button class="quiz-option" type="button" data-choice="协议脚本">协议脚本</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+          <div class="quiz-item" data-quiz-answer="本地宪法" data-quiz-explanation="project.prompt 禁止 Gherkin；启动模板仍可能列出 gherkin-parser。做不做验收管线看本地宪法和 coder 的不拥有节。">
+            <h3>2. 启动指令里出现 gherkin-parser 时，two-pack 应以什么为准？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="本地宪法">本地宪法</button>
+              <button class="quiz-option" type="button" data-choice="工具清单">工具清单</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+          <div class="quiz-item" data-quiz-answer="回传编码" data-quiz-explanation="末棒 cleaner 的 to: coder 已经覆盖唯一的其他角色，卡片进 Done；coder 只合并验证，不再发给 cleaner。">
+            <h3>3. 卡片进 Done，是因为哪一次交接？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="回传编码">回传编码</button>
+              <button class="quiz-option" type="button" data-choice="再交清理">再交清理</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+          <div class="quiz-item" data-quiz-answer="不要转发" data-quiz-explanation="coder.prompt 与 project.prompt 的 Cleaner Handoffs 同时要求：来自 cleaner 只测、done，不发 git_handoff。">
+            <h3>4. 加固结果合并进 coder 之后，下一步应是？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="不要转发">不要转发</button>
+              <button class="quiz-option" type="button" data-choice="再交清理">再交清理</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>这一课学完，你至少该带走什么</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">1. 先读生成文件</h3>
+            <p>真正的入口是 <span class="path">.swarmforge/prompts/&lt;role&gt;.md</span>，不是你在 GitHub 上点开的某一份 prompt。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2. 共享法会被本地收窄</h3>
+            <p>engineering 写满验收管线，project 在 two-pack 里把它关掉。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3. 闭环靠两段 Handoff 对打</h3>
+            <p>coder 的「给 cleaner / 50」对上 cleaner 的「给 coder / 00」；回来那一跳被明确写成不要转发。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>下一步怎么学最顺</h2>
+        <p>four-pack / six-pack 也可以按同一方式：启动文件 → 宪法文章 → 各角色全文。下一课是 <a href="./0003-four-pack-complete-loop.html">0003</a>；若你希望 0003 也改成「调用顺序 + 中文全量」，直接说。</p>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <ol class="source-list">
+          <li><a href="https://github.com/unclebob/swarm-forge/blob/main/swarmforge/scripts/swarmforge.bb">swarmforge.bb（生成启动指令）</a></li>
+          <li><a href="https://github.com/unclebob/swarm-forge/blob/two-pack/swarmforge/constitution.prompt">constitution.prompt</a></li>
+          <li><a href="./0001-swarmforge-map.html#zh-workflow">workflow.prompt（中文在 0001）</a></li>
+          <li><a href="./0001-swarmforge-map.html#zh-handoffs">handoffs.prompt（中文在 0001）</a></li>
+          <li><a href="./0001-swarmforge-map.html#zh-engineering">engineering.prompt（中文在 0001）</a></li>
+          <li><a href="https://github.com/unclebob/swarm-forge/blob/two-pack/swarmforge/constitution/articles/project.prompt">project.prompt</a></li>
+          <li><a href="https://github.com/unclebob/swarm-forge/blob/two-pack/swarmforge/roles/coder.prompt">coder.prompt</a></li>
+          <li><a href="https://github.com/unclebob/swarm-forge/blob/two-pack/swarmforge/roles/cleaner.prompt">cleaner.prompt</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">某一拍对不上「模型当时到底读了哪一段」，把拍号丢过来。0003 / 0004 也可以按这一版加厚。</p>
+    </main>
+  </body>
+</html>

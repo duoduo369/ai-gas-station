@@ -6,6 +6,7 @@
     <title>Lesson 0004 · handoff 与上下文交接</title>
     <link rel="stylesheet" href="../assets/course.css">
     <script src="../assets/classify-quiz.js" defer></script>
+    <script src="../assets/course-nav.js" defer></script>
     <script src="../assets/open-links-new-tab.js" defer></script>
   </head>
   <body>
@@ -15,7 +16,7 @@
         <h1>把 handoff 和“结束当前 session”拆开理解</h1>
         <p class="lede">这一课专门解决一个很容易踩坑的误解：你可能以为 `/handoff` 的本质是“切走当前上下文”，但从 skill 原文看，它首先是“生成一份可携带的交接文档”。这两个动作经常在实际使用里被混成一个东西。</p>
         <div class="pill-row">
-          <span class="pill">预计 10 分钟</span>
+          <span class="pill">预计 14 分钟</span>
           <span class="pill">目标：会判断 handoff 什么时候该用</span>
           <span class="pill">速查：<a href="../reference/handoff-and-phase-boundaries.html">handoff 速查</a></span>
         </div>
@@ -27,6 +28,27 @@
           <p><strong>`/handoff` 默认是“产物动作”，不是“终止动作”。</strong></p>
           <p>`handoff` skill 的定义很短也很直接：写一份 handoff document，总结当前对话，保存到系统临时目录，并给下一位 agent 一个 suggested skills 区段。它没有写“写完后必须结束当前 session”或“写完后自动切换到新窗口”。</p>
         </div>
+        <p class="beat-label">本课权威正文 · 交接 skill 全文</p>
+        <article class="prompt-doc" id="zh-handoff">
+          <h3 class="card-title">handoff/SKILL.md（中文全量）</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md">handoff/SKILL.md</a> · 整份 skill 只承诺写文档。phase boundary 的五选一顺序树已嵌在 <a href="./0002-ask-matt-main-flow-and-onramps.html#zh-phase-boundaries">0002</a>，本课不重复。</p>
+          <pre class="prompt-zh">---
+name: handoff
+description: 把当前对话压缩成一份交接文档，供另一位 agent 接手。
+argument-hint: "下一次会话将主要用来做什么？"
+disable-model-invocation: true
+---
+
+写一份 handoff 文档，总结当前对话，让一个全新的 agent 可以继续这项工作。把文件保存到用户操作系统的临时目录，而不是当前工作区。
+
+文档中要包含一个 “suggested skills” 小节，建议 agent 应该调用哪些 skill。
+
+不要重复其他产物里已经记录过的内容（例如 specs、plans、ADRs、issues、commits、diffs）。改为用路径或 URL 引用它们。
+
+删去任何敏感信息，例如 API key、密码或可识别个人身份的信息。
+
+如果用户传入了参数，就把它当作“下一次会话将聚焦什么”的描述，并据此调整这份文档。</pre>
+        </article>
       </section>
 
       <section>
@@ -49,6 +71,10 @@
 
       <section>
         <h2>phase boundary 里，handoff 只是五选一中的一个</h2>
+        <figure class="flow-figure">
+          <img src="../assets/flow-phase-boundary.svg" alt="phase boundary 五问顺序树，handoff 只在第三问为是时出现">
+          <figcaption class="flow-caption">/handoff 只在第三问为「是」时出现：需要把文件带走。它不负责结束当前 session。顺序树全文见 <a href="./0002-ask-matt-main-flow-and-onramps.html#zh-phase-boundaries">0002</a>。</figcaption>
+        </figure>
         <div class="table-wrap">
           <table>
             <thead>
@@ -87,7 +113,7 @@
             </tbody>
           </table>
         </div>
-        <p>这张表里最该记的是：<strong>`/handoff` 解决的是 portability，不是“结束当前会话”本身。</strong></p>
+        <p>这张表里最该记的是：<strong>`/handoff` 解决的是 portability，不是“结束当前会话”本身。</strong> 五个选项怎么按顺序问，见 <a href="./0002-ask-matt-main-flow-and-onramps.html#zh-phase-boundaries">0002 的 PHASE-BOUNDARIES 中文全文</a>。</p>
       </section>
 
       <section>
@@ -195,11 +221,11 @@
 
       <section>
         <h2>主资料</h2>
-        <p>这一课最值得你亲自回去看的是 <a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md">handoff/SKILL.md</a> 和 <a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/PHASE-BOUNDARIES.md">PHASE-BOUNDARIES.md</a>。前者告诉你 handoff 的最小职责，后者告诉你 handoff 只是 phase boundary 里的五选一之一。</p>
+        <p>这一课最值得对照的是上面嵌进的 <a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md">handoff/SKILL.md</a>。它在五选一里的位置，见 <a href="./0002-ask-matt-main-flow-and-onramps.html#zh-phase-boundaries">0002 · PHASE-BOUNDARIES</a>。</p>
         <ol class="source-list">
-          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md">handoff/SKILL.md</a></li>
-          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/PHASE-BOUNDARIES.md">PHASE-BOUNDARIES.md</a></li>
-          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">ask-matt/SKILL.md</a></li>
+          <li><a href="#zh-handoff">本课 · handoff 中文全文</a></li>
+          <li><a href="./0002-ask-matt-main-flow-and-onramps.html#zh-phase-boundaries">0002 · PHASE-BOUNDARIES 中文全文</a></li>
+          <li><a href="./0002-ask-matt-main-flow-and-onramps.html#zh-ask-matt">0002 · ask-matt 中文全文</a></li>
         </ol>
       </section>
 

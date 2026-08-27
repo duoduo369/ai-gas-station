@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>整分支验收速查</title>
     <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
     <script src="../assets/open-links-new-tab.js" defer></script>
   </head>
   <body>
@@ -17,6 +18,10 @@
 
       <section>
         <h2>一句话区分</h2>
+        <figure class="flow-figure">
+          <img src="../assets/flow-branch-qa.svg" alt="整分支两轴验收流程">
+          <figcaption class="flow-caption">单票停在 commit；整分支是新 session 的两轴评审。细节见 <a href="../lessons/0005-post-implement-qa-and-branch-review.html">0005</a>。</figcaption>
+        </figure>
         <div class="grid">
           <article class="card">
             <h3 class="card-title">单票 <code>implement</code> 里的 review</h3>

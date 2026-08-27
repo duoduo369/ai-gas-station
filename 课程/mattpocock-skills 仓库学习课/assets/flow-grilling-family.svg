@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 480" role="img">
+  <title>grilling family</title>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#174c3c"/>
+    </marker>
+    <marker id="arrow-warm" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#8b5d33"/>
+    </marker>
+  </defs>
+  <rect width="1080" height="480" rx="18" fill="#fbf8f1"/>
+  <text x="36" y="40" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="700" fill="#1f2a21">三者不是并列按钮：grilling 是底座</text>
+  <text x="36" y="64" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" fill="#536255">后两者都借用同一套 rounds / frontier；分叉点是「一个 session 还 hold 得住吗」。</text>
+  <rect x="240" y="88" width="600" height="88" rx="14" fill="#174c3c"/>
+  <text x="540" y="122" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="20" font-weight="700" fill="#f7faf7" text-anchor="middle">grilling</text>
+  <text x="540" y="148" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#d9e6de" text-anchor="middle">原语 · design tree · frontier · 事实归 agent，决策归你</text>
+  <line x1="420" y1="176" x2="300" y2="228" stroke="#174c3c" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="660" y1="176" x2="780" y2="228" stroke="#174c3c" stroke-width="2" marker-end="url(#arrow)"/>
+  <rect x="36" y="232" width="480" height="208" rx="14" fill="#fff" stroke="#174c3c" stroke-width="1.5"/>
+  <text x="276" y="268" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="18" font-weight="700" fill="#174c3c" text-anchor="middle">grill-with-docs</text>
+  <text x="56" y="298" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#1f2a21">何时：想法还能在一个 session 里磨清</text>
+  <text x="56" y="322" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#1f2a21">多了什么：同时跑 domain-modeling</text>
+  <text x="56" y="346" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#1f2a21">产物：对齐后的理解 + CONTEXT.md / ADR</text>
+  <text x="56" y="378" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="700" fill="#8b5d33">之后：看规模</text>
+  <text x="56" y="402" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" fill="#536255">小 → 直接 implement</text>
+  <text x="56" y="422" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" fill="#536255">大 → to-spec → to-tickets → implement</text>
+  <rect x="564" y="232" width="480" height="208" rx="14" fill="#fff" stroke="#8b5d33" stroke-width="1.5"/>
+  <text x="804" y="268" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="18" font-weight="700" fill="#8b5d33" text-anchor="middle">wayfinder</text>
+  <text x="584" y="298" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#1f2a21">何时：太大、有雾，一个 session 装不下</text>
+  <text x="584" y="322" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#1f2a21">做什么：先 chart map，一次只解一张决策票</text>
+  <text x="584" y="346" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" fill="#1f2a21">产物：map + decision tickets，不是交付物</text>
+  <text x="584" y="378" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="14" font-weight="700" fill="#8b5d33">之后：交接，不构建</text>
+  <text x="584" y="402" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" fill="#536255">清图 → to-spec（把链接决策压成计划）</text>
+  <text x="584" y="422" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" fill="#536255">只有后来证明真的很小，才直达 implement</text>
+</svg>
