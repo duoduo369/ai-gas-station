@@ -1,47 +1,67 @@
-# AI加油站
+<h1 align="center">AI加油站</h1>
 
-一个面向 AI 学习沉淀的个人知识库。
+<p align="center">面向 AI 学习沉淀的个人知识库</p>
 
-它服务于三类动作：
+收藏值得留的入口，写下自己的理解，留下下次还能用的方法。
 
-- 收藏值得留的内容入口；
-- 沉淀自己的理解、摘录与实践记录；
-- 累积已经验证过、下次还能直接复用的方法与打法。
+## 课程
 
-本仓库同时面向 Obsidian 与 GitHub 使用，因此采用“对象目录 + 横切目录”的轻量结构。对象目录自己承载索引与深度笔记，不再额外单列 `资源/`。
+clone 到本地后，点封面或标题会打开该课第一份 HTML。也可以进对应课程的 `lessons/` 目录，按编号直接打开课件学习。
 
-AI 协作入口见 [AGENTS.md](./AGENTS.md)。记录规则见 [docs/conventions.md](./docs/conventions.md)。
+每门课都有：
 
-## 顶层结构
+- `lessons/`：按课时排的 HTML 课件
+- `reference/`：回看用的速查页
 
-| 目录 | 用途 |
-| --- | --- |
-| `书籍/` | 书的索引与单本学习笔记 |
-| `演讲/` | 演讲、分享、播客等内容的索引与学习笔记 |
-| `skills/` | agent skills 的学习、拆解与实践记录 |
-| `概念/` | AI 概念、术语与机制解释 |
-| `课程/` | 自成体系的多课时课程与 lesson 课件 |
-| `playbook/` | 已验证、可复用的方法、流程、套路 |
-| `assets/` | 功能性附件，如截图、PDF、讲义 |
-| `docs/` | 机制与规范文档 |
+完整课表见 [课程](./课程/README.md)。
 
-## 使用约定
+<table>
+  <tr>
+    <td align="center" width="50%" valign="top">
+      <a href="./课程/agent编程方法论探索/lessons/0001-agent-failure-modes.html">
+        <img src="./assets/image/2026-08-27-course-cover-agent-methodology.jpg" alt="Agent 编程方法论探索" width="100%">
+      </a>
+      <p>
+        <a href="./课程/agent编程方法论探索/lessons/0001-agent-failure-modes.html"><strong>Agent 编程方法论探索</strong></a><br>
+        用失败模式和对照轴看 Matt / Superpowers / SwarmForge
+      </p>
+    </td>
+    <td align="center" width="50%" valign="top">
+      <a href="./课程/mattpocock-skills 仓库学习课/lessons/0001-repo-structure-and-skill-map.html">
+        <img src="./assets/image/2026-08-27-course-cover-matt-skills.jpg" alt="mattpocock/skills 仓库学习课" width="100%">
+      </a>
+      <p>
+        <a href="./课程/mattpocock-skills 仓库学习课/lessons/0001-repo-structure-and-skill-map.html"><strong>mattpocock/skills 仓库学习课</strong></a><br>
+        先画仓库地图，再沿 ask-matt 主线往下读
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%" valign="top">
+      <a href="./课程/obra superpowers skill 学习课/lessons/0001-repo-map-and-basic-workflow.html">
+        <img src="./assets/image/2026-08-27-course-cover-superpowers.jpg" alt="Superpowers skill 学习课" width="100%">
+      </a>
+      <p>
+        <a href="./课程/obra superpowers skill 学习课/lessons/0001-repo-map-and-basic-workflow.html"><strong>Superpowers skill 学习课</strong></a><br>
+        拆 skills 库、harness 接线和七步工作流
+      </p>
+    </td>
+    <td align="center" width="50%" valign="top">
+      <a href="./课程/unclebook AI工作流swarmforge仓库学习/lessons/0001-swarmforge-map.html">
+        <img src="./assets/image/2026-08-27-course-cover-swarmforge.jpg" alt="Uncle Bob SwarmForge 工作流课" width="100%">
+      </a>
+      <p>
+        <a href="./课程/unclebook AI工作流swarmforge仓库学习/lessons/0001-swarmforge-map.html"><strong>Uncle Bob SwarmForge 工作流课</strong></a><br>
+        分清 main 底座，再把 two / four / six pack 整台走完
+      </p>
+    </td>
+  </tr>
+</table>
 
-- 对象目录默认使用中文命名；`skills/` 因直接对应 agent skills 保留英文，机制目录也保留英文，如 `playbook/`、`assets/`、`docs/`。
-- 每个对象目录都用 `README.md` 作为索引入口。
-- `课程/` 以“每门课一个子目录”的方式组织，课程目录内部自带 `README.md`、`lessons/`、`reference/`、`assets/`。
-- 索引条目最少包含：名称、一句话注释；原始链接与本地笔记链接都是可选项。
-- 索引条目可以先于正文存在。书籍笔记只有在明确要求创建某书的 md 时才建；其他对象目录默认仍是有摘录、感悟或实践记录后再单开正文。
-- 本地链接统一使用标准 Markdown 相对路径；不存在的目标不预先加链接。
+## 其他收录
 
-## 从哪里开始
-
-- 看整体协作方式： [AGENTS.md](./AGENTS.md)
-- 看结构规则： [docs/conventions.md](./docs/conventions.md)
-- 开始记录内容：
-  - [书籍](./书籍/README.md)
-  - [演讲](./演讲/README.md)
-  - [skills](./skills/README.md)
-  - [概念](./概念/README.md)
-  - [课程](./课程/README.md)
-  - [playbook](./playbook/README.md)
+- [书籍](./书籍/README.md) - 书的索引与单本笔记
+- [演讲](./演讲/README.md) - 演讲、分享、播客
+- [skills](./skills/README.md) - agent skills 的拆解与实践
+- [概念](./概念/README.md) - 术语与机制解释
+- [playbook](./playbook/README.md) - 下次还能直接复用的方法
