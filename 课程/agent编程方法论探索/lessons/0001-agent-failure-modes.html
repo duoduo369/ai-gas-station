@@ -28,7 +28,7 @@
           <p><strong>人月不可互换，概念完整性比功能堆满更值钱，也没有能消灭本质复杂度的银弹。</strong></p>
           <p>布鲁克斯这三句并不是为 agent 写的，但正好挡住三种常见幻觉：多开几个 agent 不等于多了几个可互换人月；生成速度上去了，不等于「系统是什么」已经有一个脑子想清楚；工具能削偶发复杂度，打不掉需求、边界和概念结构本身的难度。本库的<a href="../../../书籍/人月神话.md">《人月神话》导读</a>把这三句接到了今天。</p>
         </div>
-        <p>2026 年 8 月，Anthropic 的 <a href="https://claude.com/blog/the-ai-native-sdlc-playbook">AI-Native SDLC playbook</a> 把同一件事写成组织语言：<em>code is no longer the bottleneck</em>。写代码不再最贵之后，瓶颈移到计划、审查和部署这些仍按人速跑的步骤。这一课要的不是 SDLC 六阶段名词表，而是：人速步骤跟不上时，现场会先炸在哪。</p>
+        <p>2026 年 8 月，Anthropic 的 <a href="https://claude.com/blog/the-ai-native-sdlc-playbook">AI-Native SDLC playbook</a> 把同一件事写成组织语言：<em>code is no longer the bottleneck</em>。这一课要的不是组织侧流程手册，而是：生成速度上去之后，现场会先炸在哪。</p>
       </section>
 
       <section>
@@ -46,22 +46,22 @@
           <article class="timeline-step">
             <p class="step-kicker">1 · 意图漂移</p>
             <h3 class="step-title">以为对齐了，做出的不是想要的</h3>
-            <p><a href="https://github.com/mattpocock/skills">mattpocock/skills</a> 把这记成最常见的失败：人和 agent 之间有沟通缺口，你以为对方懂了，看到成品才发现完全不是一回事。Howardism 对 Matt 工作流的整理把它接到布鲁克斯的 <em>design concept</em>：共享理解要先于任何计划；没有这层，规格和计划都是在给未对齐的东西做精装。</p>
+            <p>布鲁克斯要的是一个脑子里的概念完整性。人和 agent 之间最常见的炸法，是双方都以为对齐了。<a href="https://github.com/mattpocock/skills">mattpocock/skills</a> 把这记成失败模式 #1：沟通缺口要到成品出现才暴露。grilling 怎么修，留给下一课。</p>
           </article>
           <article class="timeline-step">
             <p class="step-kicker">2 · 过早出计划</p>
             <h3 class="step-title">开放问题还在，先铺一张好看的计划</h3>
-            <p>Howardism 记录的观察是：agent 在 plan mode 里会急着说「材料够了」，交出一份读起来完整、实现时才露馅的计划。Matt 的 <a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/wayfinder.md">wayfinder</a> 把相反纪律写死：这是 prototypemaxxing，不是 planmaxxing。全面规划会掉进瀑布——后面的票建立在前面票会推翻的假设上。</p>
+            <p>开放问题还在，生成器却急着交出一份读起来完整的计划。Playbook 把瓶颈写在 plan 一侧，正是因为计划仍按人速，却被当成已经想清楚。怎么避免 planmaxxing，留给下一课的对照轴。</p>
           </article>
           <article class="timeline-step">
             <p class="step-kicker">3 · 上下文腐烂</p>
             <h3 class="step-title">文本堆起来，工作本质丢掉</h3>
-            <p>GitHub Spec Kit 讨论区有一条被广泛附议的现场抱怨：<a href="https://github.com/github/spec-kit/discussions/1784">SpecKit creates the illusion of work, generating a bunch of text</a>。作者写的是，即便任务已经写清常量和改点，工具仍会花半小时造出未要求的接口和成百无意义测试；焦点从项目挪到了上千行指令。Howardism 从另一头说同一件事：不碰代码，开发者对系统的心智模型会烂掉；反馈环若隔着「规格 ⇄ AI ⇄ 代码」，bug 真正所在的「代码 ⇄ 测试」就被绕开了。</p>
+            <p>GitHub Spec Kit 讨论区有一条被广泛附议的现场抱怨：<a href="https://github.com/github/spec-kit/discussions/1784">SpecKit creates the illusion of work, generating a bunch of text</a>。即便任务已经写清常量和改点，工具仍会造出未要求的接口和成百无意义测试；焦点从项目挪到了上千行指令。</p>
           </article>
           <article class="timeline-step">
             <p class="step-kicker">4 · 不可验证</p>
             <h3 class="step-title">规格被当成建议，缺了要到 QA 才知道</h3>
-            <p><a href="https://sibylline.dev/articles/2026-01-28-problems-with-spec-driven-development/">Sibylline</a> 的判断很硬：当前一批 spec-driven 工具上演的是规格剧场，轮到实现时 agent 把 spec 当建议，常见只能跟上 70%–90%；Markdown 还是有损压缩，五千 token 的精确讨论会被摘要成更短的散文。Playbook 在组织侧看到的对应画面是：人逐行审查跟不上 agent 的 diff。瓶颈在验证，不在又写一轮更长的规格。</p>
+            <p>Playbook 在组织侧看到的画面是：人逐行审查跟不上 agent 的 diff。规格或测试文本再长，缺了什么也要到真正跑起来才知道。把 Markdown 规格当建议的现场批评，放到 0003 再展开。</p>
           </article>
           <article class="timeline-step">
             <p class="step-kicker">5 · 加人 / 加 agent 的沟通税</p>
@@ -76,7 +76,7 @@
         <div class="grid">
           <article class="card">
             <h3 class="card-title">Claude playbook</h3>
-            <p>用来证明「code 不再是瓶颈」不是课内修辞。它按 SDLC 阶段给组织侧建议；这一课只借开篇那句，不把六阶段当目录。</p>
+            <p>用来证明「code 不再是瓶颈」不是课内修辞。这一课只借开篇那句，不把组织侧流程手册当目录。</p>
           </article>
           <article class="card">
             <h3 class="card-title">GitHub Spec Kit 讨论</h3>
@@ -99,14 +99,12 @@
         <ol class="source-list">
           <li><a href="../../../书籍/人月神话.md">书籍笔记：人月神话</a></li>
           <li><a href="https://claude.com/blog/the-ai-native-sdlc-playbook">The AI-Native SDLC playbook</a>（Louis Claxton, 2026-08-21）</li>
-          <li><a href="https://github.com/mattpocock/skills">mattpocock/skills</a> README 里的失败模式 #1</li>
-          <li><a href="https://www.howardism.dev/articles/design-concept-grilling">Design Concept Grilling</a></li>
           <li><a href="https://github.com/github/spec-kit/discussions/1784">SpecKit creates the illusion of work</a></li>
-          <li><a href="https://sibylline.dev/articles/2026-01-28-problems-with-spec-driven-development/">The Problems with Spec Driven Development</a></li>
+          <li><a href="https://github.com/mattpocock/skills">mattpocock/skills</a> README 失败模式 #1（点名，不展开主流程）</li>
         </ol>
       </section>
 
-      <p class="footer-note">读到某处判断对不上现场经验，可以在打开这门课的会话里继续问老师。这一页没有测验。</p>
+      <p class="footer-note">讨论课，这一页没有测验。</p>
     </main>
   </body>
 </html>

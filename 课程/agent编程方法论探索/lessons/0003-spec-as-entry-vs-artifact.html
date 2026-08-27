@@ -13,11 +13,11 @@
       <section class="hero">
         <p class="eyebrow">Lesson 0003</p>
         <h1>spec 是入口还是工件</h1>
-        <p class="lede">这一课只带走一句机制判断，并拆开两个都叫 SDD 的名字。读完不应得出「不要写 spec」，也不应把 Superpowers 执行环和业界 spec-first 脚手架听成同一个缩写。</p>
+        <p class="lede">这一课只带走一句机制判断，并拆开业界 Spec-Driven Development 与 Superpowers 的 Subagent-Driven Development。读完不应得出「不要写 spec」，也不应把 Superpowers 执行环和业界 spec-first 脚手架听成同一个缩写。</p>
         <div class="pill-row">
           <span class="pill">预计 14 分钟</span>
           <span class="pill">讨论课 · 无测验</span>
-          <span class="pill">回看：<a href="../reference/spec-judgment-and-two-sdds.html">spec 与两个 SDD</a></span>
+          <span class="pill">回看：<a href="../reference/spec-judgment-and-two-sdds.html">spec 判断</a></span>
         </div>
       </section>
 
@@ -31,7 +31,7 @@
 
       <section>
         <h2>两个 SDD，必须拆开写</h2>
-        <p>资料里随手写 SDD，常常在撞名。第一次出现就不能只留缩写。</p>
+        <p>资料里随手写 SDD，常常在撞名。上面两套全称是这一课第一次拆开；后面再用缩写，都指已经拆过的那一个。</p>
         <figure class="diagram">
           <img src="../assets/two-sdds.svg" alt="业界 Spec-Driven Development 与 Superpowers Subagent-Driven Development 的分流图。">
           <figcaption>左边是入口层的业界用法；右边是 Superpowers 的执行环。0002 说「subagent 驱动的执行」，指的就是右格。</figcaption>
@@ -59,12 +59,7 @@
           <article class="timeline-step">
             <p class="step-kicker">现场</p>
             <h3 class="step-title">Markdown 有损，agent 把 spec 当建议</h3>
-            <p><a href="https://sibylline.dev/articles/2026-01-28-problems-with-spec-driven-development/">Sibylline</a> 写的是剧场：花大量 token 问精确需求，再有损摘要成 Markdown；实现时常见只跟上八到九成，缺什么要 QA 才知道。验证才是瓶颈。GitHub 讨论 <a href="https://github.com/github/spec-kit/discussions/1784">#1784</a> 是同一洞的现场版：生成大量文本，丢掉工作本质。</p>
-          </article>
-          <article class="timeline-step">
-            <p class="step-kicker">瀑布指控</p>
-            <h3 class="step-title">先写完整 spec，等于假定实现教不会你任何东西</h3>
-            <p><a href="https://opheleon.ai/blog/spec-driven-development-is-an-anti-pattern">Opheleon</a> 引用 Kent Beck：当前这波 spec-driven 工具把「实现不会反过来改规格」写进了前提。规格还会腐烂——过期的规格比没有更糟，因为它带着批准戳的错误信息。</p>
+            <p><a href="https://sibylline.dev/articles/2026-01-28-problems-with-spec-driven-development/">Sibylline</a> 写的是剧场：花大量 token 问精确需求，再有损摘要成 Markdown；实现时常见只跟上八到九成，缺什么要 QA 才知道。验证才是瓶颈。GitHub 讨论 <a href="https://github.com/github/spec-kit/discussions/1784">#1784</a> 是同一洞的现场版：生成大量文本，丢掉工作本质。<a href="https://opheleon.ai/blog/spec-driven-development-is-an-anti-pattern">Opheleon</a> 另引 Kent Beck：先写完整 spec，等于假定实现教不会你任何东西——这是旁证，不是第三条主线。</p>
           </article>
         </div>
         <p>这些指摘对准的是<strong>散文规格当入口 / 银弹 / 不看代码</strong>。它们没有证明「对齐之后不该留下一份规格工件」。</p>
@@ -119,11 +114,10 @@
           <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/to-spec/SKILL.md">to-spec</a>（对齐之后才合成，不再访谈）</li>
           <li><a href="https://sibylline.dev/articles/2026-01-28-problems-with-spec-driven-development/">The Problems with Spec Driven Development</a></li>
           <li><a href="https://github.com/github/spec-kit/discussions/1784">SpecKit creates the illusion of work</a></li>
-          <li><a href="https://opheleon.ai/blog/spec-driven-development-is-an-anti-pattern">Spec-Driven Development Is an Anti-Pattern</a></li>
         </ol>
       </section>
 
-      <p class="footer-note">判断句和现场经验打架时，可以在打开这门课的会话里继续问老师。这一页没有测验。</p>
+      <p class="footer-note">讨论课，这一页没有测验。</p>
     </main>
   </body>
 </html>

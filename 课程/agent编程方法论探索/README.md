@@ -21,12 +21,12 @@ HTML 课件顶部有相对路径导航：三课互跳、两页速查、课程入
 
 - [0001 · 当下 agent 编程会炸在哪](./lessons/0001-agent-failure-modes.html) - 用意图漂移、过早出计划、上下文腐烂、不可验证、加人/加 agent 的沟通税，解释方法论在修什么。
 - [0002 · 先轴后案例看三套方法](./lessons/0002-three-methodologies-by-axes.html) - 按对齐、执行、角色交接、spec 位置、过程谁启动五条轴，对照 Matt / Superpowers / Bob。
-- [0003 · spec 是入口还是工件](./lessons/0003-spec-as-entry-vs-artifact.html) - 带走锁定的 spec 判断，并拆开两个都叫 SDD 的东西。
+- [0003 · spec 是入口还是工件](./lessons/0003-spec-as-entry-vs-artifact.html) - 带走锁定的 spec 判断，并拆开业界 Spec-Driven Development 与 Superpowers 的 Subagent-Driven Development。
 
 ## Reference
 
-- [失败模式与对照轴速查](./reference/failure-modes-and-axes.html)
-- [spec 判断与两个 SDD 速查](./reference/spec-judgment-and-two-sdds.html)
+- [失败模式与对照轴速查](./reference/failure-modes-and-axes.html) - 五个洞和五条轴的压缩表，回看坐标系时用。
+- [spec 判断速查](./reference/spec-judgment-and-two-sdds.html) - 锁定判断句，以及两个开发缩写怎么拆开。
 
 ## 这门课不学什么
 

@@ -22,7 +22,7 @@
 
   const refs = [
     { file: "failure-modes-and-axes.html", label: "失败模式与轴" },
-    { file: "spec-judgment-and-two-sdds.html", label: "spec 与两个 SDD" },
+    { file: "spec-judgment-and-two-sdds.html", label: "spec 判断" },
   ];
 
   const lessonFiles = {};
