@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>spec 判断与两个 SDD 速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>spec 判断与两个 SDD</h1>
+        <p class="lede">0003 的结论可以单独打开。不重讲指摘长文。</p>
+      </section>
+
+      <section>
+        <h2>锁定判断</h2>
+        <div class="callout">
+          <p><strong>被指摘的是把散文规格当入口、当银弹、当可以不看代码的借口；对齐之后的规格工件，再用测试 / 审查 / 变异去咬，这三套都还在用。结论不是『不要写 spec』。</strong></p>
+        </div>
+      </section>
+
+      <section>
+        <h2>两个 SDD</h2>
+        <figure class="diagram">
+          <img src="../assets/two-sdds.svg" alt="业界 Spec-Driven Development 与 Superpowers Subagent-Driven Development 的分流图。">
+          <figcaption>同缩写，不在同一层。资料里第一次出现必须拆开写。</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>全称</th>
+                <th>在哪一层</th>
+                <th>不要听成</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Spec-Driven Development</td>
+                <td>业界：散文规格当入口，再生成代码</td>
+                <td>「三套方法已经弃用规格」</td>
+              </tr>
+              <tr>
+                <td>Subagent-Driven Development</td>
+                <td>Superpowers：按 task 派子 agent 的执行环</td>
+                <td>「又一个 spec-first 脚手架」</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>三套还在用的那一层</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>方法</th>
+                <th>规格工件</th>
+                <th>咬合力</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Matt</td>
+                <td>to-spec 综合已谈过的（不再访谈）</td>
+                <td>测试缝 + 两轴审查</td>
+              </tr>
+              <tr>
+                <td>Superpowers</td>
+                <td>批准后的设计 / spec</td>
+                <td>TDD + per-task / final review</td>
+              </tr>
+              <tr>
+                <td>Bob</td>
+                <td>宪法约束 + 可执行 Gherkin</td>
+                <td>验收测试 / 变异 / QA 脚本</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>指摘速记</h2>
+        <ul class="source-list">
+          <li>Howardism / Matt：specs-to-code 是换皮 vibe coding；代码才是战场。</li>
+          <li>Sibylline：Markdown 有损；agent 把 spec 当建议。</li>
+          <li>Spec Kit #1784：生成大量文本，丢掉工作本质。</li>
+          <li>Opheleon / Beck：先写完整 spec = 假定实现教不会你任何东西。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>回课文</h2>
+        <ol class="source-list">
+          <li><a href="../lessons/0003-spec-as-entry-vs-artifact.html">0003 · spec 判断全文</a></li>
+          <li><a href="../lessons/0002-three-methodologies-by-axes.html">0002 · spec 在轴上的位置</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">主资料：<a href="https://www.howardism.dev/articles/design-concept-grilling">Design Concept Grilling</a>、<a href="https://sibylline.dev/articles/2026-01-28-problems-with-spec-driven-development/">Sibylline</a>。</p>
+    </main>
+  </body>
+</html>

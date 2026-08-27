@@ -1,0 +1,72 @@
+<svg width="1200" height="640" viewBox="0 0 1200 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">失败模式如何引出方法论</title>
+  <desc id="desc">写代码变快之后，瓶颈移到对齐、审查与部署；同一张失败模式清单上的五个洞，才是方法论在修的东西。</desc>
+  <defs>
+    <style>
+      .bg { fill: #f9fbfc; }
+      .box { fill: #ffffff; stroke: #0e5a6b; stroke-width: 2; rx: 22; }
+      .soft { fill: #d8edf2; stroke: #0e5a6b; stroke-width: 2; rx: 22; }
+      .warm { fill: #f8e3d3; stroke: #c26b2b; stroke-width: 2; rx: 22; }
+      .title { font: 700 28px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .label { font: 700 20px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .text { font: 16px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #1b2430; }
+      .small { font: 15px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #586474; }
+      .arrow { stroke: #0e5a6b; stroke-width: 3; fill: none; marker-end: url(#arrowHead); }
+      .warmArrow { stroke: #c26b2b; stroke-width: 3; fill: none; marker-end: url(#warmArrowHead); }
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0e5a6b"/>
+    </marker>
+    <marker id="warmArrowHead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c26b2b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="640" rx="28"/>
+  <text x="60" y="52" class="title">同一张失败模式清单，不是两套问题</text>
+  <text x="60" y="82" class="small">组织侧给这些问题起的名字叫 plan / review / deploy；agent 编程侧看见的是下面五个洞。</text>
+
+  <rect class="box" x="360" y="108" width="480" height="78"/>
+  <text x="392" y="142" class="label">写代码不再是瓶颈</text>
+  <text x="392" y="168" class="text">人速的对齐、审查、部署跟不上生成速度。</text>
+
+  <path class="arrow" d="M600 186 V220"/>
+
+  <rect class="warm" x="90" y="230" width="200" height="118"/>
+  <text x="114" y="270" class="label">意图漂移</text>
+  <text x="114" y="300" class="text">以为对齐了，</text>
+  <text x="114" y="324" class="text">做出的不是想要的。</text>
+
+  <rect class="warm" x="310" y="230" width="200" height="118"/>
+  <text x="334" y="270" class="label">过早出计划</text>
+  <text x="334" y="300" class="text">开放问题还在，</text>
+  <text x="334" y="324" class="text">先铺一张好看的计划。</text>
+
+  <rect class="warm" x="530" y="230" width="200" height="118"/>
+  <text x="554" y="270" class="label">上下文腐烂</text>
+  <text x="554" y="300" class="text">文本堆起来，</text>
+  <text x="554" y="324" class="text">工作本质丢掉。</text>
+
+  <rect class="warm" x="750" y="230" width="170" height="118"/>
+  <text x="770" y="270" class="label">不可验证</text>
+  <text x="770" y="300" class="text">规格当建议，</text>
+  <text x="770" y="324" class="text">缺了才在 QA 发现。</text>
+
+  <rect class="warm" x="940" y="230" width="170" height="118"/>
+  <text x="958" y="262" class="label">沟通税</text>
+  <text x="958" y="292" class="text">加人 / 加 agent</text>
+  <text x="958" y="316" class="text">不等于加人月，</text>
+  <text x="958" y="338" class="text">协调本身变贵。</text>
+
+  <path class="warmArrow" d="M190 348 V410 H600"/>
+  <path class="warmArrow" d="M410 348 V410"/>
+  <path class="warmArrow" d="M630 348 V410"/>
+  <path class="warmArrow" d="M835 348 V410 H600"/>
+  <path class="warmArrow" d="M1025 348 V410 H600"/>
+
+  <rect class="soft" x="300" y="430" width="600" height="150"/>
+  <text x="340" y="478" class="label">方法论是在补这些洞</text>
+  <text x="340" y="512" class="text">不是发明新宗教，也不是「该装哪套 skill」。下一课用同一组轴</text>
+  <text x="340" y="538" class="text">看 Matt / Superpowers / Bob 把纪律放在哪一层。</text>
+  <text x="340" y="564" class="small">SDLC 只是组织侧给同一组问题起的名字，不是第一节大纲。</text>
+</svg>

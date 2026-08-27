@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>失败模式与对照轴速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>失败模式与对照轴</h1>
+        <p class="lede">回看坐标系，不重读 0001 / 0002。五个洞是问题，五条轴是对照。时点约 2026-08。</p>
+      </section>
+
+      <section>
+        <h2>五个洞</h2>
+        <figure class="diagram">
+          <img src="../assets/failure-modes.svg" alt="五个失败模式汇入方法论在修这些洞。">
+          <figcaption>业界问题和 agent 编程问题是同一张表。</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>洞</th>
+                <th>一句话</th>
+                <th>核对</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>意图漂移</td>
+                <td>以为对齐了，做出的不是想要的。</td>
+                <td><a href="https://github.com/mattpocock/skills">Matt README #1</a></td>
+              </tr>
+              <tr>
+                <td>过早出计划</td>
+                <td>开放问题还在，先铺一张好看的计划。</td>
+                <td><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/wayfinder.md">wayfinder：prototypemaxxing</a></td>
+              </tr>
+              <tr>
+                <td>上下文腐烂</td>
+                <td>文本堆起来，工作本质丢掉。</td>
+                <td><a href="https://github.com/github/spec-kit/discussions/1784">Spec Kit #1784</a></td>
+              </tr>
+              <tr>
+                <td>不可验证</td>
+                <td>规格当建议，缺了要到 QA 才知道。</td>
+                <td><a href="https://sibylline.dev/articles/2026-01-28-problems-with-spec-driven-development/">Sibylline</a></td>
+              </tr>
+              <tr>
+                <td>沟通税</td>
+                <td>加人 / 加 agent 不等于加人月。</td>
+                <td><a href="../../../书籍/人月神话.md">人月神话</a>；<a href="https://claude.com/blog/the-ai-native-sdlc-playbook">code 不再是瓶颈</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>五条轴 × 三套</h2>
+        <figure class="diagram">
+          <img src="../assets/comparison-axes.svg" alt="Matt、Superpowers、Bob 按五条对照轴填写的一览图。">
+          <figcaption>比较层，不比较功能清单。OpenSpec / BMAD / Spec Kit 是其他落点。</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>轴</th>
+                <th>Matt</th>
+                <th>Superpowers</th>
+                <th>Bob</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>对齐</td>
+                <td>对话 grilling</td>
+                <td>对话 + 批准闸</td>
+                <td>宪法 + Gherkin 批准</td>
+              </tr>
+              <tr>
+                <td>执行</td>
+                <td>工单 + 测试缝 + 两轴审查</td>
+                <td>subagent 驱动的执行</td>
+                <td>pack 流水线 + 可执行验收</td>
+              </tr>
+              <tr>
+                <td>角色 / 交接</td>
+                <td>人启动，可 handoff</td>
+                <td>一 task 一子 agent</td>
+                <td>角色 + git worktree</td>
+              </tr>
+              <tr>
+                <td>spec</td>
+                <td>对齐之后的合成物</td>
+                <td>批准后的设计 / spec</td>
+                <td>宪法约束 + 可执行规格</td>
+              </tr>
+              <tr>
+                <td>谁启动</td>
+                <td>人调用</td>
+                <td>skill 自动触发（所以重）</td>
+                <td>pack 按角色推进</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <p><strong>太重</strong> = 强制触发 + 执行工厂，不是卡片张数。</p>
+          <p><strong>难读</strong> = 角色 + 宪法 + 可执行验收的操作系统，不是 prompt 没写好。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>回课文</h2>
+        <ol class="source-list">
+          <li><a href="../lessons/0001-agent-failure-modes.html">0001 · 五个洞</a></li>
+          <li><a href="../lessons/0002-three-methodologies-by-axes.html">0002 · 先轴后案例</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">来源见各课「主资料」。这页不展开第四套对照。</p>
+    </main>
+  </body>
+</html>

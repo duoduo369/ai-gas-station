@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lesson 0003 · spec 是入口还是工件</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Lesson 0003</p>
+        <h1>spec 是入口还是工件</h1>
+        <p class="lede">这一课只带走一句机制判断，并拆开两个都叫 SDD 的名字。读完不应得出「不要写 spec」，也不应把 Superpowers 执行环和业界 spec-first 脚手架听成同一个缩写。</p>
+        <div class="pill-row">
+          <span class="pill">预计 14 分钟</span>
+          <span class="pill">讨论课 · 无测验</span>
+          <span class="pill">回看：<a href="../reference/spec-judgment-and-two-sdds.html">spec 与两个 SDD</a></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>先带走这句</h2>
+        <div class="callout">
+          <p><strong>被指摘的是把散文规格当入口、当银弹、当可以不看代码的借口；对齐之后的规格工件，再用测试 / 审查 / 变异去咬，这三套都还在用。结论不是『不要写 spec』。</strong></p>
+        </div>
+        <p>上一课已经按轴填过：三套都在某个位置使用规格。骂声针对的是左半句；右半句仍在现场运转。把两半听成一句「spec 驱动已死」，会把 0002 的对照表读穿。</p>
+      </section>
+
+      <section>
+        <h2>两个 SDD，必须拆开写</h2>
+        <p>资料里随手写 SDD，常常在撞名。第一次出现就不能只留缩写。</p>
+        <figure class="diagram">
+          <img src="../assets/two-sdds.svg" alt="业界 Spec-Driven Development 与 Superpowers Subagent-Driven Development 的分流图。">
+          <figcaption>左边是入口层的业界用法；右边是 Superpowers 的执行环。0002 说「subagent 驱动的执行」，指的就是右格。</figcaption>
+        </figure>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">业界 · Spec-Driven Development</h3>
+            <p>先写（往往是 Markdown）规格，再让 agent 按规格生成代码。脚手架如 Spec Kit 族常被放在这一格。指摘也主要落在这里。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">Superpowers · Subagent-Driven Development</h3>
+            <p>计划获批之后，按 task 派子 agent 执行，再用审查咬住。它回答「谁去写、写完谁看」，不回答「散文规格能不能当银弹」。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>指摘在骂哪一层</h2>
+        <div class="timeline">
+          <article class="timeline-step">
+            <p class="step-kicker">负命题</p>
+            <h3 class="step-title">specs-to-code 是换皮的 vibe coding</h3>
+            <p><a href="https://www.howardism.dev/articles/design-concept-grilling">Howardism 对 Matt 工作流的整理</a>记下这条负命题：仔细写规格、交给 AI、代码不对就改规格、全程不看代码——试过，不行。代码才是战场；不碰代码的规格会退化成愿望清单；反馈环隔了一层，开发者的心智模型跟着腐烂。grilling 的纪律正好相反：规格在对齐下游，人对代码始终伸着手。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">现场</p>
+            <h3 class="step-title">Markdown 有损，agent 把 spec 当建议</h3>
+            <p><a href="https://sibylline.dev/articles/2026-01-28-problems-with-spec-driven-development/">Sibylline</a> 写的是剧场：花大量 token 问精确需求，再有损摘要成 Markdown；实现时常见只跟上八到九成，缺什么要 QA 才知道。验证才是瓶颈。GitHub 讨论 <a href="https://github.com/github/spec-kit/discussions/1784">#1784</a> 是同一洞的现场版：生成大量文本，丢掉工作本质。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">瀑布指控</p>
+            <h3 class="step-title">先写完整 spec，等于假定实现教不会你任何东西</h3>
+            <p><a href="https://opheleon.ai/blog/spec-driven-development-is-an-anti-pattern">Opheleon</a> 引用 Kent Beck：当前这波 spec-driven 工具把「实现不会反过来改规格」写进了前提。规格还会腐烂——过期的规格比没有更糟，因为它带着批准戳的错误信息。</p>
+          </article>
+        </div>
+        <p>这些指摘对准的是<strong>散文规格当入口 / 银弹 / 不看代码</strong>。它们没有证明「对齐之后不该留下一份规格工件」。</p>
+      </section>
+
+      <section>
+        <h2>三套还在用 spec 的哪一层</h2>
+        <p>把 0002 的「spec 位置」轴接到这句判断上，避免听成三套已经弃用规格。</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>方法</th>
+                <th>还在用的那一层</th>
+                <th>用什么去咬</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Matt</td>
+                <td>grilling 对齐之后，to-spec 把已经谈过的综合成规格。规格是目的地文档，不是出发令。</td>
+                <td>预先谈妥的测试缝、TDD、Standards / Spec 两轴审查。</td>
+              </tr>
+              <tr>
+                <td>Superpowers</td>
+                <td>批准闸之后才写设计 / spec，再拆 plan。规格仍是对齐的下游产物。</td>
+                <td>TDD、per-task 审查、整分支 final review。执行环是 Subagent-Driven，不是 Spec-Driven。</td>
+              </tr>
+              <tr>
+                <td>Bob</td>
+                <td>宪法约束角色；four / six-pack 的 Gherkin 是可执行规格，不是愿望清单。</td>
+                <td>生成的验收测试、变异硬化、QA 脚本。咬合力在能跑的东西上，不在更长的 Markdown。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>这一课带走什么</h2>
+        <div class="callout">
+          <p><strong>结论不是「不要写 spec」。</strong></p>
+          <p>以后读到 SDD，先问是 Spec-Driven 还是 Subagent-Driven。读到「spec 驱动被骂」，先问骂的是入口银弹，还是对齐之后那份还要用测试咬住的工件。三套方法都还站在后一种上。这门课到此收束：不推荐安装任何一套，也不把结论写成操作手册。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <p>负命题走 Howardism 的整理（Matt 原讲没有稳定逐字稿 URL，RESOURCES 已标明缺口），公开批评走 Sibylline；Spec Kit 讨论用来听现场，不当作安装指南。</p>
+        <ol class="source-list">
+          <li><a href="https://www.howardism.dev/articles/design-concept-grilling">Design Concept Grilling</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/to-spec/SKILL.md">to-spec</a>（对齐之后才合成，不再访谈）</li>
+          <li><a href="https://sibylline.dev/articles/2026-01-28-problems-with-spec-driven-development/">The Problems with Spec Driven Development</a></li>
+          <li><a href="https://github.com/github/spec-kit/discussions/1784">SpecKit creates the illusion of work</a></li>
+          <li><a href="https://opheleon.ai/blog/spec-driven-development-is-an-anti-pattern">Spec-Driven Development Is an Anti-Pattern</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">判断句和现场经验打架时，可以在打开这门课的会话里继续问老师。这一页没有测验。</p>
+    </main>
+  </body>
+</html>

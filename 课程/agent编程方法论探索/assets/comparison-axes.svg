@@ -1,0 +1,90 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">三套方法按对照轴一眼图</title>
+  <desc id="desc">同一组轴上填写 Matt、Superpowers、Bob：比较的是纪律放在哪一层，不是谁的功能更多。</desc>
+  <defs>
+    <style>
+      .bg { fill: #f9fbfc; }
+      .head { fill: #d8edf2; stroke: #0e5a6b; stroke-width: 2; rx: 18; }
+      .cell { fill: #ffffff; stroke: #0e5a6b; stroke-width: 2; rx: 18; }
+      .axis { fill: #f8e3d3; stroke: #c26b2b; stroke-width: 2; rx: 18; }
+      .title { font: 700 28px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .label { font: 700 18px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .text { font: 15px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #1b2430; }
+      .small { font: 14px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #586474; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="720" rx="28"/>
+  <text x="48" y="48" class="title">先看轴，再看三套把纪律放在哪</text>
+  <text x="48" y="76" class="small">比较的是层，不是产品手册缩写。OpenSpec / BMAD / Spec Kit 是其他落点，本图不展开。</text>
+
+  <rect class="axis" x="48" y="100" width="210" height="56"/>
+  <text x="68" y="136" class="label">对照轴</text>
+  <rect class="head" x="274" y="100" width="290" height="56"/>
+  <text x="372" y="136" class="label">Matt</text>
+  <rect class="head" x="580" y="100" width="290" height="56"/>
+  <text x="650" y="136" class="label">Superpowers</text>
+  <rect class="head" x="886" y="100" width="266" height="56"/>
+  <text x="978" y="136" class="label">Bob</text>
+
+  <rect class="axis" x="48" y="172" width="210" height="96"/>
+  <text x="68" y="212" class="label">对齐发生在哪</text>
+  <text x="68" y="240" class="small">共享理解先于计划</text>
+  <rect class="cell" x="274" y="172" width="290" height="96"/>
+  <text x="294" y="214" class="text">对话里 grilling</text>
+  <text x="294" y="242" class="small">对齐本身是产物</text>
+  <rect class="cell" x="580" y="172" width="290" height="96"/>
+  <text x="600" y="214" class="text">对话 + 批准闸</text>
+  <text x="600" y="242" class="small">仪式可缩放，闸不消失</text>
+  <rect class="cell" x="886" y="172" width="266" height="96"/>
+  <text x="906" y="214" class="text">宪法 + Gherkin</text>
+  <text x="906" y="242" class="small">specifier 先要人批准</text>
+
+  <rect class="axis" x="48" y="284" width="210" height="96"/>
+  <text x="68" y="324" class="label">执行靠什么咬</text>
+  <text x="68" y="352" class="small">计划之后怎样不漂</text>
+  <rect class="cell" x="274" y="284" width="290" height="96"/>
+  <text x="294" y="326" class="text">工单 + 测试缝 + 两轴审查</text>
+  <text x="294" y="354" class="small">垂直切片，不是瀑布任务墙</text>
+  <rect class="cell" x="580" y="284" width="290" height="96"/>
+  <text x="600" y="326" class="text">subagent 驱动的执行</text>
+  <text x="600" y="354" class="small">按 task 派工，审查咬住</text>
+  <rect class="cell" x="886" y="284" width="266" height="96"/>
+  <text x="906" y="326" class="text">pack 流水线</text>
+  <text x="906" y="354" class="small">测试 / 变异 / QA 脚本</text>
+
+  <rect class="axis" x="48" y="396" width="210" height="96"/>
+  <text x="68" y="428" class="label">角色 / 交接</text>
+  <text x="68" y="456" class="small">上下文怎样隔离</text>
+  <rect class="cell" x="274" y="396" width="290" height="96"/>
+  <text x="294" y="438" class="text">人启动，会话可 handoff</text>
+  <text x="294" y="466" class="small">skill 可组合，不接管全程</text>
+  <rect class="cell" x="580" y="396" width="290" height="96"/>
+  <text x="600" y="438" class="text">一 task 一子 agent</text>
+  <text x="600" y="466" class="small">两段审查后再往前</text>
+  <rect class="cell" x="886" y="396" width="266" height="96"/>
+  <text x="906" y="438" class="text">角色 + git worktree</text>
+  <text x="906" y="466" class="small">交接是操作系统，不是聊天</text>
+
+  <rect class="axis" x="48" y="508" width="210" height="96"/>
+  <text x="68" y="540" class="label">spec 的位置</text>
+  <text x="68" y="568" class="small">入口还是工件</text>
+  <rect class="cell" x="274" y="508" width="290" height="96"/>
+  <text x="294" y="550" class="text">对齐之后的合成物</text>
+  <text x="294" y="578" class="small">to-spec：不再访谈，只综合</text>
+  <rect class="cell" x="580" y="508" width="290" height="96"/>
+  <text x="600" y="550" class="text">批准后的设计 / spec</text>
+  <text x="600" y="578" class="small">从对话里掏出来分块给人看</text>
+  <rect class="cell" x="886" y="508" width="266" height="96"/>
+  <text x="906" y="550" class="text">宪法约束 + 可执行规格</text>
+  <text x="906" y="578" class="small">Gherkin 要能跑，不是散文</text>
+
+  <rect class="axis" x="48" y="620" width="210" height="72"/>
+  <text x="68" y="664" class="label">过程谁启动</text>
+  <rect class="cell" x="274" y="620" width="290" height="72"/>
+  <text x="294" y="664" class="text">人调用 user-invoked 入口</text>
+  <rect class="cell" x="580" y="620" width="290" height="72"/>
+  <text x="600" y="664" class="text">skill 自动触发（所以显得重）</text>
+  <rect class="cell" x="886" y="620" width="266" height="72"/>
+  <text x="906" y="664" class="text">pack 按角色往下推</text>
+</svg>

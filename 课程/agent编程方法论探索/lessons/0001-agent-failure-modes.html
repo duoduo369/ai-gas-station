@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lesson 0001 · 当下 agent 编程会炸在哪</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Lesson 0001</p>
+        <h1>当下 agent 编程会炸在哪</h1>
+        <p class="lede">这一课只做一件事：给出同一张失败模式清单。方法论不是新宗教，是在补这些洞。组织侧后来管它们叫 plan / review / deploy，那只是起名，不是这一节的大纲。</p>
+        <div class="pill-row">
+          <span class="pill">预计 15 分钟</span>
+          <span class="pill">讨论课 · 无测验</span>
+          <span class="pill">时点：约 2026-08</span>
+          <span class="pill">回看：<a href="../reference/failure-modes-and-axes.html">失败模式与轴</a></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>先接上已经存在的软件工程判断</h2>
+        <div class="callout">
+          <p><strong>人月不可互换，概念完整性比功能堆满更值钱，也没有能消灭本质复杂度的银弹。</strong></p>
+          <p>布鲁克斯这三句并不是为 agent 写的，但正好挡住三种常见幻觉：多开几个 agent 不等于多了几个可互换人月；生成速度上去了，不等于「系统是什么」已经有一个脑子想清楚；工具能削偶发复杂度，打不掉需求、边界和概念结构本身的难度。本库的<a href="../../../书籍/人月神话.md">《人月神话》导读</a>把这三句接到了今天。</p>
+        </div>
+        <p>2026 年 8 月，Anthropic 的 <a href="https://claude.com/blog/the-ai-native-sdlc-playbook">AI-Native SDLC playbook</a> 把同一件事写成组织语言：<em>code is no longer the bottleneck</em>。写代码不再最贵之后，瓶颈移到计划、审查和部署这些仍按人速跑的步骤。这一课要的不是 SDLC 六阶段名词表，而是：人速步骤跟不上时，现场会先炸在哪。</p>
+      </section>
+
+      <section>
+        <h2>同一张清单，不是两套问题</h2>
+        <p>「业界问题」和「agent 编程问题」在这里是同一张表。左边是组织给洞起的名字，右边是写代码的人看见的炸法。不要读成两节重复。</p>
+        <figure class="diagram">
+          <img src="../assets/failure-modes.svg" alt="五个失败模式汇入方法论在修这些洞。">
+          <figcaption>五个洞是坐标系。下一课的三套方法，都要能在这张图上指出自己补的是哪一层。</figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h2>五个洞</h2>
+        <div class="timeline">
+          <article class="timeline-step">
+            <p class="step-kicker">1 · 意图漂移</p>
+            <h3 class="step-title">以为对齐了，做出的不是想要的</h3>
+            <p><a href="https://github.com/mattpocock/skills">mattpocock/skills</a> 把这记成最常见的失败：人和 agent 之间有沟通缺口，你以为对方懂了，看到成品才发现完全不是一回事。Howardism 对 Matt 工作流的整理把它接到布鲁克斯的 <em>design concept</em>：共享理解要先于任何计划；没有这层，规格和计划都是在给未对齐的东西做精装。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">2 · 过早出计划</p>
+            <h3 class="step-title">开放问题还在，先铺一张好看的计划</h3>
+            <p>Howardism 记录的观察是：agent 在 plan mode 里会急着说「材料够了」，交出一份读起来完整、实现时才露馅的计划。Matt 的 <a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/wayfinder.md">wayfinder</a> 把相反纪律写死：这是 prototypemaxxing，不是 planmaxxing。全面规划会掉进瀑布——后面的票建立在前面票会推翻的假设上。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">3 · 上下文腐烂</p>
+            <h3 class="step-title">文本堆起来，工作本质丢掉</h3>
+            <p>GitHub Spec Kit 讨论区有一条被广泛附议的现场抱怨：<a href="https://github.com/github/spec-kit/discussions/1784">SpecKit creates the illusion of work, generating a bunch of text</a>。作者写的是，即便任务已经写清常量和改点，工具仍会花半小时造出未要求的接口和成百无意义测试；焦点从项目挪到了上千行指令。Howardism 从另一头说同一件事：不碰代码，开发者对系统的心智模型会烂掉；反馈环若隔着「规格 ⇄ AI ⇄ 代码」，bug 真正所在的「代码 ⇄ 测试」就被绕开了。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">4 · 不可验证</p>
+            <h3 class="step-title">规格被当成建议，缺了要到 QA 才知道</h3>
+            <p><a href="https://sibylline.dev/articles/2026-01-28-problems-with-spec-driven-development/">Sibylline</a> 的判断很硬：当前一批 spec-driven 工具上演的是规格剧场，轮到实现时 agent 把 spec 当建议，常见只能跟上 70%–90%；Markdown 还是有损压缩，五千 token 的精确讨论会被摘要成更短的散文。Playbook 在组织侧看到的对应画面是：人逐行审查跟不上 agent 的 diff。瓶颈在验证，不在又写一轮更长的规格。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">5 · 加人 / 加 agent 的沟通税</p>
+            <h3 class="step-title">人手和会话变多，协调本身变贵</h3>
+            <p>人月神话说的就是这件事：过了阈值，新增成员带来的是接口对齐、同步和返工，不是线性产能。每个新 agent 还要吃上下文，还可能把概念完整性打散。Playbook 举的安全审查队列，是同一条税的组织版：输出乘上去了，按人速编制的闸门要么堵住，要么漏审。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>点名两份证据，不展开成工具目录</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">Claude playbook</h3>
+            <p>用来证明「code 不再是瓶颈」不是课内修辞。它按 SDLC 阶段给组织侧建议；这一课只借开篇那句，不把六阶段当目录。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">GitHub Spec Kit 讨论</h3>
+            <p>用来证明「生成大量文本、丢掉工作本质」是一线已经撞上的洞，不是作者编的。本课不教 Spec Kit，也不把它升成第四套对照。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>这一课带走什么</h2>
+        <div class="callout">
+          <p><strong>方法论涌现，是因为这五个洞在生成速度面前被放大了。</strong></p>
+          <p>下一课不再比谁的 skill 更多，而用同一组轴看三套方法把纪律放在哪一层。若某一格对不上这五个洞，它就还只是口味。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <p>这一课最值得先读的是本库<a href="../../../书籍/人月神话.md">《人月神话》导读</a>里关于人月、概念完整性和银弹的判断，以及 Claude playbook 开篇 <a href="https://claude.com/blog/the-ai-native-sdlc-playbook">Code is no longer the bottleneck</a>。其余条目供核对，不必一次读完。</p>
+        <ol class="source-list">
+          <li><a href="../../../书籍/人月神话.md">书籍笔记：人月神话</a></li>
+          <li><a href="https://claude.com/blog/the-ai-native-sdlc-playbook">The AI-Native SDLC playbook</a>（Louis Claxton, 2026-08-21）</li>
+          <li><a href="https://github.com/mattpocock/skills">mattpocock/skills</a> README 里的失败模式 #1</li>
+          <li><a href="https://www.howardism.dev/articles/design-concept-grilling">Design Concept Grilling</a></li>
+          <li><a href="https://github.com/github/spec-kit/discussions/1784">SpecKit creates the illusion of work</a></li>
+          <li><a href="https://sibylline.dev/articles/2026-01-28-problems-with-spec-driven-development/">The Problems with Spec Driven Development</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">读到某处判断对不上现场经验，可以在打开这门课的会话里继续问老师。这一页没有测验。</p>
+    </main>
+  </body>
+</html>

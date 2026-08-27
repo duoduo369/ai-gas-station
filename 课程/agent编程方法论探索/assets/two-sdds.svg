@@ -1,0 +1,51 @@
+<svg width="1200" height="520" viewBox="0 0 1200 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">两个都叫 SDD 的东西</title>
+  <desc id="desc">业界 Spec-Driven Development 与 Superpowers 的 Subagent-Driven Development 同缩写、不在同一层。</desc>
+  <defs>
+    <style>
+      .bg { fill: #f9fbfc; }
+      .box { fill: #ffffff; stroke: #0e5a6b; stroke-width: 2; rx: 22; }
+      .soft { fill: #d8edf2; stroke: #0e5a6b; stroke-width: 2; rx: 22; }
+      .warm { fill: #f8e3d3; stroke: #c26b2b; stroke-width: 2; rx: 22; }
+      .title { font: 700 28px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .label { font: 700 22px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .text { font: 16px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #1b2430; }
+      .small { font: 15px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #586474; }
+      .arrow { stroke: #0e5a6b; stroke-width: 3; fill: none; marker-end: url(#arrowHead); }
+      .warmArrow { stroke: #c26b2b; stroke-width: 3; fill: none; marker-end: url(#warmArrowHead); }
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0e5a6b"/>
+    </marker>
+    <marker id="warmArrowHead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c26b2b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="520" rx="28"/>
+  <text x="60" y="52" class="title">遇到缩写 SDD，先拆开再往下读</text>
+
+  <rect class="box" x="410" y="84" width="380" height="72"/>
+  <text x="470" y="128" class="label">同一个缩写：SDD</text>
+
+  <path class="warmArrow" d="M480 156 L220 220"/>
+  <path class="arrow" d="M720 156 L980 220"/>
+
+  <rect class="warm" x="60" y="220" width="430" height="168"/>
+  <text x="88" y="260" class="label">业界 · Spec-Driven</text>
+  <text x="88" y="288" class="label">Development</text>
+  <text x="88" y="324" class="text">散文规格当入口，再生成代码。</text>
+  <text x="88" y="350" class="text">被指摘的通常是这一层：当银弹、</text>
+  <text x="88" y="376" class="text">当可以不看代码的借口。</text>
+
+  <rect class="soft" x="710" y="220" width="430" height="168"/>
+  <text x="738" y="260" class="label">Superpowers · Subagent-</text>
+  <text x="738" y="288" class="label">Driven Development</text>
+  <text x="738" y="324" class="text">按 task 派子 agent 执行，</text>
+  <text x="738" y="350" class="text">再用审查把实现咬在计划上。</text>
+  <text x="738" y="376" class="text">这是执行环，不是「写完 spec 就结束」。</text>
+
+  <rect class="box" x="180" y="416" width="840" height="72"/>
+  <text x="212" y="446" class="text">判断不落在「要不要写 spec」，而落在：规格是对齐之前的入口，还是对齐之后的工件。</text>
+  <text x="212" y="472" class="small">Matt / Superpowers / Bob 都还在用后一种；0002 提到 Superpowers 执行时，说的是这张图右边那一格。</text>
+</svg>

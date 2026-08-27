@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lesson 0002 · 先轴后案例看三套方法</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Lesson 0002</p>
+        <h1>先轴后案例看三套方法</h1>
+        <p class="lede">这一课只做一件事：先摆出对照轴，再让 Matt / Superpowers / Bob 按轴各填一段。比较的是纪律放在哪一层，不是三份产品手册缩写。未读过那三个仓库的人，靠定位句就能跟上；已经精读过的人，也不必再走一遍仓库地图。</p>
+        <div class="pill-row">
+          <span class="pill">预计 18 分钟</span>
+          <span class="pill">讨论课 · 无测验</span>
+          <span class="pill">回看：<a href="../reference/failure-modes-and-axes.html">失败模式与轴</a></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>先看轴</h2>
+        <p>上一课的五个洞是问题坐标系。对照用下面五条轴，否则三套方法会被比成「谁功能更多」。</p>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">对齐发生在哪</h3>
+            <p>共享理解是在对话里达成，还是写进一份尚未对齐的文档里假装达成。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">执行靠什么咬住</h3>
+            <p>计划之后，靠工单、测试、审查、变异还是角色流水线，让实现不漂。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">角色 / 交接怎么隔离</h3>
+            <p>上下文是同一会话里压缩，还是按 task / 角色 / git worktree 切开。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">spec 是入口还是工件</h3>
+            <p>规格是对齐之前的出发令，还是对齐之后的合成物。下一课会把这句钉死。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">过程谁启动</h3>
+            <p>人点名调用，还是 skill 自动触发，还是 pack 按角色往下推。这决定「重」从哪来。</p>
+          </article>
+        </div>
+        <figure class="diagram">
+          <img src="../assets/comparison-axes.svg" alt="Matt、Superpowers、Bob 按五条对照轴填写的一览图。">
+          <figcaption>一眼图只保层，不保手册。下面三段按轴展开，仍不精读 prompt。</figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h2>Matt：对齐发生在对话里，规格是事后合成</h2>
+        <p><a href="https://github.com/mattpocock/skills">mattpocock/skills</a> 自称可组合的小 skill，明确对照那些「拥有全过程」的脚手架（README 点名 GSD、BMAD、Spec-Kit）。主线可以记成：grilling 对齐 → <a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/to-spec/SKILL.md">to-spec</a> 合成规格 → to-tickets 切垂直切片 → implement。路由器是 ask-matt，不是一条强制流水线。</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>轴</th>
+                <th>落点</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>对齐</td>
+                <td><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md">grilling</a> 把决策树一次问清一条。Howardism 的整理：目标是共享的 design concept，不是先交出计划。</td>
+              </tr>
+              <tr>
+                <td>执行</td>
+                <td>工单是 tracer-bullet；implement 在预先谈妥的测试缝上走 TDD，收口用 Standards / Spec 两轴审查。</td>
+              </tr>
+              <tr>
+                <td>角色 / 交接</td>
+                <td>人启动 user-invoked 入口；会话太大就 handoff。skill 彼此组合，不把人从方向盘上请下去。</td>
+              </tr>
+              <tr>
+                <td>spec</td>
+                <td>工件，不是入口。to-spec 写明：不要再 interview，只综合已经谈过的。</td>
+              </tr>
+              <tr>
+                <td>谁启动</td>
+                <td>人。agent 不会自己跳上 wayfinder；默认前门仍是 grilling，而不是自动工厂。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/wayfinder.md">wayfinder</a> 是多 session 决策地图，计划而不做。它自己警告全面规划会掉进瀑布。可选深链：<a href="../../mattpocock-skills 仓库学习课/README.md">mattpocock-skills 仓库学习课</a>——以该仓库为对象，先建立地图，再沿 ask-matt 主流程精读。</p>
+      </section>
+
+      <section>
+        <h2>Superpowers：批准闸不消失，执行交给子 agent</h2>
+        <p><a href="https://github.com/obra/superpowers">obra/superpowers</a> 自称 complete methodology：可组合 skill，加上「确保 agent 会去用它们」的初始指令。README 里的基本工作流是 brainstorming → worktree → writing-plans → 执行环 → TDD → code-review → finish。执行环是 <strong>subagent 驱动的执行</strong>（按 task 派子 agent，或批次执行加人工检查点）。它和业界常说的「规格驱动」不是同一件事，下一课再拆开那组撞名。</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>轴</th>
+                <th>落点</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>对齐</td>
+                <td><a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">brainstorming</a> 先把任务分成 spike / bounded / architectural。仪式随任务缩放，<strong>批准闸不随任务消失</strong>。</td>
+              </tr>
+              <tr>
+                <td>执行</td>
+                <td>计划写给「热情但判断力差的初级工程师」。子 agent 按 task 推进；TDD 与 per-task review 咬住，功能出现不等于工作流结束。</td>
+              </tr>
+              <tr>
+                <td>角色 / 交接</td>
+                <td>一 task 一颗新鲜子 agent；两段审查（是否符合 spec，然后代码质量）过了才往前。</td>
+              </tr>
+              <tr>
+                <td>spec</td>
+                <td>从对话里掏出来，分块短到人真能看完，签字后再写 plan。规格仍是对齐之后的工件，只是生产它的过程由流程强制。</td>
+              </tr>
+              <tr>
+                <td>谁启动</td>
+                <td><a href="https://github.com/obra/superpowers/blob/main/skills/using-superpowers/SKILL.md">using-superpowers</a> 的硬门槛：有 1% 可能适用就必须先调 skill。「觉得 overkill 往往是在跳流程」写在红旗表里。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <p><strong>「太重」落在轴上，不是口味。</strong>重的是强制触发（过程谁启动）加上按 task 派工的执行工厂（执行怎么咬住），不是 skill 卡片的张数。</p>
+        </div>
+        <p>可选深链：<a href="../../obra superpowers skill 学习课/README.md">obra superpowers skill 学习课</a>——以该仓库为对象，先建立「skills 库 + harness 接线 + 七步工作流」地图，再精读关键 skill。</p>
+      </section>
+
+      <section>
+        <h2>Bob：角色、宪法、可执行验收是一台操作系统</h2>
+        <p><a href="https://github.com/unclebob/swarm-forge">unclebob/swarm-forge</a> 在 <code>main</code> 上放共享脚本和宪法，可运行的是 pack 分支。agent 在不同 git worktree 里按角色工作，用交接协议而不是同一段聊天往下挤。two-pack 是 coder → cleaner；four-pack 加上 specifier 与 architect，意图先变成 Gherkin 再实现；six-pack 再把清理、硬化、QA 拆成独立角色。</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>轴</th>
+                <th>落点</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>对齐</td>
+                <td>共享宪法是所有角色的法；four / six-pack 里 specifier 把用户意图写成精确 Gherkin，批准后才交接。</td>
+              </tr>
+              <tr>
+                <td>执行</td>
+                <td>pack 流水线。TDD、验收测试、变异硬化、QA 脚本是咬合力，不是写完再补的文档。</td>
+              </tr>
+              <tr>
+                <td>角色 / 交接</td>
+                <td>一角色一 worktree；handoff 走 git 与消息，而不是「同一个上下文里换一顶帽子」。</td>
+              </tr>
+              <tr>
+                <td>spec</td>
+                <td>宪法和 pack 本地法是约束入口；Gherkin 是要能跑的规格。散文规格不是这台机器的燃料。</td>
+              </tr>
+              <tr>
+                <td>谁启动</td>
+                <td>人选定 pack 并启动 swarm 之后，角色按流水线推进，完成时广播。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <p><strong>难读，是因为它是操作系统，不是一段没写好的 prompt。</strong>角色、宪法、可执行验收叠在一起，读感会像在啃内核；把它误判成「提示词太绕」，会看丢它真正在隔离的那一层。</p>
+        </div>
+        <p>可选深链：<a href="../../unclebook AI工作流swarmforge仓库学习/README.md">unclebook AI工作流 swarmforge 仓库学习课</a>——以 <code>swarmforge/</code> 为对象，先分清 <code>main</code> 底座与 pack 流水线，再把 two / four / six 整台走完。</p>
+      </section>
+
+      <section>
+        <h2>格局不止三套，这一课不负责教它们</h2>
+        <p>Matt 的 README 把 GSD、BMAD、Spec-Kit 写成「拥有过程、换走控制权」的对照。OpenSpec、Kiro 等也落在附近。它们是其他落点：有的把散文规格当入口，有的把过程所有权收到脚手架里。点名是为了避免读者以为世上只有刚才三套；展开留给以后单开的课。</p>
+      </section>
+
+      <section>
+        <h2>这一课带走什么</h2>
+        <div class="callout">
+          <p><strong>三套修的是同一组洞里的不同层。</strong> Matt 把对齐放在人启动的对话，规格事后合成；Superpowers 用自动触发和批准闸强迫对齐发生，再用子 agent 工厂执行；Bob 把隔离做成角色操作系统，验收必须可执行。</p>
+          <p>下一课只钉一句 spec 判断，并拆开两个都叫 SDD 的名字。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <p>三套各自的总入口比任何一张 skill 卡都更值得先看。本课不嵌条文，核对时走 GitHub。</p>
+        <ol class="source-list">
+          <li><a href="https://github.com/mattpocock/skills">mattpocock/skills</a> README 与 <a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/to-spec/SKILL.md">to-spec</a>、<a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/wayfinder.md">wayfinder</a></li>
+          <li><a href="https://github.com/obra/superpowers">obra/superpowers</a> README（How it works / Basic Workflow）与 <a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">brainstorming</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/using-superpowers/SKILL.md">using-superpowers</a></li>
+          <li><a href="https://github.com/unclebob/swarm-forge">unclebob/swarm-forge</a> README（Intent 与 two / four / six-pack）</li>
+        </ol>
+      </section>
+
+      <p class="footer-note">某一格和读者自己的流程对不上时，可以在打开这门课的会话里继续问老师。这一页没有测验。</p>
+    </main>
+  </body>
+</html>
