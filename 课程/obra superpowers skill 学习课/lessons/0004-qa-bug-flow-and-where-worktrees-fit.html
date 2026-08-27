@@ -41,14 +41,14 @@
         <div class="grid">
           <article class="card">
             <h3 class="card-title">如果预期变了</h3>
-            <p>这不是 bug 流，而是回到上一课的 spec 分流：先问 authority 还对不对，再决定修 spec、plan 还是实现。</p>
+            <p>这不是 bug 流，是回到上一课的 spec 分流：先问 authority 还对不对，再决定修 spec、plan 还是实现。</p>
           </article>
           <article class="card">
             <h3 class="card-title">如果预期没变，只是坏了</h3>
-            <p>这才是 <code>systematic-debugging</code> 的地盘。关键动作不是“快修”，而是先找 root cause。</p>
+            <p>这才是 <code>systematic-debugging</code> 的地盘。关键动作不是“快修”，是先找 root cause。</p>
           </article>
         </div>
-        <p>所以这节课和 <a href="./0003-when-implementation-drifts-from-spec.html#three-cases">0003 的三种分流</a> 不是冲突关系，而是前后衔接：<strong>先用 0003 判断是不是 spec / plan / implementation 的边界问题；确认边界没变后，再进入这节课的 debug 流。</strong></p>
+        <p>所以这节课和 <a href="./0003-when-implementation-drifts-from-spec.html#three-cases">0003 的三种分流</a> 是前后衔接，不冲突：<strong>先用 0003 判断是不是 spec / plan / implementation 的边界问题；确认边界没变后，再进入这节课的 debug 流。</strong></p>
       </section>
 
       <a id="systematic-debugging"></a>
@@ -56,7 +56,7 @@
         <h2>第二块重点：<code>systematic-debugging</code> 可以单独执行，不要求先有 spec</h2>
         <div class="callout">
           <p><strong>这个 skill 的触发条件不是“手上有没有 spec”，而是“你是不是遇到了 bug、失败测试、异常行为、性能问题、构建失败”。</strong></p>
-          <p>也就是说，<code>systematic-debugging</code> 完全可以单独跑。<strong>有 spec 时，spec 帮你定义 expected behavior；没有 spec 时，也仍然可以围绕错误信息、复现步骤、数据流和 working example 去做 root cause 调查。</strong></p>
+          <p>所以 <code>systematic-debugging</code> 完全可以单独跑。<strong>有 spec 时，spec 帮你定义 expected behavior；没有 spec 时，也可以围绕错误信息、复现步骤、数据流和 working example 去做 root cause 调查。</strong></p>
         </div>
         <div class="prompt-stack">
           <article class="prompt-doc">
@@ -133,7 +133,7 @@ systematic-debugging 不是“修 bug 的语气词”，
         <h2>第三块重点：修完以后不是“我试了一下好了”，而是 fresh verification</h2>
         <div class="callout">
           <p><strong>debug skill 解决的是“别乱修”；<code>verification-before-completion</code> 解决的是“别乱宣布修好了”。</strong></p>
-          <p>所以这两张卡天然成对：前者管 root cause，后者管 evidence。真正把 bug 流走圆的，不是把代码改掉，而是<strong>用最新验证证据证明原始症状已经消失，而且相关检查确实通过</strong>。</p>
+          <p>所以这两张卡天然成对：前者管 root cause，后者管 evidence。把 bug 流走圆的，不是把代码改掉，是<strong>用最新验证证据证明原始症状已经消失，而且相关检查确实通过</strong>。</p>
         </div>
         <div class="prompt-stack">
           <article class="prompt-doc">
@@ -188,7 +188,7 @@ Partial verification
         <h2>第四块重点：<code>using-git-worktrees</code> 不是最后一步，而是整段工作的环境层</h2>
         <div class="callout">
           <p><strong>你之前“从来没用过 worktree 这个 skill 也能正常走完流程”，这件事本身并不奇怪。</strong></p>
-          <p>因为这张卡的重点不是“强迫你显式敲一次 git 命令”，而是：<strong>在开始实现或修 bug 前，确保自己在隔离工作空间里；如果平台原生已经帮你隔离了，就别再手搓一个新的去跟 harness 打架。</strong></p>
+          <p>因为这张卡的重点不是“强迫你显式敲一次 git 命令”，是：<strong>在开始实现或修 bug 前，确保自己在隔离工作空间里；如果平台原生已经帮你隔离了，就别再手搓一个新的去跟 harness 打架。</strong></p>
         </div>
         <div class="prompt-stack">
           <article class="prompt-doc">
@@ -259,7 +259,7 @@ worktree 不是某个 feature 做完后才补的动作，
           </article>
           <article class="card">
             <h3 class="card-title">0004 给了你最后的现实补丁</h3>
-            <p>让你知道验收 bug 时该切 debug 流，以及 worktree 其实一直在环境层，而不是课尾彩蛋。</p>
+            <p>让你知道验收 bug 时该切 debug 流，以及 worktree 一直在环境层，不是课尾彩蛋。</p>
           </article>
         </div>
       </section>
@@ -324,7 +324,7 @@ worktree 不是某个 feature 做完后才补的动作，
           </article>
           <article class="card">
             <h3 class="card-title">2. 修 bug 不是猜修法</h3>
-            <p>`systematic-debugging` 的核心不是“修”，而是先查 root cause。</p>
+            <p>`systematic-debugging` 的核心不是“修”，是先查 root cause。</p>
           </article>
           <article class="card">
             <h3 class="card-title">3. “fixed” 是证据词，不是情绪词</h3>
@@ -339,7 +339,7 @@ worktree 不是某个 feature 做完后才补的动作，
 
       <section>
         <h2>主资料</h2>
-        <p>这一课最值得你亲自通读的主资料是 <a href="https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md">systematic-debugging/SKILL.md</a>。因为它把最后一类最容易被人靠经验乱跳流程的场景，硬生生重新拉回了“先调查，再修复”的轨道上。</p>
+        <p>这一课最值得先通读的是 <a href="https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md">systematic-debugging/SKILL.md</a>。它把最后一类最容易靠经验乱跳流程的场景，硬生生拉回“先调查，再修复”的轨道上。</p>
         <ol class="source-list">
           <li><a href="https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md">skills/systematic-debugging/SKILL.md</a></li>
           <li><a href="https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md">skills/verification-before-completion/SKILL.md</a></li>

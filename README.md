@@ -13,7 +13,7 @@ clone 到本地后，点封面或标题会打开该课第一份 HTML。也可以
 - `lessons/`：按课时排的 HTML 课件
 - `reference/`：回看用的速查页
 
-完整课表见 [课程](./课程/README.md)。
+完整课表见 [课程](./课程/README.md)。建议用Obisidian，打开`文件与连接`里的`检测所有类型文件`，就可以在课程下直接找到对应课程lessons子目录里的html点开看课程了。课程都是基于 /teach 这个skill生成的，具体可以线下  playblooks/teach-me.md。
 
 <table>
   <tr>

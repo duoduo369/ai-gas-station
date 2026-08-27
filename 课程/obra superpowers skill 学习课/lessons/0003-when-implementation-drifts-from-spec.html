@@ -27,7 +27,7 @@
         <h2>先把最常见误区说破</h2>
         <div class="callout">
           <p><strong>最常见误区是：一发现跑偏，就本能地“再补一点代码”或者“干脆重开一份 spec”。</strong></p>
-          <p>这两种反应都可能对，也都可能错。关键不是“发现了缺口”，而是先判断：<strong>错的是实现、是 plan，还是 spec 本身</strong>。只要你分不清这三层，后面就很容易在错误层级上用力。</p>
+          <p>这两种反应都可能对，也都可能错。关键在先判断：<strong>错的是实现、是 plan，还是 spec 本身</strong>。分不清这三层，后面就很容易在错误层级上用力。</p>
         </div>
         <div class="grid">
           <article class="card">
@@ -58,7 +58,7 @@
         <h2>第一块重点：先认清谁是 authority</h2>
         <div class="callout">
           <p><strong>当实现和要求打架时，默认不是“谁最后说了 done 谁赢”，而是看 authority 顺序。</strong></p>
-          <p>在 Superpowers 这套写法里，最重要的一句是：<strong>spec 是 binding authority，plan 是 spec 的 argument，implementation report 不是 authority，只是状态报告。</strong> 这句话其实已经决定了你发现跑偏后应该怎么分流。</p>
+          <p>在 Superpowers 这套写法里，核心一句是：<strong>spec 是 binding authority，plan 是 spec 的 argument，implementation report 不是 authority，只是状态报告。</strong> 这句话已经决定了你发现跑偏后应该怎么分流。</p>
         </div>
         <div class="prompt-stack">
           <article class="prompt-doc">
@@ -126,7 +126,7 @@ Agent reported "success"
           </article>
           <article class="card">
             <h3 class="card-title">情况 B：spec 对，但 plan 不够</h3>
-            <p>比如 task 粒度拆坏了、顺序不对、关键约束没下传到 implementer。此时重点不是先补代码，而是先修 plan 或补 plan 中缺的任务，再继续执行。</p>
+            <p>比如 task 粒度拆坏了、顺序不对、关键约束没下传到 implementer。先修 plan 或补 plan 中缺的任务，再继续执行，不要先补代码。</p>
           </article>
           <article class="card">
             <h3 class="card-title">情况 C：spec 本身不再 authoritative</h3>
@@ -191,7 +191,7 @@ review 指出缺口，不是“表演性同意”的起点，
           </article>
           <article class="card">
             <h3 class="card-title">现场 2：review 说“这不满足要求”</h3>
-            <p>先定位 reviewer 指的是哪一层要求。若 reviewer 说的要求其实不在 spec 里，那要讨论的是 spec 边界，不是马上讨好式补实现。</p>
+            <p>先定位 reviewer 指的是哪一层要求。若 reviewer 说的要求不在 spec 里，那要讨论的是 spec 边界，不是马上讨好式补实现。</p>
           </article>
           <article class="card">
             <h3 class="card-title">现场 3：人验收后改口，说真正想要的是另一种行为</h3>
@@ -247,7 +247,7 @@ review 指出缺口，不是“表演性同意”的起点，
         <div class="grid">
           <article class="card">
             <h3 class="card-title">1. 先分层，再补洞</h3>
-            <p>发现缺口后，第一件事不是修，而是先判断错在实现、plan，还是 spec。</p>
+            <p>发现缺口后，第一件事不是修，是先判断错在实现、plan，还是 spec。</p>
           </article>
           <article class="card">
             <h3 class="card-title">2. agent 报 done 不是 authority</h3>
@@ -271,7 +271,7 @@ review 指出缺口，不是“表演性同意”的起点，
 
       <section>
         <h2>主资料</h2>
-        <p>这一课最值得你亲自通读的主资料是 <a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">subagent-driven-development/SKILL.md</a>。因为“spec 是 authority、plan 是 argument” 这条判断，几乎决定了这节课里所有分流动作的起点。</p>
+        <p>这一课最值得先通读的是 <a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">subagent-driven-development/SKILL.md</a>。“spec 是 authority、plan 是 argument” 这条判断，几乎决定了这节课里所有分流动作的起点。</p>
         <ol class="source-list">
           <li><a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a></li>
           <li><a href="https://github.com/obra/superpowers/blob/main/skills/receiving-code-review/SKILL.md">skills/receiving-code-review/SKILL.md</a></li>

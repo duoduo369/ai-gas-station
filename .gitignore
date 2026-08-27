@@ -1,5 +1,6 @@
 # Obsidian local configuration
 .obsidian/
+.workbuddy/
 
 # Local planning / scratch (not part of the repo)
 .scratch/

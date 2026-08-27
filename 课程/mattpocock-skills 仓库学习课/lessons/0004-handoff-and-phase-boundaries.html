@@ -23,7 +23,7 @@
       </section>
 
       <section>
-        <h2>先抓一条最重要的纠偏</h2>
+        <h2>先抓一条关键纠偏</h2>
         <div class="callout">
           <p><strong>`/handoff` 默认是“产物动作”，不是“终止动作”。</strong></p>
           <p>`handoff` skill 的定义很短也很直接：写一份 handoff document，总结当前对话，保存到系统临时目录，并给下一位 agent 一个 suggested skills 区段。它没有写“写完后必须结束当前 session”或“写完后自动切换到新窗口”。</p>
@@ -63,7 +63,7 @@ disable-model-invocation: true
             <p>它承诺的是把当前上下文压成一份 portable markdown，给下一位 agent 用；并没有承诺当前 agent 在这个窗口里停止思考或停止响应。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">所以“继续工作”其实不违背定义</h3>
+            <h3 class="card-title">所以“继续工作”不违背定义</h3>
             <p>如果你在当前 session 里又给了后续目标，或者 harness 仍把这个窗口视为主会话，agent 继续做下去在定义上是说得通的。</p>
           </article>
         </div>
@@ -160,7 +160,7 @@ disable-model-invocation: true
           </article>
           <article class="card">
             <h3 class="card-title">目标是把任务转移给别处</h3>
-            <p>这时才是 `/handoff` 真正不可替代的位置；但你通常还需要手动去打开新 session、或明确停在这里。</p>
+            <p>这时才是 `/handoff` 不可替代的位置；但你通常还需要手动去打开新 session、或明确停在这里。</p>
           </article>
         </div>
       </section>
@@ -202,14 +202,14 @@ disable-model-invocation: true
         <div class="grid">
           <article class="card">
             <h3 class="card-title">1. handoff 是产物</h3>
-            <p>默认首先是 portable handoff document，而不是会话终止器。</p>
+            <p>默认首先是 portable handoff document，不是会话终止器。</p>
           </article>
           <article class="card">
             <h3 class="card-title">2. 终止当前 session 是另一件事</h3>
             <p>需要不要继续、要不要 clear、要不要 compact，是 phase boundary 的另一层判断。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">3. handoff 真正解决 portability</h3>
+            <h3 class="card-title">3. handoff 解决 portability</h3>
             <p>换 harness、换目录、交给别人、分叉旁支，这些都需要它。</p>
           </article>
           <article class="card">

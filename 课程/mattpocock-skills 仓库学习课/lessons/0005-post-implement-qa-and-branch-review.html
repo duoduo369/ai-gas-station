@@ -23,7 +23,7 @@
       </section>
 
       <section>
-        <h2>先抓一句最重要的纠偏</h2>
+        <h2>先抓一句关键纠偏</h2>
         <div class="callout">
           <p><strong>仓库里没有独立的 <code>/qa</code> 来做“全部 ticket 做完后的整体验收”。</strong></p>
           <p>主线写到 ship 时，收尾 skill 是 <code>/code-review</code>。文档里的推荐也写得很直白：单票评审和整分支评审都要，吃不准时就“每张票看一次，最后再对分支点做一次总评”。你直觉里那句“对当前分支所有提交做一次整体 review，看有没有跑偏 spec”，正好就是这条。</p>
@@ -359,7 +359,7 @@ description: 从某个固定点（commit、分支、tag 或 merge-base）起评�
 
       <section>
         <h2>验收发现问题时，要不要新开 spec</h2>
-        <p>默认答案是<strong>不要</strong>。spec 是当时的决策快照，不是活文档。<code>to-spec</code> 写得很清楚：一开工它就会过期；真正该留下的是 <code>CONTEXT.md</code> 和 ADR。目的地没变，就在同一份 spec 下面补工作。</p>
+        <p>默认答案是<strong>不要</strong>。spec 是当时的决策快照，不是活文档。<code>to-spec</code> 写得很清楚：一开工它就会过期；该留下的是 <code>CONTEXT.md</code> 和 ADR。目的地没变，就在同一份 spec 下面补工作。</p>
         <div class="table-wrap">
           <table>
             <thead>
@@ -378,7 +378,7 @@ description: 从某个固定点（commit、分支、tag 或 merge-base）起评�
               <tr>
                 <td>Spec 轴：多做了（scope creep）</td>
                 <td>agent 做了 spec 没要的东西</td>
-                <td>先问你自己：这是该删掉，还是你其实想要？想要就当成新决策，而不是“评审通过”。</td>
+                <td>先问你自己：这是该删掉，还是你其实想要？想要就当成新决策，不是“评审通过”。</td>
               </tr>
               <tr>
                 <td>人走 demo 才发现 spec 漏了、写得不够</td>
@@ -443,7 +443,7 @@ description: 从某个固定点（commit、分支、tag 或 merge-base）起评�
           <li><code>.scratch/&lt;feature&gt;/issues/01-xxx.md</code> — 一张票一个文件</li>
           <li>票上的 <code>Status:</code> 行，就是 triage 状态在本地的落点</li>
         </ul>
-        <p>所以：<strong>tracker 能跑 triage，不代表你这条工作流该跑。</strong> 文档自己也说了——如果 tracker 里的东西都来自你自己的规划，你会很少打开 <code>/triage</code>。它真正值钱的场景是开源仓库、团队往你这里扔原始 issue。本地独唱、票都是 <code>to-tickets</code> 写进 <code>.scratch</code> 的，验收时发现缺口，直接在同一个 <code>issues/</code> 里补票，或先 grill 再补；不要把这些票再送去 triage。</p>
+        <p>所以：<strong>tracker 能跑 triage，不代表你这条工作流该跑。</strong> 文档自己也说了——如果 tracker 里的东西都来自你自己的规划，你会很少打开 <code>/triage</code>。它值钱的场景是开源仓库、团队往你这里扔原始 issue。本地独唱、票都是 <code>to-tickets</code> 写进 <code>.scratch</code> 的，验收时发现缺口，直接在同一个 <code>issues/</code> 里补票，或先 grill 再补；不要把这些票再送去 triage。</p>
         <p>只有一种本地情况它才开始有用：tracker 里突然多了一条<strong>还没被你规划过的原始备注</strong>——同事丢来的、用户反馈、你随手记下但完全没拆过的东西。那时 triage 的核实、去重、agent brief 才帮得上忙。</p>
         <article class="prompt-doc" id="zh-triage-docs">
           <h3 class="card-title">docs/engineering/triage.md · 只处理外来工单（本课所需小节）</h3>
@@ -595,7 +595,7 @@ description: 从某个固定点（commit、分支、tag 或 merge-base）起评�
 
       <section>
         <h2>主资料</h2>
-        <p>这一课最值得你对照的权威正文已经嵌在上面。人读 FAQ 补的是 skill 没写、但验收时会踩到的坑。</p>
+        <p>这一课最值得对照的权威正文已经嵌在上面。人读 FAQ 补的是 skill 没写、但验收时会踩到的坑。</p>
         <ol class="source-list">
           <li><a href="#zh-code-review">本课 · code-review skill 中文全文</a></li>
           <li><a href="#zh-code-review-docs">本课 · code-review 人读 FAQ</a></li>

@@ -26,7 +26,7 @@
         <h2>先记住一句总判断</h2>
         <div class="callout">
           <p><strong><code>main</code> 不是拿来直接 <code>./swarm</code> 的工作流，而是共享操作系统。</strong></p>
-          <p>README 的 Intent 写得很直：<code>main</code> 负责说明系统，并携带共享脚本和默认宪法条款。真正可运行的角色提示、本机宪法和 <code>swarmforge.conf</code> 在 pack 分支上。你点开的 <code>swarmforge/</code> 在 <code>main</code> 上只有三样：宪法文章、交接协议、脚本。</p>
+          <p>README 的 Intent 写得很直：<code>main</code> 负责说明系统，并携带共享脚本和默认宪法条款。可运行的角色提示、本机宪法和 <code>swarmforge.conf</code> 在 pack 分支上。你点开的 <code>swarmforge/</code> 在 <code>main</code> 上只有三样：宪法文章、交接协议、脚本。</p>
         </div>
       </section>
 
@@ -82,8 +82,7 @@
             </tbody>
           </table>
         </div>
-        <p>最值钱的规则是：<strong>共享文章文件名是法律。</strong> pack 要加例外，用 <code>project.prompt</code> 或 <code>local-engineering.prompt</code> / <code>local-workflow.prompt</code>，不要提交同名的 <code>engineering.prompt</code>。</p>
-      </section>
+        <p>最值钱的规则是：<strong>共享文章文件名是法律。</strong> pack 要加例外，用 <code>project.prompt</code> 或 <code>local-engineering.prompt</code> / <code>local-workflow.prompt</code>，不要提交同名的 <code>engineering.prompt</code>。</p>      </section>
 
       <section id="beat-constitution">
         <p class="beat-label">地图里的 prompt · 实际被读到的法律</p>
@@ -305,8 +304,7 @@ message: &lt;一行，最多 80 字符&gt;
           </article>
           <article class="card">
             <h3 class="card-title">cleaner · 清理员</h3>
-            <p>行为不变，把刚写的代码收拾干净。two-pack 里它还兼架构审查和变异加固，并批量吃 coder 的交接。six-pack 里它只管局部清理、覆盖率、CRAP≤6、DRY，以及数变异位点；不跑真正的变异测试。</p>
-          </article>
+            <p>行为不变，把刚写的代码收拾干净。two-pack 里它还兼架构审查和变异加固，并批量吃 coder 的交接。six-pack 里它只管局部清理、覆盖率、CRAP≤6、DRY，以及数变异位点；不跑真正的变异测试。</p>          </article>
           <article class="card">
             <h3 class="card-title">refactorer · 重构员</h3>
             <p>只出现在 four-pack，职责接近 six-pack 的 cleaner：保行为、提覆盖、降 CRAP/DRY、必要时拆过大的文件。另加属性测试支架。不引入新功能，不跑变异测试。</p>
@@ -488,7 +486,7 @@ message: &lt;一行，最多 80 字符&gt;
 
       <section>
         <h2>主资料</h2>
-        <p>这一课最值得你亲自读的主资料是 <a href="https://github.com/unclebob/swarm-forge/blob/main/README.md">仓库 README</a>。原因很简单：<code>swarmforge/</code> 目录告诉你底座里有什么，README 告诉你它为什么不能单独当可运行工作流来 checkout。</p>
+        <p>这一课最值得读的主资料是 <a href="https://github.com/unclebob/swarm-forge/blob/main/README.md">仓库 README</a>。原因很简单：<code>swarmforge/</code> 目录告诉你底座里有什么，README 告诉你它为什么不能单独当可运行工作流来 checkout。</p>
         <ol class="source-list">
           <li><a href="https://github.com/unclebob/swarm-forge/blob/main/README.md">README.md</a></li>
           <li><a href="https://github.com/unclebob/swarm-forge/tree/main/swarmforge">swarmforge/ 目录</a></li>

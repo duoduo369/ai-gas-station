@@ -13,7 +13,7 @@
     <main>
       <section class="hero">
         <p class="eyebrow">Lesson 0002</p>
-        <h1>功能做出来以后，工作流怎么真正收口</h1>
+        <h1>功能做出来以后，工作流怎么收口</h1>
         <p class="lede">这节课补后半程。<code>subagent-driven-development</code> 不只是把功能丢给 subagent，<code>executing-plans</code> 也不是随手接上；review、final review 和 finish 才把这条线收住。</p>
         <div class="pill-row">
           <span class="pill">预计 20 分钟</span>
@@ -27,16 +27,16 @@
         <h2>先说你最熟悉、也最容易截断的版本</h2>
         <div class="callout">
           <p><strong>常见截断版心智模型：</strong>`brainstorming` 把设计讲清楚 → 自动长出 spec / plan → 叫 subagent 去实现 → 功能看起来能跑 → 人工点一点验收 → 结束。</p>
-          <p><strong>Superpowers 的完整版心智模型：</strong>实现只是后半程的开头，不是后半程的结尾。真正完整的闭环，是“按任务推进实现 → 每任务 review → 全分支 final review → 进入 finish 菜单 → 由人决定 merge / PR / keep”。</p>
+          <p><strong>Superpowers 的完整版心智模型：</strong>实现只是后半程的开头，不是结尾。完整闭环是“按任务推进实现 → 每任务 review → 全分支 final review → 进入 finish 菜单 → 由人决定 merge / PR / keep”。</p>
         </div>
         <div class="grid">
           <article class="card">
             <h3 class="card-title">为什么会误以为已经结束</h3>
-            <p>因为“功能出现了”给人很强的完成感，尤其是 UI 或接口已经能跑的时候，很容易把“能演示”误认成“工作流正式收口”。</p>
+            <p>因为“功能出现了”给人很强的完成感，尤其是 UI 或接口已经能跑的时候，容易把“能演示”误认成“工作流正式收口”。</p>
           </article>
           <article class="card">
             <h3 class="card-title">真正漏掉的是哪些环节</h3>
-            <p>最常漏掉的不是写代码本身，而是 per-task review、whole-branch review，以及 `finishing-a-development-branch` 提供的正式收口菜单。</p>
+            <p>最常漏掉的不是写代码本身，是 per-task review、whole-branch review，以及 <code>finishing-a-development-branch</code> 提供的正式收口菜单。</p>
           </article>
         </div>
       </section>
@@ -83,7 +83,7 @@
         </div>
         <figure class="diagram">
           <img src="../assets/implementation-finish-loop.svg" alt="后半程闭环图：plan 后选择执行模式，进入任务执行与 review 循环，再进入 finish 菜单。">
-          <figcaption>如果你总在“功能看起来有了”这里停下，这张图能帮你看见自己其实只走到了执行环内部，还没正式进入收口。</figcaption>
+          <figcaption>如果你总在“功能看起来有了”这里停下，这张图能帮你看见自己只走到了执行环内部，还没正式进入收口。</figcaption>
         </figure>
       </section>
 
@@ -92,7 +92,7 @@
         <h2>第一块重点：SDD 究竟是什么，不是什么</h2>
         <div class="callout">
           <p><strong>SDD 不是“把 feature 丢给 subagent”这么简单。</strong></p>
-          <p>它是一整套控制方式：controller 留在上层做协调，每个任务派一个新的 implementer，任务后立刻 review，有问题进 fix loop，全部任务结束后还要做一次 whole-branch review，最后再进入 `finishing-a-development-branch`。如果你只记住“里面用了 subagent”，基本等于没学到它的骨架。</p>
+          <p>它是一整套控制方式：controller 留在上层做协调，每个任务派一个新的 implementer，任务后立刻 review，有问题进 fix loop，全部任务结束后还要做一次 whole-branch review，最后再进入 `finishing-a-development-branch`。只记住“里面用了 subagent”，等于没学到它的骨架。</p>
         </div>
         <div class="grid">
           <article class="card">
@@ -183,7 +183,7 @@ executing-plans 更像“单会话按 plan 顺序推进，遇阻就停下来 ask
         <h2>第二块重点：Review 不是锦上添花，是 mandatory gate</h2>
         <div class="callout">
           <p><strong>如果你把 review 理解成“有空补一个”，后半程几乎一定会被你走短。</strong></p>
-          <p>Superpowers 的写法非常明确：在 SDD 里，review 是每个 task 后的 gate；在更广义上，major feature 完成后和 merge 之前也都应该 request review。所以“功能有了”不能自动替代“review 过了”。</p>
+          <p>Superpowers 写得很明确：在 SDD 里，review 是每个 task 后的 gate；在更广义上，major feature 完成后和 merge 之前也都应该 request review。所以“功能有了”不能自动替代“review 过了”。</p>
         </div>
         <div class="prompt-stack">
           <article class="prompt-doc">
@@ -227,7 +227,7 @@ Review 在这里不是社交礼仪，也不是“别人顺手帮你看看”，
         <h2>第三块重点：Finish skill 负责把“实现完成”变成“正式收口”</h2>
         <div class="callout">
           <p><strong>真正的 finish 不是“我看着差不多，去 merge 吧”。</strong></p>
-          <p>`finishing-a-development-branch` 最有价值的地方，是它把“收尾”从主观感觉，变成一套明确菜单和明确边界：先跑全量测试，再识别当前环境，再由用户选择 merge / PR / keep；只有用户明确要求 discard，才会走删除分支的路径。</p>
+          <p><code>finishing-a-development-branch</code> 最有价值的地方，是它把“收尾”从主观感觉，变成一套明确菜单和明确边界：先跑全量测试，再识别当前环境，再由用户选择 merge / PR / keep；只有用户明确要求 discard，才会走删除分支的路径。</p>
         </div>
         <div class="prompt-stack">
           <article class="prompt-doc">
@@ -280,7 +280,7 @@ finish skill 的价值不是“给你一个 merge 命令”，
           </article>
           <article class="card">
             <h3 class="card-title">正式收口状态</h3>
-            <p>验证通过、review 过关、分支级检查完成、用户明确做出整合选择，工作才真正进入结尾。</p>
+            <p>验证通过、review 过关、分支级检查完成、用户明确做出整合选择，工作才算进入结尾。</p>
           </article>
         </div>
       </section>
@@ -365,7 +365,7 @@ finish skill 的价值不是“给你一个 merge 命令”，
 
       <section>
         <h2>主资料</h2>
-        <p>这一课最值得你亲自通读的主资料是 <a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">subagent-driven-development/SKILL.md</a>。因为它最完整地把“为什么实现不能只看功能是否出现、而要看整个执行环有没有真正闭合”讲清楚。</p>
+        <p>这一课最值得先通读的是 <a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">subagent-driven-development/SKILL.md</a>。它把“为什么实现不能只看功能是否出现、而要看整个执行环有没有闭合”讲得最完整。</p>
         <ol class="source-list">
           <li><a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a></li>
           <li><a href="https://github.com/obra/superpowers/blob/main/skills/executing-plans/SKILL.md">skills/executing-plans/SKILL.md</a></li>
