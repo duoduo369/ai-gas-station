@@ -21,7 +21,7 @@
 - 本地引用统一使用标准 Markdown 相对路径，不依赖 Obsidian 双链承载关键结构。
 - 不对不存在的目标预先加链接，避免 Obsidian 误建空文件。
 - 附件统一放 `assets/`；书籍封面放 `assets/cover/`，其余附件文件名采用“日期 + 英文短语”。
-- 不直接扩顶层目录或改机制；结构分歧对照 [docs/conventions.md](./docs/conventions.md) 并先问人。本地规划草稿放 `.scratch/`，不入库。
+- 不直接扩顶层目录或改机制；结构分歧对照 [docs/conventions.md](./docs/conventions.md) 并先问人。spec / 工单走 GitHub Issues；`.scratch/` 仍 gitignore，只给真正的本地草稿，engineering skills 不往那里写 issue。
 
 ## 分支路由
 
@@ -36,6 +36,7 @@
 - `方法`、`流程`、`套路`、`准则`、`可复用经验` -> [playbook/README.md](./playbook/README.md)
 - `截图`、`PDF`、`讲义`、`附件` -> [assets/README.md](./assets/README.md)
 - `扩目录`、`改顶层结构`、`新增机制`、`结构分歧` -> [docs/conventions.md](./docs/conventions.md)
+- `工单`、`issue`、`spec`、`tracker`、`triage` -> [docs/agents/issue-tracker.md](./docs/agents/issue-tracker.md)
 
 ## 默认加载链
 
@@ -59,3 +60,17 @@
 - 结构文档允许逐步演化，冲突时以 [docs/conventions.md](./docs/conventions.md) 与 [CONTEXT.md](./CONTEXT.md) 为准。
 - 同类内容如果连续出现且现有目录明显容纳不顺，再考虑新增对象目录。
 - 不要为了“可能以后会用”预建很多空目录。
+
+## Agent skills
+
+### Issue tracker
+
+本仓库的 spec / 工单走 GitHub Issues（`duoduo369/ai-gas-station`）。见 [docs/agents/issue-tracker.md](./docs/agents/issue-tracker.md)。
+
+### Triage labels
+
+使用默认五套：`needs-triage`、`needs-info`、`ready-for-agent`、`ready-for-human`、`wontfix`。见 [docs/agents/triage-labels.md](./docs/agents/triage-labels.md)。
+
+### Domain docs
+
+单上下文：根目录 `CONTEXT.md`。ADR 按需由 domain-modeling 懒创建。见 [docs/agents/domain.md](./docs/agents/domain.md)。
