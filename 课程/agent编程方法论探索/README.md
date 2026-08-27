@@ -3,11 +3,11 @@
 > 回到课程索引：[课程/README.md](../README.md)
 > 教学状态：[MISSION.md](./MISSION.md) · [RESOURCES.md](./RESOURCES.md) · [NOTES.md](./NOTES.md)
 
-这是一门**方法论讨论课**，不是仓库精读，也不是操作手册。讨论锚定到约 2026 年 8 月底的社区沉积：agent 写代码变快之后，为什么会涌现一批方法；Matt Pocock skills、obra Superpowers、Uncle Bob SwarmForge 各自把纪律放在哪一层；以及 spec 被骂时，到底在骂哪一层。
+这门课谈方法。讨论锚点放在约 2026 年 8 月底的社区沉积：agent 写代码快了以后，为什么会冒出一批方法；Matt Pocock skills、obra Superpowers、Uncle Bob SwarmForge 分别把纪律压在哪一层；spec 挨骂时，人到底在骂哪一层。
 
-读完后，读者应能用同一套失败模式解释「为什么会有这些方法」，按对照轴看三套落点，并带走一句 spec 判断。课里出现的三门仓库精读课只是可选深链，不预设读者上过。
+读完后，你可以用同一张失败模式清单解释这些方法为什么出现，也能按对照轴看三套方法的落点，并带走一句 spec 判断。课里出现的三门仓库精读课只是深链，不要求先修。
 
-这门课明确**不是**选型指南，也**不会**推出「日常该装哪套 skill」。勘探还没有变成下次能直接复用的操作，结论也不写入 playbook。
+这门课不做选型，也不回答日常该装哪套 skill。现在这轮整理停在勘探，结论不进 `playbook/`。
 
 课程包沿用 `teach` 在本库的落地形态：
 
@@ -19,9 +19,9 @@ HTML 课件顶部有相对路径导航：三课互跳、两页速查、课程入
 
 ## Lessons
 
-- [0001 · 当下 agent 编程会炸在哪](./lessons/0001-agent-failure-modes.html) - 用意图漂移、过早出计划、上下文腐烂、不可验证、加人/加 agent 的沟通税，解释方法论在修什么。
-- [0002 · 先轴后案例看三套方法](./lessons/0002-three-methodologies-by-axes.html) - 按对齐、执行、角色交接、spec 位置、过程谁启动五条轴，对照 Matt / Superpowers / Bob。
-- [0003 · spec 是入口还是工件](./lessons/0003-spec-as-entry-vs-artifact.html) - 带走锁定的 spec 判断，并拆开业界 Spec-Driven Development 与 Superpowers 的 Subagent-Driven Development。
+- [0001 · Agent编程目前依然面临的问题](./lessons/0001-agent-failure-modes.html) - 把意图漂移、过早出计划、上下文腐烂、不可验证、沟通税摆出来，看方法在补哪几个洞。
+- [0002 · 先轴后案例看三套方法](./lessons/0002-three-methodologies-by-axes.html) - 拿对齐、执行、角色交接、spec 位置、过程谁启动五条轴，对照 Matt / Superpowers / Bob。
+- [0003 · spec 是入口还是工件](./lessons/0003-spec-as-entry-vs-artifact.html) - 把 spec 判断钉住，再拆开业界 Spec-Driven Development 和 Superpowers 的 Subagent-Driven Development。
 
 ## Reference
 

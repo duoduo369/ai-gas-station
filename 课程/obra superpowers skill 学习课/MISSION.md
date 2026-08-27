@@ -1,12 +1,12 @@
 # Mission: Learning Superpowers
 
 ## Why
-用课程化方式拆解 `obra/superpowers`，把它从“看过 README”推进到“能说清工作流、技能分工和入口顺序”的程度。学完后，目标不是只会复述仓库内容，而是能把这套思路迁移到自己日常使用的 agent 工作流里。
+用课程把 `obra/superpowers` 拆开，让你不只停在“看过 README”。学完后，你能说清工作流、技能分工和入口顺序，也能把这套思路迁到自己常用的 agent 工作流里。
 
 ## Success looks like
 - 能说清 `superpowers` 的仓库结构，以及 `skills/`、harness 目录、`docs/`、`tests/` 各自的角色
 - 能复述 README 里的七步基本工作流，并知道每一步大概对应哪张 skill 卡
-- 遇到一个具体场景时，能先判断应该优先读哪张 skill，而不是盲目翻完整个仓库
+- 遇到具体场景时，能先判断该优先读哪张 skill，不用盲翻整个仓库
 
 ## Constraints
 - 课程内容默认用中文写

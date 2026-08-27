@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lesson 0004 · 人验收发现 bug 后怎么切线，以及 worktree 到底在流程里的哪一层</title>
-    <link rel="stylesheet" href="../assets/course.css">
+    <link rel="stylesheet" href="../../assets/course.css">
     <script src="../assets/lesson-quiz.js" defer></script>
     <script src="../assets/course-nav.js" defer></script>
-    <script src="../assets/open-links-new-tab.js" defer></script>
+    <script src="../../assets/open-links-new-tab.js" defer></script>
   </head>
   <body>
     <main>
       <section class="hero">
         <p class="eyebrow">Lesson 0004</p>
         <h1>人验收发现 bug 后怎么切线，以及 worktree 到底在流程里的哪一层</h1>
-        <p class="lede">这节课把整门课真正收口。你前面已经知道 feature 怎么实现、怎么收尾、跑偏时怎么分流；现在补上最后一块现实世界里最常把流程走歪的地方：人验收发现 bug 时，为什么不能继续沿 feature 流硬补，而要切到 <code>systematic-debugging -&gt; verification-before-completion</code>，以及 <code>using-git-worktrees</code> 为什么不是“最后突然冒出来的新步骤”，而是整段实现与修 bug 的隔离底座。</p>
+        <p class="lede">这节课补最后一段现实流程。人验收时抓到 bug，你要切到 <code>systematic-debugging -&gt; verification-before-completion</code>；<code>using-git-worktrees</code> 则一直待在实现和修 bug 的底座层。</p>
         <div class="pill-row">
           <span class="pill">预计 22 分钟</span>
           <span class="pill">目标：把最后一段流程走圆</span>

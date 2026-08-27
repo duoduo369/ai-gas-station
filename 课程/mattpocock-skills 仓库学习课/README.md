@@ -4,7 +4,7 @@
 > 回到课程索引：[课程/README.md](../README.md)
 > 教学状态：[MISSION.md](./MISSION.md) · [RESOURCES.md](./RESOURCES.md)
 
-这门课围绕 `mattpocock/skills` 仓库展开，目标不是一次性背完所有 `SKILL.md`，而是先建立仓库地图，再沿着最关键的流程和 skill 逐步精读。
+这门课拆 `mattpocock/skills`。你先画仓库地图，再沿最关键的流程和 skill 往下读，不用一口气把所有 `SKILL.md` 背完。
 
 课内已经按 [teach 课件加厚方法](../../playbook/teach-课件-嵌入权威中文.md) 把本课要对照的权威正文嵌成中文（原文只留 GitHub 外链），复习时不必再翻上游仓库。
 
@@ -24,8 +24,8 @@ HTML 课件顶部有相对路径导航：六课互跳、速查页、课程入口
 - [0002 · ask-matt 主流程与上坡入口](./lessons/0002-ask-matt-main-flow-and-onramps.html) - 嵌 `ask-matt` 与 `PHASE-BOUNDARIES` 中文全文。
 - [0003 · grilling、grill-with-docs 与 wayfinder](./lessons/0003-grilling-vs-grill-with-docs-vs-wayfinder.html) - 嵌三者加 `domain-modeling` 中文；`ask-matt` 链 0002。
 - [0004 · handoff 与上下文交接](./lessons/0004-handoff-and-phase-boundaries.html) - 嵌 `handoff` 中文；phase boundary 链 0002。
-- [0005 · 所有 ticket 做完后怎么验收](./lessons/0005-post-implement-qa-and-branch-review.html) - 嵌 `code-review` 全文、seam / implement / spec 快照 / triage 本课所需小节。
-- [0006 · Issue tracker 是配置不是平台](./lessons/0006-issue-tracker-is-config.html) - 嵌 setup 四选一、本地 markdown 模板全文、GitLab 同形节。
+- [0005 · 所有 ticket 做完后怎么验收](./lessons/0005-post-implement-qa-and-branch-review.html) - 嵌 `code-review` 全文，再补 seam / implement / spec 快照 / triage 这些本课要用的小节。
+- [0006 · Issue tracker 是配置不是平台](./lessons/0006-issue-tracker-is-config.html) - 嵌 setup 四选一、本地 markdown 模板全文和 GitLab 同形节。
 
 ## Reference
 

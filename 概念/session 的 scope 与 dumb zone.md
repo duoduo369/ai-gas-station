@@ -9,11 +9,11 @@
 
 ## 两张图先建立直觉
 
-![token 关系示意图](../assets/smart_dump_zone_token_relation.png)
+![token 关系示意图](../assets/image/smart_dump_zone_token_relation.png)
 
 这张图适合用来理解为什么上下文一长，问题不只是“字变多了”。每增加一段输入，模型都需要在更多 token 之间维持关系；长度越大，潜在关系就越多，注意力也越容易被摊薄。
 
-![session dumb zone 示意图](../assets/session_dumb_zone.png)
+![session dumb zone 示意图](../assets/image/session_dumb_zone.png)
 
 这张图更像是工作感受层面的总结：session 不是到了某个固定数值才突然坏掉，而是随着上下文增长，表现逐渐下滑，然后进入一个明显更难控制的区域。图里的 `150k` 更适合理解成示意，不是所有模型都共享的硬阈值。
 

@@ -14,11 +14,11 @@
 
 ## 两张图先建立直觉
 
-![agent 由 model、harness 与 environment 共同构成](../assets/agent_model_harness_env.png)
+![agent 由 model、harness 与 environment 共同构成](../assets/image/agent_model_harness_env.png)
 
 这张图很适合表达我现在更认同的层次关系：`model` 在最内层，`harness` 包住模型，而真正让 agent 能在工程里长期可用的，是更外层的 `environment`。
 
-![很多人熟悉的 model、harness、skills 视角](../assets/model-harness-skill.png)
+![很多人熟悉的 model、harness、skills 视角](../assets/image/model-harness-skill.png)
 
 这张图更接近很多人最先接受的说法：模型在最里面，外面是 harness，再往外是 skills / applications，它们合起来形成 agent。这个视角本身没问题，但如果只停在这里，会低估项目外部环境的重要性。
 

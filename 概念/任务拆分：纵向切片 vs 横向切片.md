@@ -8,15 +8,15 @@
 
 ## 三张图先建立直觉
 
-![系统分层示意图](../assets/layer.png)
+![系统分层示意图](../assets/image/layer.png)
 
 先把常见分层看清楚：数据库、API、前端，本来就是不同责任的技术层。
 
-![横向拆分示意图](../assets/horizontal_slices.png)
+![横向拆分示意图](../assets/image/horizontal_slices.png)
 
 横向拆分的问题在于：Phase 1、Phase 2、Phase 3 往往各自只推进一层，真正的集成被推迟到后面。前面每一阶段都可能写了很多代码，但仍然不知道整体路径是不是通的。
 
-![纵向切片示意图](../assets/vertical_split.png)
+![纵向切片示意图](../assets/image/vertical_split.png)
 
 纵向切片更像是从第一阶段开始就跨层工作。每一刀都同时碰到数据库、API、前端，只是范围先做得很小，但它从一开始就是可集成、可运行、可反馈的。
 

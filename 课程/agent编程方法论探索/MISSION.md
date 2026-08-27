@@ -2,15 +2,15 @@
 
 ## Why
 
-把 2026 年 8 月底之前，围绕 agent 编程涌现的那批方法论收成一门可分享的讨论课。读完后，人能用同一套失败模式解释「为什么会有这些方法」，并能对照 Matt skills、Superpowers、SwarmForge 把纪律放在哪一层，而不必再从一次调研聊天里复述。
+把 2026 年 8 月底前围绕 agent 编程冒出来的那批方法整理成一门讨论课。读完后，人能用同一套失败模式解释这些方法为什么出现，也能对照 Matt skills、Superpowers、SwarmForge 的纪律落点，不用再把一次调研聊天复述一遍。
 
 ## Success looks like
 
 - 能用意图漂移、过早出计划、上下文腐烂、不可验证、加人/加 agent 的沟通税，解释方法论在修什么。
-- 能按对照轴说出 Matt / Superpowers / Bob 各自把纪律放在哪，而不是比较谁的 skill 更多。
-- 能陈述 spec 判断：指摘的是散文规格当入口/银弹/不看代码；对齐之后的规格工件这三套都还在用。结论不是「不要写 spec」。
+- 能按对照轴说出 Matt / Superpowers / Bob 各自把纪律放在哪，不把比较做成数 skill 卡。
+- 能说清 spec 争议指向什么：散文规格被拿来当入口、银弹和不看代码的借口。对齐后的规格工件，这三套都还在用。
 - 能拆开两个 SDD：业界 Spec-Driven Development，与 Superpowers 的 Subagent-Driven Development。
-- 全程没有「所以该安装某套 skill」的推荐。
+- 课里不出现「所以该安装某套 skill」的推荐。
 
 ## Constraints
 

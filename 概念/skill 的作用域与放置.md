@@ -4,7 +4,7 @@
 
 这篇不是讲某一个具体 skill，而是记录一个更上层的判断：skill 应该放在用户侧，还是放进项目里；以及当 skill 已经带出稳定概念或方法论时，什么时候值得把参考文档和它一起维护。
 
-![skill scope 示意图](../assets/skill_scope.png)
+![skill scope 示意图](../assets/image/skill_scope.png)
 
 这张图很适合作为入口：先把视角分成 `user-level` 和 `project-level`，再去细想它更接近哪种放置和维护方式。
 

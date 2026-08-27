@@ -12,8 +12,9 @@
 
 ## 条目
 
-- [teach 课件：嵌入权威中文](./teach-课件-嵌入权威中文.md) - 课里点名的 prompt/skill 把中文嵌进 HTML，少让学员再翻上游；章节结构随课，不绑死流程拍序。
-- [teach 课件：统一导航条](./teach-课件-统一导航条.md) - 多节课 / 多张速查页的课程别在每页手写导航，改成 `assets/course-nav.js` 统一注入，后续只维护一处列表。
+- [teach-me](./teach-me.md) - 先走上游 teach，再套本库覆盖：共用 `课程/assets/` chrome、课 > 1 节才注入导航、图只解释散文看不清的关系、标题不要用 `ch` 卡窄、正文用 `/stop-slop` 去 AI 味。
+- [teach 课件：嵌入权威中文](./teach-课件-嵌入权威中文.md) - 精读课分支：课里点名的 prompt/skill 把中文嵌进 HTML，少让学员再翻上游；讨论课不要套这条。
+- [课程封面：给 README 做可点击入口](./课程封面：给 README 做可点击入口.md) - 给 README 做可点击入口，不是 lesson 配图规则。
 
 ## 现在先不收什么
 
