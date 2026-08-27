@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" role="img">
+  <title>phase boundary decision tree</title>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#174c3c"/>
+    </marker>
+    <marker id="arrow-warm" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#8b5d33"/>
+    </marker>
+  </defs>
+  <rect width="900" height="640" rx="18" fill="#fbf8f1"/>
+  <text x="36" y="40" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="700" fill="#1f2a21">phase boundary：从上往下问，第一个 yes 赢</text>
+  <text x="36" y="64" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" fill="#536255">只在两个 phase 之间问。中途 compact 会丢掉 primary source。</text>
+  <rect x="36" y="92" width="430" height="70" rx="12" fill="#fff" stroke="#174c3c" stroke-width="1.4"/>
+  <text x="56" y="122" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" fill="#174c3c">1. 还能在这个 session 继续？</text>
+  <text x="56" y="144" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#536255">下一棒需要此刻的推理原文，或还在 smart zone 里</text>
+  <line x1="466" y1="127" x2="560" y2="127" stroke="#174c3c" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <rect x="568" y="100" width="296" height="54" rx="10" fill="#174c3c"/>
+  <text x="716" y="124" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" fill="#f7faf7" text-anchor="middle">Continue · 留下</text>
+  <text x="716" y="143" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="11" fill="#d9e6de" text-anchor="middle">零成本，零损失 · 先排除它</text>
+  <line x1="251" y1="162" x2="251" y2="198" stroke="#174c3c" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="262" y="188" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="11" fill="#536255">否</text>
+  <rect x="36" y="198" width="430" height="70" rx="12" fill="#fff" stroke="#174c3c" stroke-width="1.4"/>
+  <text x="56" y="228" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" fill="#174c3c">2. 这段上下文对下一步无关？</text>
+  <text x="56" y="250" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#536255">探索、决策、死胡同都可以丢掉</text>
+  <line x1="466" y1="233" x2="560" y2="233" stroke="#174c3c" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <rect x="568" y="206" width="296" height="54" rx="10" fill="#d9e6de" stroke="#174c3c" stroke-width="1.2"/>
+  <text x="716" y="230" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="15" font-weight="700" fill="#174c3c" text-anchor="middle">/clear</text>
+  <text x="716" y="249" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="11" fill="#536255" text-anchor="middle">最便宜 · 旧 session 仍可 resume</text>
+  <line x1="251" y1="268" x2="251" y2="304" stroke="#174c3c" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="262" y="294" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="11" fill="#536255">否</text>
+  <rect x="36" y="304" width="430" height="70" rx="12" fill="#fff" stroke="#174c3c" stroke-width="1.4"/>
+  <text x="56" y="334" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" fill="#174c3c">3. 需要把文件带走吗？</text>
+  <text x="56" y="356" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#536255">新 harness / 新目录 / 同事 / 中途分叉</text>
+  <line x1="466" y1="339" x2="560" y2="339" stroke="#174c3c" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <rect x="568" y="312" width="296" height="54" rx="10" fill="#f0dfc6" stroke="#8b5d33" stroke-width="1.2"/>
+  <text x="716" y="336" font-family="SFMono-Regular, Consolas, Liberation Mono, monospace" font-size="15" font-weight="700" fill="#8b5d33" text-anchor="middle">/handoff</text>
+  <text x="716" y="355" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="11" fill="#536255" text-anchor="middle">买的是 portability，不是结束会话</text>
+  <line x1="251" y1="374" x2="251" y2="410" stroke="#174c3c" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="262" y="400" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="11" fill="#536255">否</text>
+  <rect x="36" y="410" width="430" height="70" rx="12" fill="#fff" stroke="#174c3c" stroke-width="1.4"/>
+  <text x="56" y="440" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" fill="#174c3c">4. 任务能 AFK、范围很紧？</text>
+  <text x="56" y="462" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="12" fill="#536255">你不用盯着，例如自动评审</text>
+  <line x1="466" y1="445" x2="560" y2="445" stroke="#174c3c" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <rect x="568" y="418" width="296" height="54" rx="10" fill="#d9e6de" stroke="#174c3c" stroke-width="1.2"/>
+  <text x="716" y="442" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="15" font-weight="700" fill="#174c3c" text-anchor="middle">Subagent</text>
+  <text x="716" y="461" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="11" fill="#536255" text-anchor="middle">本 session 不动，拿回报告</text>
+  <line x1="251" y1="480" x2="251" y2="516" stroke="#174c3c" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="262" y="506" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="11" fill="#536255">否</text>
+  <rect x="36" y="516" width="828" height="88" rx="12" fill="#fff" stroke="#8b5d33" stroke-width="1.6"/>
+  <text x="56" y="548" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="16" font-weight="700" fill="#8b5d33">5. 否则 → /compact（默认兜底，不是第一手）</text>
+  <text x="56" y="572" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" fill="#536255">相关上下文还在、同一 harness、同一目录，你还得留在环里。给一条指令，例如 /compact we're going to QA this area。</text>
+  <text x="56" y="592" font-family="Source Han Sans SC, Noto Sans SC, PingFang SC, Microsoft YaHei, sans-serif" font-size="13" fill="#536255">从这里起步的失败模式：新 session 对摘要压扁过的决策自信地错。</text>
+</svg>

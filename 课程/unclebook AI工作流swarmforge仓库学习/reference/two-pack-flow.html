@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>two-pack 流程速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>two-pack 流程速查</h1>
+        <p class="lede">回看用的压缩版：忘了谁是 master、两跳怎么走、卡片何时进 Done 时先翻这一页。对应课件：<a href="../lessons/0002-two-pack-complete-loop.html">Lesson 0002</a>。</p>
+      </section>
+
+      <section>
+        <h2>合成</h2>
+        <p><code>get-swarm-forge two-pack …</code> = <code>main</code> 的 scripts + 三篇共享宪法 + pack 的 conf / roles / <code>project.prompt</code>。<a href="https://github.com/unclebob/swarm-forge/tree/two-pack/swarmforge">two-pack 的 swarmforge/</a> 本身没有 scripts。</p>
+      </section>
+
+      <section>
+        <h2>拓扑</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>coder</th>
+                <th>cleaner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>worktree</td>
+                <td>master（主目录）</td>
+                <td>.worktrees/cleaner</td>
+              </tr>
+              <tr>
+                <td>接收</td>
+                <td>task</td>
+                <td>batch</td>
+              </tr>
+              <tr>
+                <td>New Task / 聊天</td>
+                <td>是</td>
+                <td>否</td>
+              </tr>
+              <tr>
+                <td>规格批准</td>
+                <td colspan="2">无</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>启动时实际读什么</h2>
+        <p>Codex 吃的是生成文件 <span class="path">.swarmforge/prompts/&lt;role&gt;.md</span>：先递归读宪法文章，再读角色 prompt。two-pack 文章是 workflow / handoffs / engineering（main）+ project（pack）。全文中文在 <a href="../lessons/0002-two-pack-complete-loop.html">0002</a> 按调用顺序展开。</p>
+      </section>
+        <ol class="source-list">
+          <li>New Task → coder（名字即全程 <code>task:</code>）</li>
+          <li>coder TDD → <code>git_handoff</code> <code>to: cleaner</code> <code>priority: 50</code>（可能先 <code>AUDIT_REQUIRED</code>）</li>
+          <li>cleaner 一批清理/架构/变异 → <code>to: coder</code> <code>priority: 00</code>＝末棒，卡片 Done</li>
+          <li>coder merge + 单测 + <code>done_with_current.sh</code>，不再转发</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>禁区</h2>
+        <p>Gherkin、IR、验收测试、Gherkin 变异、属性测试。来源：<a href="https://github.com/unclebob/swarm-forge/blob/two-pack/swarmforge/constitution/articles/project.prompt">project.prompt</a>。</p>
+      </section>
+
+      <p class="footer-note"><a href="./glossary.html">术语速查</a> · <a href="./swarmforge-map.html">总地图</a> · <a href="../README.md">课程入口</a></p>
+    </main>
+  </body>
+</html>

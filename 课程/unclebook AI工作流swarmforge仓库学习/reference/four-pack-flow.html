@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>four-pack 流程速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>four-pack 流程速查</h1>
+        <p class="lede">回看用的压缩版：忘了谁是 master、人闸卡在哪一跳、卡片何时进 Done 时先翻这一页。对应课件：<a href="../lessons/0003-four-pack-complete-loop.html">Lesson 0003</a>。对照 <a href="./two-pack-flow.html">two-pack</a>。</p>
+      </section>
+
+      <section>
+        <h2>合成</h2>
+        <p><code>get-swarm-forge four-pack …</code> = <code>main</code> 的 scripts + 三篇共享宪法 + pack 的 conf / roles / <code>project.prompt</code> / <code>local-workflow.prompt</code>。<a href="https://github.com/unclebob/swarm-forge/tree/four-pack/swarmforge">four-pack 的 swarmforge/</a> 本身没有 scripts。</p>
+      </section>
+
+      <section>
+        <h2>拓扑</h2>
+        <p><a href="https://github.com/unclebob/swarm-forge/blob/four-pack/swarmforge/swarmforge.conf">conf</a>：specifier@master task · coder task · refactorer task · architect <strong>batch</strong>。全是 codex + yolo。New Task / 聊天只找 specifier。</p>
+      </section>
+
+      <section>
+        <h2>启动时实际读什么</h2>
+        <p>Codex 吃的是生成文件 <span class="path">.swarmforge/prompts/&lt;role&gt;.md</span>：先递归读宪法文章，再读角色 prompt。four-pack 文章是 workflow / handoffs / engineering（main）+ project 与 local-workflow（pack）。全文中文在 <a href="../lessons/0003-four-pack-complete-loop.html">0003</a> 按调用顺序展开。</p>
+      </section>
+
+      <section>
+        <h2>一轮</h2>
+        <ol class="source-list">
+          <li>New Task → specifier 五阶段写 Gherkin → <code>to: coder</code>（停在 Attention）</li>
+          <li>人 Approve → coder（验收管线 + TDD）→ <code>to: refactorer</code></li>
+          <li>refactorer：清理、CRAP/DRY、数变异位点 → <code>to: architect</code></li>
+          <li>architect：结构 + 真变异 + 软 Gherkin 变异 → 有功能则 <code>to:</code> 其余三人 <code>priority: 00</code>＝末棒，卡片 Done</li>
+          <li>收到 architect 的人只 merge 验证（specifier 问下一张卡），不转发</li>
+        </ol>
+      </section>
+
+      <p class="footer-note"><a href="./six-pack-flow.html">six-pack</a> · <a href="./glossary.html">术语</a> · <a href="../README.md">课程入口</a></p>
+    </main>
+  </body>
+</html>

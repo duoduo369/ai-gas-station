@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Issue tracker 接线速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>Issue tracker 是配置，不是平台</h1>
+        <p class="lede">Skills 读 <code>docs/agents/issue-tracker.md</code>。内置 GitHub / GitLab / <code>.scratch</code>；飞书走 Other。工作票像分支，共享板像主干；合码只挂 parent spec。</p>
+      </section>
+
+      <section>
+        <h2>三份模板 + Other</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>选项</th>
+                <th>票住哪</th>
+                <th>Agent 怎么动</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>GitHub</td>
+                <td>仓库 Issues</td>
+                <td><code>gh</code></td>
+              </tr>
+              <tr>
+                <td>GitLab</td>
+                <td>仓库 Issues</td>
+                <td><code>glab</code></td>
+              </tr>
+              <tr>
+                <td>Local markdown</td>
+                <td><code>.scratch/&lt;feature&gt;/spec.md</code> 与 <code>issues/&lt;NN&gt;-&lt;slug&gt;.md</code></td>
+                <td>读写文件</td>
+              </tr>
+              <tr>
+                <td>Other</td>
+                <td>你描述的地方（Jira / Linear / 飞书 / Beads …）</td>
+                <td>你写进配置的 CLI、MCP 或 API</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>两层，不要叠成一层</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">共享入口</h3>
+            <p>外来 bug、产品需求、<code>/triage</code>。可以继续用 GitLab Issue。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">工作票</h3>
+            <p><code>to-tickets</code> / <code>wayfinder</code>。用 <code>.scratch</code> 或飞书按 feature 隔离。不要进共享看板。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">合码指针</h3>
+            <p>MR 或提交说明挂一份 spec 快照链接。不是把整板实现票公开。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>飞书怎么选载体</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>载体</th>
+                <th>像什么</th>
+                <th>blocking / frontier</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Drive / 知识库 markdown 目录</td>
+                <td>远程 <code>.scratch</code></td>
+                <td>正文约定，靠扫目录</td>
+              </tr>
+              <tr>
+                <td>多维表格 Base</td>
+                <td>真 tracker</td>
+                <td>关联字段 + 视图筛选</td>
+              </tr>
+              <tr>
+                <td>任务 / Meegle 项目</td>
+                <td>团队已有工单系统</td>
+                <td>子任务；需团队已经在用</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>CLI：<a href="https://github.com/larksuite/cli">larksuite/cli</a>。配置里必须写清 publish / fetch / 状态 / blocking / claim / resolve。</p>
+      </section>
+
+      <section>
+        <h2>已知警告</h2>
+        <ul>
+          <li>GitHub 与本地 markdown 二选一，不要双写。</li>
+          <li>本地文件提交进 git 容易意外持久化；公开 tracker 又会被 agent 票填满。</li>
+          <li>没有原生 blocking 时，依赖图靠正文推断，要人校正。</li>
+          <li>代码托管和 issue 可以拆开：GitLab 只管 MR，票走别处。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <ol class="source-list">
+          <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/setup-matt-pocock-skills.md">setup-matt-pocock-skills.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/setup-matt-pocock-skills/issue-tracker-local.md">issue-tracker-local.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/wayfinder.md">wayfinder.md</a></li>
+          <li><a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/triage.md">triage.md</a></li>
+          <li><a href="../lessons/0006-issue-tracker-is-config.html">回到这一课</a></li>
+        </ol>
+      </section>
+    </main>
+  </body>
+</html>

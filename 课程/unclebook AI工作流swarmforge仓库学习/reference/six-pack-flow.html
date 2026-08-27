@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>six-pack 流程速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>six-pack 流程速查</h1>
+        <p class="lede">回看用的压缩版：忘了谁写 QA 规格、谁跑变异、卡片何时进 Done 时先翻这一页。对应课件：<a href="../lessons/0004-six-pack-complete-loop.html">Lesson 0004</a>。对照 <a href="./four-pack-flow.html">four-pack</a>。</p>
+      </section>
+
+      <section>
+        <h2>合成</h2>
+        <p><code>get-swarm-forge six-pack …</code> = <code>main</code> 的 scripts + 三篇共享宪法 + pack 的 conf / roles / <code>project.prompt</code> / <code>local-workflow.prompt</code> / <code>local-engineering.prompt</code>。<a href="https://github.com/unclebob/swarm-forge/tree/six-pack/swarmforge">six-pack 的 swarmforge/</a> 本身没有 scripts。</p>
+      </section>
+
+      <section>
+        <h2>拓扑</h2>
+        <p><a href="https://github.com/unclebob/swarm-forge/blob/six-pack/swarmforge/swarmforge.conf">conf</a>：specifier grok@master task · coder codex task · 后四岗 batch（cleaner / architect / hardender / QA）。以窗口行为准，不要被 project.prompt 的「全是 Codex」带偏。</p>
+      </section>
+
+      <section>
+        <h2>启动时实际读什么</h2>
+        <p>生成文件 <span class="path">.swarmforge/prompts/&lt;role&gt;.md</span>：先递归读宪法文章，再读角色 prompt。six-pack 文章是 workflow / handoffs / engineering（main）+ project、local-workflow、local-engineering（pack）。全文中文在 <a href="../lessons/0004-six-pack-complete-loop.html">0004</a> 按调用顺序展开。</p>
+      </section>
+
+      <section>
+        <h2>一轮</h2>
+        <ol class="source-list">
+          <li>specifier：Gherkin 五步 + <strong>UI 端到端 QA 规格</strong> → 人批 → coder</li>
+          <li>coder（验收管线 + TDD，忽略 QA 套件）→ cleaner</li>
+          <li>cleaner（局部清理，scan/count，不跑变异）→ architect</li>
+          <li>architect（只要结构 + 属性测试）→ hardender</li>
+          <li>hardender（语言变异 → 软 Gherkin → CRAP → DRY）→ QA</li>
+          <li>QA 把 QA 规格做成脚本，只从 UI 跑 → <code>to:</code> 其余五人 <code>priority: 00</code>＝末棒，卡片 Done</li>
+          <li>收到 QA 的人只验证（specifier 问下一张卡），不转发</li>
+        </ol>
+      </section>
+
+      <p class="footer-note"><a href="./two-pack-flow.html">two-pack</a> · <a href="./glossary.html">术语</a> · <a href="../README.md">课程入口</a></p>
+    </main>
+  </body>
+</html>
