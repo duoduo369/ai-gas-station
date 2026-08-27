@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>实现跑偏与 spec 分流速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>实现跑偏与 spec 分流速查</h1>
+        <p class="lede">这页只服务一个问题：发现实现跑偏、漏实现、或 review 指出缺口后，你到底该补实现、改 plan，还是回 spec。</p>
+      </section>
+
+      <section>
+        <h2>先抓一句总判断</h2>
+        <div class="callout">
+          <p><strong>行为边界没变：先看实现层或 plan 层。</strong></p>
+          <p><strong>行为边界变了：回 spec 层，再刷新 plan。</strong></p>
+        </div>
+      </section>
+
+      <section>
+        <h2>分流图</h2>
+        <figure class="diagram">
+          <img src="../assets/drift-decision-tree.svg" alt="实现跑偏和漏实现时的分流图。">
+          <figcaption>先问“spec 还对吗”，而不是先问“要不要补代码”。</figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h2>三种情况最短记法</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>情况</th>
+                <th>更像什么</th>
+                <th>第一动作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>spec 对，代码少了</td>
+                <td>实现缺口</td>
+                <td>补实现 / 补 task / 重跑 review</td>
+              </tr>
+              <tr>
+                <td>spec 对，但 task 拆坏了</td>
+                <td>plan 缺口</td>
+                <td>先改 plan，再继续执行</td>
+              </tr>
+              <tr>
+                <td>真正想要的行为变了</td>
+                <td>spec 缺口</td>
+                <td>先修 spec，再刷新 plan</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>要看中文条文，回 0003 的这三处</h2>
+        <ol class="source-list">
+          <li><a href="../lessons/0003-when-implementation-drifts-from-spec.html#authority-order">0003 · authority 顺序</a></li>
+          <li><a href="../lessons/0003-when-implementation-drifts-from-spec.html#three-cases">0003 · 三种处理</a></li>
+          <li><a href="../lessons/0003-when-implementation-drifts-from-spec.html#review-feedback">0003 · review 指出缺口时怎么处理</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">来源：<a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">subagent-driven-development</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/receiving-code-review/SKILL.md">receiving-code-review</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md">verification-before-completion</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/SKILL.md">requesting-code-review</a>。</p>
+    </main>
+  </body>
+</html>

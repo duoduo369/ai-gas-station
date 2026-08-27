@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>实现后半程与收口速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>实现后半程与收口速查</h1>
+        <p class="lede">这页只做压缩回看：当你再次怀疑“功能不是已经有了吗，为什么 workflow 还没完”时，先翻这里。</p>
+      </section>
+
+      <section>
+        <h2>一句话总判断</h2>
+        <div class="callout">
+          <p><strong>功能出现 = 可演示状态；review 完整、finish 明确 = 正式收口状态。</strong></p>
+          <p>Superpowers 的后半程关心的，不只是“有没有把功能做出来”，还关心“有没有把这份工作整合进更大的分支和协作上下文里”。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>后半程最短顺序</h2>
+        <figure class="diagram">
+          <img src="../assets/implementation-finish-loop.svg" alt="后半程闭环图：plan 之后进入执行模式、任务循环、分支级 review，再进入 finish。">
+          <figcaption>如果你总是在“功能已经能跑”这里停住，这张图最能提醒你：你通常还困在执行环里，没有真正走到 finish。</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>阶段</th>
+                <th>你该怎么记</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>有了 plan</td>
+                <td>准备进入实现模式，不等于已经进入收尾。</td>
+              </tr>
+              <tr>
+                <td>SDD / executing-plans</td>
+                <td>按任务推进执行。</td>
+              </tr>
+              <tr>
+                <td>Per-task review</td>
+                <td>每个任务做完后就过 gate。</td>
+              </tr>
+              <tr>
+                <td>Whole-branch review</td>
+                <td>整条分支再看一次。</td>
+              </tr>
+              <tr>
+                <td>finishing-a-development-branch</td>
+                <td>跑全量验证，出 merge / PR / keep 菜单，由用户拍板。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>SDD 与 executing-plans 的当前读法</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">SDD</h3>
+            <p>默认更重：任务级 dispatch、任务级 review、fix loop、整分支 final review，然后显式 finish。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">executing-plans</h3>
+            <p>更像单会话按 plan 推进。仍然要 finish，但遇阻更强调停下来 ask，而不是持续自主推进。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>最容易忘的 3 个 gate</h2>
+        <ol class="source-list">
+          <li>Per-task review 不是可选项。</li>
+          <li>Whole-branch final review 不是因为前面 review 过就能省。</li>
+          <li>`finishing-a-development-branch` 的整合菜单由用户决定，不由 agent 默认替人 merge。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>要看中文条文，回 0002 的这三处</h2>
+        <ol class="source-list">
+          <li><a href="../lessons/0002-how-the-workflow-actually-finishes.html#sdd-vs-executing">0002 · SDD 与 executing-plans</a></li>
+          <li><a href="../lessons/0002-how-the-workflow-actually-finishes.html#review-gate">0002 · Review gate</a></li>
+          <li><a href="../lessons/0002-how-the-workflow-actually-finishes.html#finish-gate">0002 · Finish gate</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">来源：<a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">subagent-driven-development</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/executing-plans/SKILL.md">executing-plans</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/SKILL.md">requesting-code-review</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/finishing-a-development-branch/SKILL.md">finishing-a-development-branch</a>、<a href="https://github.com/obra/superpowers/blob/main/README.md#the-basic-workflow">README · Basic Workflow</a>。</p>
+    </main>
+  </body>
+</html>

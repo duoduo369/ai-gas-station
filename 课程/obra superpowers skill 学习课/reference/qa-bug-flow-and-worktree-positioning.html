@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>验收 bug 流与 worktree 位置速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>验收 bug 流与 worktree 位置速查</h1>
+        <p class="lede">这页只回答最后两个现实问题：人验收发现 bug 时怎么切到 debug 流，以及 worktree 到底位于整条工作流的哪一层。</p>
+      </section>
+
+      <section>
+        <h2>先抓一句总判断</h2>
+        <div class="callout">
+          <p><strong>预期变了：回 spec 分流。</strong></p>
+          <p><strong>预期没变但东西坏了：切 `systematic-debugging`，修完后再走 `verification-before-completion`。</strong></p>
+        </div>
+      </section>
+
+      <section>
+        <h2>总图</h2>
+        <figure class="diagram">
+          <img src="../assets/bug-flow-and-worktree-map.svg" alt="验收 bug 流与 worktree 位置图。">
+          <figcaption>worktree 横跨实现和修 bug 的全过程，所以它是环境层，不是最后才补的步骤。</figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h2>验收 bug 的最短顺序</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>阶段</th>
+                <th>你该怎么记</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>先判断边界</td>
+                <td>预期变了没有？变了就回 0003，不变才进 debug。</td>
+              </tr>
+              <tr>
+                <td>systematic-debugging</td>
+                <td>先查 root cause，不准直接猜 fix。</td>
+              </tr>
+              <tr>
+                <td>失败用例</td>
+                <td>用最小失败测试锁定原始症状。</td>
+              </tr>
+              <tr>
+                <td>单一修复</td>
+                <td>一次只改根因，不顺手大翻修。</td>
+              </tr>
+              <tr>
+                <td>verification-before-completion</td>
+                <td>拿 fresh evidence 证明原始症状真没了。</td>
+              </tr>
+              <tr>
+                <td>finish</td>
+                <td>验证过后，才回到 branch finish 正式收口。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>worktree 最短判断</h2>
+        <ol class="source-list">
+          <li>先检测是不是已经在隔离工作空间里。</li>
+          <li>已经隔离好了，就不要再建一个新的 worktree。</li>
+          <li>如果平台有 native worktree 工具，优先用它，不要绕开 harness 手搓 git。</li>
+          <li>只有没有 native tool 时，才用 git worktree fallback。</li>
+          <li>进入工作空间后先做 baseline setup / tests，别让后续失败来源变模糊。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>要看中文条文，回 0004 的这四处</h2>
+        <ol class="source-list">
+          <li><a href="../lessons/0004-qa-bug-flow-and-where-worktrees-fit.html#bug-flow">0004 · 发现 bug 后先切线</a></li>
+          <li><a href="../lessons/0004-qa-bug-flow-and-where-worktrees-fit.html#systematic-debugging">0004 · systematic-debugging</a></li>
+          <li><a href="../lessons/0004-qa-bug-flow-and-where-worktrees-fit.html#verification-gate">0004 · verification-before-completion</a></li>
+          <li><a href="../lessons/0004-qa-bug-flow-and-where-worktrees-fit.html#worktree-position">0004 · worktree 在流程里的位置</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">来源：<a href="https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md">systematic-debugging</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md">verification-before-completion</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/using-git-worktrees/SKILL.md">using-git-worktrees</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/finishing-a-development-branch/SKILL.md">finishing-a-development-branch</a>。</p>
+    </main>
+  </body>
+</html>
