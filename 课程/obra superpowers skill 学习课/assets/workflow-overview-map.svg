@@ -1,0 +1,66 @@
+<svg width="1200" height="520" viewBox="0 0 1200 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Superpowers 七步主线一眼图</title>
+  <desc id="desc">从 skill check 到 brainstorm、plan、执行环、finish 的整体工作流图。</desc>
+  <defs>
+    <style>
+      .bg { fill: #f9fbfc; }
+      .box { fill: #ffffff; stroke: #0e5a6b; stroke-width: 2; rx: 22; }
+      .boxSoft { fill: #d8edf2; stroke: #0e5a6b; stroke-width: 2; rx: 22; }
+      .loop { fill: #f8e3d3; stroke: #c26b2b; stroke-width: 2; rx: 24; }
+      .title { font: 700 28px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .label { font: 700 21px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .text { font: 16px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #1b2430; }
+      .small { font: 15px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #586474; }
+      .arrow { stroke: #0e5a6b; stroke-width: 3; fill: none; marker-end: url(#arrowHead); }
+      .warmArrow { stroke: #c26b2b; stroke-width: 3; fill: none; marker-end: url(#warmArrowHead); }
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0e5a6b"/>
+    </marker>
+    <marker id="warmArrowHead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c26b2b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="520" rx="28"/>
+  <text x="60" y="58" class="title">Superpowers 七步主线一眼图</text>
+
+  <rect class="box" x="60" y="110" width="190" height="96"/>
+  <text x="88" y="148" class="label">0. Skill Check</text>
+  <text x="88" y="176" class="text">先判断该用哪张卡，</text>
+  <text x="88" y="198" class="text">再开始动作。</text>
+
+  <rect class="box" x="300" y="110" width="210" height="96"/>
+  <text x="332" y="148" class="label">1. Brainstorm</text>
+  <text x="332" y="176" class="text">先设计、先批准，</text>
+  <text x="332" y="198" class="text">再进入实现。</text>
+
+  <rect class="box" x="560" y="110" width="210" height="96"/>
+  <text x="592" y="148" class="label">2. Plan</text>
+  <text x="592" y="176" class="text">把设计拆成 task，</text>
+  <text x="592" y="198" class="text">写清验证与接口。</text>
+
+  <rect class="loop" x="820" y="80" width="320" height="250"/>
+  <text x="854" y="122" class="label">3. 执行环</text>
+  <text x="854" y="156" class="text">SDD / executing-plans 进入后，</text>
+  <text x="854" y="178" class="text">不是一路写到底，而是：</text>
+  <text x="876" y="212" class="text">按 task 实现</text>
+  <text x="1008" y="212" class="text">→</text>
+  <text x="1030" y="212" class="text">TDD</text>
+  <text x="876" y="248" class="text">→ per-task review</text>
+  <text x="876" y="284" class="text">→ final review</text>
+  <text x="876" y="308" class="small">功能出现 ≠ workflow 正式结束</text>
+
+  <rect class="boxSoft" x="420" y="370" width="340" height="102"/>
+  <text x="452" y="412" class="label">4. Finish</text>
+  <text x="452" y="440" class="text">跑全量验证，给出 merge / PR / keep 菜单，</text>
+  <text x="452" y="462" class="text">由用户拍板真正的收口方式。</text>
+
+  <path class="arrow" d="M250 158 H300"/>
+  <path class="arrow" d="M510 158 H560"/>
+  <path class="arrow" d="M770 158 H820"/>
+  <path class="warmArrow" d="M980 330 V370 H760"/>
+
+  <text x="90" y="246" class="small">0001 重点：建立这张总地图</text>
+  <text x="854" y="352" class="small">0002 重点：为什么“功能有了”还不算完全结束</text>
+</svg>

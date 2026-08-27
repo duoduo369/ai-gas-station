@@ -1,0 +1,70 @@
+<svg width="1200" height="620" viewBox="0 0 1200 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">实现后半程闭环图</title>
+  <desc id="desc">展示 plan 之后进入 SDD 或 executing-plans，再到每任务 review、final review、finish 菜单的闭环。</desc>
+  <defs>
+    <style>
+      .bg { fill: #f9fbfc; }
+      .box { fill: #ffffff; stroke: #0e5a6b; stroke-width: 2; rx: 22; }
+      .soft { fill: #d8edf2; stroke: #0e5a6b; stroke-width: 2; rx: 22; }
+      .warm { fill: #f8e3d3; stroke: #c26b2b; stroke-width: 2; rx: 22; }
+      .title { font: 700 28px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .label { font: 700 20px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .text { font: 16px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #1b2430; }
+      .small { font: 15px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #586474; }
+      .arrow { stroke: #0e5a6b; stroke-width: 3; fill: none; marker-end: url(#arrowHead); }
+      .warmArrow { stroke: #c26b2b; stroke-width: 3; fill: none; marker-end: url(#warmArrowHead); }
+      .dash { stroke-dasharray: 8 7; }
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0e5a6b"/>
+    </marker>
+    <marker id="warmArrowHead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c26b2b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="620" rx="28"/>
+  <text x="60" y="58" class="title">实现后半程闭环图</text>
+
+  <rect class="box" x="70" y="112" width="230" height="92"/>
+  <text x="102" y="150" class="label">Plan 已经存在</text>
+  <text x="102" y="178" class="text">从这里开始，才准备</text>
+  <text x="102" y="200" class="text">进入实现模式。</text>
+
+  <rect class="soft" x="360" y="92" width="290" height="128"/>
+  <text x="390" y="132" class="label">选择执行模式</text>
+  <text x="390" y="164" class="text">SDD：更重的任务级 dispatch + review</text>
+  <text x="390" y="190" class="text">executing-plans：单会话照 plan 推进</text>
+  <text x="390" y="214" class="small">两条路最后都要接到 finish</text>
+
+  <rect class="warm" x="740" y="82" width="380" height="312"/>
+  <text x="772" y="124" class="label">执行环</text>
+  <text x="772" y="156" class="text">1. 做一个 task</text>
+  <text x="772" y="186" class="text">2. TDD / 测试 / 提交</text>
+  <text x="772" y="216" class="text">3. per-task review</text>
+  <text x="772" y="246" class="text">4. 有问题进 fix loop</text>
+  <text x="772" y="276" class="text">5. 没问题就下一个 task</text>
+  <text x="772" y="324" class="small">“功能看起来有了”大多只走到了这里</text>
+  <path class="warmArrow dash" d="M1080 198 C1130 198 1130 328 1030 328"/>
+
+  <rect class="box" x="220" y="438" width="270" height="96"/>
+  <text x="252" y="476" class="label">Whole-branch Review</text>
+  <text x="252" y="504" class="text">把所有 task 放在一起，</text>
+  <text x="252" y="526" class="text">再看一次分支级缺口。</text>
+
+  <rect class="soft" x="570" y="438" width="280" height="96"/>
+  <text x="602" y="476" class="label">Finishing Skill</text>
+  <text x="602" y="504" class="text">先跑全量验证，再出整合菜单。</text>
+  <text x="602" y="526" class="text">由用户决定 merge / PR / keep。</text>
+
+  <rect class="box" x="930" y="438" width="200" height="96"/>
+  <text x="964" y="476" class="label">正式收口</text>
+  <text x="964" y="504" class="text">不是“差不多”，</text>
+  <text x="964" y="526" class="text">而是显式结束。</text>
+
+  <path class="arrow" d="M300 158 H360"/>
+  <path class="arrow" d="M650 158 H740"/>
+  <path class="arrow" d="M860 394 V438 H490"/>
+  <path class="arrow" d="M490 486 H570"/>
+  <path class="arrow" d="M850 486 H930"/>
+</svg>

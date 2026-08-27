@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>superpowers 项目地图与工作流速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>superpowers 项目地图与工作流速查</h1>
+        <p class="lede">这是给回看用的压缩版资料。当你忘了这个仓库到底是方法库、插件、还是工作流说明书时，先翻这一页，把主判断找回来。</p>
+      </section>
+
+      <section>
+        <h2>先抓 4 个判断轴</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">1. 先把它当成方法系统</h3>
+            <p><a href="https://github.com/obra/superpowers/blob/main/README.md">README.md</a> 开宗明义讲的是软件开发方法论，不是某个单一功能插件。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2. 真正主内容在 skills/</h3>
+            <p><span class="path">skills/</span> 里装的是可复用规则卡；理解仓库，最终还是要回到这些 <code>SKILL.md</code>。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3. 多个隐藏目录是 harness 接线</h3>
+            <p><span class="path">.codex-plugin/</span>、<span class="path">.claude-plugin/</span>、<span class="path">.cursor-plugin/</span> 等目录说明同一套方法在适配多个 agent。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">4. using-superpowers 是入口守门员</h3>
+            <p>不先读这张卡，很容易把 Superpowers 误解成“推荐清单”，而不是“先判断 skill，再做动作”的强约束体系。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>顶层结构怎么读</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>位置</th>
+                <th>角色</th>
+                <th>你该怎么用它</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="https://github.com/obra/superpowers/blob/main/README.md">README.md</a></td>
+                <td>总入口</td>
+                <td>先用它建立项目目标、技能总览和七步工作流。</td>
+              </tr>
+              <tr>
+                <td><span class="path">skills/</span></td>
+                <td>方法卡库</td>
+                <td>按 skill 精读；后续课程的主体也围着这里展开。</td>
+              </tr>
+              <tr>
+                <td><span class="path">.codex-plugin/</span> 等 harness 目录</td>
+                <td>平台适配层</td>
+                <td>读“同一套方法如何被不同 agent 使用”，不是读业务逻辑。</td>
+              </tr>
+              <tr>
+                <td><span class="path">docs/</span></td>
+                <td>补充说明与设计沉淀</td>
+                <td>当 README 不够细、要看平台说明或计划背景时再下钻。</td>
+              </tr>
+              <tr>
+                <td><span class="path">tests/</span></td>
+                <td>验证层</td>
+                <td>提醒自己这套插件和工作流并不是只靠文案维持，还有验证约束。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>七步基本工作流</h2>
+        <figure class="diagram">
+          <img src="../assets/workflow-overview-map.svg" alt="Superpowers 的总工作流图：先做 skill check，再 brainstorm、plan、进入执行环，最后 finish。">
+          <figcaption>这张图适合先扫一眼，再往下读七步表格。它能帮你记住一个最重要的事实：Step 4 之后不是直线写到底，而是进了执行环。</figcaption>
+        </figure>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>阶段</th>
+                <th>对应 skill</th>
+                <th>一句话理解</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td><a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">brainstorming</a></td>
+                <td>先把想法讲清楚，再谈实现。</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><a href="https://github.com/obra/superpowers/blob/main/skills/using-git-worktrees/SKILL.md">using-git-worktrees</a></td>
+                <td>把实现放进隔离工作空间。</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><a href="https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md">writing-plans</a></td>
+                <td>把设计拆成 bite-sized 任务。</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td><a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">subagent-driven-development</a> / <a href="https://github.com/obra/superpowers/blob/main/skills/executing-plans/SKILL.md">executing-plans</a></td>
+                <td>进入执行模式，决定谁来按计划推进任务。</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td><a href="https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md">test-driven-development</a></td>
+                <td>Step 4 内每个任务的实现纪律：先红，再绿，再重构。</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td><a href="https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/SKILL.md">requesting-code-review</a></td>
+                <td>Step 4 内每个任务完成后的检查关卡。</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td><a href="https://github.com/obra/superpowers/blob/main/skills/finishing-a-development-branch/SKILL.md">finishing-a-development-branch</a></td>
+                <td>收尾要验证、决策、清理，而不是“感觉完成”。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <p><strong>最容易搞混的就是 4 / 5 / 6。</strong></p>
+          <p>别把它们读成三段各走一次的直线。更准确的记法是：先走到 Step 4 进入执行模式，然后在里面循环“Step 5 用 TDD 做完一个任务 → Step 6 过 review → 下一个任务”，所有任务收束后才进入 Step 7。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>要看中文条文，去 0001 的这两处</h2>
+        <ol class="source-list">
+          <li><a href="../lessons/0001-repo-map-and-basic-workflow.html#embedded-gates">0001 · 第二层补强</a> - 课内已嵌入 `using-superpowers` 与 `brainstorming` 的中文节选。</li>
+          <li><a href="../lessons/0001-repo-map-and-basic-workflow.html#embedded-execution-rules">0001 · 第三层补强</a> - 课内已嵌入 `subagent-driven-development` 与 `test-driven-development` 的中文节选。</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>如果你现在只读 5 份资料</h2>
+        <ol class="source-list">
+          <li><a href="https://github.com/obra/superpowers/blob/main/README.md">README.md</a></li>
+          <li><a href="https://github.com/obra/superpowers/blob/main/skills/using-superpowers/SKILL.md">skills/using-superpowers/SKILL.md</a></li>
+          <li><a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">skills/brainstorming/SKILL.md</a></li>
+          <li><a href="https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md">skills/writing-plans/SKILL.md</a></li>
+          <li><a href="https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md">skills/test-driven-development/SKILL.md</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">来源：<a href="https://github.com/obra/superpowers/blob/main/README.md">README.md</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/using-superpowers/SKILL.md">using-superpowers</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">brainstorming</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md">writing-plans</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md">test-driven-development</a>、<a href="https://github.com/obra/superpowers/blob/main/.codex-plugin/plugin.json">.codex-plugin/plugin.json</a>。</p>
+    </main>
+  </body>
+</html>

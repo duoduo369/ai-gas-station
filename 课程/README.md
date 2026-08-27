@@ -6,3 +6,4 @@
 ## 项目拆解课
 
 - [mattpocock-skills 仓库学习课](<./mattpocock-skills 仓库学习课/README.md>) - 以 `mattpocock/skills` 为对象，先建立仓库地图，再顺着 `ask-matt` 主流程继续精读。
+- [obra superpowers skill 学习课](<./obra superpowers skill 学习课/README.md>) - 以 `obra/superpowers` 为对象，先建立“skills 库 + harness 接线 + 七步工作流”的地图，再逐步精读关键 skill。

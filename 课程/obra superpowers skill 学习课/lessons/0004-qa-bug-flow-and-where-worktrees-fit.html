@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lesson 0004 · 人验收发现 bug 后怎么切线，以及 worktree 到底在流程里的哪一层</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/lesson-quiz.js" defer></script>
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Lesson 0004</p>
+        <h1>人验收发现 bug 后怎么切线，以及 worktree 到底在流程里的哪一层</h1>
+        <p class="lede">这节课把整门课真正收口。你前面已经知道 feature 怎么实现、怎么收尾、跑偏时怎么分流；现在补上最后一块现实世界里最常把流程走歪的地方：人验收发现 bug 时，为什么不能继续沿 feature 流硬补，而要切到 <code>systematic-debugging -&gt; verification-before-completion</code>，以及 <code>using-git-worktrees</code> 为什么不是“最后突然冒出来的新步骤”，而是整段实现与修 bug 的隔离底座。</p>
+        <div class="pill-row">
+          <span class="pill">预计 22 分钟</span>
+          <span class="pill">目标：把最后一段流程走圆</span>
+          <span class="pill">内嵌关键中文条文</span>
+          <span class="pill">回看资料：<a href="../reference/qa-bug-flow-and-worktree-positioning.html">终课速查</a></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>先看最后这张总图</h2>
+        <figure class="diagram">
+          <img src="../assets/bug-flow-and-worktree-map.svg" alt="人验收发现 bug 后切到 systematic-debugging 和 verification-before-completion，以及 worktree 作为实现和修 bug 底座的位置图。">
+          <figcaption>这张图把你前面几课串起来了：发现 bug 后不是继续 feature 流乱补，而是先判断是不是 spec 变了；如果不是，就切 debug 流。worktree 则横跨整段实现与修复过程，不是最后单独补的一步。</figcaption>
+        </figure>
+      </section>
+
+      <a id="bug-flow"></a>
+      <section>
+        <h2>第一块重点：人验收发现 bug 时，先切线，不要顺手修</h2>
+        <div class="callout">
+          <p><strong>“功能已经有了，只差修一个小 bug” 是最容易让流程失真的一句话。</strong></p>
+          <p>因为这句话会让人误以为：既然 feature 大方向没问题，那就继续沿实现流往前补一点就好。但 Superpowers 把这件事拆得更细：<strong>如果行为边界没变，而只是表现坏了、测试挂了、实际行为和预期不一致，这已经不是“继续 feature 流”，而是一个调试问题。</strong></p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">如果预期变了</h3>
+            <p>这不是 bug 流，而是回到上一课的 spec 分流：先问 authority 还对不对，再决定修 spec、plan 还是实现。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">如果预期没变，只是坏了</h3>
+            <p>这才是 <code>systematic-debugging</code> 的地盘。关键动作不是“快修”，而是先找 root cause。</p>
+          </article>
+        </div>
+        <p>所以这节课和 <a href="./0003-when-implementation-drifts-from-spec.html#three-cases">0003 的三种分流</a> 不是冲突关系，而是前后衔接：<strong>先用 0003 判断是不是 spec / plan / implementation 的边界问题；确认边界没变后，再进入这节课的 debug 流。</strong></p>
+      </section>
+
+      <a id="systematic-debugging"></a>
+      <section>
+        <h2>第二块重点：<code>systematic-debugging</code> 可以单独执行，不要求先有 spec</h2>
+        <div class="callout">
+          <p><strong>这个 skill 的触发条件不是“手上有没有 spec”，而是“你是不是遇到了 bug、失败测试、异常行为、性能问题、构建失败”。</strong></p>
+          <p>也就是说，<code>systematic-debugging</code> 完全可以单独跑。<strong>有 spec 时，spec 帮你定义 expected behavior；没有 spec 时，也仍然可以围绕错误信息、复现步骤、数据流和 working example 去做 root cause 调查。</strong></p>
+        </div>
+        <div class="prompt-stack">
+          <article class="prompt-doc">
+            <h3 class="card-title">systematic-debugging（中文节选）</h3>
+            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md">skills/systematic-debugging/SKILL.md</a> · 本课为什么必须先读：它直接规定了“只要是 bug / 失败 / 异常行为，就先查根因，不准猜修法”。</p>
+            <pre class="prompt-zh">【核心原则】
+永远先找到 root cause，再尝试 fix。
+修症状，不修根因，等于失败。
+
+【铁律】
+NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
+
+如果还没完成 Phase 1，就不能提 fix。
+
+【什么时候用】
+任何技术问题都用：
+- test failure
+- production bug
+- unexpected behavior
+- performance problem
+- build failure
+- integration issue
+
+尤其是在这些时刻更不能跳：
+- 时间压力很大
+- “这个一眼就能 quick fix”
+- 你已经试过几次 fix
+- 上一个 fix 没生效
+- 你其实还没完全理解问题
+
+【四个阶段】
+Phase 1：Root Cause Investigation
+- 仔细读 error message 和 stack trace
+- 稳定复现
+- 看最近改动
+- 多组件系统要先补 evidence gathering
+- trace data flow，向上追坏值来源
+
+Phase 2：Pattern Analysis
+- 找同仓库里 working example
+- 完整读参考实现
+- 列出 broken 和 working 的差异
+
+Phase 3：Hypothesis and Testing
+- 一次只立一个假设
+- 用最小改动测试它
+- 不要多个 fix 一起上
+
+Phase 4：Implementation
+- 先做最小失败用例
+- 只做单一 fix
+- fix 后重新验证
+- 如果 3 次以上 fix 都失败，要开始怀疑 architecture
+
+【你在这一课该记住的点】
+systematic-debugging 不是“修 bug 的语气词”，
+而是一套禁止你靠猜乱修的控制流程。</pre>
+          </article>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">有 spec 时怎么用</h3>
+            <p>spec 提供“什么叫对”的上位定义；debug skill 提供“怎么找到为什么错了”的方法。一个定义预期，一个定位根因。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">没 spec 时怎么用</h3>
+            <p>仍然可以围绕报错、复现、working example、调用链和数据流去追问题。缺 spec 不等于可以跳过根因调查。</p>
+          </article>
+        </div>
+      </section>
+
+      <a id="verification-gate"></a>
+      <section>
+        <h2>第三块重点：修完以后不是“我试了一下好了”，而是 fresh verification</h2>
+        <div class="callout">
+          <p><strong>debug skill 解决的是“别乱修”；<code>verification-before-completion</code> 解决的是“别乱宣布修好了”。</strong></p>
+          <p>所以这两张卡天然成对：前者管 root cause，后者管 evidence。真正把 bug 流走圆的，不是把代码改掉，而是<strong>用最新验证证据证明原始症状已经消失，而且相关检查确实通过</strong>。</p>
+        </div>
+        <div class="prompt-stack">
+          <article class="prompt-doc">
+            <h3 class="card-title">verification-before-completion（中文节选）</h3>
+            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md">skills/verification-before-completion/SKILL.md</a> · 本课为什么要嵌：它明确规定“fixed / passing / done” 这种话必须建立在 fresh verification evidence 上。</p>
+            <pre class="prompt-zh">【核心原则】
+Evidence before claims, always.
+
+【铁律】
+NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
+
+如果你没有在这一条消息里运行验证命令，
+就不能声称它 pass 了。
+
+【Gate Function】
+在任何 completion / fixed / passing 之类的表达之前：
+1. IDENTIFY：什么命令能证明这个 claim
+2. RUN：跑完整命令
+3. READ：读完整输出、exit code、失败数
+4. VERIFY：输出到底有没有证明这个 claim
+5. ONLY THEN：才允许说“修好了 / 通过了”
+
+【常见失败】
+Agent said success
+≠ bug fixed
+
+Code changed
+≠ issue resolved
+
+Partial verification
+≠ enough evidence
+
+【对 bug flow 最重要的一句】
+真正的“bug fixed”不是改完代码，
+而是原始症状验证通过，加上相关检查也有新鲜证据。</pre>
+          </article>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">最小闭环</h3>
+            <p>找到 root cause -> 做最小失败用例 -> 单一 fix -> fresh verification。少哪一环，都会让“修好了”变成错觉。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">和 TDD 的关系</h3>
+            <p>这里不是回头再补一轮抽象测试，而是把“原始症状”锁进最小失败用例，再用验证门证明它真的绿了。</p>
+          </article>
+        </div>
+      </section>
+
+      <a id="worktree-position"></a>
+      <section>
+        <h2>第四块重点：<code>using-git-worktrees</code> 不是最后一步，而是整段工作的环境层</h2>
+        <div class="callout">
+          <p><strong>你之前“从来没用过 worktree 这个 skill 也能正常走完流程”，这件事本身并不奇怪。</strong></p>
+          <p>因为这张卡的重点不是“强迫你显式敲一次 git 命令”，而是：<strong>在开始实现或修 bug 前，确保自己在隔离工作空间里；如果平台原生已经帮你隔离了，就别再手搓一个新的去跟 harness 打架。</strong></p>
+        </div>
+        <div class="prompt-stack">
+          <article class="prompt-doc">
+            <h3 class="card-title">using-git-worktrees（中文节选）</h3>
+            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/using-git-worktrees/SKILL.md">skills/using-git-worktrees/SKILL.md</a> · 本课为什么现在才讲：它不是主流程后半程的“新步骤”，而是你前面所有实现 / 修 bug 活动所在的环境层。</p>
+            <pre class="prompt-zh">【核心原则】
+先检测现有隔离。
+再用 native tool。
+最后才 fallback 到 git。
+Never fight the harness.
+
+【Step 0：先检测是不是已经隔离】
+如果已经在 linked worktree 里：
+- 不要再创建一个新的 worktree
+- 直接跳到项目 setup
+
+如果不是隔离工作空间：
+- 如果用户还没表态，要先问 consent
+- 用户拒绝，也可以 in-place 工作
+
+【Step 1a：优先 native worktree tools】
+如果平台已经有 worktree / EnterWorktree / --worktree 之类的原生机制：
+- 用它
+- 不要绕开它直接 git worktree add
+
+【Step 1b：只有没有 native tool 时，才 git fallback】
+手工 git worktree 是兜底，不是默认第一选择。
+
+【Step 3：验证 clean baseline】
+进入工作空间后要先做 setup，再跑 baseline tests。
+如果 baseline 本来就不干净，后面每个失败都会变得含糊。
+
+【你在这一课该记住的点】
+worktree 不是某个 feature 做完后才补的动作，
+而是实现与调试在什么空间里发生的问题。</pre>
+          </article>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">情况 A：平台已经隔离好了</h3>
+            <p>这就是你“没显式用也像在用了”的常见来源。skill 要你做的是先检测并承认这件事，而不是重复创建。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">情况 B：普通 checkout，准备做风险改动</h3>
+            <p>这时 worktree 才最有价值：先隔离，再实现，再 debug，再收口，避免把主工作区搅脏。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">情况 C：没有 native tool，只能 git fallback</h3>
+            <p>这当然可以，但它在 skill 里是兜底位，不是默认位。默认顺序始终是：先看 harness，再看 git。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>把整门课最后收成一句口令</h2>
+        <div class="callout">
+          <p><strong>更贴近真实工作的完整后半程，不是“实现 -> 点一点 -> 完事”，而是：</strong></p>
+          <p>在合适的隔离工作空间里实现 -> review / 验收 -> 发现 bug 时先判断是否 spec 变了 -> 没变就切 <code>systematic-debugging</code> -> 用最小失败用例锁定症状 -> 单一修复 -> <code>verification-before-completion</code> 给出 fresh evidence -> 再回 finish skill 正式收口。</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">0002 给了你收口骨架</h3>
+            <p>让你知道“功能有了”不等于流程结束，后面还有 final review 和 finish。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">0003 给了你边界判断</h3>
+            <p>让你知道跑偏时先分 spec / plan / implementation，不要在错误层级上用力。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">0004 给了你最后的现实补丁</h3>
+            <p>让你知道验收 bug 时该切 debug 流，以及 worktree 其实一直在环境层，而不是课尾彩蛋。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="quiz">
+        <h2>4 分钟自测</h2>
+        <p>这组题只检查一件事：你能不能把“发现 bug”“修好 bug”“在哪个工作空间里修”这三件事分开。</p>
+        <div class="quiz-list">
+          <div class="quiz-item" data-quiz-answer="先看预期变没变" data-quiz-explanation="人验收发现 bug 后，第一步不是补代码，而是先判断这是不是 0003 的 spec 边界问题：预期到底变了没有。">
+            <h3>1. 人验收发现 bug 时，第一反应最该更接近哪一个？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="先看预期变没变">先看预期变没变</button>
+              <button class="quiz-option" type="button" data-choice="先补一版实现">先补一版实现</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-quiz-answer="不必须先有 spec" data-quiz-explanation="systematic-debugging 的触发条件是 ANY technical issue，不是“必须先有 spec”。有 spec 更好，但没有也照样能做根因调查。">
+            <h3>2. `systematic-debugging` 是不是必须建立在现成 spec 之上？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="不必须先有 spec">不必须先有 spec</button>
+              <button class="quiz-option" type="button" data-choice="必须先有 spec">必须先有 spec</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-quiz-answer="先 fresh verify" data-quiz-explanation="verification-before-completion 的铁律就是：没有 fresh verification evidence，就不能宣称 fixed。">
+            <h3>3. 代码改完后，要说“bug 修好了”，下一步更该是什么？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="先 fresh verify">先 fresh verify</button>
+              <button class="quiz-option" type="button" data-choice="先写完成汇报">先写完成汇报</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-quiz-answer="它是环境隔离层" data-quiz-explanation="using-git-worktrees 处理的是“工作在哪个空间里发生”，所以它是实现与调试之下的环境隔离层，不是最后的收尾层。">
+            <h3>4. `using-git-worktrees` 在整条工作流里更像哪一种东西？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="它是环境隔离层">它是环境隔离层</button>
+              <button class="quiz-option" type="button" data-choice="它是最后收尾层">它是最后收尾层</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+
+          <div class="quiz-item" data-quiz-answer="不要再建一个" data-quiz-explanation="using-git-worktrees 的 Step 0 先检测现有隔离；如果已经在 linked worktree 里，就不要再创建一个新的 worktree。">
+            <h3>5. 如果平台已经把你放进 linked worktree 里，正确动作更接近哪一个？</h3>
+            <div class="options">
+              <button class="quiz-option" type="button" data-choice="不要再建一个">不要再建一个</button>
+              <button class="quiz-option" type="button" data-choice="再套一层 worktree">再套一层 worktree</button>
+            </div>
+            <p class="feedback" aria-live="polite"></p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>这一整门课学完，你至少该带走什么</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">1. 验收 bug 时先判断边界</h3>
+            <p>预期变了就回 spec 层；预期没变但东西坏了，就切 debug 流。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2. 修 bug 不是猜修法</h3>
+            <p>`systematic-debugging` 的核心不是“修”，而是先查 root cause。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3. “fixed” 是证据词，不是情绪词</h3>
+            <p>`verification-before-completion` 要求 fresh evidence，不允许靠感觉宣布成功。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">4. worktree 是底座，不是彩蛋</h3>
+            <p>它决定实现和修 bug 在什么空间里发生；已经隔离好就承认它，没隔离再补它。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <p>这一课最值得你亲自通读的主资料是 <a href="https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md">systematic-debugging/SKILL.md</a>。因为它把最后一类最容易被人靠经验乱跳流程的场景，硬生生重新拉回了“先调查，再修复”的轨道上。</p>
+        <ol class="source-list">
+          <li><a href="https://github.com/obra/superpowers/blob/main/skills/systematic-debugging/SKILL.md">skills/systematic-debugging/SKILL.md</a></li>
+          <li><a href="https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md">skills/verification-before-completion/SKILL.md</a></li>
+          <li><a href="https://github.com/obra/superpowers/blob/main/skills/using-git-worktrees/SKILL.md">skills/using-git-worktrees/SKILL.md</a></li>
+          <li><a href="https://github.com/obra/superpowers/blob/main/skills/finishing-a-development-branch/SKILL.md">skills/finishing-a-development-branch/SKILL.md</a></li>
+          <li><a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a></li>
+        </ol>
+      </section>
+
+      <p class="footer-note">如果你下一次在“功能都做出来了，点一圈发现还有个 bug”这一步又想直接补代码，就先回到这节课，问自己两句：预期到底变没变？如果没变，我有没有先查根因和拿到 fresh evidence？</p>
+    </main>
+  </body>
+</html>

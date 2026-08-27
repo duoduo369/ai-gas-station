@@ -1,0 +1,85 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">验收 bug 流与 worktree 位置图</title>
+  <desc id="desc">展示 feature 实现后，人验收发现 bug 时如何切到 systematic-debugging 与 verification-before-completion，以及 worktree 作为隔离底座位于整段实现和修复流程之下。</desc>
+  <defs>
+    <style>
+      .bg { fill: #f9fbfc; }
+      .box { fill: #ffffff; stroke: #0e5a6b; stroke-width: 2; rx: 22; }
+      .soft { fill: #d8edf2; stroke: #0e5a6b; stroke-width: 2; rx: 22; }
+      .warm { fill: #f8e3d3; stroke: #c26b2b; stroke-width: 2; rx: 22; }
+      .band { fill: #eef4df; stroke: #6f7f39; stroke-width: 2; rx: 24; }
+      .title { font: 700 28px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .label { font: 700 20px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .text { font: 16px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #1b2430; }
+      .small { font: 15px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #586474; }
+      .bandText { font: 16px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #344211; }
+      .arrow { stroke: #0e5a6b; stroke-width: 3; fill: none; marker-end: url(#arrowHead); }
+      .warmArrow { stroke: #c26b2b; stroke-width: 3; fill: none; marker-end: url(#warmArrowHead); }
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0e5a6b"/>
+    </marker>
+    <marker id="warmArrowHead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c26b2b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="760" rx="28"/>
+  <text x="60" y="58" class="title">验收 bug 流与 worktree 位置图</text>
+
+  <rect class="box" x="70" y="110" width="220" height="94"/>
+  <text x="102" y="148" class="label">Feature 已实现</text>
+  <text x="102" y="176" class="text">功能大体做出来，</text>
+  <text x="102" y="198" class="text">进入人验收 / review。</text>
+
+  <rect class="warm" x="350" y="96" width="280" height="122"/>
+  <text x="382" y="136" class="label">验收发现 bug</text>
+  <text x="382" y="166" class="text">这里不要继续沿 feature 流</text>
+  <text x="382" y="192" class="text">“顺手补一点”往前冲。</text>
+
+  <rect class="soft" x="700" y="94" width="390" height="126"/>
+  <text x="732" y="134" class="label">先判断是哪类问题</text>
+  <text x="732" y="164" class="text">行为边界变了 → 回 0003 的 spec 分流</text>
+  <text x="732" y="190" class="text">行为边界没变、只是坏了 → 切 debug 流</text>
+
+  <rect class="box" x="96" y="300" width="250" height="116"/>
+  <text x="128" y="340" class="label">1. Systematic Debugging</text>
+  <text x="128" y="370" class="text">先查根因，再谈修法。</text>
+  <text x="128" y="396" class="text">没有 root cause，不准 fix。</text>
+
+  <rect class="box" x="402" y="300" width="236" height="116"/>
+  <text x="434" y="340" class="label">2. 失败用例</text>
+  <text x="434" y="370" class="text">用最小失败测试</text>
+  <text x="434" y="396" class="text">锁定原始症状。</text>
+
+  <rect class="box" x="696" y="300" width="220" height="116"/>
+  <text x="728" y="340" class="label">3. 单一修复</text>
+  <text x="728" y="370" class="text">只改根因，</text>
+  <text x="728" y="396" class="text">不要顺手大翻修。</text>
+
+  <rect class="soft" x="954" y="286" width="180" height="144"/>
+  <text x="986" y="326" class="label">4. Fresh Verify</text>
+  <text x="986" y="356" class="text">重新跑完整验证，</text>
+  <text x="986" y="382" class="text">确认 bug 真修好。</text>
+  <text x="986" y="414" class="small">之后才能宣称 fixed</text>
+
+  <rect class="warm" x="420" y="498" width="360" height="110"/>
+  <text x="452" y="540" class="label">5. 回到 finish / 收口</text>
+  <text x="452" y="570" class="text">验证过了，才回到 branch finish、</text>
+  <text x="452" y="594" class="text">merge / PR / keep 这些收尾动作。</text>
+
+  <rect class="band" x="80" y="654" width="1040" height="66"/>
+  <text x="110" y="686" class="bandText">Worktree / Isolated Workspace 位于整段实现与修 bug 过程之下：</text>
+  <text x="110" y="710" class="bandText">先检测是否已隔离 → 优先用 harness / native tool → 没有时才 git fallback。它不是最后一步，而是环境底座。</text>
+
+  <path class="arrow" d="M290 157 H350"/>
+  <path class="arrow" d="M630 157 H700"/>
+  <path class="warmArrow" d="M790 220 V270 H221 V300"/>
+  <path class="arrow" d="M346 358 H402"/>
+  <path class="arrow" d="M638 358 H696"/>
+  <path class="arrow" d="M916 358 H954"/>
+  <path class="arrow" d="M1044 430 V498 H780"/>
+
+  <text x="114" y="444" class="small">systematic-debugging 可以单独跑；有 spec 更好，没有 spec 也不是不能 debug。</text>
+  <text x="864" y="246" class="small">如果发现不是 bug，而是预期变了，请回 spec 层。</text>
+</svg>
