@@ -1,0 +1,62 @@
+<svg width="1200" height="560" viewBox="0 0 1200 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">teach 工作区文件怎么互相喂</title>
+  <desc id="desc">MISSION 和 RESOURCES 喂给 lessons；lessons 压进 reference；learning-records 决定下一课；NOTES 记下偏好。</desc>
+  <defs>
+    <style>
+      .bg { fill: #f9fbfc; }
+      .box { fill: #ffffff; stroke: #0e5a6b; stroke-width: 2; }
+      .boxSoft { fill: #d8edf2; stroke: #0e5a6b; stroke-width: 2; }
+      .warm { fill: #f8e3d3; stroke: #c26b2b; stroke-width: 2; }
+      .title { font: 700 28px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .label { font: 700 20px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .text { font: 16px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #1b2430; }
+      .small { font: 15px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #586474; }
+      .arrow { stroke: #0e5a6b; stroke-width: 3; fill: none; marker-end: url(#arrowHead); }
+      .warmArrow { stroke: #c26b2b; stroke-width: 3; fill: none; marker-end: url(#warmArrowHead); }
+    </style>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0e5a6b"/>
+    </marker>
+    <marker id="warmArrowHead" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#c26b2b"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1200" height="560" rx="28"/>
+  <text x="48" y="52" class="title">teach 工作区：文件怎么互相喂</text>
+  <text x="48" y="84" class="small">连续性在文件夹里，不在上一次对话窗口。</text>
+  <rect class="box" x="48" y="120" width="250" height="110" rx="22"/>
+  <text x="72" y="158" class="label">MISSION.md</text>
+  <text x="72" y="188" class="text">为什么学。每课都要</text>
+  <text x="72" y="210" class="text">能指回这份理由。</text>
+  <rect class="box" x="48" y="260" width="250" height="110" rx="22"/>
+  <text x="72" y="298" class="label">RESOURCES.md</text>
+  <text x="72" y="328" class="text">高信任资料先于课。</text>
+  <text x="72" y="350" class="text">课里的判断要带引用。</text>
+  <rect class="boxSoft" x="430" y="170" width="300" height="160" rx="22"/>
+  <text x="454" y="214" class="label">lessons/*.html</text>
+  <text x="454" y="248" class="text">主产物：一课一事，</text>
+  <text x="454" y="274" class="text">坐下来能上完，</text>
+  <text x="454" y="300" class="text">带走一个能接着用的赢。</text>
+  <rect class="box" x="860" y="120" width="290" height="110" rx="22"/>
+  <text x="884" y="158" class="label">reference/*.html</text>
+  <text x="884" y="188" class="text">从课里压出来的速查。</text>
+  <text x="884" y="210" class="text">以后回看，优先翻这里。</text>
+  <rect class="warm" x="860" y="280" width="290" height="110" rx="22"/>
+  <text x="884" y="318" class="label">learning-records/</text>
+  <text x="884" y="348" class="text">你已经证明学会了什么。</text>
+  <text x="884" y="370" class="text">用来算下一课该卡在哪。</text>
+  <rect class="box" x="430" y="400" width="300" height="96" rx="22"/>
+  <text x="454" y="438" class="label">NOTES.md</text>
+  <text x="454" y="468" class="text">你怎么学、课往哪收。</text>
+  <path class="arrow" d="M298 175 H430"/>
+  <path class="arrow" d="M298 315 H430"/>
+  <path class="arrow" d="M730 210 H860"/>
+  <path class="warmArrow" d="M730 280 H860"/>
+  <path class="warmArrow" d="M1005 390 V500 H730"/>
+  <path class="arrow" d="M580 400 V330"/>
+  <text x="318" y="164" class="small">钉住</text>
+  <text x="318" y="304" class="small">引用</text>
+  <text x="760" y="196" class="small">压缩</text>
+  <text x="748" y="268" class="small">证据</text>
+  <text x="780" y="520" class="small">下一课从这里回头</text>
+</svg>

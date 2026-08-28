@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>teach 工作区速查</title>
+    <link rel="stylesheet" href="../../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>teach 工作区速查</h1>
+        <p class="lede">回看这一页。分清该不该打 <code>/teach</code>、第一句怎么写、目录里每份文件干什么、本库落在哪。</p>
+      </section>
+
+      <section>
+        <h2>先做这道分流</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>你想要</th>
+                <th>伸手拿</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>连续学一个主题，session 要能叠起来</td>
+                <td><code>/teach</code>（用户显式触发）</td>
+              </tr>
+              <tr>
+                <td>当前会话里把一个想法讲清楚</td>
+                <td>直接问</td>
+              </tr>
+              <tr>
+                <td>上一条没打中，要它重讲</td>
+                <td><code>/wait-what</code></td>
+              </tr>
+              <tr>
+                <td>把已有想法问锋利</td>
+                <td><code>/grill-me</code></td>
+              </tr>
+              <tr>
+                <td>一份带引用的调查文档</td>
+                <td><code>/research</code></td>
+              </tr>
+              <tr>
+                <td>grilling 中途要学新东西</td>
+                <td>先 <code>/handoff</code>，再在教学工作区 <code>/teach</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>第一句怎么打</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>场景</th>
+                <th>斜杠怎么写</th>
+                <th>同一条消息还要说</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>还没想好主题</td>
+                <td><code>/teach</code></td>
+                <td>让它先问为什么学。目录说死。</td>
+              </tr>
+              <tr>
+                <td>日常技能</td>
+                <td><code>/teach 尤克里里弹唱</code></td>
+                <td>为什么学、会什么、不会什么、指定教材/视频、不要选择题、要能对着做的步骤。</td>
+              </tr>
+              <tr>
+                <td>GitHub 仓库</td>
+                <td><code>/teach owner/repo</code> 或仓库 URL</td>
+                <td>教学目录另开，不要写进上游仓库。要地图还是精读，先报已知。</td>
+              </tr>
+              <tr>
+                <td>先钉资料</td>
+                <td><code>/teach</code> + 「先不要写 lesson」</td>
+                <td>点名必须用的书/文档/视频/社区。没有引用就重写。</td>
+              </tr>
+              <tr>
+                <td>续课</td>
+                <td><code>/teach next lesson</code></td>
+                <td>在已有工作区里开。太深太浅、要复习不要新课，当场说。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>文件职责</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>路径</th>
+                <th>干什么</th>
+                <th>你怎么用</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="path">MISSION.md</span></td>
+                <td>为什么学</td>
+                <td>空着就先问。每课都要能指回这里。</td>
+              </tr>
+              <tr>
+                <td><span class="path">RESOURCES.md</span></td>
+                <td>高信任资料</td>
+                <td>Knowledge / Wisdom 分组。课里的判断从这里引。</td>
+              </tr>
+              <tr>
+                <td><span class="path">lessons/*.html</span></td>
+                <td>教学主产物</td>
+                <td>一课一事。第一次学打开它。</td>
+              </tr>
+              <tr>
+                <td><span class="path">reference/*.html</span></td>
+                <td>压缩精华</td>
+                <td>以后回看走这里。</td>
+              </tr>
+              <tr>
+                <td><span class="path">learning-records/</span></td>
+                <td>已证明学会了什么</td>
+                <td>像 ADR。覆盖 ≠ 学会。用来算下一课。</td>
+              </tr>
+              <tr>
+                <td><span class="path">assets/</span></td>
+                <td>可复用组件</td>
+                <td>共用样式是第一块零件。图、模拟器往这里放。本库新课默认不加测验脚本。</td>
+              </tr>
+              <tr>
+                <td><span class="path">NOTES.md</span></td>
+                <td>教学偏好</td>
+                <td>你怎么学、课往哪收，写在这里给后续 session。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <figure class="diagram">
+          <img src="../assets/workspace-loop.svg" alt="MISSION 和 RESOURCES 喂给 lessons，lessons 压进 reference，learning-records 决定下一课。">
+          <figcaption>连续性在文件夹，不在上一场对话。</figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h2>难度在两段里角色相反</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">学知识</h3>
+            <p>难度是敌人。它吃工作记忆。只放练这项技能需要的知识，先讲清楚再练。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">练技能</h3>
+            <p>难度是工具。提取、间隔、交错（交错只用于技能）。反馈环尽量短。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">流畅 vs 存储</h3>
+            <p>当下能想起叫流畅，容易骗你。要的是存储强度：过一周还在。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">智慧</h3>
+            <p>需要判断的问题，答完指向社区。用户拒绝加入社区，就停在这一步。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>本库落点</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>上游 teach</th>
+                <th>本库 teach-me</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>当前目录就是工作区</td>
+                <td>一门课一个子目录：<span class="path">课程/某课/</span></td>
+              </tr>
+              <tr>
+                <td><span class="path">assets/</span> 里放共用样式</td>
+                <td>样式走 <span class="path">课程/assets/course.css</span>，该课 <span class="path">assets/</span> 只放导航与局部图；新课默认不加测验</td>
+              </tr>
+              <tr>
+                <td>课 &gt; 1 节时自己链来链去</td>
+                <td>同时有 <span class="path">lessons/</span> 和 <span class="path">reference/</span> 就注入 <span class="path">course-nav.js</span></td>
+              </tr>
+              <tr>
+                <td>精读对象由课自己决定</td>
+                <td>点名且要对着学的 skill / prompt，嵌中文；讨论课不嵌全文</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>覆盖层正文：<a href="../../../playbook/teach-me.md">playbook/teach-me.md</a>。精读分支：<a href="../../../playbook/teach-课件-嵌入权威中文.md">嵌入权威中文</a>。</p>
+      </section>
+
+      <section>
+        <h2>还没修好的坑</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">写进 skill 目录</h3>
+            <p><a href="https://github.com/mattpocock/skills/issues/377">#377</a>。第一节课落地后先核对路径，开始时把目录说死。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">测验第一项</h3>
+            <p><a href="https://github.com/mattpocock/skills/issues/335">#335</a>。上游若出测验，正确答案位置无意义。本库默认不出测验。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">没有摸底</h3>
+            <p><a href="https://github.com/mattpocock/skills/issues/725">#725</a>。第一句自己报已知和缺口。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">不会自己停</h3>
+            <p>会做下一课，不太会改去复习或真实练习。要复习，开口要。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>怎样算它在工作</h2>
+        <ul class="source-list">
+          <li>空目录里先问为什么学，再出课。</li>
+          <li><span class="path">RESOURCES.md</span> 先于 lessons 填起来；每课点名一份主资料。</li>
+          <li>课里的判断带外链。没有引用，就是在用记忆教书。</li>
+          <li>一课能坐下来上完，走时多会一件事。</li>
+          <li>同一文件夹开新会话说“下一课”，课接着走，不重开炉灶。</li>
+          <li>课长得像一门课：链共用样式，不各自糊一套。</li>
+        </ul>
+        <p>对照清单来自 <a href="https://github.com/mattpocock/skills/blob/main/docs/productivity/teach.md">docs/productivity/teach.md</a>。agent 执行规则仍看 <a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/SKILL.md">SKILL.md</a>。</p>
+      </section>
+    </main>
+  </body>
+</html>

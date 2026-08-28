@@ -9,6 +9,23 @@
 
 点封面或标题会打开该课第一份 HTML。
 
+## Skill 精读课
+
+<table>
+  <tr>
+    <td align="center" width="50%" valign="top">
+      <a href="./teach skill 学习课/lessons/0001-teach-workspace-and-how-to-invoke.html">
+        <img src="../assets/cover/teachskill课程.jpg" alt="teach skill 学习课" width="100%">
+      </a>
+      <p>
+        <a href="./teach skill 学习课/lessons/0001-teach-workspace-and-how-to-invoke.html"><strong>teach skill 学习课</strong></a><br>
+        用 <code>/teach</code> 学 teach 本身：工作区七件套、何时调用、本库 <code>teach-me</code> 覆盖层。一节课收口。
+      </p>
+    </td>
+    <td width="50%"></td>
+  </tr>
+</table>
+
 ## 方法论讨论课
 
 <table>
@@ -22,7 +39,15 @@
         用 Matt / Superpowers / SwarmForge 三套方法讨论纪律落点，也讨论 spec 是入口还是工件。
       </p>
     </td>
-    <td width="50%"></td>
+    <td align="center" width="50%" valign="top">
+      <a href="./AI中文写作去AI味/lessons/0001-ai-flavor-traces.html">
+        <img src="../assets/cover/写作去ai味.jpg" alt="AI 中文写作去 AI 味" width="100%">
+      </a>
+      <p>
+        <a href="./AI中文写作去AI味/lessons/0001-ai-flavor-traces.html"><strong>AI 中文写作去 AI 味</strong></a><br>
+        识别 AI 味的七种痕迹，用六步流程（提示词→材料→大纲→初稿→改稿→定稿）让成品读起来像人写的。两节收口。
+      </p>
+    </td>
   </tr>
 </table>
 

@@ -13,6 +13,10 @@
 
 - [handoff](https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md) - 把当前会话压缩成下一位 agent 能直接接手的 handoff 文档，同时避免重复搬运已有产物；[学习拆解](<./handoff 学习拆解.md>)
 
+## 教学工作区
+
+- [teach](https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/SKILL.md) - 把当前目录变成跨 session 的教学工作区；人读说明见 [docs/productivity/teach.md](https://github.com/mattpocock/skills/blob/main/docs/productivity/teach.md)；[课程](<../课程/teach skill 学习课/README.md>)
+
 ## 写作机制
 
 - [writing-for-agents](https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL.md) - 系统讲 agent 文档怎么写：context pointer、信息层级、completion criteria、leading words 与 pruning；[学习拆解](<./writing-for-agents 学习拆解.md>)

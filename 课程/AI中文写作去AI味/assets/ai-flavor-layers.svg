@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" width="720" height="420">
+  <defs>
+    <linearGradient id="structure" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0e5a6b" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#0e5a6b" stop-opacity="0.02"/>
+    </linearGradient>
+    <linearGradient id="lexical" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c26b2b" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#c26b2b" stop-opacity="0.02"/>
+    </linearGradient>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#0f202e" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="720" height="420" fill="none"/>
+
+  <!-- Layer 1: 结构层 -->
+  <rect x="24" y="24" width="672" height="174" rx="12" fill="url(#structure)" stroke="#0e5a6b" stroke-opacity="0.2" stroke-width="1.5"/>
+  <rect x="24" y="24" width="672" height="40" rx="12" fill="#0e5a6b" fill-opacity="0.9"/>
+  <rect x="24" y="52" width="672" height="12" fill="#0e5a6b" fill-opacity="0.9"/>
+  <text x="48" y="50" font-family="'Source Han Sans SC','Noto Sans SC','PingFang SC',sans-serif" font-size="16" font-weight="700" fill="#ffffff">结构层 — 决定文章「怎么走」</text>
+
+  <!-- Structure traces -->
+  <g transform="translate(48, 80)">
+    <rect x="0" y="0" width="120" height="36" rx="8" fill="#ffffff" filter="url(#shadow)"/>
+    <text x="60" y="23" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="13" fill="#1b2430">痕迹一：翻案腔</text>
+  </g>
+  <g transform="translate(178, 80)">
+    <rect x="0" y="0" width="120" height="36" rx="8" fill="#ffffff" filter="url(#shadow)"/>
+    <text x="60" y="23" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="13" fill="#1b2430">痕迹二：套话开场</text>
+  </g>
+  <g transform="translate(308, 80)">
+    <rect x="0" y="0" width="120" height="36" rx="8" fill="#ffffff" filter="url(#shadow)"/>
+    <text x="60" y="23" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="13" fill="#1b2430">痕迹三：三件套排比</text>
+  </g>
+  <g transform="translate(438, 80)">
+    <rect x="0" y="0" width="120" height="36" rx="8" fill="#ffffff" filter="url(#shadow)"/>
+    <text x="60" y="23" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="13" fill="#1b2430">痕迹四：假动作</text>
+  </g>
+  <g transform="translate(568, 80)">
+    <rect x="0" y="0" width="120" height="36" rx="8" fill="#ffffff" filter="url(#shadow)"/>
+    <text x="60" y="23" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="13" fill="#1b2430">痕迹七：假细节</text>
+  </g>
+
+  <!-- Structure note -->
+  <text x="672" y="144" text-anchor="end" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="11" fill="#586474">需要人读，不能只靠扫描</text>
+
+  <!-- Arrow between layers -->
+  <g transform="translate(360, 210)">
+    <line x1="-120" y1="0" x2="120" y2="0" stroke="#586474" stroke-opacity="0.3" stroke-width="1" stroke-dasharray="4 3"/>
+    <polygon points="120,-4 132,0 120,4" fill="#586474" fill-opacity="0.3"/>
+    <polygon points="-120,-4 -132,0 -120,4" fill="#586474" fill-opacity="0.3"/>
+  </g>
+
+  <!-- Layer 2: 词汇层 -->
+  <rect x="24" y="228" width="672" height="130" rx="12" fill="url(#lexical)" stroke="#c26b2b" stroke-opacity="0.2" stroke-width="1.5"/>
+  <rect x="24" y="228" width="672" height="40" rx="12" fill="#c26b2b" fill-opacity="0.9"/>
+  <rect x="24" y="256" width="672" height="12" fill="#c26b2b" fill-opacity="0.9"/>
+  <text x="48" y="254" font-family="'Source Han Sans SC','Noto Sans SC','PingFang SC',sans-serif" font-size="16" font-weight="700" fill="#ffffff">词汇层 — 决定文章「用什么说」</text>
+
+  <!-- Lexical traces -->
+  <g transform="translate(48, 284)">
+    <rect x="0" y="0" width="200" height="36" rx="8" fill="#ffffff" filter="url(#shadow)"/>
+    <text x="100" y="23" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="13" fill="#1b2430">痕迹五：标点出卖</text>
+  </g>
+  <g transform="translate(268, 284)">
+    <rect x="0" y="0" width="200" height="36" rx="8" fill="#ffffff" filter="url(#shadow)"/>
+    <text x="100" y="23" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="13" fill="#1b2430">痕迹六：模型腔词汇</text>
+  </g>
+
+  <!-- Lexical note -->
+  <text x="672" y="322" text-anchor="end" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="11" fill="#586474">全文搜索即可，5 分钟扫完</text>
+
+  <!-- Bottom annotation -->
+  <text x="360" y="398" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="12" fill="#586474">两层七痕迹 · 先词汇后结构 · 两轮扫描</text>
+</svg>

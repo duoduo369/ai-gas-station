@@ -56,6 +56,30 @@ clone 到本地后，点封面或标题会打开该课第一份 HTML。也可以
       </p>
     </td>
   </tr>
+  <tr>
+    <td align="center" width="50%" valign="top">
+      <a href="./课程/teach skill 学习课/lessons/0001-teach-workspace-and-how-to-invoke.html">
+        <img src="./assets/cover/teachskill课程.jpg" alt="teach skill 学习课" width="100%">
+      </a>
+      <p>
+        <a href="./课程/teach skill 学习课/lessons/0001-teach-workspace-and-how-to-invoke.html"><strong>teach skill 学习课</strong></a><br>
+        用 /teach 学 teach：工作区七件套和本库覆盖层
+      </p>
+    </td>
+    <td width="50%"></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%" valign="top">
+      <a href="./课程/AI中文写作去AI味/lessons/0001-ai-flavor-traces.html">
+        <img src="./assets/cover/写作去ai味.jpg" alt="AI 中文写作去 AI 味" width="100%">
+      </a>
+      <p>
+        <a href="./课程/AI中文写作去AI味/lessons/0001-ai-flavor-traces.html"><strong>AI 中文写作去 AI 味</strong></a><br>
+        识别 AI 味的七种痕迹，用六步流程让成品读起来像人写的
+      </p>
+    </td>
+    <td width="50%"></td>
+  </tr>
 </table>
 
 ## 其他收录

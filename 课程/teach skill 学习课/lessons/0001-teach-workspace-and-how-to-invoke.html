@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lesson 0001 · 工作区怎么转起来，以及何时打 /teach</title>
+    <link rel="stylesheet" href="../../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Lesson 0001</p>
+        <h1>把当前目录变成一门能续上的课</h1>
+        <p class="lede"><code>/teach</code> 把你打开的目录当成教学工作区。使命、资料、课件、速查和学习记录都写成文件。下一场对话读这些文件，不靠上一场聊天还在不在。</p>
+        <div class="pill-row">
+          <span class="pill">预计 16 分钟</span>
+          <span class="pill">目标：会开口用 /teach</span>
+          <span class="pill">内嵌关键中文条文</span>
+          <span class="pill">回看：<a href="../reference/teach-workspace-map.html">工作区速查</a></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>先记住这一句</h2>
+        <div class="callout">
+          <p><strong><code>teach</code> 要你自己打 <code>/teach</code>。frontmatter 里写了 <code>disable-model-invocation: true</code>，agent 不会自己伸手。</strong></p>
+          <p>人读说明 <a href="https://github.com/mattpocock/skills/blob/main/docs/productivity/teach.md">docs/productivity/teach.md</a> 把适用边界写得很硬：学习本身就是项目时才用它。当前会话里要一句解释，直接问。上一句没打中，用 <a href="https://aihero.dev/skills-wait-what">wait-what</a>。要把已有想法磨锋利，用 <a href="https://aihero.dev/skills-grill-me">grill-me</a>。只要一份带引用的调查文档，用 <a href="https://aihero.dev/skills-research">research</a>。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>你想要什么，就伸哪只手</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>你想要</th>
+                <th>伸手拿</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>连续几周学一个主题，session 要能叠起来</td>
+                <td><code>/teach</code></td>
+              </tr>
+              <tr>
+                <td>当前会话里把一个想法讲清楚</td>
+                <td>直接问</td>
+              </tr>
+              <tr>
+                <td>上一条没打中，要它按原上下文重讲</td>
+                <td><code>/wait-what</code></td>
+              </tr>
+              <tr>
+                <td>把你已经有的想法问锋利，不灌新材料</td>
+                <td><code>/grill-me</code></td>
+              </tr>
+              <tr>
+                <td>后台去读一手资料，留给你一份带引用的文档</td>
+                <td><code>/research</code></td>
+              </tr>
+              <tr>
+                <td>grilling 中途冒出要学的东西，又不想拆掉 grilling</td>
+                <td>先 <code>/handoff</code> 到教学工作区，再在那里 <code>/teach</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>这张表来自 <a href="https://github.com/mattpocock/skills/blob/main/docs/productivity/teach.md">docs/productivity/teach.md</a> 的 When to reach for it。走完这张表，下次自己就能判断该伸哪只手。</p>
+      </section>
+
+      <section>
+        <h2>工作区里到底落下什么</h2>
+        <p><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/SKILL.md">SKILL.md</a> 把当前目录当成教学工作区。人读 docs 加了一句落地约束：单独给一个目录或仓库，别写进正在干活的项目根上。本知识库放在 <span class="path">课程/某课/</span>，这一课自己就在那个位置。</p>
+        <figure class="diagram">
+          <img src="../assets/workspace-loop.svg" alt="MISSION 和 RESOURCES 喂给 lessons，lessons 压进 reference，learning-records 决定下一课。">
+          <figcaption>课是主产物。速查才是以后翻的东西。学习记录只记你证明学会了的，不记“这节讲过了”。</figcaption>
+        </figure>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">MISSION.md</h3>
+            <p>为什么学。空目录里第一次 <code>/teach</code>，agent 该先问你这件事，再写课。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">RESOURCES.md</h3>
+            <p>高信任资料清单，分成 Knowledge 和 Wisdom。资料没填满之前，先去找资料。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">lessons/*.html</h3>
+            <p>一课一事的 HTML。短，坐下来能上完，带走一个能接着用的赢。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">reference/*.html</h3>
+            <p>从课里压出来的速查。人读 docs 说：课很少回头看，速查会。</p>
+          </article>
+        </div>
+        <p><span class="path">learning-records/</span> 像 ADR：记下非显然的学会了什么，用来算下一课该卡在哪。<span class="path">NOTES.md</span> 记你怎么学。<span class="path">assets/</span> 放可复用组件，共用样式是工作区拿到的第一份可复用资产。格式文件在 skill 包里：<a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/MISSION-FORMAT.md">MISSION</a>、<a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/RESOURCES-FORMAT.md">RESOURCES</a>、<a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/LEARNING-RECORD-FORMAT.md">learning-records</a>。</p>
+      </section>
+
+      <a id="embedded-skill"></a>
+      <section>
+        <h2>对着条文看：agent 实际执行的是这些</h2>
+        <div class="prompt-stack">
+          <article class="prompt-doc">
+            <h3 class="card-title">teach SKILL.md（工作区与哲学）</h3>
+            <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/SKILL.md">skills/productivity/teach/SKILL.md</a> · 本课要对照的是文件职责，以及知识、技能、智慧怎么分。</p>
+            <pre class="prompt-zh">【教学工作区】
+把当前目录当成教学工作区。学习状态落在这些文件里：
+
+- MISSION.md：你为什么对这个主题感兴趣。所有教学都挂在这份理由上。格式见 MISSION-FORMAT.md。
+- ./reference/*.html：从课时里压出来的材料。小抄、算法、语法、体式、术语表。给打印和快速回看。
+- RESOURCES.md：用来垫上下文知识、或去拿知识和智慧的资料清单。格式见 RESOURCES-FORMAT.md。
+- ./learning-records/*.md：你已经学会了什么。接近软件里的架构决策记录：记下非显然的课和关键洞察，之后可能要改，也会驱动后面的课。用来计算最近发展区。文件名 0001-&lt;dash-case-name&gt;.md，序号递增。格式见 LEARNING-RECORD-FORMAT.md。
+- ./lessons/*.html：课时。一节课是一份自包含 HTML，只教一件和使命绑死、范围很紧的事。这是这个工作区里教学的主单位。
+- ./assets/*：跨课时复用的组件。见 Assets。
+- NOTES.md：教学偏好和工作备忘。
+
+【哲学】
+要学到深处，你需要三样东西：
+
+- Knowledge（知识）：从高质量、高信任的资料里拿到
+- Skills（技能）：靠我基于这些知识设计的、高度相关的互动课练出来
+- Wisdom（智慧）：来自和其他学习者、实践者的互动
+
+RESOURCES.md 还没填满之前，先去找能帮你拿到知识的高质量资料。不要信模型参数里那点东西。
+
+有的主题知识比技能多，比如理论物理。有的主题技能比知识多，比如瑜伽。
+
+【流畅强度 vs 存储强度】
+- Fluency strength（流畅强度）：当下能把知识想起来
+- Storage strength（存储强度）：长期还留着
+
+流畅会给你一种已经会了的错觉。真正要的是存储强度。课要靠合意难度把长期记忆建起来：提取练习（凭记忆回想）、间隔（把练习摊开）、交错（把相关但不同的主题混着练；只用于技能练习）。</pre>
+          </article>
+
+          <article class="prompt-doc">
+            <h3 class="card-title">teach SKILL.md（先知识，后技能）</h3>
+            <p class="prompt-cap">原文同上 · 难度在两段里角色相反，这是这张卡最容易用错的地方。</p>
+            <pre class="prompt-zh">【使命】
+每节课都要挂在使命上：你为什么要学这个。
+
+使命不清楚，或 MISSION.md 还是空的，第一件事是问你为什么要学。使命没钉住，知识会飘，课会抽象，下一课也没有判断标准。
+
+使命会改。改之前先跟你确认，再更新 MISSION.md，并补一条学习记录。
+
+【最近发展区】
+每节课都该让你觉得“刚好有点难”。你点名要学某件具体的事，就教那件。你没点名，就读 learning-records、对着使命选最相关、又刚好卡在最近发展区里的那一件。
+
+【知识】
+课围着你将要学会的一项技能来设计。课里的知识只放练这项技能需要的那部分。先教知识，再让你在紧反馈环里练技能。
+
+知识先从受信任的资料里收集，记进 RESOURCES.md。课里的判断要带外链。学知识时，难度是敌人。它会吃掉你用来理解的工作记忆。
+
+【技能】
+技能要的是耐用和能迁移。让知识站住。
+
+练技能时，难度是工具。费力提取才能长出存储强度。互动课、测验、轻量的页内任务、真实步骤清单，都要有尽量短的反馈环。测验的每个选项，词数要一样（字符数能一样更好）。不要用排版给答案通风报信。
+
+【参考文档】
+写课的同时写参考页。课很少回头看，参考页会。它们是课时的压缩精华，做成快速查阅。术语表一旦建了，后面每课都要守它。</pre>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>空目录里，课按这个顺序走</h2>
+        <div class="timeline">
+          <article class="timeline-step">
+            <p class="step-kicker">1</p>
+            <h3 class="step-title">先问为什么学</h3>
+            <p>使命空着就写课，后面每课都缺锚点。人读 docs 把“先访谈、再出课”写成它在工作的第一条信号。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">2</p>
+            <h3 class="step-title">RESOURCES.md 先于 lessons</h3>
+            <p>SKILL.md 写得很直：资料没填满之前，先去找资料。一课没有引用，就是在用模型记忆教书。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">3</p>
+            <h3 class="step-title">写出一节能上完的 HTML</h3>
+            <p>一课一事，挂在使命上，推荐一份主资料，提醒你不懂就问这个当老师的 agent。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">4</p>
+            <h3 class="step-title">把精华压进 reference</h3>
+            <p>语法表、流程图、术语，从课里抽出来。以后回看走速查，不把整节课再读一遍。</p>
+          </article>
+        </div>
+        <p>下一课从文件夹续，不从聊天记录续。人读 docs 说三种做法都行：同一会话接着要下一课、新会话再打 <code>/teach</code>、在同一文件夹开新会话说“下一课”。文件夹才是连续性。做法：在工作区开新会话，打 <code>/teach next lesson</code>，后面再补主题。</p>
+      </section>
+
+      <section>
+        <h2>斜杠后面可以跟什么</h2>
+        <p><a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/SKILL.md">SKILL.md</a> 的 <code>argument-hint</code> 是 <code>What would you like to learn about?</code>。斜杠不是只能光秃秃打出去：主题可以写在同一条消息里。</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>你打的</th>
+                <th>它当什么用</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>/teach</code></td>
+                <td>空目录里该先问为什么学。你还没给主题，就让它问。</td>
+              </tr>
+              <tr>
+                <td><code>/teach 尤克里里弹唱</code></td>
+                <td>主题直接当参数。日常技能和编程主题，走同一套工作区。</td>
+              </tr>
+              <tr>
+                <td><code>/teach https://github.com/obra/superpowers</code> 或 <code>/teach obra/superpowers</code></td>
+                <td>把这个仓库当学习对象。人读 docs 说，代码侧最稳的用法是摸不熟的代码库，不是从零学一门语言。</td>
+              </tr>
+              <tr>
+                <td>斜杠后面再写一段约束</td>
+                <td>已知、缺口、指定资料、目录落点、不要选择题，都可以写在第一句。第一课没有摸底（<a href="https://github.com/mattpocock/skills/issues/725">#725</a>），起始水平靠你自己报。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout">
+          <p><strong>先开一个只给这门课用的目录，再打斜杠。</strong></p>
+          <p>人读 docs 写得很硬：别写进正在干活的项目根上，也别丢进一个全局 <code>~/.learnings/</code>。学 GitHub 仓库时，教学工作区是旁边那个空目录，不是那份上游仓库本身。<a href="https://github.com/mattpocock/skills/issues/377">#377</a> 还在，第一句把目录说死。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>三条例子：仓库、尤克里里、把资料钉死</h2>
+        <p>人读 docs 的 <a href="https://github.com/mattpocock/skills/blob/main/docs/productivity/teach.md">Is it only useful for code?</a> 写过：非代码用例才是记录里更大的一块，瑜伽、钢琴、吉他、认证都走同一套使命 / 资料 / 最近发展区。下面三句都可以直接改了发出去。</p>
+        <div class="prompt-stack">
+          <article class="prompt-doc">
+            <h3 class="card-title">学一个 GitHub 仓库</h3>
+            <p class="prompt-cap">对象是仓库，工作区另开。第一句把「为什么学、已经会什么、课往哪写」说完。</p>
+            <pre class="prompt-zh">/teach https://github.com/obra/superpowers
+
+教学工作区请写到 D:\learn\superpowers-teach\ ，不要写进那个上游仓库，也不要写进 skill 安装目录。
+
+我要能自己在这个仓库里判断该先读哪张 skill，不要安装教程。
+已经会用 agent 写代码，没读过这个仓库。
+
+先填 RESOURCES.md，课里每条判断都带 GitHub 链接。第一节只要仓库地图和工作流主线。</pre>
+          </article>
+          <article class="prompt-doc">
+            <h3 class="card-title">学尤克里里弹唱</h3>
+            <p class="prompt-cap">技能比知识多，课应该是对着琴能做的步骤，不是乐理论文。资料由你点名，模型脑子里的指法不当教材。</p>
+            <pre class="prompt-zh">/teach 尤克里里弹唱
+
+单独开目录 D:\learn\ukulele\ 。两个月后要能给自己唱歌伴奏。
+
+会按弦，会 C / G / Am / F，不会切和弦，扫弦没有稳定节奏。
+第一课只要一个能跟着唱的 4/4 扫弦型。
+
+资料用我下一条消息里的教材和视频，写进 RESOURCES.md 再出课。
+不要用你参数记忆里的指法表。不要做选择题。课里给出我能对着琴做的步骤清单。</pre>
+          </article>
+          <article class="prompt-doc">
+            <h3 class="card-title">强迫它先引用、再出课</h3>
+            <p class="prompt-cap">SKILL.md 自己就要求 RESOURCES 先于 lessons。你越早把资料名单甩给它，它越不容易用记忆教书。</p>
+            <pre class="prompt-zh">/teach
+
+先不要写 lesson。先找高信任资料，填进 RESOURCES.md，分成 Knowledge 和 Wisdom。
+资料不够就停，问我要入口。
+
+我指定这三份必须用：
+- （贴书 / 官方文档 / 仓库路径 / 视频）
+- （贴第二份）
+- （贴你常去的社区，没有就留空）
+
+出课以后：每条判断带链接；每课点名一份主资料让我自己去读。
+没有引用的句子，删掉重写。</pre>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>课开起来以后，你还可以这样说</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">续课</h3>
+            <p>同一文件夹开新会话：<code>/teach next lesson</code>。人读 docs 写过，课是一次一次唤，连续性在文件夹，不在聊天窗口。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">纠水平</h3>
+            <p>「这课太深，我还不会 X」「我已经会 Y，记进 learning-records，别再教。」纠正会变成记录，下一课才转得过来。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">要复习，不要新课</h3>
+            <p>它会做下一课，不太会自己改去复习。想对着琴/代码练，就明说：不要新 HTML，先按 reference 出一组练习步骤。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">改资料、改偏好</h3>
+            <p>「主资料换成这个链接」「以后中文、短课、不要选择题」写进 <span class="path">NOTES.md</span>。偏好不说，它不会猜到。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>本库存课，还要再套一层</h2>
+        <p>上游 <code>teach</code> 负责出课。这个知识库再套 <a href="../../../playbook/teach-me.md">playbook/teach-me.md</a>：共用 <span class="path">课程/assets/course.css</span>，课表导航写在该课的 <span class="path">course-nav.js</span>，图只加在散文看不清关系的地方，标题不用 <code>ch</code> 卡窄，正文过 <code>/stop-slop</code>。</p>
+        <p>精读 skill 或 prompt 时，再走 <a href="../../../playbook/teach-课件-嵌入权威中文.md">嵌入权威中文</a>。讨论课、地图课默认不嵌全文。你现在读的这一课就是精读课，所以上面把条文嵌进来了。</p>
+      </section>
+
+      <section>
+        <h2>三个还没修好的坑</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">文件写进 skill 安装目录</h3>
+            <p><a href="https://github.com/mattpocock/skills/issues/377">#377</a>：<code>SKILL.md</code> 里的 <code>./</code> 同时指 skill 包和你的工作区。第一节课落地后先看路径。开始时把目录说死。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">正确答案总在第一项</h3>
+            <p><a href="https://github.com/mattpocock/skills/issues/335">#335</a> 还在。选项字数对齐能挡住另一种泄题，挡不住位置。上游 <code>teach</code> 若坚持出测验，不要把第一项当答案。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">第一课没有摸底</h3>
+            <p><a href="https://github.com/mattpocock/skills/issues/725">#725</a> 还是功能请求。起始水平靠你自己说，或靠空的 <span class="path">learning-records/</span>。第一句就把已知和缺口讲清楚。</p>
+          </article>
+        </div>
+        <p>人读 docs 还有一句更硬的：<code>teach</code> 不可未经核对就信。有人学二阶魔方时拿到了编出来的公式。手续领域、记号一错就错的主题，风险最高。代码这种立刻能跑的，风险低一些。每课那份主资料是给你去核对的，不是装饰。</p>
+      </section>
+
+      <section>
+        <h2>这一课学完，你至少该带走什么</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">1. 自己打 /teach</h3>
+            <p>agent 不会自己走这张卡。学习是项目时才用；当场要一句解释，直接问。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2. 连续性在文件夹</h3>
+            <p>使命、资料、课件、速查、学习记录都是文件。新会话打开同一目录，课就能续。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3. 回看走 reference</h3>
+            <p>lesson 负责第一次学会。以后翻速查，不把整节 HTML 再读一遍。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">4. 本库还要套 teach-me</h3>
+            <p>课放进 <span class="path">课程/某课/</span>，chrome 用 <span class="path">课程/assets/</span>。精读课才嵌条文。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">5. 第一句把用法说死</h3>
+            <p>主题、GitHub 地址、已知和缺口、指定资料、目录落点，都写在同一条 <code>/teach</code> 里。空着打出去，它只能猜。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <p>这一课请你自己去读的主资料是人读说明 <a href="https://github.com/mattpocock/skills/blob/main/docs/productivity/teach.md">docs/productivity/teach.md</a>。它比 <code>SKILL.md</code> 更适合你当使用者看：何时伸手、常见坑、怎样判断它在工作。agent 执行时读的仍是 <a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/SKILL.md">SKILL.md</a>。</p>
+      </section>
+
+      <p class="footer-note">有不清楚的，直接问我。我是这门课的老师，第一句怎么打、仓库和日常技能怎么分开用、资料怎么钉死，都可以追问。</p>
+    </main>
+  </body>
+</html>

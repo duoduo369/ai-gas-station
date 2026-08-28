@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>流程与模型速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">速查</p>
+        <h1>流程与模型速查</h1>
+        <p class="lede">六步流程、每步用什么模型、四个 skill 在哪一步出场。</p>
+      </section>
+
+      <section>
+        <h2>六步流程</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>步骤</th>
+                <th>动作</th>
+                <th>用什么模型</th>
+                <th>谁主导</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>① 提示词</td>
+                <td>给角色、给材料、给禁令</td>
+                <td>Claude / GPT</td>
+                <td>人</td>
+              </tr>
+              <tr>
+                <td>② 材料准备</td>
+                <td>凑够五件真材料（事实、数据、场景、原话、对比）</td>
+                <td>不用 AI</td>
+                <td>人</td>
+              </tr>
+              <tr>
+                <td>③ 大纲</td>
+                <td>AI 出骨架，人调角度，HKR 质检</td>
+                <td>Claude / GPT</td>
+                <td>人定角度</td>
+              </tr>
+              <tr>
+                <td>④ 初稿</td>
+                <td>按大纲逐段展开，需要文学风格时加载风格 skill</td>
+                <td>国产模型</td>
+                <td>AI 初稿 + 人二次改写</td>
+              </tr>
+              <tr>
+                <td>⑤ 改稿</td>
+                <td>第一轮词汇层扫描，第二轮结构层人读，中间插 grill</td>
+                <td>国产模型润色，强模型 grill</td>
+                <td>人</td>
+              </tr>
+              <tr>
+                <td>⑥ 定稿</td>
+                <td>判断、细节、段落推进、活人感四问</td>
+                <td>不用 AI</td>
+                <td>人</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>模型选择</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>场景</th>
+                <th>选谁</th>
+                <th>理由</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>推理、结构化、大纲、grill</td>
+                <td>Claude / GPT</td>
+                <td>强推理，能搭骨架、追问漏洞</td>
+              </tr>
+              <tr>
+                <td>初稿、语感润色</td>
+                <td>DeepSeek / 通义千问等</td>
+                <td>中文语感好，少翻译腔</td>
+              </tr>
+              <tr>
+                <td>只用一个模型走全程</td>
+                <td>国产模型</td>
+                <td>语感是底线，结构问题靠流程补</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>Skill 出场表</h2>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Skill</th>
+                <th>在哪一步</th>
+                <th>一句话记法</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>human-writing</td>
+                <td>② 材料 + ⑤ 改稿</td>
+                <td>五件真材料，翻案腔禁令</td>
+              </tr>
+              <tr>
+                <td>khazix-writer</td>
+                <td>①③④⑤ 全流程</td>
+                <td>四层自检，五种文章原型</td>
+              </tr>
+              <tr>
+                <td>stop-slop</td>
+                <td>⑤ 改稿</td>
+                <td>五维评分，35/50 及格线</td>
+              </tr>
+              <tr>
+                <td>sun-style-writing</td>
+                <td>④ 初稿</td>
+                <td>白描、数字、物件、留白</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>提示词模板</h2>
+
+        <p>写专栏文章时直接套这个结构：</p>
+
+        <pre class="prompt-zh">你是一个写中文专栏的作者，面向 AI 行业的从业者。
+
+素材：
+[把新闻链接、PDF、语音转文字、散乱想法全部贴进来]
+
+要求：
+- 先出大纲，每段给主题句和关键论据，不展开
+- 大纲确认后再写初稿
+- 不用"不是……而是……"、"说白了"、"意味着"、"本质上"
+- 不用破折号，不用提示性冒号，不用三件套排比
+- 段落要短，多数时候一句话就是一段
+- 开头从一个具体的事件或场景切入</pre>
+      </section>
+    </main>
+  </body>
+</html>

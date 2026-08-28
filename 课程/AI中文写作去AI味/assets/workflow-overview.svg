@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" width="800" height="640">
+  <defs>
+    <linearGradient id="step" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0e5a6b" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#083945"/>
+    </linearGradient>
+    <linearGradient id="skill" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c26b2b" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#a0522d"/>
+    </linearGradient>
+    <linearGradient id="model" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#16724a" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0f5235"/>
+    </linearGradient>
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="106%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#0f202e" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="32" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC','PingFang SC',sans-serif" font-size="18" font-weight="700" fill="#1b2430">六步写作流程</text>
+
+  <!-- Step 1: 提示词 -->
+  <g transform="translate(24, 56)">
+    <rect x="0" y="0" width="140" height="48" rx="10" fill="url(#step)" filter="url(#shadow)"/>
+    <text x="70" y="20" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="12" fill="#d8edf2">① 提示词</text>
+    <text x="70" y="37" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="11" fill="#ffffff" font-weight="600">给角色 + 给材料 + 给禁令</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <line x1="164" y1="80" x2="222" y2="80" stroke="#586474" stroke-opacity="0.4" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: 材料准备 -->
+  <g transform="translate(226, 56)">
+    <rect x="0" y="0" width="140" height="48" rx="10" fill="url(#step)" filter="url(#shadow)"/>
+    <text x="70" y="20" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="12" fill="#d8edf2">② 材料准备</text>
+    <text x="70" y="37" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="11" fill="#ffffff" font-weight="600">凑够五件真材料</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <line x1="366" y1="80" x2="424" y2="80" stroke="#586474" stroke-opacity="0.4" stroke-width="1.5"/>
+
+  <!-- Step 3: 大纲 -->
+  <g transform="translate(428, 56)">
+    <rect x="0" y="0" width="140" height="48" rx="10" fill="url(#step)" filter="url(#shadow)"/>
+    <text x="70" y="20" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="12" fill="#d8edf2">③ 大纲</text>
+    <text x="70" y="37" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="11" fill="#ffffff" font-weight="600">AI 出骨架，人调角度</text>
+  </g>
+
+  <!-- Arrow 3→4 -->
+  <line x1="568" y1="80" x2="626" y2="80" stroke="#586474" stroke-opacity="0.4" stroke-width="1.5"/>
+
+  <!-- Step 4: 初稿 -->
+  <g transform="translate(630, 56)">
+    <rect x="0" y="0" width="140" height="48" rx="10" fill="url(#step)" filter="url(#shadow)"/>
+    <text x="70" y="20" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="12" fill="#d8edf2">④ 初稿</text>
+    <text x="70" y="37" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="11" fill="#ffffff" font-weight="600">按大纲逐段展开</text>
+  </g>
+
+  <!-- Down arrow 4→5 -->
+  <line x1="700" y1="104" x2="700" y2="170" stroke="#586474" stroke-opacity="0.4" stroke-width="1.5"/>
+
+  <!-- Step 5: 改稿（两轮） -->
+  <g transform="translate(630, 174)">
+    <rect x="0" y="0" width="140" height="80" rx="10" fill="url(#step)" filter="url(#shadow)"/>
+    <text x="70" y="19" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="12" fill="#d8edf2">⑤ 改稿</text>
+    <line x1="20" y1="28" x2="120" y2="28" stroke="#d8edf2" stroke-opacity="0.3" stroke-width="0.5"/>
+    <text x="70" y="42" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#ffffff">第一轮：扫描词汇层</text>
+    <text x="70" y="56" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#ffffff">第二轮：人读结构层</text>
+    <text x="70" y="72" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#d8edf2">→ grill 交叉验证</text>
+  </g>
+
+  <!-- Down arrow 5→6 -->
+  <line x1="700" y1="254" x2="700" y2="320" stroke="#586474" stroke-opacity="0.4" stroke-width="1.5"/>
+
+  <!-- Step 6: 定稿 -->
+  <g transform="translate(630, 324)">
+    <rect x="0" y="0" width="140" height="48" rx="10" fill="url(#step)" filter="url(#shadow)"/>
+    <text x="70" y="20" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="12" fill="#d8edf2">⑥ 定稿</text>
+    <text x="70" y="37" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="11" fill="#ffffff" font-weight="600">人终审，不发空稿</text>
+  </g>
+
+  <!-- ====== LEFT PANEL: Skills ====== -->
+  <rect x="24" y="140" width="260" height="240" rx="10" fill="#f9fbfc" stroke="#cfd8e3" stroke-width="1" filter="url(#shadow)"/>
+
+  <text x="154" y="166" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="14" font-weight="700" fill="#0e5a6b">Skill 在流程中的位置</text>
+
+  <!-- human-writing -->
+  <g transform="translate(36, 182)">
+    <rect x="0" y="0" width="236" height="36" rx="6" fill="url(#skill)"/>
+    <text x="118" y="15" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="11" font-weight="600" fill="#ffffff">human-writing</text>
+    <text x="118" y="29" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#f8e3d3">② 材料准备 + ⑤ 改稿（硬禁词扫描）</text>
+  </g>
+
+  <!-- khazix-writer -->
+  <g transform="translate(36, 226)">
+    <rect x="0" y="0" width="236" height="36" rx="6" fill="url(#skill)"/>
+    <text x="118" y="15" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="11" font-weight="600" fill="#ffffff">khazix-writer</text>
+    <text x="118" y="29" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#f8e3d3">① 提示词 + ③ 大纲 + ④ 初稿 + ⑤ 四层自检</text>
+  </g>
+
+  <!-- stop-slop -->
+  <g transform="translate(36, 270)">
+    <rect x="0" y="0" width="236" height="36" rx="6" fill="url(#skill)"/>
+    <text x="118" y="15" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="11" font-weight="600" fill="#ffffff">stop-slop</text>
+    <text x="118" y="29" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#f8e3d3">⑤ 改稿（五维评分 + 结构检查）</text>
+  </g>
+
+  <!-- sun-style-writing -->
+  <g transform="translate(36, 314)">
+    <rect x="0" y="0" width="236" height="36" rx="6" fill="url(#skill)"/>
+    <text x="118" y="15" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="11" font-weight="600" fill="#ffffff">sun-style-writing</text>
+    <text x="118" y="29" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#f8e3d3">④ 初稿（文学性叙事长文专用）</text>
+  </g>
+
+  <!-- ====== RIGHT PANEL: Models ====== -->
+  <rect x="300" y="140" width="300" height="240" rx="10" fill="#f9fbfc" stroke="#cfd8e3" stroke-width="1" filter="url(#shadow)"/>
+
+  <text x="450" y="166" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="14" font-weight="700" fill="#0e5a6b">模型选择策略</text>
+
+  <!-- Foreign model -->
+  <g transform="translate(312, 182)">
+    <rect x="0" y="0" width="276" height="56" rx="6" fill="url(#model)"/>
+    <text x="138" y="18" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="12" font-weight="600" fill="#ffffff">国外模型（Claude / GPT）</text>
+    <text x="138" y="34" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#d8edf2">强项：推理、结构化、大纲、grill</text>
+    <text x="138" y="48" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#d8edf2">用在哪：① 提示词梳理 ③ 大纲 ⑤ grill</text>
+  </g>
+
+  <!-- Domestic model -->
+  <g transform="translate(312, 248)">
+    <rect x="0" y="0" width="276" height="56" rx="6" fill="url(#model)"/>
+    <text x="138" y="18" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="12" font-weight="600" fill="#ffffff">国产模型（DeepSeek / 通义千问）</text>
+    <text x="138" y="34" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#d8edf2">强项：中文语感、自然表达、不翻译腔</text>
+    <text x="138" y="48" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#d8edf2">用在哪：④ 初稿生成 ⑤ 语感润色</text>
+  </g>
+
+  <!-- Hybrid strategy -->
+  <g transform="translate(312, 316)">
+    <rect x="0" y="0" width="276" height="46" rx="6" fill="#ffffff" stroke="#16724a" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="138" y="17" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="11" font-weight="600" fill="#16724a">混合策略：强模型出骨架，国产模型润语感</text>
+    <text x="138" y="35" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#586474">流程本身比模型选择更重要</text>
+  </g>
+
+  <!-- ====== BOTTOM: Sun Style ====== -->
+  <rect x="24" y="404" width="576" height="96" rx="10" fill="#f9fbfc" stroke="#c26b2b" stroke-opacity="0.2" stroke-width="1" filter="url(#shadow)"/>
+
+  <text x="312" y="428" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="13" font-weight="700" fill="#c26b2b">孙学写作法：特定风格 Skill 的范例</text>
+
+  <g transform="translate(36, 444)">
+    <rect x="0" y="0" width="110" height="28" rx="5" fill="#f8e3d3"/>
+    <text x="55" y="19" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#c26b2b">白描 · 只写看得见的</text>
+  </g>
+  <g transform="translate(156, 444)">
+    <rect x="0" y="0" width="110" height="28" rx="5" fill="#f8e3d3"/>
+    <text x="55" y="19" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#c26b2b">数字代替形容词</text>
+  </g>
+  <g transform="translate(276, 444)">
+    <rect x="0" y="0" width="110" height="28" rx="5" fill="#f8e3d3"/>
+    <text x="55" y="19" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#c26b2b">物件承载情感</text>
+  </g>
+  <g transform="translate(396, 444)">
+    <rect x="0" y="0" width="110" height="28" rx="5" fill="#f8e3d3"/>
+    <text x="55" y="19" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#c26b2b">沉默即高潮</text>
+  </g>
+  <g transform="translate(36, 480)">
+    <rect x="0" y="0" width="110" height="28" rx="5" fill="#f8e3d3"/>
+    <text x="55" y="19" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#c26b2b">蒙太奇时间结构</text>
+  </g>
+  <g transform="translate(156, 480)">
+    <rect x="0" y="0" width="110" height="28" rx="5" fill="#f8e3d3"/>
+    <text x="55" y="19" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#c26b2b">回环结尾</text>
+  </g>
+  <g transform="translate(276, 480)">
+    <rect x="0" y="0" width="110" height="28" rx="5" fill="#f8e3d3"/>
+    <text x="55" y="19" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#c26b2b">十四项检查清单</text>
+  </g>
+  <g transform="translate(396, 480)">
+    <rect x="0" y="0" width="110" height="28" rx="5" fill="#f8e3d3"/>
+    <text x="55" y="19" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="10" fill="#c26b2b">适用：叙事长文 + 回忆录</text>
+  </g>
+
+  <!-- Bottom note -->
+  <text x="400" y="620" text-anchor="middle" font-family="'Source Han Sans SC','Noto Sans SC',sans-serif" font-size="11" fill="#586474">六步流程 · 四个 Skill · 两类模型 · 一个目标：成品读起来像人写的</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0,0 8,3 0,6" fill="#586474" fill-opacity="0.4"/>
+    </marker>
+  </defs>
+</svg>
