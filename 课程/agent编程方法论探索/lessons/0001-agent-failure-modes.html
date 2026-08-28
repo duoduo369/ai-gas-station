@@ -28,7 +28,43 @@
           <p><strong>人月不可互换，概念完整性比功能堆满更值钱，也没有能消灭本质复杂度的银弹。</strong></p>
           <p>布鲁克斯这三句并不是为 agent 写的，但正好挡住三种常见幻觉：多开几个 agent 不等于多了几个可互换人月；生成速度上去了，不等于「系统是什么」已经有一个脑子想清楚；工具能削偶发复杂度，打不掉需求、边界和概念结构本身的难度。本库的<a href="../../../书籍/人月神话.md">《人月神话》导读</a>把这三句接到了今天。</p>
         </div>
-        <p>2026 年 8 月，Anthropic 的 <a href="https://claude.com/blog/the-ai-native-sdlc-playbook">AI-Native SDLC playbook</a> 把同一件事写成组织语言：<em>code is no longer the bottleneck</em>。这一课不展开组织侧流程手册，只回答：生成速度上去之后，现场会先炸在哪。</p>
+        <p>这三句挡住的是「系统要长成什么样」的判断。生成速度起来之后，组织侧也把这件事说了同一句话；下面三节先把语言认下来，再回到那五个洞。</p>
+      </section>
+
+      <section>
+        <h2>先认一下 SDLC 这张原本的清单</h2>
+        <p><strong>SDLC</strong>，Software Development Life Cycle，软件开发生命周期。一句话：把从需求到上线、再到退役的全过程切成固定阶段、按顺序走一遍的标准化清单。后面那两张图和那五个洞，都按这张清单铺。</p>
+        <p>不同的 SDLC 模型（瀑布、敏捷、螺旋、V 模型）给阶段起不一样的名字、设不一样的门，但绕不开的几件事是固定的：<em>先想清楚要做什么，再设计怎么搞，再写代码，再验证，再上线，再维护</em>。</p>
+        <p>这一课不需要分清这些模型。只需要记住一件事：所有 SDLC 模型都默认「写代码」是最慢的那一段，于是阶段之间的闸门、签字、评审全按写代码的速度设置。下面两张图就是这件事的两个角度。</p>
+      </section>
+
+      <section>
+        <h2>原本是线，生成后是环</h2>
+        <figure class="diagram">
+          <img src="../assets/agent时代的编码图.png" alt="Before agents — every stage runs at human speed; After agents — build runs at agent speed，Build 被压成竖条。">
+          <figcaption>Build 被压缩之后释放出的时间叫 cycle time reclaimed；但被释放的是 Build 的时间，被留下的是 Build 两侧阶段的瓶颈。</figcaption>
+        </figure>
+        <figure class="diagram">
+          <img src="../assets/ai的一个开发流程.png" alt="Traditional — the line; AI-native — the loop, humans above the loop instigating, directing and governing。">
+          <figcaption>阶段没换，关系换了：原来一条线、一个阶段完了才进下一个；现在是一个环、一个阶段的产物触发下一个。人的位置也跟着挪——从阶段里挪到门上。</figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h2>playbook 里值得先记住的几条</h2>
+        <div class="callout">
+          <p><strong><em>code is no longer the bottleneck</em>，不是「不用写代码」，是「控制代码的闸门成了新瓶颈」。</strong></p>
+          <p><a href="https://claude.com/blog/the-ai-native-sdlc-playbook">blog</a> 全文很长，后半段都在讲 hooks / skills / 持续评估之类的实现细节；这一课只取前半段还站得住的几条，撑起后面五个洞的组织语言：</p>
+          <ul>
+            <li><strong>新瓶颈在 Build 两侧。</strong>Build 被压缩到小时，原本按周 / 月配的 Plan / Review / Deploy / Maintain 没同步加速，整条流的总时间被这些阶段决定。</li>
+            <li><strong>逐行人工审查注定失败。</strong>人在人写代码的年代跟得上，agent 一个会话吐出几千行 diff，谁也看不过来。受监管行业更尴尬：要么审查队列堆死，要么代码在审查不足时上线。</li>
+            <li><strong>控制目标保留，执行的机制换代。</strong>需求、设计、写没写对、会不会出事——这四件事不动；以前靠签字和会议，现在换成 hooks、skills、自动化门禁。机制换了，「谁拍板」没变。</li>
+            <li><strong>提交链替代沟通链。</strong>每个阶段结束往版本控制里交一个产物（intent、spec、plan、PR、merged result、event），下一阶段从读这个产物开始。提交链本身就是审计轨迹：谁要了什么、agent 写了什么、人批了什么。</li>
+            <li><strong>人在门里，不在阶段里。</strong>逐行审查让位给「审查 agent 标记的重点、判断意图与风险」。人的注意力从看每行挪到看每处标记。</li>
+            <li><strong>委员会式治理响应跟不上。</strong>例外情况还走每周 / 每月开一次会的委员会，agent 一天能扔出 N 个例外出来。</li>
+          </ul>
+          <p>这六条不展开成工具目录。判断一门方法论有用没用，看它补的是这六条里的哪几条；下面五个洞就是这六条的现场版。</p>
+        </div>
       </section>
 
       <section>
@@ -75,7 +111,7 @@
         <div class="grid">
           <article class="card">
             <h3 class="card-title">Claude playbook</h3>
-            <p>用来证明「code 不再是瓶颈」不是课内修辞。这一课只借开篇那句，不把组织侧流程手册当目录。</p>
+            <p>用来证明「code 不再是瓶颈」不是课内修辞。这一课只借开篇那张「原本是线、生成后是环」的图和组织语言那六条，不把组织侧流程手册当目录。</p>
           </article>
           <article class="card">
             <h3 class="card-title">GitHub Spec Kit 讨论</h3>
@@ -94,7 +130,7 @@
 
       <section>
         <h2>主资料</h2>
-        <p>这一课最值得先读的是本库<a href="../../../书籍/人月神话.md">《人月神话》导读</a>里关于人月、概念完整性和银弹的判断，以及 Claude playbook 开篇 <a href="https://claude.com/blog/the-ai-native-sdlc-playbook">Code is no longer the bottleneck</a>。其余条目供核对，不必一次读完。</p>
+        <p>这一课最值得先读的是本库<a href="../../../书籍/人月神话.md">《人月神话》导读</a>里关于人月、概念完整性和银弹的判断，以及 Claude playbook 开篇 <a href="https://claude.com/blog/the-ai-native-sdlc-playbook"><em>Code is no longer the bottleneck</em></a> 与「原本是线、生成后是环」那一组对照图。其余条目供核对，不必一次读完。</p>
         <ol class="source-list">
           <li><a href="../../../书籍/人月神话.md">书籍笔记：人月神话</a></li>
           <li><a href="https://claude.com/blog/the-ai-native-sdlc-playbook">The AI-Native SDLC playbook</a>（Louis Claxton, 2026-08-21）</li>
