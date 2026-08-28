@@ -4,10 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lesson 0005 · 所有 ticket 做完后怎么验收</title>
-    <link rel="stylesheet" href="../../assets/course.css">
-    <script src="../assets/classify-quiz.js" defer></script>
+    <link rel="stylesheet" href="../assets/course.css">
     <script src="../assets/course-nav.js" defer></script>
-    <script src="../../assets/open-links-new-tab.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
   </head>
   <body>
     <main>
@@ -16,7 +15,6 @@
         <h1>所有 ticket 做完后，整体怎么验收</h1>
         <p class="lede">你已经把一张张 <code>implement</code> 走完。这节课看整分支验收：为什么单票评审不够、<code>/code-review</code> 在查什么、spec 有缺口时怎么补、本地 <code>.scratch</code> 里的票要不要再过 <code>/triage</code>。</p>
         <div class="pill-row">
-          <span class="pill">预计 24 分钟</span>
           <span class="pill">目标：会读两轴并分流后续工作</span>
           <span class="pill">速查：<a href="../reference/post-implement-qa-and-branch-review.html">整分支验收速查</a></span>
         </div>
@@ -25,25 +23,25 @@
       <section>
         <h2>先抓一句关键纠偏</h2>
         <div class="callout">
-          <p><strong>仓库里没有独立的 <code>/qa</code> 来做“全部 ticket 做完后的整体验收”。</strong></p>
-          <p>主线写到 ship 时，收尾 skill 是 <code>/code-review</code>。文档里的推荐也写得很直白：单票评审和整分支评审都要，吃不准时就“每张票看一次，最后再对分支点做一次总评”。你直觉里那句“对当前分支所有提交做一次整体 review，看有没有跑偏 spec”，正好就是这条。</p>
+          <p><strong>仓库里没有独立的 <code>/qa</code> 来做"全部 ticket 做完后的整体验收"。</strong></p>
+          <p>主线写到 ship 时，收尾 skill 是 <code>/code-review</code>。文档里的推荐也写得很直白：单票评审和整分支评审都要，吃不准时就"每张票看一次，最后再对分支点做一次总评"。你直觉里那句"对当前分支所有提交做一次整体 review，看有没有跑偏 spec"，正好就是这条。</p>
         </div>
       </section>
 
       <section>
-        <h2>为什么你会觉得“应该有个 QA 流程”</h2>
+        <h2>为什么你会觉得"应该有个 QA 流程"</h2>
         <div class="grid">
           <article class="card">
             <h3 class="card-title">因为 phase 名叫 QA</h3>
-            <p><code>ask-matt</code> 把一个 session 里的阶段说成“grilling、implementation、the QA”。这是阶段名，不是 slash command。到了实现和验收的边界，例子甚至是 <code>/compact we're going to QA this area</code>。</p>
+            <p><code>ask-matt</code> 把一个 session 里的阶段说成"grilling、implementation、the QA"。这是阶段名，不是 slash command。到了实现和验收的边界，例子甚至是 <code>/compact we're going to QA this area</code>。</p>
           </article>
           <article class="card">
             <h3 class="card-title">因为以前真的有 <code>/qa</code></h3>
-            <p>它已经被删掉了。旧 skill 做的是“你边用边报问题，agent 帮你把 bug 开成 issue”，不是“功能做完后闸门式验收”。所以它被吸收进了 <code>/triage</code> 和 <code>/to-tickets</code>。</p>
+            <p>它已经被删掉了。旧 skill 做的是"你边用边报问题，agent 帮你把 bug 开成 issue"。后来它被吸收进了 <code>/triage</code> 和 <code>/to-tickets</code>。</p>
           </article>
           <article class="card">
             <h3 class="card-title">因为每张票看起来已经 review 过</h3>
-            <p><code>implement</code> 的最后一拍确实是跑 <code>/code-review</code> 再 commit。于是很容易以为整条链路已经自带验收，不再需要人上场。</p>
+            <p><code>implement</code> 的最后一拍确实是跑 <code>/code-review</code> 再 commit。你很容易以为整条链路已经自带验收，不再需要人上场。</p>
           </article>
         </div>
       </section>
@@ -52,7 +50,7 @@
         <h2>这一课里的 seam 是什么</h2>
         <div class="callout">
           <p><strong>seam 是你观察行为的那条公开边界：站在接口外面看它做什么，不伸手进模块里面。</strong></p>
-          <p>测试住在 seam 上，不住在内部实现上。所以单票说“在约定 seam 上红绿过关”，指的不是“所有测试都绿了”，而是：事先说好从哪条公开边界验行为，并且只在那里验。</p>
+          <p>测试住在 seam 上，不住在内部实现上。单票说"在约定 seam 上红绿过关"，指的是：事先说好从哪条公开边界验行为，并且只在那里验。它不等于"所有测试都绿了"。</p>
         </div>
         <div class="grid">
           <article class="card">
@@ -61,26 +59,30 @@
           </article>
           <article class="card">
             <h3 class="card-title">越高越好，越少越好</h3>
-            <p>优先用已经存在的 seam，能站在更高处观察就不要往下拆。一次改动里，理想数量是一个。新开很多 seam，通常意味着测试开始贴实现。</p>
+            <p>优先用已经存在的 seam，能站在更高处观察就不要往下拆。一次改动里，理想数量是一个。新开很多 seam，通常说明测试开始贴实现。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">它不是“模块边界”的同义词</h3>
+            <h3 class="card-title">它不是"模块边界"的同义词</h3>
             <p>仓库刻意不用 boundary 这个词，避免和 DDD 的 bounded context 搅在一起。seam 说的是：行为在哪被替换、被观察。更完整的深模块词汇在 <code>codebase-design</code>，这一课只需要验收用得上的这层。</p>
           </article>
         </div>
         <p class="beat-label">验收共用的词 · tdd 怎么定义 seam</p>
         <article class="prompt-doc" id="zh-tdd-seams">
           <h3 class="card-title">tdd/SKILL.md · Seams 一节（中文全量）</h3>
-          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md">tdd/SKILL.md</a> 的 “Seams — where tests go”。全文其余部分（好测试、反模式、红绿循环）留给以后的 TDD 课。</p>
-          <pre class="prompt-zh">## Seams — 测试写在哪
-
-**seam** 是你测试时所站的公开边界：那条你观察行为、但不伸进内部的接口。测试住在 seam 上，从不对着内部实现。
-
-**只在事先约定的 seam 上测。** 写任何测试之前，先写下要测的 seam，并和用户确认。没有确认过的 seam 上不写测试。你不可能什么都测 —— 事先约定 seam，是让测试力气落在关键路径和复杂逻辑上，而不是每一个边角。
-
-问：“公开接口是什么，我们应该在哪些 seam 上测？”
-
-当那个接口本身的形状还是问题 —— 模块有多深、seam 该落在哪、接口该暴露什么 —— 用 `/codebase-design` skill 要那套词汇。它是 module、interface、depth、seam、adapter、leverage、locality 这些词的共享来源，而且是一份拿来查阅的参考，不是一场要跑的 session。</pre>
+          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md">tdd/SKILL.md</a> 的 "Seams — where tests go"。全文其余部分（好测试、反模式、红绿循环）留给以后的 TDD 课。</p>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h5>Seams — 测试写在哪</h5>
+              <p><strong>seam</strong> 是你测试时所站的公开边界：那条你观察行为、但不伸进内部的接口。测试住在 seam 上，从不对着内部实现。</p>
+              <p><strong>只在事先约定的 seam 上测。</strong> 写任何测试之前，先写下要测的 seam，并和用户确认。没有确认过的 seam 上不写测试。你不可能什么都测 —— 事先约定 seam，是让测试力气落在关键路径和复杂逻辑上，而不是每一个边角。</p>
+              <p>问："公开接口是什么，我们应该在哪些 seam 上测？"</p>
+              <p>当那个接口本身的形状还是问题 —— 模块有多深、seam 该落在哪、接口该暴露什么 —— 用 <code>/codebase-design</code> skill 要那套词汇。它是 module、interface、depth、seam、adapter、leverage、locality 这些词的共享来源，而且是一份拿来查阅的参考，不是一场要跑的 session。</p>
+            </div>
+          </details>
         </article>
       </section>
 
@@ -109,42 +111,52 @@
               <tr>
                 <td>同会话里的自评</td>
                 <td>作者 agent 记得自己刚写完的假设。</td>
-                <td>独立评审。文档原话是：同一上下文审自己，不是 review，是带着 slash command 的确认偏差。</td>
+                <td>独立评审。文档原话：同一上下文审自己，等于带着 slash command 的确认偏差，不是 review。</td>
               </tr>
               <tr>
                 <td>ticket 上的验收框</td>
-                <td>拆票时写下了“怎样才算这张票完成”。</td>
+                <td>拆票时写下了"怎样才算这张票完成"。</td>
                 <td><code>implement</code> 不会勾这些框，也不会关票。frontier 要你自己往前推。</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p>所以：<strong>单票 review 是必要的，但不是整分支验收。</strong> 文档把整分支总评的独特价值说成一件事：抓住那些“每张票单独看都过、拼在一起才露馅”的交互。</p>
+        <p>单票 review 必要，但整分支验收还需要更多。文档把整分支总评的独特价值说成一件事：抓住那些"每张票单独看都过、拼在一起才露馅"的交互。</p>
         <article class="prompt-doc" id="zh-implement">
           <h3 class="card-title">implement/SKILL.md（中文全量）</h3>
           <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/implement/SKILL.md">implement/SKILL.md</a> · 整份 skill 停在 commit。关票、勾验收框是人的事，见下面人读 FAQ。</p>
-          <pre class="prompt-zh">---
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <pre class="prompt-raw prompt-frontmatter">---
 name: implement
-description: "按一份 spec 或一组 tickets 去实现一块工作。"
+description: &quot;按一份 spec 或一组 tickets 去实现一块工作。&quot;
 disable-model-invocation: true
----
-
-按用户在 spec 或 tickets 里描述的工作去实现。
-
-尽可能使用 /tdd，而且只在事先约定的 seam 上。
-
-定期跑类型检查，定期跑单个测试文件，最后再跑一次全量测试套件。
-
-做完后，用 /code-review 评审这项工作。
-
-把工作提交到当前分支。</pre>
+---</pre>
+            <div class="prompt-md">
+              <p>按用户在 spec 或 tickets 里描述的工作去实现。</p>
+              <p>尽可能使用 /tdd，而且只在事先约定的 seam 上。</p>
+              <p>定期跑类型检查，定期跑单个测试文件，最后再跑一次全量测试套件。</p>
+              <p>做完后，用 /code-review 评审这项工作。</p>
+              <p>把工作提交到当前分支。</p>
+            </div>
+          </details>
         </article>
         <article class="prompt-doc" id="zh-implement-faq">
           <h3 class="card-title">docs/engineering/implement.md · 不停在关票（本课所需小节）</h3>
-          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/implement.md">docs/engineering/implement.md</a> 的 FAQ “It finished, but my ticket is still open…”。全文其余部分见原文。</p>
-          <pre class="prompt-zh">**它做完了，但我的票还开着，验收框也还没勾。**
-
-对，而且是预期行为。`implement` 没有完成步骤。它停在 commit，从不碰工作项，GitHub Issues 和本地 markdown tracker 上都确认过，所以这不是 tracker 接线问题。它也不根据 `code-review` 的发现去改，也不去勾源 issue 上的 `- [ ]` 框。关票、核对验收条件，是你自己的事。这件事在依赖链上咬得最狠，因为 `to-tickets` 把 frontier 定义成“所有 blocker 都已关闭的票”。没有人关票，就永远看不见解除阻塞。</pre>
+          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/implement.md">docs/engineering/implement.md</a> 的 FAQ "It finished, but my ticket is still open…"。全文其余部分见原文。</p>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <p><strong>它做完了，但我的票还开着，验收框也还没勾。</strong></p>
+              <p>对，而且是预期行为。<code>implement</code> 没有完成步骤。它停在 commit，从不碰工作项，GitHub Issues 和本地 markdown tracker 上都确认过，所以这不是 tracker 接线问题。它也不根据 <code>code-review</code> 的发现去改，也不去勾源 issue 上的 <code>- [ ]</code> 框。关票、核对验收条件，是你自己的事。这件事在依赖链上咬得最狠，因为 <code>to-tickets</code> 把 frontier 定义成"所有 blocker 都已关闭的票"。没有人关票，就永远看不见解除阻塞。</p>
+            </div>
+          </details>
         </article>
       </section>
 
@@ -169,7 +181,7 @@ disable-model-invocation: true
           </article>
           <article class="card">
             <h3 class="card-title">4. 两轴分开读，不要揉成一句</h3>
-            <p>报告必须是 <code>## Standards</code> 和 <code>## Spec</code> 两块。一轴过了不能把另一轴盖掉。下一节把这两轴拆开讲。</p>
+            <p>报告必须是 <code>## Standards</code> 和 <code>## Spec</code> 两块。一轴过了不能把另一轴盖掉。两轴的详细拆解在后面。</p>
           </article>
           <article class="card">
             <h3 class="card-title">5. 你自己把 demo 走一遍</h3>
@@ -177,16 +189,16 @@ disable-model-invocation: true
           </article>
           <article class="card">
             <h3 class="card-title">6. 发现了就分流，不要空转</h3>
-            <p><code>code-review</code> 没有“直到干净为止”的收敛保证。带着引用的发现，按后面的分流表处理；不要循环到它再也挑不出东西。</p>
+            <p><code>code-review</code> 没有"直到干净为止"的收敛保证。带着引用的发现，按后面的分流表处理；不要循环到它再也挑不出东西。</p>
           </article>
         </div>
       </section>
 
       <section>
-        <h2><code>code-review</code> 跟传统人审不是同一件事</h2>
+        <h2><code>code-review</code> 跟传统人审是两件事</h2>
         <div class="callout">
-          <p><strong>它重点查的是“做没做对的东西”，不是“这段代码里有没有空指针”。</strong></p>
-          <p>你的直觉对了一半：Spec 轴确实是在问 agent 有没有按 spec 做成。但要校正一句——它查的是 spec 里锁住的<strong>行为、决策和 seam</strong>，不是“实现手法像不像你脑子里的写法”。<code>to-spec</code> 自己就禁止把文件路径和代码片段写进 spec。传统人审爱抓的 null、race、off-by-one，文档明确说那是 Claude Code 自带的 review，不是这个 skill。</p>
+          <p><strong>它重点查的是"做没做对的东西"。它不是用来找空指针的。</strong></p>
+          <p>你的直觉对了一半：Spec 轴确实是在问 agent 有没有按 spec 做成。但要校正一句。它查的是 spec 里锁住的行为、决策和 seam，不关心"实现手法像不像你脑子里的写法"。<code>to-spec</code> 自己就禁止把文件路径和代码片段写进 spec。传统人审爱抓的 null、race、off-by-one，文档明确说那是 Claude Code 自带的 review，不属于这个 skill。</p>
         </div>
         <div class="table-wrap">
           <table>
@@ -221,145 +233,156 @@ disable-model-invocation: true
             </tbody>
           </table>
         </div>
-        <p>两轴故意跑在<strong>互相看不见的 sub-agent</strong> 里，最后也不合并、不排名。代码可以“标准全过、东西做错”，也可以“东西做对、风格不像这个仓库”。揉成一个总分，就是过的那轴把没过的盖掉。</p>
-        <p>还有一个验收时特别容易漏的点：<strong>Spec 轴看不见 spec 里根本没写的需求。</strong>“缺了”的意思是 spec 要了、代码没有。你点 demo 时才发现“当初漏了登录过期”，这条不会作为 Spec 失败出现——因为它不在对照物里。</p>
+        <p>两轴故意跑在<strong>互相看不见的 sub-agent</strong> 里，最后也不合并、不排名。代码可以"标准全过、东西做错"，也可以"东西做对、风格不像这个仓库"。揉成一个总分，过的那轴就会把没过的盖掉。</p>
+        <p>还有一个验收时特别容易漏的点：<strong>Spec 轴看不见 spec 里根本没写的需求。</strong>"缺了"的意思是 spec 要了、代码没有。你点 demo 时才发现"当初漏了登录过期"，这条不会作为 Spec 失败出现。它不在对照物里。</p>
         <p class="beat-label">整分支验收 · 两轴 skill 全文</p>
         <article class="prompt-doc" id="zh-code-review">
           <h3 class="card-title">code-review/SKILL.md（中文全量）</h3>
           <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md">code-review/SKILL.md</a> · agent 实际执行的流程。人读 FAQ（同会话自评、单票 vs 整分支、无收敛）在下一块。</p>
-          <pre class="prompt-zh">---
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <pre class="prompt-raw prompt-frontmatter">---
 name: code-review
-description: 从某个固定点（commit、分支、tag 或 merge-base）起评审改动，沿两轴进行 — Standards（代码是否遵循本仓库已写明的编码标准？）和 Spec（代码是否做成了源 issue/spec 要求的那个东西？）。两轴在并行 sub-agent 里跑，并排报告。适用于用户要评审一个分支、一份 PR、进行中的改动，或说 “review since X”。
----
-
-对 `HEAD` 和用户给出的固定点之间的 diff 做两轴评审：
-
-- **Standards** — 代码是否符合本仓库已写明的编码标准？
-- **Spec** — 代码是否忠实地实现了源 issue / spec？
-
-两轴作为 **并行 sub-agent** 跑，以免污染彼此的上下文，然后由本 skill 汇总它们的发现。
-
-你应该已经拿到 issue tracker —— 若缺少 `docs/agents/issue-tracker.md`，跑 `/setup-matt-pocock-skills`。
-
-## 流程
-
-### 1. 钉住固定点
-
-用户说的那个就是固定点 —— commit SHA、分支名、tag、`main`、`HEAD~5` 等。若没指定，问他们。
-
-把 diff 命令一次性记下：`git diff &lt;fixed-point&gt;...HEAD`（三点，所以比较的是 merge-base）。再用 `git log &lt;fixed-point&gt;..HEAD --oneline` 记下 commit 列表。
-
-往下走之前，确认固定点能解析（`git rev-parse &lt;fixed-point&gt;`），且 diff 非空。坏的 ref 或空 diff 应该在这里失败 —— 不要进到两个并行 sub-agent 里面才失败。
-
-### 2. 找出 spec 来源
-
-按这个顺序找源 spec：
-
-1. commit message 里的 issue 引用（`#123`、`Closes #45`、GitLab `!67` 等）—— 按 `docs/agents/issue-tracker.md` 的工作流去取。
-2. 用户当参数传入的路径。
-3. `docs/`、`specs/` 或 `.scratch/` 下，与分支名或功能匹配的 spec 文件。
-4. 若什么都没找到，问用户 spec 在哪。若他们说没有，**Spec** sub-agent 将跳过，并报告 “no spec available”。
-
-### 3. 找出 standards 来源
-
-仓库里任何写明代码该怎么写的东西，例如 `CODING_STANDARDS.md` 或 `CONTRIBUTING.md`。
-
-在仓库自己写下的标准之上，Standards 轴永远带着下面这份 **smell baseline** —— 一组固定的 Fowler code smells（《重构》第 3 章），即使仓库什么都没写也适用。两条规则绑住它：
-
-- **仓库覆盖。** 已写明的仓库标准永远赢；仓库认可的做法若会被 baseline 打标，就压住那个 smell。
-- **永远是判断题。** 每个 smell 都是带标签的启发式（“可能的 Feature Envy”），绝不是硬性违规 —— 而且和这里任何标准一样，工具已经在强制的东西就跳过。
-
-每个 smell 读作 *它是什么* → *怎么修*；拿它去对照 diff：
-
-- **Mysterious Name** — 函数、变量或类型的名字没有揭示它做什么或装什么。→ 改名；若想不出诚实的名字，设计就是浑的。
-- **Duplicated Code** — 同一种逻辑形状出现在这次改动的多个 hunk 或文件里。→ 抽出共享形状，两边都调用它。
-- **Feature Envy** — 一个方法伸进另一个对象的数据，比伸进自己的还多。→ 把方法搬到它羡慕的数据上。
-- **Data Clumps** — 同样几个字段或参数总是结伴旅行（一个类型想要出生）。→ 捆成一个类型，传那个。
-- **Primitive Obsession** — 一个原语或字符串在顶一个该有自己类型的领域概念。→ 给这个概念一个小类型。
-- **Repeated Switches** — 同一次改动里，对同一类型反复出现同样的 `switch` / `if` 瀑布。→ 换成多态，或两边共享的一张 map。
-- **Shotgun Surgery** — 一次逻辑改动迫使 diff 里许多文件零散编辑。→ 把一起变的东西收进一个模块。
-- **Divergent Change** — 一个文件或模块因为几个不相关的理由被改。→ 拆开，让每个模块只为一个理由变。
-- **Speculative Generality** — 为 spec 里没有的需求加上的抽象、参数或钩子。→ 删掉；内联回去，直到真需求出现。
-- **Message Chains** — 长长的 `a.b().c().d()` 导航，调用方不该依赖。→ 把这段走访藏到第一个对象的一个方法后面。
-- **Middle Man** — 一个类或函数大多只是往下委托。→ 砍掉，直接调真正的目标。
-- **Refused Bequest** — 子类或实现者忽略或覆盖了它继承的大部分。→ 丢掉继承，用组合。
-
-### 4. 并行拉起两个 sub-agent
-
-**Standards sub-agent 提示** — 包含：
-
-- 完整的 diff 命令和 commit 列表。
-- 你在第 3 步找到的 standards 源文件列表，**外加第 3 步的 smell baseline 全文贴进去** —— sub-agent 没有别的途径拿到它。
-- 简报：“按相关文件/hunk 报告 — (a) diff 违反已写明标准的每一处：引用那条标准（文件 + 规则）；以及 (b) 你看到的任何 baseline smell：点名并引用 hunk。把硬性违规和判断题分开 — 已写明标准的破坏可以是硬的，但 baseline smell 永远是判断题，已写明的仓库标准覆盖 baseline。工具已经在强制的跳过。少于 400 词。”
-
-**Spec sub-agent 提示** — 包含：
-
-- diff 命令和 commit 列表。
-- spec 的路径或取到的正文。
-- 简报：“报告：(a) spec 要求了但缺失或不完整的需求；(b) diff 里没被要求的行为（scope creep）；(c) 看起来实现了、但实现看起来是错的需求。每条发现引用 spec 的那一行。少于 400 词。”
-
-若 spec 缺失，跳过 Spec sub-agent，并在最终报告里注明。
-
-### 5. 汇总
-
-把两份报告放在 `## Standards` 和 `## Spec` 标题下，原样或轻度清理。**不要** 合并或重新排名发现 — 两轴故意分开（见 Why two axes）。
-
-以一句话总结结束：每轴发现总数，以及 *各轴内部* 最严重的问题（如果有）。不要跨轴挑一个总冠军 — 那正是分开存在所要防止的重新排名。
-
-## 为什么要两轴
-
-一次改动可以通过一轴而失败另一轴：
-
-- 代码遵循每一条标准，但实现了错的东西 → **Standards 过，Spec 不过。**
-- 代码恰好做了 issue 要求的，但破坏了项目约定 → **Spec 过，Standards 不过。**
-
-分开报告，阻止一轴把另一轴盖掉。</pre>
+description: 从某个固定点（commit、分支、tag 或 merge-base）起评审改动，沿两轴进行 — Standards（代码是否遵循本仓库已写明的编码标准？）和 Spec（代码是否做成了源 issue/spec 要求的那个东西？）。两轴在并行 sub-agent 里跑，并排报告。适用于用户要评审一个分支、一份 PR、进行中的改动，或说 &quot;review since X&quot;。
+---</pre>
+            <div class="prompt-md">
+              <p>对 <code>HEAD</code> 和用户给出的固定点之间的 diff 做两轴评审：</p>
+              <ul>
+              <li><strong>Standards</strong> — 代码是否符合本仓库已写明的编码标准？</li>
+              <li><strong>Spec</strong> — 代码是否忠实地实现了源 issue / spec？</li>
+              </ul>
+              <p>两轴作为 <strong>并行 sub-agent</strong> 跑，以免污染彼此的上下文，然后由本 skill 汇总它们的发现。</p>
+              <p>你应该已经拿到 issue tracker —— 若缺少 <code>docs/agents/issue-tracker.md</code>，跑 <code>/setup-matt-pocock-skills</code>。</p>
+              <h5>流程</h5>
+              <h6>1. 钉住固定点</h6>
+              <p>用户说的那个就是固定点 —— commit SHA、分支名、tag、<code>main</code>、<code>HEAD~5</code> 等。若没指定，问他们。</p>
+              <p>把 diff 命令一次性记下：<code>git diff &lt;fixed-point&gt;...HEAD</code>（三点，所以比较的是 merge-base）。再用 <code>git log &lt;fixed-point&gt;..HEAD --oneline</code> 记下 commit 列表。</p>
+              <p>往下走之前，确认固定点能解析（<code>git rev-parse &lt;fixed-point&gt;</code>），且 diff 非空。坏的 ref 或空 diff 应该在这里失败 —— 不要进到两个并行 sub-agent 里面才失败。</p>
+              <h6>2. 找出 spec 来源</h6>
+              <p>按这个顺序找源 spec：</p>
+              <ol>
+              <li>commit message 里的 issue 引用（<code>#123</code>、<code>Closes #45</code>、GitLab <code>!67</code> 等）—— 按 <code>docs/agents/issue-tracker.md</code> 的工作流去取。</li>
+              <li>用户当参数传入的路径。</li>
+              <li><code>docs/</code>、<code>specs/</code> 或 <code>.scratch/</code> 下，与分支名或功能匹配的 spec 文件。</li>
+              <li>若什么都没找到，问用户 spec 在哪。若他们说没有，<strong>Spec</strong> sub-agent 将跳过，并报告 "no spec available"。</li>
+              </ol>
+              <h6>3. 找出 standards 来源</h6>
+              <p>仓库里任何写明代码该怎么写的东西，例如 <code>CODING_STANDARDS.md</code> 或 <code>CONTRIBUTING.md</code>。</p>
+              <p>在仓库自己写下的标准之上，Standards 轴永远带着下面这份 <strong>smell baseline</strong> —— 一组固定的 Fowler code smells（《重构》第 3 章），即使仓库什么都没写也适用。两条规则绑住它：</p>
+              <ul>
+              <li><strong>仓库覆盖。</strong> 已写明的仓库标准永远赢；仓库认可的做法若会被 baseline 打标，就压住那个 smell。</li>
+              <li><strong>永远是判断题。</strong> 每个 smell 都是带标签的启发式（"可能的 Feature Envy"），绝不是硬性违规 —— 而且和这里任何标准一样，工具已经在强制的东西就跳过。</li>
+              </ul>
+              <p>每个 smell 读作 <em>它是什么</em> → <em>怎么修</em>；拿它去对照 diff：</p>
+              <ul>
+              <li><strong>Mysterious Name</strong> — 函数、变量或类型的名字没有揭示它做什么或装什么。→ 改名；若想不出诚实的名字，设计就是浑的。</li>
+              <li><strong>Duplicated Code</strong> — 同一种逻辑形状出现在这次改动的多个 hunk 或文件里。→ 抽出共享形状，两边都调用它。</li>
+              <li><strong>Feature Envy</strong> — 一个方法伸进另一个对象的数据，比伸进自己的还多。→ 把方法搬到它羡慕的数据上。</li>
+              <li><strong>Data Clumps</strong> — 同样几个字段或参数总是结伴旅行（一个类型想要出生）。→ 捆成一个类型，传那个。</li>
+              <li><strong>Primitive Obsession</strong> — 一个原语或字符串在顶一个该有自己类型的领域概念。→ 给这个概念一个小类型。</li>
+              <li><strong>Repeated Switches</strong> — 同一次改动里，对同一类型反复出现同样的 <code>switch</code> / <code>if</code> 瀑布。→ 换成多态，或两边共享的一张 map。</li>
+              <li><strong>Shotgun Surgery</strong> — 一次逻辑改动迫使 diff 里许多文件零散编辑。→ 把一起变的东西收进一个模块。</li>
+              <li><strong>Divergent Change</strong> — 一个文件或模块因为几个不相关的理由被改。→ 拆开，让每个模块只为一个理由变。</li>
+              <li><strong>Speculative Generality</strong> — 为 spec 里没有的需求加上的抽象、参数或钩子。→ 删掉；内联回去，直到真需求出现。</li>
+              <li><strong>Message Chains</strong> — 长长的 <code>a.b().c().d()</code> 导航，调用方不该依赖。→ 把这段走访藏到第一个对象的一个方法后面。</li>
+              <li><strong>Middle Man</strong> — 一个类或函数大多只是往下委托。→ 砍掉，直接调真正的目标。</li>
+              <li><strong>Refused Bequest</strong> — 子类或实现者忽略或覆盖了它继承的大部分。→ 丢掉继承，用组合。</li>
+              </ul>
+              <h6>4. 并行拉起两个 sub-agent</h6>
+              <p><strong>Standards sub-agent 提示</strong> — 包含：</p>
+              <ul>
+              <li>完整的 diff 命令和 commit 列表。</li>
+              <li>你在第 3 步找到的 standards 源文件列表，<strong>外加第 3 步的 smell baseline 全文贴进去</strong> —— sub-agent 没有别的途径拿到它。</li>
+              <li>简报："按相关文件/hunk 报告 — (a) diff 违反已写明标准的每一处：引用那条标准（文件 + 规则）；以及 (b) 你看到的任何 baseline smell：点名并引用 hunk。把硬性违规和判断题分开 — 已写明标准的破坏可以是硬的，但 baseline smell 永远是判断题，已写明的仓库标准覆盖 baseline。工具已经在强制的跳过。少于 400 词。"</li>
+              </ul>
+              <p><strong>Spec sub-agent 提示</strong> — 包含：</p>
+              <ul>
+              <li>diff 命令和 commit 列表。</li>
+              <li>spec 的路径或取到的正文。</li>
+              <li>简报："报告：(a) spec 要求了但缺失或不完整的需求；(b) diff 里没被要求的行为（scope creep）；(c) 看起来实现了、但实现看起来是错的需求。每条发现引用 spec 的那一行。少于 400 词。"</li>
+              </ul>
+              <p>若 spec 缺失，跳过 Spec sub-agent，并在最终报告里注明。</p>
+              <h6>5. 汇总</h6>
+              <p>把两份报告放在 <code>## Standards</code> 和 <code>## Spec</code> 标题下，原样或轻度清理。<strong>不要</strong> 合并或重新排名发现 — 两轴故意分开（见 Why two axes）。</p>
+              <p>以一句话总结结束：每轴发现总数，以及 <em>各轴内部</em> 最严重的问题（如果有）。不要跨轴挑一个总冠军 — 那正是分开存在所要防止的重新排名。</p>
+              <h5>为什么要两轴</h5>
+              <p>一次改动可以通过一轴而失败另一轴：</p>
+              <ul>
+              <li>代码遵循每一条标准，但实现了错的东西 → <strong>Standards 过，Spec 不过。</strong></li>
+              <li>代码恰好做了 issue 要求的，但破坏了项目约定 → <strong>Spec 过，Standards 不过。</strong></li>
+              </ul>
+              <p>分开报告，阻止一轴把另一轴盖掉。</p>
+            </div>
+          </details>
         </article>
         <article class="prompt-doc" id="zh-code-review-docs">
           <h3 class="card-title">docs/engineering/code-review.md · 何时用、关键 FAQ（本课所需小节）</h3>
           <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/code-review.md">docs/engineering/code-review.md</a>。流程全文见上一块 skill；这里嵌人读页里本课真正用到的分流表和 FAQ。Claude Code 同名冲突等 harness 问题见原文。</p>
-          <pre class="prompt-zh">## 什么时候去找它
-
-输入 `/code-review`，或当你要求评审一个分支、一份 PR、进行中的工作、或任何 “since X” 时，agent 会自己伸手。
-
-| 你的处境 | 去找 |
-| --- | --- |
-| 已经有 diff，你想知道它既做得对、又是对的东西 | `code-review` |
-| 你想在 diff 里抓 bug —— 空指针路径、race、off-by-one | Claude Code 自带的 review，不是这一个 |
-| 还什么都没写，想 test-first 写出来 | tdd |
-| 一整份 spec 需要构建，评审也包括在内 | implement，它自己会调这个 skill |
-| 漂的是整个代码库，不是一段 diff | improve-codebase-architecture |
-| 有东西坏了，你不知道为什么 | diagnosing-bugs |
-
-你必须给出固定点。若不给，skill 会问，而不是猜；然后它会先确认 ref 能解析、diff 非空，再拉起任何东西，这样打错的分支名会在你面前失败，而不是在两个 sub-agent 里面失败。
-
-## 常见问题
-
-**该在写代码的同一个 session 里跑吗？**
-
-宁愿开一个新的。有读者原话：“同一上下文审自己不是 review，是带着 slash command 的确认偏差。”作者 session 里的评审 agent 握着塑造这段代码的每一个假设，而这正是独立评审者不该有的上下文。这也是为什么有人要求 `implement` 不要内置评审步骤 —— 它在刚写下 diff 的那个 session 里跑评审。你自己从干净 session 调用 `/code-review`，才是诚实的版本。
-
-**每张票之后跑，还是最后跑一次？**
-
-两种都行，skill 不替你决定。按票跑能让每次 diff 足够小，Spec 轴有一份清楚的 spec 可对，这是 `implement` 用的模式。攒到分支末尾一次跑，能抓住按票评审各自漏掉的票间交互。吃不准就：每张票看一次，最后再对分支点做一次总评。
-
-**我能相信这些发现吗？**
-
-不能不核对。Sub-agent 输出是假设，不是证据 —— 有团队报告过十几处破坏性改动被基于散文的评审放过去。这个 skill 把两份报告原样或轻度清理后汇总，而不是拿每条声明回头对文件再验证，所以一条发现可能引用错位置，或夸大影响。行动前先读每条发现上的引用。每条发现必须带着一条 —— 一条标准规则、一个 smell 加它的 hunk、或 spec 的一行 —— 正是这一点让核对成为可能。
-
-**为什么我每次跑它都会找出新问题？**
-
-因为修复会造出新的表面，也因为 Standards 轴里判断题那一半在两次运行之间不是确定性的。有读者把这个循环说得很直：“/code-review 和 /improve-code-architecture 每次都能找出新东西。我实现修复，再跑这些 skill，一遍又一遍。”没有收敛保证。把一次评审当成线索清单，对那些背后有被引用规则的动手，然后停下 —— 不要循环到它回来是干净的，因为它不会。
-
-**它审我未提交的工作吗？**
-
-不。它 diff 的是 `&lt;fixed-point&gt;...HEAD`，三点，从 merge-base 量起，排除 staged 和工作区改动。若 `implement` 还没做过一次中间 commit，即将提交的工作对评审是看不见的。先 commit，再评审，然后 amend 或加 fixup。</pre>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h5>什么时候去找它</h5>
+              <p>输入 <code>/code-review</code>，或当你要求评审一个分支、一份 PR、进行中的工作、或任何 "since X" 时，agent 会自己伸手。</p>
+              <table>
+              <thead>
+              <tr>
+              <th>你的处境</th>
+              <th>去找</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+              <td>已经有 diff，你想知道它既做得对、又是对的东西</td>
+              <td><code>code-review</code></td>
+              </tr>
+              <tr>
+              <td>你想在 diff 里抓 bug —— 空指针路径、race、off-by-one</td>
+              <td>Claude Code 自带的 review，不是这一个</td>
+              </tr>
+              <tr>
+              <td>还什么都没写，想 test-first 写出来</td>
+              <td>tdd</td>
+              </tr>
+              <tr>
+              <td>一整份 spec 需要构建，评审也包括在内</td>
+              <td>implement，它自己会调这个 skill</td>
+              </tr>
+              <tr>
+              <td>漂的是整个代码库，不是一段 diff</td>
+              <td>improve-codebase-architecture</td>
+              </tr>
+              <tr>
+              <td>有东西坏了，你不知道为什么</td>
+              <td>diagnosing-bugs</td>
+              </tr>
+              </tbody>
+              </table>
+              <p>你必须给出固定点。若不给，skill 会问，而不是猜；然后它会先确认 ref 能解析、diff 非空，再拉起任何东西，这样打错的分支名会在你面前失败，而不是在两个 sub-agent 里面失败。</p>
+              <h5>常见问题</h5>
+              <p><strong>该在写代码的同一个 session 里跑吗？</strong></p>
+              <p>宁愿开一个新的。有读者原话："同一上下文审自己不是 review，是带着 slash command 的确认偏差。"作者 session 里的评审 agent 握着塑造这段代码的每一个假设，而这正是独立评审者不该有的上下文。这也是为什么有人要求 <code>implement</code> 不要内置评审步骤 —— 它在刚写下 diff 的那个 session 里跑评审。你自己从干净 session 调用 <code>/code-review</code>，才是诚实的版本。</p>
+              <p><strong>每张票之后跑，还是最后跑一次？</strong></p>
+              <p>两种都行，skill 不替你决定。按票跑能让每次 diff 足够小，Spec 轴有一份清楚的 spec 可对，这是 <code>implement</code> 用的模式。攒到分支末尾一次跑，能抓住按票评审各自漏掉的票间交互。吃不准就：每张票看一次，最后再对分支点做一次总评。</p>
+              <p><strong>我能相信这些发现吗？</strong></p>
+              <p>不能不核对。Sub-agent 输出是假设，不是证据 —— 有团队报告过十几处破坏性改动被基于散文的评审放过去。这个 skill 把两份报告原样或轻度清理后汇总，而不是拿每条声明回头对文件再验证，所以一条发现可能引用错位置，或夸大影响。行动前先读每条发现上的引用。每条发现必须带着一条 —— 一条标准规则、一个 smell 加它的 hunk、或 spec 的一行 —— 正是这一点让核对成为可能。</p>
+              <p><strong>为什么我每次跑它都会找出新问题？</strong></p>
+              <p>因为修复会造出新的表面，也因为 Standards 轴里判断题那一半在两次运行之间不是确定性的。有读者把这个循环说得很直："/code-review 和 /improve-code-architecture 每次都能找出新东西。我实现修复，再跑这些 skill，一遍又一遍。"没有收敛保证。把一次评审当成线索清单，对那些背后有被引用规则的动手，然后停下 —— 不要循环到它回来是干净的，因为它不会。</p>
+              <p><strong>它审我未提交的工作吗？</strong></p>
+              <p>不。它 diff 的是 <code>&lt;fixed-point&gt;...HEAD</code>，三点，从 merge-base 量起，排除 staged 和工作区改动。若 <code>implement</code> 还没做过一次中间 commit，即将提交的工作对评审是看不见的。先 commit，再评审，然后 amend 或加 fixup。</p>
+            </div>
+          </details>
         </article>
       </section>
 
       <section>
         <h2>验收发现问题时，要不要新开 spec</h2>
-        <p>默认答案是<strong>不要</strong>。spec 是当时的决策快照，不是活文档。<code>to-spec</code> 写得很清楚：一开工它就会过期；该留下的是 <code>CONTEXT.md</code> 和 ADR。目的地没变，就在同一份 spec 下面补工作。</p>
+        <p>默认答案是<strong>不要</strong>。spec 是当时的决策快照，不要当活文档用。<code>to-spec</code> 写得很清楚：一开工它就会过期；该留下的是 <code>CONTEXT.md</code> 和 ADR。目的地没变，就在同一份 spec 下面补工作。</p>
         <div class="table-wrap">
           <table>
             <thead>
@@ -378,7 +401,7 @@ description: 从某个固定点（commit、分支、tag 或 merge-base）起评�
               <tr>
                 <td>Spec 轴：多做了（scope creep）</td>
                 <td>agent 做了 spec 没要的东西</td>
-                <td>先问你自己：这是该删掉，还是你其实想要？想要就当成新决策，不是“评审通过”。</td>
+                <td>先问你自己：这是该删掉，还是你其实想要？想要就当成新决策，不是"评审通过"。</td>
               </tr>
               <tr>
                 <td>人走 demo 才发现 spec 漏了、写得不够</td>
@@ -398,36 +421,45 @@ description: 从某个固定点（commit、分支、tag 或 merge-base）起评�
         <article class="prompt-doc" id="zh-to-spec-seams">
           <h3 class="card-title">to-spec/SKILL.md · 先约定 seam、禁止路径（本课所需小节）</h3>
           <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/to-spec/SKILL.md">to-spec/SKILL.md</a>。用户故事模板等其余全文见原文；本课要的是验收会碰到的那几条。</p>
-          <pre class="prompt-zh">这个 skill 吃当前对话上下文和对代码库的理解，产出一份 spec。不要访谈用户 —— 只综合你已经知道的。
-
-## 流程（节选）
-
-2. 草拟你将在哪些 seam 上测试这个功能。已有 seam 优先于新开的。能站多高就站多高。若必须新开 seam，提到你能提到的最高处。代码库里 seam 越少越好 —— 理想数量是一个。
-
-和用户确认这些 seam 符合他们的预期。
-
-3. 按模板写 spec，然后发布到项目 issue tracker。打上 `ready-for-agent` triage 标签 —— 不需要额外 triage。
-
-## Implementation Decisions（节选）
-
-不要写入具体文件路径或代码片段。它们很快就会过时。
-
-例外：若原型产出的片段比散文更能精确编码一个决策（状态机、reducer、schema、类型形状），把它内联进相关决策，并简短注明来自原型。剪到决策密集的部分 —— 不是能跑的 demo，只是重要的那些位。</pre>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <p>这个 skill 吃当前对话上下文和对代码库的理解，产出一份 spec。不要访谈用户 —— 只综合你已经知道的。</p>
+              <h5>流程（节选）</h5>
+              <ol start="2">
+              <li>草拟你将在哪些 seam 上测试这个功能。已有 seam 优先于新开的。能站多高就站多高。若必须新开 seam，提到你能提到的最高处。代码库里 seam 越少越好 —— 理想数量是一个。</li>
+              </ol>
+              <p>和用户确认这些 seam 符合他们的预期。</p>
+              <ol start="3">
+              <li>按模板写 spec，然后发布到项目 issue tracker。打上 <code>ready-for-agent</code> triage 标签 —— 不需要额外 triage。</li>
+              </ol>
+              <h5>Implementation Decisions（节选）</h5>
+              <p>不要写入具体文件路径或代码片段。它们很快就会过时。</p>
+              <p>例外：若原型产出的片段比散文更能精确编码一个决策（状态机、reducer、schema、类型形状），把它内联进相关决策，并简短注明来自原型。剪到决策密集的部分 —— 不是能跑的 demo，只是重要的那些位。</p>
+            </div>
+          </details>
         </article>
         <article class="prompt-doc" id="zh-to-spec-docs">
           <h3 class="card-title">docs/engineering/to-spec.md · 快照与 pivot（本课所需小节）</h3>
-          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/to-spec.md">docs/engineering/to-spec.md</a> 的 FAQ。Seams before prose 与 “Do I keep the spec frozen” 是验收分流的条文依据。</p>
-          <pre class="prompt-zh">## 先写 seam，再写正文
-
-动笔之前，`to-spec` 先草拟这个功能将在哪些 **seam** 上被测试，并和你确认。它优先用已经存在的 seam，能站多高就站多高 —— 一次改动里理想数量是一个。
-
-这些约定好的 seam 会往下传。[tdd] 只在事先约定的 seam 上工作，[code-review] 对照 spec 评审 diff，所以一个没人约定却用上的 seam 会变成评审发现。这条绑定是间接的 —— 它穿过这份文档 —— 正因为如此，seam 对话值得在这里认真做，而不是推迟到实现。
-
-**`/to-prd` 去哪了？**
-就是这个 skill，在 v1.1 改了名。“Spec” 现在是贯穿始终的词，旧 slug `to-prd` 已死 —— 用新名字重装。替换旧词汇的那一对是 *spec* 和 *tickets*：spec 是目的地和钉住它的决策，tickets 是走到那里的执行步骤。若你 pivot，删掉没做完的 tickets，留着 spec。
-
-**票开始之后，spec 要冻住，还是让 agent 改写？**
-没有东西让它保持同步，所以实践上它是你当时所知的一份快照，实现第一次教给你新东西时它就过期了。工作交付后，把它当一次性产物。真正该活得更久的是你的 `CONTEXT.md` 和 ADR —— 实现期间学到的、值得留下的东西，属于那里，不属于一份被改来改去的 spec。</pre>
+          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/to-spec.md">docs/engineering/to-spec.md</a> 的 FAQ。Seams before prose 与 "Do I keep the spec frozen" 是验收分流的条文依据。</p>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h5>先写 seam，再写正文</h5>
+              <p>动笔之前，<code>to-spec</code> 先草拟这个功能将在哪些 <strong>seam</strong> 上被测试，并和你确认。它优先用已经存在的 seam，能站多高就站多高 —— 一次改动里理想数量是一个。</p>
+              <p>这些约定好的 seam 会往下传。[tdd] 只在事先约定的 seam 上工作，[code-review] 对照 spec 评审 diff，所以一个没人约定却用上的 seam 会变成评审发现。这条绑定是间接的 —— 它穿过这份文档 —— 正因为如此，seam 对话值得在这里认真做，而不是推迟到实现。</p>
+              <p><strong><code>/to-prd</code> 去哪了？</strong>
+              就是这个 skill，在 v1.1 改了名。"Spec" 现在是贯穿始终的词，旧 slug <code>to-prd</code> 已死 —— 用新名字重装。替换旧词汇的那一对是 <em>spec</em> 和 <em>tickets</em>：spec 是目的地和钉住它的决策，tickets 是走到那里的执行步骤。若你 pivot，删掉没做完的 tickets，留着 spec。</p>
+              <p><strong>票开始之后，spec 要冻住，还是让 agent 改写？</strong>
+              没有东西让它保持同步，所以实践上它是你当时所知的一份快照，实现第一次教给你新东西时它就过期了。工作交付后，把它当一次性产物。真正该活得更久的是你的 <code>CONTEXT.md</code> 和 ADR —— 实现期间学到的、值得留下的东西，属于那里，不属于一份被改来改去的 spec。</p>
+            </div>
+          </details>
         </article>
       </section>
 
@@ -443,22 +475,25 @@ description: 从某个固定点（commit、分支、tag 或 merge-base）起评�
           <li><code>.scratch/&lt;feature&gt;/issues/01-xxx.md</code> — 一张票一个文件</li>
           <li>票上的 <code>Status:</code> 行，就是 triage 状态在本地的落点</li>
         </ul>
-        <p>所以：<strong>tracker 能跑 triage，不代表你这条工作流该跑。</strong> 文档自己也说了——如果 tracker 里的东西都来自你自己的规划，你会很少打开 <code>/triage</code>。它值钱的场景是开源仓库、团队往你这里扔原始 issue。本地独唱、票都是 <code>to-tickets</code> 写进 <code>.scratch</code> 的，验收时发现缺口，直接在同一个 <code>issues/</code> 里补票，或先 grill 再补；不要把这些票再送去 triage。</p>
-        <p>只有一种本地情况它才开始有用：tracker 里突然多了一条<strong>还没被你规划过的原始备注</strong>——同事丢来的、用户反馈、你随手记下但完全没拆过的东西。那时 triage 的核实、去重、agent brief 才帮得上忙。</p>
+        <p>tracker 能跑 triage，不代表你这条工作流该跑。文档自己也说了。如果 tracker 里的东西都来自你自己的规划，你会很少打开 <code>/triage</code>。它值钱的场景是开源仓库、团队往你这里扔原始 issue。本地独唱、票都是 <code>to-tickets</code> 写进 <code>.scratch</code> 的，验收时发现缺口，直接在同一个 <code>issues/</code> 里补票，或先 grill 再补；不要把这些票再送去 triage。</p>
+        <p>只有一种本地情况它才开始有用：tracker 里突然多了一条<strong>还没被你规划过的原始备注</strong>。同事丢来的、用户反馈、你随手记下但完全没拆过的东西。那时 triage 的核实、去重、agent brief 才帮得上忙。</p>
         <article class="prompt-doc" id="zh-triage-docs">
           <h3 class="card-title">docs/engineering/triage.md · 只处理外来工单（本课所需小节）</h3>
-          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/triage.md">docs/engineering/triage.md</a>。状态机与 agent brief 全文见原文；本课要的是“不要 triage 自己拆的票”，以及 Linear / GitHub 拆分（0006 会再碰到）。</p>
-          <pre class="prompt-zh">`triage` 处理项目 tracker 上的 issue，让每一条走过一个由 **triage 角色** 组成的小状态机 —— 一个类别角色加一个状态角色 —— 留下的要么是一份 agent-ready brief，要么是给报告人的具体问题，要么是带记录理由的关闭。
-
-它只处理 **不是你创建的** issue。原始 bug 报告、外来功能请求、突然扔进来的外部 PR —— 从外面落到 tracker 上、保持报告人留下的形状的工作。[to-tickets] 产出的票从构造上已经是 agent-ready，再对它们跑 `triage` 往好了说也是浪费。规则很平：`/triage` 只给外来 issue，不给你自己创建的 issue。
-
-**我该对 to-tickets 刚发布的票再跑一遍 triage 吗？**
-
-不。它们已经是 agent-ready —— `to-tickets` 发布时就打上 `ready-for-agent`，正是为了让 AFK runner 不用再过一遍就能捡走。碰到这个问题的用户跑完 spec 流，看见产出上写着 `needs-triage`，发现 AFK runner 什么都不管。`triage` 是外来工作的上坡入口；spec 流是你自己发起的工作的车道。它们在 `ready-for-agent` 会合，不会更早。
-
-**它能和 Linear 一起用吗？或者 GitHub Issues 以外的任何东西？**
-
-能 —— tracker 是配置，不是写死的假设，有人拿它对接 Linear（经 `linear` CLI）、GitLab，以及 `.scratch/` 下的纯 markdown 文件。一种常见拆分是 Linear 管 issue 和规划，GitHub 管代码和 PR：skill 里说 “issue tracker” 的映射到 Linear，说 “PR” 的映射到 GitHub。</pre>
+          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/triage.md">docs/engineering/triage.md</a>。状态机与 agent brief 全文见原文；本课要的是"不要 triage 自己拆的票"，以及 Linear / GitHub 拆分（0006 会再碰到）。</p>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <p><code>triage</code> 处理项目 tracker 上的 issue，让每一条走过一个由 <strong>triage 角色</strong> 组成的小状态机 —— 一个类别角色加一个状态角色 —— 留下的要么是一份 agent-ready brief，要么是给报告人的具体问题，要么是带记录理由的关闭。</p>
+              <p>它只处理 <strong>不是你创建的</strong> issue。原始 bug 报告、外来功能请求、突然扔进来的外部 PR —— 从外面落到 tracker 上、保持报告人留下的形状的工作。[to-tickets] 产出的票从构造上已经是 agent-ready，再对它们跑 <code>triage</code> 往好了说也是浪费。规则很平：<code>/triage</code> 只给外来 issue，不给你自己创建的 issue。</p>
+              <p><strong>我该对 to-tickets 刚发布的票再跑一遍 triage 吗？</strong></p>
+              <p>不。它们已经是 agent-ready —— <code>to-tickets</code> 发布时就打上 <code>ready-for-agent</code>，正是为了让 AFK runner 不用再过一遍就能捡走。碰到这个问题的用户跑完 spec 流，看见产出上写着 <code>needs-triage</code>，发现 AFK runner 什么都不管。<code>triage</code> 是外来工作的上坡入口；spec 流是你自己发起的工作的车道。它们在 <code>ready-for-agent</code> 会合，不会更早。</p>
+              <p><strong>它能和 Linear 一起用吗？或者 GitHub Issues 以外的任何东西？</strong></p>
+              <p>能 —— tracker 是配置，不是写死的假设，有人拿它对接 Linear（经 <code>linear</code> CLI）、GitLab，以及 <code>.scratch/</code> 下的纯 markdown 文件。一种常见拆分是 Linear 管 issue 和规划，GitHub 管代码和 PR：skill 里说 "issue tracker" 的映射到 Linear，说 "PR" 的映射到 GitHub。</p>
+            </div>
+          </details>
         </article>
       </section>
 
@@ -506,56 +541,6 @@ description: 从某个固定点（commit、分支、tag 或 merge-base）起评�
               </tr>
             </tbody>
           </table>
-        </div>
-      </section>
-
-      <section class="quiz">
-        <h2>3 分钟自测</h2>
-        <div class="quiz-list">
-          <div class="quiz-item" data-quiz-answer="没有独立命令" data-quiz-explanation="独立 `/qa` 已经退役。旧 skill 是边用边报 bug 再开 issue，不是整分支验收闸门。主线收尾用的是 `/code-review`。">
-            <h3>1. 所有 ticket 都 implement 完以后，仓库里有没有专门的 <code>/qa</code> 做整分支验收？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="还有专门命令">还有专门命令</button>
-              <button class="quiz-option" type="button" data-choice="没有独立命令">没有独立命令</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="测行为的公开边界" data-quiz-explanation="tdd 原文：seam 是你观察行为、但不伸进内部的那条公开边界。测试住在 seam 上，不住在实现细节上。">
-            <h3>2. 这一课里的 seam，指的是什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="模块内部的实现细节">模块内部的实现细节</button>
-              <button class="quiz-option" type="button" data-choice="测行为的公开边界">测行为的公开边界</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="是不是对的东西" data-quiz-explanation="Spec 轴问的是 the right thing：有没有按 spec 的行为和决策做成。传统人审爱抓的 bug，以及“实现手法像不像”，都不是它的主业。">
-            <h3>3. 这个 <code>/code-review</code> 的 Spec 轴，核心在问什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="是不是抓空指针">是不是抓空指针</button>
-              <button class="quiz-option" type="button" data-choice="是不是对的东西">是不是对的东西</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="同一份里补票" data-quiz-explanation="目的地没变就补票，不要新开 spec。spec 是快照，不是活文档；destination 换了才配得上重新 to-spec。">
-            <h3>4. 验收时发现 spec 漏了一个需求，但功能目的地没变，默认怎么做？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="立刻新开一份">立刻新开一份</button>
-              <button class="quiz-option" type="button" data-choice="同一份里补票">同一份里补票</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="不用再跑它" data-quiz-explanation="to-tickets 写进 .scratch 的票已经是 agent-ready。triage 只处理外来的原始报告；本地独唱规划流里你会很少打开它。">
-            <h3>5. 本地 <code>.scratch</code> 里那些由 <code>to-tickets</code> 拆出来的票，验收时要不要再跑 <code>/triage</code>？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="不用再跑它">不用再跑它</button>
-              <button class="quiz-option" type="button" data-choice="还要再跑它">还要再跑它</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
         </div>
       </section>
 
@@ -607,7 +592,7 @@ description: 从某个固定点（commit、分支、tag 或 merge-base）起评�
         </ol>
       </section>
 
-      <p class="footer-note">下一课已写成 <a href="./0006-issue-tracker-is-config.html">0006 · Issue tracker 是配置不是平台</a>。之后若继续，可以拆 <code>to-tickets</code> 的 vertical slice，或把飞书接线写成一份 <code>issue-tracker.md</code> 草稿。</p>
+      <p class="footer-note">下一课已写成 <a href="./0006-issue-tracker-is-config.html">0006 · Issue tracker 是一份配置文档</a>。之后若继续，可以拆 <code>to-tickets</code> 的 vertical slice，或把飞书接线写成一份 <code>issue-tracker.md</code> 草稿。</p>
     </main>
   </body>
 </html>

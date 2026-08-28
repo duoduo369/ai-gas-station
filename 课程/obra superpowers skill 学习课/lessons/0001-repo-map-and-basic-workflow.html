@@ -1,420 +1,349 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lesson 0001 · 仓库地图与基本工作流</title>
-    <link rel="stylesheet" href="../../assets/course.css">
-    <script src="../assets/lesson-quiz.js" defer></script>
-    <script src="../assets/course-nav.js" defer></script>
-    <script src="../../assets/open-links-new-tab.js" defer></script>
-  </head>
-  <body>
-    <main>
-      <section class="hero">
-        <p class="eyebrow">Lesson 0001</p>
-        <h1>先把 Superpowers 看成一套工作系统</h1>
-        <p class="lede">这节课把 <code>obra/superpowers</code> 当一套工作系统看。仓库怎么分层、基本工作流怎么推进、第一批该优先读哪些 skill 卡，都在这一课。</p>
-        <div class="pill-row">
-          <span class="pill">预计 18 分钟</span>
-          <span class="pill">目标：建立总地图</span>
-          <span class="pill">内嵌关键中文条文</span>
-          <span class="pill">回看资料：<a href="../reference/superpowers-project-and-flow-map.html">速查页</a></span>
-        </div>
-      </section>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>仓库地图与基本工作流</title>
+<link href="../assets/course.css" rel="stylesheet"/>
+<script defer="" src="../assets/course-nav.js"></script>
+<script defer="" src="../assets/open-links-new-tab.js"></script>
+</head>
+<body>
+<main>
+<section class="hero">
+<p class="eyebrow">仓库地图</p>
+<h1>Superpowers 是一套工作系统</h1>
+<p class="lede">把 <code>obra/superpowers</code> 当一套工作系统看。仓库怎么分层、基本工作流怎么推进、第一批该优先读哪些 skill 卡，都在这一课。</p>
+<p>速查：<a href="../reference/superpowers-project-and-flow-map.html">项目地图与工作流</a></p>
+</section>
+<section>
+<h2>先记住一句总判断</h2>
+<div class="callout">
+<p><strong>Superpowers 不是单个“神奇提示词”，而是一套把技能卡、流程门槛和 agent 行为约束缝在一起的方法系统。</strong></p>
+<p>仓库总入口 <a href="https://github.com/obra/superpowers/blob/main/README.md">README.md</a> 讲工作法和技能库，Codex 插件清单 <a href="https://github.com/obra/superpowers/blob/main/.codex-plugin/plugin.json">.codex-plugin/plugin.json</a> 讲这套东西怎么作为插件对外交付。两份文件对着看，这个定位就清楚了。</p>
+</div>
+</section>
+<section>
+<h2>顶层结构在说什么</h2>
+<div class="grid">
+<article class="card">
+<h3 class="card-title">README.md 是总入口</h3>
+<p>它先讲这是什么，再讲怎么装、七步基本工作流是什么、仓库里有哪些核心 skill。第一轮阅读时，它比任何单个 skill 都更值得先看。</p>
+</article>
+<article class="card">
+<h3 class="card-title">skills/ 是主内容区</h3>
+<p>可复用的方法卡都在这里，例如 <a href="https://github.com/obra/superpowers/blob/main/skills/using-superpowers/SKILL.md">using-superpowers</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">brainstorming</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md">writing-plans</a>。后面精读主要围着这里打转。</p>
+</article>
+<article class="card">
+<h3 class="card-title">一圈 harness 目录是接线层</h3>
+<p><span class="path">.codex-plugin/</span>、<span class="path">.claude-plugin/</span>、<span class="path">.cursor-plugin/</span>、<span class="path">.devin-plugin/</span> 这些目录说明同一套工作法要分别接到不同 agent 环境里。</p>
+</article>
+<article class="card">
+<h3 class="card-title">docs/ 与 tests/ 负责支撑</h3>
+<p><span class="path">docs/</span> 里放额外说明、方案与平台文档，<span class="path">tests/</span> 负责插件基础设施验证。README 不是唯一的信息源，文档层和验证层一起托着这个项目。</p>
+</article>
+</div>
+</section>
+<section>
+<h2>先抓这 4 份文件</h2>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>为什么先看它</th>
+<th>你要带走什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/obra/superpowers/blob/main/README.md">README.md</a></td>
+<td>总图最完整</td>
+<td>项目目标、安装入口、七步主线、技能总表。</td>
+</tr>
+<tr>
+<td><a href="https://github.com/obra/superpowers/blob/main/skills/using-superpowers/SKILL.md">using-superpowers/SKILL.md</a></td>
+<td>方法门槛最强</td>
+<td>为什么“先找 skill，再行动”被设成硬门槛。</td>
+</tr>
+<tr>
+<td><a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">brainstorming/SKILL.md</a></td>
+<td>设计阶段总入口</td>
+<td>任务怎样分成 spike / bounded / architectural 三条路。</td>
+</tr>
+<tr>
+<td><a href="https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md">writing-plans/SKILL.md</a></td>
+<td>把设计变成执行</td>
+<td>计划如何被拆成可验证、可交接的小步骤。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<a id="embedded-gates"></a>
+<section>
+<h2>两张总门槛的中文条文</h2>
+<div class="callout">
+<p><strong>这一课不只告诉你去看哪个文件，还把依赖的条文直接嵌进来。</strong></p>
+<p><code>using-superpowers</code> 管“先检查 skill 再行动”，<code>brainstorming</code> 管“创造性工作先设计、先审批、再实现”。<code>writing-plans</code> 的详细条文留给后续课，这一课先记住它处在 Step 3 的位置。</p>
+</div>
+<div class="prompt-stack">
+<article class="prompt-doc">
+<h3 class="card-title">using-superpowers（中文节选）</h3>
+<p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/using-superpowers/SKILL.md">skills/using-superpowers/SKILL.md</a> · 本课为什么先读：它是整个仓库的总守门规则，不先理解它，很容易把 Superpowers 误读成“有空再用的技巧库”。</p>
+<details class="prompt-fold">
+<summary class="prompt-toggle">
+<span class="prompt-toggle-closed">查看完整 prompt</span>
+<span class="prompt-toggle-open">收起 prompt</span>
+</summary>
+<div class="prompt-md">
+<h5>核心规则</h5>
+<p>在任何响应或动作之前——包括澄清问题、浏览代码库、检查文件——都必须先调用相关或被请求的 skill。</p>
+<p>如果后来发现自己判断错了，那是下一步再修正的事；但“先检查 skill，再行动”这一步不能跳过。</p>
+<p>在进入 plan mode 之前：如果还没有 brainstorm，就先调用 brainstorming。</p>
+<h6>然后要明确说出</h6>
+<p>Using [skill] to [purpose]</p>
+<p>并按该 skill 的要求完整执行。</p>
+<h5>Skill 优先级</h5>
+<p>如果多个 skill 同时适用，先处理流程型 skill，再处理实施型 skill。</p>
+<ul>
+<li>“我们来做 X” -&gt; 先 superpowers:brainstorming，再进入实现 skill</li>
+<li>“修这个 bug” -&gt; 先 superpowers:systematic-debugging，再进入领域 skill</li>
+</ul>
+<h5>典型红旗</h5>
+<ul>
+<li>“这只是个简单问题” -&gt; 错。问题也是任务，仍然要先做 skill check。</li>
+<li>“我先看看代码再说” -&gt; 错。skill check 必须发生在看文件之前。</li>
+<li>“我记得这个 skill 的意思” -&gt; 错。skill 会演化，要读当前版本。</li>
+<li>“这个 skill 有点大材小用” -&gt; 错。觉得它像 overkill，往往正说明你在跳流程。</li>
+</ul>
+</div>
+</details>
+</article>
+<article class="prompt-doc">
+<h3 class="card-title">brainstorming（中文节选）</h3>
+<p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">skills/brainstorming/SKILL.md</a> · 本课为什么先读：这张卡决定了“开始实现之前，人和 agent 到底应该完成什么对齐动作”。</p>
+<details class="prompt-fold">
+<summary class="prompt-toggle">
+<span class="prompt-toggle-closed">查看完整 prompt</span>
+<span class="prompt-toggle-open">收起 prompt</span>
+</summary>
+<div class="prompt-md">
+<h5>硬门槛</h5>
+<h6>在你把意图告诉人类并得到批准之前</h6>
+<ul><li>不要调用任何实现 skill</li><li>不要写代码</li><li>不要搭脚手架</li><li>不要采取任何实现动作</li></ul>
 
-      <section>
-        <h2>先记住一句总判断</h2>
-        <div class="callout">
-          <p><strong>Superpowers 不是单个“神奇提示词”，而是一套把技能卡、流程门槛和 agent 行为约束缝在一起的方法系统。</strong></p>
-          <p>这个判断能从仓库总入口 <a href="https://github.com/obra/superpowers/blob/main/README.md">README.md</a> 和 Codex 插件清单 <a href="https://github.com/obra/superpowers/blob/main/.codex-plugin/plugin.json">.codex-plugin/plugin.json</a> 一起看出来：一个在讲工作法和技能库，一个在讲这套东西怎样作为插件对外交付。</p>
-        </div>
-      </section>
+<p>不管任务大小，批准门槛都在；变化的只是设计产物的轻重，而不是能不能跳过批准。</p>
+<h5>三条路径</h5>
+<h6>Spike</h6>
+<ul><li>输出是答案，不是保留代码</li><li>用 2–3 句话说清你要验证什么、准备怎么试</li><li>得到点头后，再去廉价地探一遍</li></ul>
 
-      <section>
-        <h2>第一层：顶层结构在说什么</h2>
-        <div class="grid">
-          <article class="card">
-            <h3 class="card-title">README.md 是总入口</h3>
-            <p>它先讲这是什么，再讲怎么装、七步基本工作流是什么、仓库里有哪些核心 skill。第一轮阅读时，它比任何单个 skill 都更值得先看。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">skills/ 是主内容区</h3>
-            <p>可复用的方法卡都在这里，例如 <a href="https://github.com/obra/superpowers/blob/main/skills/using-superpowers/SKILL.md">using-superpowers</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">brainstorming</a>、<a href="https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md">writing-plans</a>。后面精读，主要也是围着这里打转。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">一圈 harness 目录是接线层</h3>
-            <p><span class="path">.codex-plugin/</span>、<span class="path">.claude-plugin/</span>、<span class="path">.cursor-plugin/</span>、<span class="path">.devin-plugin/</span> 这些目录的存在提醒你：同一套工作法，需要分别接到不同 agent 环境里。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">docs/ 与 tests/ 负责支撑</h3>
-            <p><span class="path">docs/</span> 里放额外说明、方案与平台文档，<span class="path">tests/</span> 负责插件基础设施验证。这个仓库不靠 README 独撑，文档层和验证层一起托着。</p>
-          </article>
-        </div>
-      </section>
+<h6>Bounded</h6>
+<ul><li>针对仓库里已经存在的流程做一个边界清晰的小改动</li><li>先问关键澄清问题</li><li>在聊天里给出短设计</li><li>明确拿到 yes 后，才能开始实现</li></ul>
 
-      <section>
-        <h2>第二层：先抓这 4 份文件</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>文件</th>
-                <th>为什么先看它</th>
-                <th>你要带走什么</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><a href="https://github.com/obra/superpowers/blob/main/README.md">README.md</a></td>
-                <td>总图最完整</td>
-                <td>项目目标、安装入口、七步主线、技能总表。</td>
-              </tr>
-              <tr>
-                <td><a href="https://github.com/obra/superpowers/blob/main/skills/using-superpowers/SKILL.md">using-superpowers/SKILL.md</a></td>
-                <td>方法门槛最强</td>
-                <td>为什么“先找 skill，再行动”被设成硬门槛。</td>
-              </tr>
-              <tr>
-                <td><a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">brainstorming/SKILL.md</a></td>
-                <td>设计阶段总入口</td>
-                <td>任务怎样分成 spike / bounded / architectural 三条路。</td>
-              </tr>
-              <tr>
-                <td><a href="https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md">writing-plans/SKILL.md</a></td>
-                <td>把设计变成执行</td>
-                <td>计划如何被拆成可验证、可交接的小步骤。</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+<h6>Architectural</h6>
+<ul><li>新项目、新子系统，或会改变多个接口和边界的改动</li><li>走完整流程：澄清、方案比较、分段设计、写 spec、再交给 writing-plans</li></ul>
 
-      <a id="embedded-gates"></a>
-      <section>
-        <h2>第二层补强：先把总门槛读成中文</h2>
-        <div class="callout">
-          <p><strong>按这门课的 playbook，这里不只告诉你“去看哪个文件”，还把本课依赖的条文直接嵌进来。</strong></p>
-          <p>0001 先把两张规则卡放进课里：<code>using-superpowers</code> 负责“先检查 skill 再行动”，<code>brainstorming</code> 负责“创造性工作先设计、先审批、再实现”。<code>writing-plans</code> 的详细条文留给后续课，这一课只需要先知道它处在 Step 3 的位置。</p>
-        </div>
-        <div class="prompt-stack">
-          <article class="prompt-doc">
-            <h3 class="card-title">using-superpowers（中文节选）</h3>
-            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/using-superpowers/SKILL.md">skills/using-superpowers/SKILL.md</a> · 本课为什么先读：它是整个仓库的总守门规则，不先理解它，很容易把 Superpowers 误读成“有空再用的技巧库”。</p>
-            <pre class="prompt-zh">【核心规则】
-在任何响应或动作之前——包括澄清问题、浏览代码库、检查文件——都必须先调用相关或被请求的 skill。
-如果后来发现自己判断错了，那是下一步再修正的事；但“先检查 skill，再行动”这一步不能跳过。
+<h5>最容易犯的反模式</h5>
+<p>“这太简单了，不需要 approval”</p>
+<p>-&gt; 错。简单只意味着设计可以更短，不意味着可以绕过批准。</p>
+<p>“先开始写，他们边看边批”</p>
+<p>-&gt; 错。设计可以很短，但 gate 是批准本身，不是文字长度。</p>
+</div>
+</details>
+</article>
+</div>
+</section>
+<section>
+<h2>七步主线</h2>
+<div class="timeline">
+<article class="timeline-step">
+<p class="step-kicker">Step 1</p>
+<h3 class="step-title">brainstorming</h3>
+<p>先把模糊想法收束成可讨论的设计，而不是一上来就写代码。</p>
+</article>
+<article class="timeline-step">
+<p class="step-kicker">Step 2</p>
+<h3 class="step-title">using-git-worktrees</h3>
+<p>设计过关后，把实现放到隔离工作空间里，避免直接把主工作区搅乱。</p>
+</article>
+<article class="timeline-step">
+<p class="step-kicker">Step 3</p>
+<h3 class="step-title">writing-plans</h3>
+<p>把设计拆成一串短小、可验证的任务，而不是留在抽象口号层。</p>
+</article>
+<article class="timeline-step">
+<p class="step-kicker">Step 4</p>
+<h3 class="step-title">subagent-driven-development / executing-plans</h3>
+<p>开始执行计划。这里决定的是“接下来由谁、用什么执行模式把任务往前推”，不是说到了 Step 4 就已经把代码全部写完。</p>
+</article>
+<article class="timeline-step">
+<p class="step-kicker">Step 5</p>
+<h3 class="step-title">test-driven-development</h3>
+<p>这是 Step 4 里面每个实现任务都要遵守的写代码纪律：先写失败测试，再写最小实现，再看它变绿。</p>
+</article>
+<article class="timeline-step">
+<p class="step-kicker">Step 6</p>
+<h3 class="step-title">requesting-code-review</h3>
+<p>这是 Step 4 里的任务间关卡。一个任务按 TDD 做完后，要先过 review，再继续下一个任务。</p>
+</article>
+<article class="timeline-step">
+<p class="step-kicker">Step 7</p>
+<h3 class="step-title">finishing-a-development-branch</h3>
+<p>收尾不是“感觉差不多了”，而是验证、决定去向、再清理开发分支。</p>
+</article>
+</div>
+<p>这一串顺序来自 <a href="https://github.com/obra/superpowers/blob/main/README.md#the-basic-workflow">README 的 Basic Workflow</a>。Superpowers 卖的不是单一技巧，是一条默认开发主线。</p>
+<div class="callout">
+<p><strong>Step 4、5、6 不是三段各走一次的直线。</strong></p>
+<p>Step 4 是进入执行模式，Step 5 是这个执行模式里每个任务都要遵守的实现纪律，Step 6 是每个任务做完后的检查关卡。真实节奏是：先走到 Step 4，然后在里面循环“按 TDD 实现一个任务 → review → 下一个任务”，任务全部结束后再走 Step 7。</p>
+</div>
+<figure class="diagram">
+<img alt="把 Superpowers 主线画成一张图：skill check、brainstorm、plan、执行环、finish。" src="../assets/workflow-overview-map.svg"/>
+<figcaption>这张图和七步时间线对着看：这一课先记住全局，0002 再把执行环和收口拆开。</figcaption>
+</figure>
+</section>
+<a id="embedded-execution-rules"></a>
+<section>
+<h2>执行环里的两张硬规则</h2>
+<div class="callout">
+<p><strong>只记住七个名字，容易以为自己已经懂了。</strong></p>
+<p>解释 Step 4、5、6 关系的，是下面两张更底层的条文：一张负责“任务怎么接力执行”，一张负责“任务里代码怎么落地”。</p>
+</div>
+<div class="prompt-stack">
+<article class="prompt-doc">
+<h3 class="card-title">subagent-driven-development（中文节选）</h3>
+<p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a> · 本课为什么先读：它把 Step 4 说得比 README 更具体，能直接解释为什么 Step 5 和 Step 6 像“套娃”而不是“下一章”。</p>
+<details class="prompt-fold">
+<summary class="prompt-toggle">
+<span class="prompt-toggle-closed">查看完整 prompt</span>
+<span class="prompt-toggle-open">收起 prompt</span>
+</summary>
+<div class="prompt-md">
+<h5>Overview</h5>
+<p>按实现计划执行时，为每个任务分派一个新的 implementer subagent；</p>
+<p>任务完成后做一次 task review（先看 spec 是否符合，再看代码质量）；</p>
+<p>整条分支结束后，再做一次 broad whole-branch review。</p>
+<h5>Core principle</h5>
+<h6>Fresh subagent per task</h6>
+<ul><li>task review（spec + quality）</li><li>broad final review</li></ul>
 
-在进入 plan mode 之前：如果还没有 brainstorm，就先调用 brainstorming。
+<p>= high quality, fast iteration</p>
+<h5>每个任务的节奏</h5>
+<ol><li>派一个实现者 subagent</li><li>实现者实现、测试、提交、自查</li><li>生成 review package，再派 task reviewer</li><li>review 过关 -&gt; 任务完成</li><li>还有任务 -&gt; 回到下一个任务</li><li>全部任务完成 -&gt; broad final review</li><li>最后进入 finishing-a-development-branch</li></ol>
 
-然后要明确说出：
-Using [skill] to [purpose]
-并按该 skill 的要求完整执行。
+<h5>你现在该抓住的点</h5>
+<p>Step 4 不是“写代码结束于此”，而是“从这里开始进入按任务推进的执行环”。</p>
+<p>TDD 和 per-task review 都发生在这个执行环里面。</p>
+</div>
+</details>
+</article>
+<article class="prompt-doc">
+<h3 class="card-title">test-driven-development（中文节选）</h3>
+<p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md">skills/test-driven-development/SKILL.md</a> · 本课为什么先读：它不是“测试建议”，是 Step 4 内每个实现任务都要守的硬规则。</p>
+<details class="prompt-fold">
+<summary class="prompt-toggle">
+<span class="prompt-toggle-closed">查看完整 prompt</span>
+<span class="prompt-toggle-open">收起 prompt</span>
+</summary>
+<div class="prompt-md">
+<h5>Overview</h5>
+<p>先写测试。看它失败。再写最小代码让它通过。</p>
+<h6>核心原则</h6>
+<p>如果你没有看过测试先失败，你就不知道这个测试是否真的能测出问题。</p>
+<h5>铁律</h5>
+<p>NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST</p>
+<h6>如果你在测试之前就写了生产代码</h6>
+<ul><li>删掉</li><li>重新开始</li><li>不要把旧代码留作“参考”</li><li>不要一边补测试一边继续改那份代码</li></ul>
 
-【Skill 优先级】
-如果多个 skill 同时适用，先处理流程型 skill，再处理实施型 skill。
-
-- “我们来做 X” -> 先 superpowers:brainstorming，再进入实现 skill
-- “修这个 bug” -> 先 superpowers:systematic-debugging，再进入领域 skill
-
-【典型红旗】
-- “这只是个简单问题” -> 错。问题也是任务，仍然要先做 skill check。
-- “我先看看代码再说” -> 错。skill check 必须发生在看文件之前。
-- “我记得这个 skill 的意思” -> 错。skill 会演化，要读当前版本。
-- “这个 skill 有点大材小用” -> 错。觉得它像 overkill，往往正说明你在跳流程。</pre>
-          </article>
-
-          <article class="prompt-doc">
-            <h3 class="card-title">brainstorming（中文节选）</h3>
-            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">skills/brainstorming/SKILL.md</a> · 本课为什么先读：这张卡决定了“开始实现之前，人和 agent 到底应该完成什么对齐动作”。</p>
-            <pre class="prompt-zh">【硬门槛】
-在你把意图告诉人类并得到批准之前：
-- 不要调用任何实现 skill
-- 不要写代码
-- 不要搭脚手架
-- 不要采取任何实现动作
-
-不管任务大小，批准门槛都在；变化的只是设计产物的轻重，而不是能不能跳过批准。
-
-【三条路径】
-Spike：
-- 输出是答案，不是保留代码
-- 用 2–3 句话说清你要验证什么、准备怎么试
-- 得到点头后，再去廉价地探一遍
-
-Bounded：
-- 针对仓库里已经存在的流程做一个边界清晰的小改动
-- 先问关键澄清问题
-- 在聊天里给出短设计
-- 明确拿到 yes 后，才能开始实现
-
-Architectural：
-- 新项目、新子系统，或会改变多个接口和边界的改动
-- 走完整流程：澄清、方案比较、分段设计、写 spec、再交给 writing-plans
-
-【最容易犯的反模式】
-“这太简单了，不需要 approval”
--> 错。简单只意味着设计可以更短，不意味着可以绕过批准。
-
-“先开始写，他们边看边批”
--> 错。设计可以很短，但 gate 是批准本身，不是文字长度。</pre>
-          </article>
-        </div>
-      </section>
-
-      <section>
-        <h2>第三层：README 里的七步主线怎么记</h2>
-        <div class="timeline">
-          <article class="timeline-step">
-            <p class="step-kicker">Step 1</p>
-            <h3 class="step-title">brainstorming</h3>
-            <p>先把模糊想法收束成可讨论的设计，而不是一上来就写代码。</p>
-          </article>
-          <article class="timeline-step">
-            <p class="step-kicker">Step 2</p>
-            <h3 class="step-title">using-git-worktrees</h3>
-            <p>设计过关后，把实现放到隔离工作空间里，避免直接把主工作区搅乱。</p>
-          </article>
-          <article class="timeline-step">
-            <p class="step-kicker">Step 3</p>
-            <h3 class="step-title">writing-plans</h3>
-            <p>把设计拆成一串短小、可验证的任务，而不是留在抽象口号层。</p>
-          </article>
-          <article class="timeline-step">
-            <p class="step-kicker">Step 4</p>
-            <h3 class="step-title">subagent-driven-development / executing-plans</h3>
-            <p>开始执行计划。这里决定的是“接下来由谁、用什么执行模式把任务往前推”，不是说到了 Step 4 就已经把代码全部写完。</p>
-          </article>
-          <article class="timeline-step">
-            <p class="step-kicker">Step 5</p>
-            <h3 class="step-title">test-driven-development</h3>
-            <p>这是 Step 4 里面每个实现任务都要遵守的写代码纪律：先写失败测试，再写最小实现，再看它变绿。</p>
-          </article>
-          <article class="timeline-step">
-            <p class="step-kicker">Step 6</p>
-            <h3 class="step-title">requesting-code-review</h3>
-            <p>这是 Step 4 里的任务间关卡。一个任务按 TDD 做完后，要先过 review，再继续下一个任务。</p>
-          </article>
-          <article class="timeline-step">
-            <p class="step-kicker">Step 7</p>
-            <h3 class="step-title">finishing-a-development-branch</h3>
-            <p>收尾不是“感觉差不多了”，而是验证、决定去向、再清理开发分支。</p>
-          </article>
-        </div>
-        <p>这一串顺序来自 <a href="https://github.com/obra/superpowers/blob/main/README.md#the-basic-workflow">README 的 Basic Workflow</a>。别背名字，先意识到：<strong>Superpowers 卖的不是单技，是一条默认开发主线。</strong></p>
-        <div class="callout">
-          <p><strong>一个常见误读：</strong>很多人会把 Step 4、5、6 看成三段线性、互不重叠的执行命令。</p>
-          <p>更贴近实际的读法是：<strong>Step 4 是进入执行模式，Step 5 是这个执行模式里每个任务都要遵守的实现纪律，Step 6 是每个任务做完后的检查关卡。</strong> 所以真实节奏更像是：先走到 Step 4，然后在 Step 4 里面反复循环“按 TDD 实现一个任务 → review → 下一个任务”，全部任务结束后再走 Step 7。</p>
-        </div>
-        <figure class="diagram">
-          <img src="../assets/workflow-overview-map.svg" alt="把 Superpowers 主线画成一张图：skill check、brainstorm、plan、执行环、finish。">
-          <figcaption>这张图适合和上面的七步时间线对着看：0001 先记住全局，0002 再把执行环和收口拆开。</figcaption>
-        </figure>
-      </section>
-
-      <a id="embedded-execution-rules"></a>
-      <section>
-        <h2>第三层补强：执行环里的两张硬规则</h2>
-        <div class="callout">
-          <p><strong>如果你只记住七个名字，容易以为自己已经懂了。</strong></p>
-          <p>读懂 Step 4、5、6 关系的，不是 README 那张总表，是下面两张更底层的条文：一张负责“任务怎么接力执行”，一张负责“任务里代码怎么落地”。</p>
-        </div>
-        <div class="prompt-stack">
-          <article class="prompt-doc">
-            <h3 class="card-title">subagent-driven-development（中文节选）</h3>
-            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a> · 本课为什么先读：它把 Step 4 说得比 README 更具体，能直接解释为什么 Step 5 和 Step 6 像“套娃”而不是“下一章”。</p>
-            <pre class="prompt-zh">【Overview】
-按实现计划执行时，为每个任务分派一个新的 implementer subagent；
-任务完成后做一次 task review（先看 spec 是否符合，再看代码质量）；
-整条分支结束后，再做一次 broad whole-branch review。
-
-【Core principle】
-Fresh subagent per task
-+ task review（spec + quality）
-+ broad final review
-= high quality, fast iteration
-
-【每个任务的节奏】
-1. 派一个实现者 subagent
-2. 实现者实现、测试、提交、自查
-3. 生成 review package，再派 task reviewer
-4. review 过关 -> 任务完成
-5. 还有任务 -> 回到下一个任务
-6. 全部任务完成 -> broad final review
-7. 最后进入 finishing-a-development-branch
-
-【你现在该抓住的点】
-Step 4 不是“写代码结束于此”，而是“从这里开始进入按任务推进的执行环”。
-TDD 和 per-task review 都发生在这个执行环里面。</pre>
-          </article>
-
-          <article class="prompt-doc">
-            <h3 class="card-title">test-driven-development（中文节选）</h3>
-            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md">skills/test-driven-development/SKILL.md</a> · 本课为什么先读：它不是“测试建议”，是 Step 4 内每个实现任务都要守的硬规则。</p>
-            <pre class="prompt-zh">【Overview】
-先写测试。看它失败。再写最小代码让它通过。
-
-核心原则：
-如果你没有看过测试先失败，你就不知道这个测试是否真的能测出问题。
-
-【铁律】
-NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
-
-如果你在测试之前就写了生产代码：
-- 删掉
-- 重新开始
-- 不要把旧代码留作“参考”
-- 不要一边补测试一边继续改那份代码
-
-【Red-Green-Refactor】
-RED
-- 写一个失败测试
-
-Verify RED
-- 确认它是因为功能缺失而失败，不是因为拼写错误或测试本身坏了
-
-GREEN
-- 只写最小实现，让这个测试通过
-
-Verify GREEN
-- 确认测试通过，其他测试也还是绿的
-
-REFACTOR
-- 只在保持全绿的前提下清理命名、去重、抽 helper
-
-【你现在该抓住的点】
-Step 5 不是“做完 Step 4 后再补一轮测试”，而是 Step 4 里的写码方式本身。</pre>
-          </article>
-        </div>
-      </section>
-
-      <section>
-        <h2>第四层：第一批最值得抓的 skill</h2>
-        <div class="grid">
-          <article class="card">
-            <h3 class="card-title">using-superpowers</h3>
-            <p>它像交通规则。先判断有没有适用 skill，再决定怎么做事情；连澄清问题之前都要先检查。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">brainstorming</h3>
-            <p>它像设计闸门。凡是创造性工作，先说清任务属于哪条路径，再拿到人类批准，不能边解释边开工。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">writing-plans</h3>
-            <p>它像施工图。价值不在“有计划”，在把计划写到没有上下文的执行者也能照着做。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">test-driven-development</h3>
-            <p>它像执行纪律。前面再会规划，如果实现阶段允许偷懒，整条流程就会重新退化成“拍脑袋编码”。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">requesting-code-review</h3>
-            <p>它像任务间闸门。不是一个任务全做完后才第一次 review，而是一个任务做完就该拉一次检查，避免错误滚到后面放大。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="quiz">
-        <h2>3 分钟自测</h2>
-        <p>先不追求背诵所有 skill，只检查你有没有抓住第一批最关键的判断。</p>        <div class="quiz-list">
-          <div class="quiz-item" data-quiz-answer="先找技能" data-quiz-explanation="`using-superpowers` 要求在任何响应或动作前先检查相关 skill，所以第一反应不是动手，而是先做 skill check。">
-            <h3>1. 看到一个新任务时，Superpowers 最先希望你做什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="先找技能">先找技能</button>
-              <button class="quiz-option" type="button" data-choice="直接动手">直接动手</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="七个阶段" data-quiz-explanation="README 里的 Basic Workflow 明确把常见开发过程拆成七步，所以它强调的是分阶段接力，而不是一个大招包打天下。">
-            <h3>2. README 想让你记住的工作主线，更像哪一种东西？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="七个阶段">七个阶段</button>
-              <button class="quiz-option" type="button" data-choice="一个大招">一个大招</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="任务内纪律" data-quiz-explanation="Step 4 决定怎么执行计划，Step 5 解决的是执行任务时怎样写代码，所以它更像嵌在 Step 4 里的任务内纪律。">
-            <h3>3. 在一个 feature 的正常推进里，Step 5 更像什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="任务内纪律">任务内纪律</button>
-              <button class="quiz-option" type="button" data-choice="另一轮执行">另一轮执行</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="先短设计再等批准" data-quiz-explanation="对 bounded 任务，brainstorming 要求先提短设计并明确拿到 yes，不能边写边等批准。">
-            <h3>4. 一个 bounded 任务在开始实现前，最关键的门槛是什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="先短设计再等批准">先短设计再等批准</button>
-              <button class="quiz-option" type="button" data-choice="先写代码再补设计">先写代码再补设计</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="出货清单" data-quiz-explanation="插件 manifest 更像对外发布视角下的包装说明，而不是给学习者解释方法论的主正文。">
-            <h3>5. `.codex-plugin/plugin.json` 在这门课里更适合被当成什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="出货清单">出货清单</button>
-              <button class="quiz-option" type="button" data-choice="教学正文">教学正文</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h2>这一课学完，你至少该带走什么</h2>
-        <div class="grid">
-          <article class="card">
-            <h3 class="card-title">1. 先认系统，不先认单卡</h3>
-            <p>Superpowers 的重点在技能之间的接力关系，不在某张单独 skill 的口号。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">2. README 是主线图</h3>
-            <p>它的价值不在安装说明，在那条七步主线和对技能系统的总体 framing。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">3. using-superpowers 是总门槛</h3>
-            <p>不读这张卡，很容易把整个仓库误读成“可选技巧集合”，而不是强约束流程。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">4. Step 4/5/6 是一段套娃关系</h3>
-            <p>Step 4 是执行模式，Step 5 是任务内 TDD，Step 6 是任务间 review，不是三段彼此独立的流水线。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">5. 总门槛值得在课里直接看条文</h3>
-            <p>像 <code>using-superpowers</code>、<code>brainstorming</code>、<code>test-driven-development</code> 这种规则，只写“去看原文”而不把中文放进课里，你第一次学时容易只记住名字，没记住门槛。</p>
-          </article>
-        </div>
-      </section>
-
-      <section>
-        <h2>下一步怎么学最顺</h2>
-        <p>建议下一课优先走这条线：</p>
-        <ol class="source-list">
-          <li>精读 <a href="https://github.com/obra/superpowers/blob/main/skills/using-superpowers/SKILL.md">using-superpowers/SKILL.md</a>，把“什么时候必须先读 skill”内化。</li>
-          <li>再读 <a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">brainstorming/SKILL.md</a>，把三条路径和审批门槛看熟。</li>
-          <li>最后接 <a href="https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md">writing-plans/SKILL.md</a>，那时再把 Step 3 的详细条文补厚，看看设计怎样被翻译成施工计划。</li>
-        </ol>
-      </section>
-
-      <section>
-        <h2>主资料</h2>
-        <p>这一课最值得先通读的主资料仍然是 <a href="https://github.com/obra/superpowers/blob/main/README.md">README.md</a>。不过现在课内已经把几张关键规则卡的中文条文嵌进来了，所以你第一次复习时，不必反复在 lesson 和上游仓库之间来回跳。</p>
-        <ol class="source-list">
-          <li><a href="https://github.com/obra/superpowers/blob/main/README.md">README.md</a></li>
-          <li><a href="https://github.com/obra/superpowers/blob/main/skills/using-superpowers/SKILL.md">skills/using-superpowers/SKILL.md</a></li>
-          <li><a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">skills/brainstorming/SKILL.md</a></li>
-          <li><a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a></li>
-          <li><a href="https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md">skills/writing-plans/SKILL.md</a></li>
-          <li><a href="https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md">skills/test-driven-development/SKILL.md</a></li>
-          <li><a href="https://github.com/obra/superpowers/blob/main/.codex-plugin/plugin.json">.codex-plugin/plugin.json</a></li>
-        </ol>
-      </section>
-
-      <p class="footer-note">哪里觉得抽象、像在记术语，下一条直接问我。我会继续把它拆成更贴近你当前理解的位置。</p>
-    </main>
-  </body>
+<h5>Red-Green-Refactor</h5>
+<h6>RED</h6>
+<ul>
+<li>写一个失败测试</li>
+</ul>
+<h6>Verify RED</h6>
+<ul>
+<li>确认它是因为功能缺失而失败，不是因为拼写错误或测试本身坏了</li>
+</ul>
+<h6>GREEN</h6>
+<ul>
+<li>只写最小实现，让这个测试通过</li>
+</ul>
+<h6>Verify GREEN</h6>
+<ul>
+<li>确认测试通过，其他测试也还是绿的</li>
+</ul>
+<h6>REFACTOR</h6>
+<ul>
+<li>只在保持全绿的前提下清理命名、去重、抽 helper</li>
+</ul>
+<h5>你现在该抓住的点</h5>
+<p>Step 5 不是“做完 Step 4 后再补一轮测试”，而是 Step 4 里的写码方式本身。</p>
+</div>
+</details>
+</article>
+</div>
+</section>
+<section>
+<h2>第一批值得精读的 skill</h2>
+<div class="grid">
+<article class="card">
+<h3 class="card-title">using-superpowers</h3>
+<p>先判断有没有适用 skill，再决定怎么做事情。连澄清问题之前都要先检查一遍。</p>
+</article>
+<article class="card">
+<h3 class="card-title">brainstorming</h3>
+<p>创造性工作先说清任务属于哪条路径，拿到人类批准才动工，不能边解释边开工。</p>
+</article>
+<article class="card">
+<h3 class="card-title">writing-plans</h3>
+<p>价值不在“有计划”，在把计划写到没有上下文的执行者也能照着做。</p>
+</article>
+<article class="card">
+<h3 class="card-title">test-driven-development</h3>
+<p>实现阶段允许偷懒，前面规划得再好，整条流程也会退化成拍脑袋编码。</p>
+</article>
+<article class="card">
+<h3 class="card-title">requesting-code-review</h3>
+<p>一个任务做完就拉一次检查，不等全部做完。错误才不会滚到后面放大。</p>
+</article>
+</div>
+</section>
+<section>
+<h2>这一课带走什么</h2>
+<div class="grid">
+<article class="card">
+<h3 class="card-title">先认系统，再认单卡</h3>
+<p>Superpowers 的重点在技能之间怎么接力。单张 skill 的口号可以先放一放。</p>
+</article>
+<article class="card">
+<h3 class="card-title">README 是主线图</h3>
+<p>它最值的部分不是安装说明，是那条七步主线和对技能系统的总体 framing。</p>
+</article>
+<article class="card">
+<h3 class="card-title">using-superpowers 是总门槛</h3>
+<p>漏掉这张卡，整个仓库容易被读成“可选技巧集合”，而它其实是一套强约束流程。</p>
+</article>
+<article class="card">
+<h3 class="card-title">Step 4/5/6 是套娃，不是流水线</h3>
+<p>Step 4 是执行模式，Step 5 是任务内 TDD，Step 6 是任务间 review。三层套在一起跑。</p>
+</article>
+</div>
+</section>
+<section>
+<h2>主资料</h2>
+<p>这一课最值得先通读的主资料是 <a href="https://github.com/obra/superpowers/blob/main/README.md">README.md</a>。课内已经把几张关键规则卡的中文条文嵌进来了，第一次复习时不必反复在 lesson 和上游仓库之间来回跳。</p>
+<ol class="source-list">
+<li><a href="https://github.com/obra/superpowers/blob/main/README.md">README.md</a></li>
+<li><a href="https://github.com/obra/superpowers/blob/main/skills/using-superpowers/SKILL.md">skills/using-superpowers/SKILL.md</a></li>
+<li><a href="https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md">skills/brainstorming/SKILL.md</a></li>
+<li><a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a></li>
+<li><a href="https://github.com/obra/superpowers/blob/main/skills/writing-plans/SKILL.md">skills/writing-plans/SKILL.md</a></li>
+<li><a href="https://github.com/obra/superpowers/blob/main/skills/test-driven-development/SKILL.md">skills/test-driven-development/SKILL.md</a></li>
+<li><a href="https://github.com/obra/superpowers/blob/main/.codex-plugin/plugin.json">.codex-plugin/plugin.json</a></li>
+</ol>
+</section>
+</main>
+</body>
 </html>

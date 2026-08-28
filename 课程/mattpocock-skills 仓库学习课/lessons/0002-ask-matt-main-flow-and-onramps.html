@@ -4,19 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lesson 0002 · ask-matt 主流程与上坡入口</title>
-    <link rel="stylesheet" href="../../assets/course.css">
-    <script src="../assets/classify-quiz.js" defer></script>
+    <link rel="stylesheet" href="../assets/course.css">
     <script src="../assets/course-nav.js" defer></script>
-    <script src="../../assets/open-links-new-tab.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
   </head>
   <body>
     <main>
       <section class="hero">
         <p class="eyebrow">Lesson 0002</p>
         <h1>把 ask-matt 读成一张路线图</h1>
-        <p class="lede">上一课先把仓库看平了。这一课直接读 <code>ask-matt</code>：它怎么把一串 skills 串成从 idea 到 ship 的主线，又怎么从 triage、diagnosing-bugs、wayfinder 这些入口并回主线。</p>
+        <p class="lede">上一课先把仓库看平了。这一课直接读 <code>ask-matt</code>：它把一串 skills 串成 idea 到 ship 的主线，又从 triage、diagnosing-bugs、wayfinder 这些入口并回主线。</p>
         <div class="pill-row">
-          <span class="pill">预计 18 分钟</span>
           <span class="pill">目标：会读主流程</span>
           <span class="pill">速查：<a href="../reference/ask-matt-flow-map.html">ask-matt 流程速查</a></span>
         </div>
@@ -25,103 +23,103 @@
       <section>
         <h2>先抓最核心的一句</h2>
         <div class="callout">
-          <p><strong>`ask-matt` 的价值，不是回答“仓库里有哪些 skill”，而是回答“在你当前这类问题里，下一步应该走哪条路”。</strong></p>
-          <p>所以读它时，别把它当字典；把它当一个路由器。它把不同问题状态分流，再把它们并到合适的位置。</p>
+          <p><strong>`ask-matt` 回答的是：在你当前这类问题里，下一步应该走哪条路。</strong></p>
+          <p>读它时把它当一个路由器。它把不同问题状态分流，再并到合适的位置。</p>
         </div>
         <p class="beat-label">本课权威正文 · 路由器全文</p>
         <article class="prompt-doc" id="zh-ask-matt">
           <h3 class="card-title">ask-matt/SKILL.md（中文全量）</h3>
-          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">ask-matt/SKILL.md</a> · 这一课就是在读这份路由图。后面各节是带你过一遍；对照时以这块中文为准。</p>
-          <pre class="prompt-zh">---
+          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">ask-matt/SKILL.md</a> · 这一课就是在读这份路由图。对照时以这块中文为准。</p>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <pre class="prompt-raw prompt-frontmatter">---
 name: ask-matt
 description: 问当前处境该用哪条 skill 或哪条 flow。本仓库 skills 上的路由器。
 disable-model-invocation: true
----
-
-# Ask Matt
-
-你记不住每一个 skill，所以来问。
-
-一条 **flow** 是穿过这些 skills 的路径。大多数路径走一条 **主线（main flow）**，两条 **上坡入口（on-ramps）** 并到这条主线上。其余的要么独立，要么是跑在底下的词汇层。
-
-## 主线：idea → ship
-
-大多数工作走的路线。你有一个想法，想把它做出来。
-
-1. **`/grill-with-docs`** — 用访谈把想法磨清楚。只要你在 **工作目录里干活**，就从这里起步：它是有状态的，学到的东西留在 `CONTEXT.md` 和 ADR 里。（没有工作目录？用 `/grill-me` —— 见独立技能。两者跑的是同一个 `/grilling` 原语；`grill-with-docs` 会留下纸面痕迹，所以只要有仓库可以留下痕迹，它就是更好的那个。）
-2. **分支 — 每一个问题都能在对话里解决吗？** 如果某个问题需要可运行的答案（状态、业务逻辑、必须看见的 UI），绕去原型，两边都用 **`/handoff`** 桥接（原型活在自己的目录里，这正是 `/handoff` 的用途 —— 见 Phase boundaries）：
-   - **`/handoff`** 出去，然后对着那份文件开一个新 session，
-   - **`/prototype`** 用一次性代码回答那个问题，
-   - **`/handoff`** 把学到的东西带回来，并在原来的想法线程里引用它。
-3. **分支 — 这是一次跨多个 session 的构建吗？**
-   - **是** → **`/to-spec`**（把对话写成 spec），然后 **`/to-tickets`** 拆成 tracer-bullet tickets，每张票声明自己的 **blocking edges**。本地 tracker 上，那是 `.scratch/&lt;feature&gt;/issues/` 下一票一个文件，按 blocker 优先、人手推进；真 tracker 上这些边变成原生 blocking 链接，所以 blockers 已完成的票谁都能抓 —— 每张票开一次 **`/implement`**，票与票之间 **`/clear`** 上下文。每张票是自洽的，所以上一张的上下文可以丢掉。
-   - **否** → 就在这里、同一个上下文窗口里 **`/implement`**。
-
-   无论哪条，**`/implement`** 内部驱动 **`/tdd`** 来做每一张 issue —— 一次一块红绿切片 —— 收尾再跑 **`/code-review`**，对 diff 做两轴评审（Standards + Spec），然后才 commit。只想对一个具体行为做 test-first、不要完整 spec 时，单独用 **`/tdd`**；想对照某个固定点评审分支或 PR 时，单独用 **`/code-review`**。
-
-### 上下文卫生
-
-把第 1–3 步留在 **同一个不间断的上下文窗口** —— 在 `/to-tickets` 之前不要 compact 或 clear —— 这样 grilling、spec 和 tickets 都建立在同一套思考上。之后每一次 `/implement` 都重新开始，只吃那张票。
-
-这件事的上限是 **[smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone)**：大约 15 万 tokens（前沿模型）之内，模型仍然推理得锐利。如果 session 在走到 `/to-tickets` 之前就接近这条线，不要硬撑着退化继续 —— 在最近的 phase boundary `/compact`，然后接着做（见 Phase boundaries）。
-
-## 上坡入口
-
-一种会生成工作、再并回主线的起始处境。
-
-- **bug 和请求堆上来了** → **`/triage`**。它让 issue 走过 triage 角色，产出 agent-ready issues，之后由 **`/implement`** 捡走。
-
-  Triage 只处理 **不是你创建的** issue —— bug 报告、外来功能请求、任何以原始形态到来的东西。`/to-tickets` 产出的票已经是 agent-ready，所以 **不要再 triage 它们**。
-
-- **有东西坏了** → **`/diagnosing-bugs`**。给难的那些：一眼看不穿的 bug、间歇 flake、两个已知好状态之间爬进来的回归。它拒绝空谈，直到有一条 **紧反馈回路** —— 一条命令已经会在 *这个* bug 上变红 —— 然后带着回归测试去修。事后分析若发现真正的问题是没有好 seam 能把 bug 锁住，就交接给 **`/improve-codebase-architecture`**。
-
-- **一大块有雾的努力 —— 绿地项目或巨大功能，一个 session 装不下** → **`/wayfinder`**，这里认知负担最重的一条流。从这里到目的地的路还看不见时，它在 issue tracker 上画出一张 **共享地图**，由 **decision tickets** 组成，一次解一张 —— 产出的是 **决策，不是交付物** —— 直到雾被推开、路清楚了。**`/grill-with-docs`** 磨的是你能在一个 session 里 hold 住的想法；wayfinder 是给那个 hold 不住的 —— 它更慢、更密，所以只留给那种情况，绝不要用在已经界定清楚的功能上。
-
-  地图清楚之后，**它交接，它不构建**：在 **`/to-spec`** 并回主线，把地图上互相链接的决策压成可构建的计划，然后照常 `/to-tickets` 和 `/implement`。把地图直接 loop 进 `/implement`，等于跳过那次压缩、丢掉链接起来的细节 —— 只有这次努力后来证明真的很小，才直接 `/implement`。
-
-## 代码库健康
-
-不是功能工作 —— 是保养。
-
-- **`/improve-codebase-architecture`** — 有空就跑，让代码库继续适合 agent 操作。它会浮出 **deepening opportunities**；挑其中一个，就 **生成一个想法**，可以拿到主线的 `/grill-with-docs`。它是找出候选的勘察；**`/codebase-design`**（下面）才是你设计被选中那一个时用的工作台。
-
-## 底下的词汇层
-
-两份 model-invoked 参考，跑在 *其他 skill 底下* —— 各自是那套词汇的单一事实源。当问题出在 **用词** 而不是流程时，直接去找它们；或者让上面的 skill 把它们拉进来。
-
-- **`/domain-modeling`** — 磨这个项目的 *领域* 语言：挑战一个模糊词，拆开一个身兼三职的词（“account”），把难逆转的决策写成 ADR。这是 `/grill-with-docs` 用来让 `CONTEXT.md` 保持干净 glossary 的主动纪律。
-- **`/codebase-design`** — 深模块词汇（module、interface、depth、seam、adapter、leverage、locality），用来设计模块的 *形状*：大量行为藏在干净 seam 上的小接口后面。`/tdd` 和 `/improve-codebase-architecture` 都说这套话。
-
-## Phase boundaries
-
-一个 **phase** 是 session 里的一块工作 —— grilling、implementation、the QA。在两块之间的 **边界** 上你有五个选项，在这张地图里这是最模糊的决定：
-
-- **Continue** — 留在原地。零成本，零损失。
-- **`/clear`** — 清空窗口，这里的东西对下一步毫无用处时。
-- **`/handoff`** — 写一份可携带的 markdown。很窄：只用于 **新 harness**、**新目录**、**同事**，或 **phase 中途** 分叉旁支。它买到的是 portability。
-- **Subagent** — 把范围很紧的任务送到它自己的窗口，拿回一份报告。
-- **`/compact`** — 压缩这段上下文，用摘要去播种一个新 session。这是 **默认项**，在树的底部，不是第一伸手去够的。
-
-读 [PHASE-BOUNDARIES.md](PHASE-BOUNDARIES.md) 看顺序树 —— 五个问题、每条分支背后的理由，以及为什么 primary-source 的代价让 **Continue** 必须先被排除。在边界上做决定；phase 中途，继续，或把剩下的拆给 subagent。
-
-## 独立技能
-
-完全离开主线。
-
-- **`/grill-me`** — 和 `/grill-with-docs` 一样不停访谈，但是 **无状态**：本地什么都不存，也不建 `CONTEXT.md`。在你 **没有在工作目录里干活** 时用它 —— 磨一个计划、一份设计、一篇文字，底下没有仓库。如果你在工作目录里，改用 `/grill-with-docs`：同一套访谈，会留下纸面痕迹，所以严格来说它更好。
-- **`/grilling`** — 访谈原语本身：rounds、frontier、事实是 agent 的活、决策是你的。`/grill-me` 和 `/grill-with-docs` 是两个具名入口；`/triage`、`/wayfinder` 和 `/improve-codebase-architecture` 内部都会跑它。只有当你想要没有外壳的访谈时，才直接去找它。
-- **`/resolving-merge-conflicts`** — 处理进行中的 merge 或 rebase，一块 hunk 一块 hunk 来，按追溯到双方 **primary source** 的意图解决，而不是挑行，然后做完这次操作。它从不跑 `--abort`。独立、不在任何 flow 上：你已经在冲突中间时才去找它。
-- **`/prototype`** — 一个小的、一次性程序，回答一个设计问题：这个状态模型感觉对不对，或这个 UI 该长什么样。Throwaway 约束的是代码怎么写，不是承诺销毁它：答案折进正式代码，原型本身作为 **primary source** 留在 `prototype/&lt;name&gt;` 分支上（离开 main），由实现 issue 指过去。它是主线第 2 步的绕路，但任何纸上很难拍板的设计问题都可以用。
-- **`/research`** — 把阅读苦力外包给 **后台 agent**：它对照 **primary sources** 调查一个问题，然后在仓库里留下一份带引用的 Markdown。它读的时候你继续干活。它产出的文件是拿 *进* 主线 `/grill-with-docs` 的东西 —— research 喂思考，不代替思考。
-- **`/to-questionnaire`** — 挡住你的东西不在你脑子里、也不在代码库里，而在 **别人脑子里** 时，给对方写一份问卷去填。它是 `/grill-me` 的反面：不是访谈你关于主题，而是访谈你关于 **发送** —— 寄给谁、你要拿回什么 —— 并把问题对准那个缺口。收回来的材料给 `/grill-with-docs` 或 `/to-spec`。
-- **`/wizard`** — 只属于 **人** 的步骤：开通基础设施、配凭证或 CI secrets、点开不熟的第三方后台、跑一次性迁移或切流。它生成交互式 bash 脚本，打开每个 URL、捕获每个值、写进 `.env` 和 GitHub secrets —— 于是这套手续不再每次都要再向 agent 解释一遍。Model-invoked，所以 agent 撞上只有你过得去的墙时会自己伸手。如果 agent 自己就能做，它就该自己做；这是给真正需要人在环里的地方。
-- **`/wait-what`** — 上一条消息没打中时的纠正。在对话中途、在任何其他 skill 里面用，agent 会用你当时缺的上下文、用白话、用 `CONTEXT.md` 的词汇，把刚才那句话重新讲一遍。它是事后药；`/grill-with-docs` 是事前预防，因为早早就定下的共享语言才是不让行话冒出来的办法。
-- **`/teach`** — 跨多个 session 学一个概念，把当前目录当成有状态的工作区。
-- **`/writing-for-agents`** — 写给 agent 读的文档参考：skills、AGENTS.md、被指向的 docs。
-
-## 前置条件
-
-**`/setup-matt-pocock-skills`** — 第一次走工程 flow 之前跑，配置其他 skill 假定存在的 issue tracker、triage 标签和文档布局。自定义 issue tracker 也可以。</pre>
+---</pre>
+            <div class="prompt-md">
+              <h4>Ask Matt</h4>
+              <p>你记不住每一个 skill，所以来问。</p>
+              <p>一条 <strong>flow</strong> 是穿过这些 skills 的路径。大多数路径走一条 <strong>主线（main flow）</strong>，两条 <strong>上坡入口（on-ramps）</strong> 并到这条主线上。其余的要么独立，要么是跑在底下的词汇层。</p>
+              <h5>主线：idea → ship</h5>
+              <p>大多数工作走的路线。你有一个想法，想把它做出来。</p>
+              <ol>
+              <li><strong><code>/grill-with-docs</code></strong> — 用访谈把想法磨清楚。只要你在 <strong>工作目录里干活</strong>，就从这里起步：它是有状态的，学到的东西留在 <code>CONTEXT.md</code> 和 ADR 里。（没有工作目录？用 <code>/grill-me</code> —— 见独立技能。两者跑的是同一个 <code>/grilling</code> 原语；<code>grill-with-docs</code> 会留下纸面痕迹，所以只要有仓库可以留下痕迹，它就是更好的那个。）</li>
+              <li><strong>分支 — 每一个问题都能在对话里解决吗？</strong> 如果某个问题需要可运行的答案（状态、业务逻辑、必须看见的 UI），绕去原型，两边都用 <strong><code>/handoff</code></strong> 桥接（原型活在自己的目录里，这正是 <code>/handoff</code> 的用途 —— 见 Phase boundaries）：
+                <ul>
+                <li><strong><code>/handoff</code></strong> 出去，然后对着那份文件开一个新 session，</li>
+                <li><strong><code>/prototype</code></strong> 用一次性代码回答那个问题，</li>
+                <li><strong><code>/handoff</code></strong> 把学到的东西带回来，并在原来的想法线程里引用它。</li>
+                </ul>
+              </li>
+              <li><strong>分支 — 这是一次跨多个 session 的构建吗？</strong>
+                <ul>
+                <li><strong>是</strong> → <strong><code>/to-spec</code></strong>（把对话写成 spec），然后 <strong><code>/to-tickets</code></strong> 拆成 tracer-bullet tickets，每张票声明自己的 <strong>blocking edges</strong>。本地 tracker 上，那是 <code>.scratch/&lt;feature&gt;/issues/</code> 下一票一个文件，按 blocker 优先、人手推进；真 tracker 上这些边变成原生 blocking 链接，所以 blockers 已完成的票谁都能抓 —— 每张票开一次 <strong><code>/implement</code></strong>，票与票之间 <strong><code>/clear</code></strong> 上下文。每张票是自洽的，所以上一张的上下文可以丢掉。</li>
+                <li><strong>否</strong> → 就在这里、同一个上下文窗口里 <strong><code>/implement</code></strong>。</li>
+                </ul>
+              </li>
+              </ol>
+              <p>无论哪条，<strong><code>/implement</code></strong> 内部驱动 <strong><code>/tdd</code></strong> 来做每一张 issue —— 一次一块红绿切片 —— 收尾再跑 <strong><code>/code-review</code></strong>，对 diff 做两轴评审（Standards + Spec），然后才 commit。只想对一个具体行为做 test-first、不要完整 spec 时，单独用 <strong><code>/tdd</code></strong>；想对照某个固定点评审分支或 PR 时，单独用 <strong><code>/code-review</code></strong>。</p>
+              <h6>上下文卫生</h6>
+              <p>把第 1–3 步留在 <strong>同一个不间断的上下文窗口</strong> —— 在 <code>/to-tickets</code> 之前不要 compact 或 clear —— 这样 grilling、spec 和 tickets 都建立在同一套思考上。之后每一次 <code>/implement</code> 都重新开始，只吃那张票。</p>
+              <p>这件事的上限是 <strong><a href="https://www.aihero.dev/ai-coding-dictionary/smart-zone">smart zone</a></strong>：大约 15 万 tokens（前沿模型）之内，模型仍然推理得锐利。如果 session 在走到 <code>/to-tickets</code> 之前就接近这条线，不要硬撑着退化继续 —— 在最近的 phase boundary <code>/compact</code>，然后接着做（见 Phase boundaries）。</p>
+              <h5>上坡入口</h5>
+              <p>一种会生成工作、再并回主线的起始处境。</p>
+              <ul>
+              <li><strong>bug 和请求堆上来了</strong> → <strong><code>/triage</code></strong>。它让 issue 走过 triage 角色，产出 agent-ready issues，之后由 <strong><code>/implement</code></strong> 捡走。</li>
+              </ul>
+              <p>Triage 只处理 <strong>不是你创建的</strong> issue —— bug 报告、外来功能请求、任何以原始形态到来的东西。<code>/to-tickets</code> 产出的票已经是 agent-ready，所以 <strong>不要再 triage 它们</strong>。</p>
+              <ul>
+              <li>
+              <p><strong>有东西坏了</strong> → <strong><code>/diagnosing-bugs</code></strong>。给难的那些：一眼看不穿的 bug、间歇 flake、两个已知好状态之间爬进来的回归。它拒绝空谈，直到有一条 <strong>紧反馈回路</strong> —— 一条命令已经会在 <em>这个</em> bug 上变红 —— 然后带着回归测试去修。事后分析若发现真正的问题是没有好 seam 能把 bug 锁住，就交接给 <strong><code>/improve-codebase-architecture</code></strong>。</p>
+              </li>
+              <li>
+              <p><strong>一大块有雾的努力 —— 绿地项目或巨大功能，一个 session 装不下</strong> → <strong><code>/wayfinder</code></strong>，这里认知负担最重的一条流。从这里到目的地的路还看不见时，它在 issue tracker 上画出一张 <strong>共享地图</strong>，由 <strong>decision tickets</strong> 组成，一次解一张 —— 产出的是 <strong>决策，不是交付物</strong> —— 直到雾被推开、路清楚了。<strong><code>/grill-with-docs</code></strong> 磨的是你能在一个 session 里 hold 住的想法；wayfinder 是给那个 hold 不住的 —— 它更慢、更密，所以只留给那种情况，绝不要用在已经界定清楚的功能上。</p>
+              </li>
+              </ul>
+              <p>地图清楚之后，<strong>它交接，它不构建</strong>：在 <strong><code>/to-spec</code></strong> 并回主线，把地图上互相链接的决策压成可构建的计划，然后照常 <code>/to-tickets</code> 和 <code>/implement</code>。把地图直接 loop 进 <code>/implement</code>，等于跳过那次压缩、丢掉链接起来的细节 —— 只有这次努力后来证明真的很小，才直接 <code>/implement</code>。</p>
+              <h5>代码库健康</h5>
+              <p>不是功能工作 —— 是保养。</p>
+              <ul>
+              <li><strong><code>/improve-codebase-architecture</code></strong> — 有空就跑，让代码库继续适合 agent 操作。它会浮出 <strong>deepening opportunities</strong>；挑其中一个，就 <strong>生成一个想法</strong>，可以拿到主线的 <code>/grill-with-docs</code>。它是找出候选的勘察；<strong><code>/codebase-design</code></strong>（下面）才是你设计被选中那一个时用的工作台。</li>
+              </ul>
+              <h5>底下的词汇层</h5>
+              <p>两份 model-invoked 参考，跑在 <em>其他 skill 底下</em> —— 各自是那套词汇的单一事实源。当问题出在 <strong>用词</strong> 而不是流程时，直接去找它们；或者让上面的 skill 把它们拉进来。</p>
+              <ul>
+              <li><strong><code>/domain-modeling</code></strong> — 磨这个项目的 <em>领域</em> 语言：挑战一个模糊词，拆开一个身兼三职的词（"account"），把难逆转的决策写成 ADR。这是 <code>/grill-with-docs</code> 用来让 <code>CONTEXT.md</code> 保持干净 glossary 的主动纪律。</li>
+              <li><strong><code>/codebase-design</code></strong> — 深模块词汇（module、interface、depth、seam、adapter、leverage、locality），用来设计模块的 <em>形状</em>：大量行为藏在干净 seam 上的小接口后面。<code>/tdd</code> 和 <code>/improve-codebase-architecture</code> 都说这套话。</li>
+              </ul>
+              <h5>Phase boundaries</h5>
+              <p>一个 <strong>phase</strong> 是 session 里的一块工作 —— grilling、implementation、the QA。在两块之间的 <strong>边界</strong> 上你有五个选项，在这张地图里这是最模糊的决定：</p>
+              <ul>
+              <li><strong>Continue</strong> — 留在原地。零成本，零损失。</li>
+              <li><strong><code>/clear</code></strong> — 清空窗口，这里的东西对下一步毫无用处时。</li>
+              <li><strong><code>/handoff</code></strong> — 写一份可携带的 markdown。很窄：只用于 <strong>新 harness</strong>、<strong>新目录</strong>、<strong>同事</strong>，或 <strong>phase 中途</strong> 分叉旁支。它买到的是 portability。</li>
+              <li><strong>Subagent</strong> — 把范围很紧的任务送到它自己的窗口，拿回一份报告。</li>
+              <li><strong><code>/compact</code></strong> — 压缩这段上下文，用摘要去播种一个新 session。这是 <strong>默认项</strong>，在树的底部，不是第一伸手去够的。</li>
+              </ul>
+              <p>读 <a href="PHASE-BOUNDARIES.md">PHASE-BOUNDARIES.md</a> 看顺序树 —— 五个问题、每条分支背后的理由，以及为什么 primary-source 的代价让 <strong>Continue</strong> 必须先被排除。在边界上做决定；phase 中途，继续，或把剩下的拆给 subagent。</p>
+              <h5>独立技能</h5>
+              <p>完全离开主线。</p>
+              <ul>
+              <li><strong><code>/grill-me</code></strong> — 和 <code>/grill-with-docs</code> 一样不停访谈，但是 <strong>无状态</strong>：本地什么都不存，也不建 <code>CONTEXT.md</code>。在你 <strong>没有在工作目录里干活</strong> 时用它 —— 磨一个计划、一份设计、一篇文字，底下没有仓库。如果你在工作目录里，改用 <code>/grill-with-docs</code>：同一套访谈，会留下纸面痕迹，所以严格来说它更好。</li>
+              <li><strong><code>/grilling</code></strong> — 访谈原语本身：rounds、frontier、事实是 agent 的活、决策是你的。<code>/grill-me</code> 和 <code>/grill-with-docs</code> 是两个具名入口；<code>/triage</code>、<code>/wayfinder</code> 和 <code>/improve-codebase-architecture</code> 内部都会跑它。只有当你想要没有外壳的访谈时，才直接去找它。</li>
+              <li><strong><code>/resolving-merge-conflicts</code></strong> — 处理进行中的 merge 或 rebase，一块 hunk 一块 hunk 来，按追溯到双方 <strong>primary source</strong> 的意图解决，而不是挑行，然后做完这次操作。它从不跑 <code>--abort</code>。独立、不在任何 flow 上：你已经在冲突中间时才去找它。</li>
+              <li><strong><code>/prototype</code></strong> — 一个小的、一次性程序，回答一个设计问题：这个状态模型感觉对不对，或这个 UI 该长什么样。Throwaway 约束的是代码怎么写，不是承诺销毁它：答案折进正式代码，原型本身作为 <strong>primary source</strong> 留在 <code>prototype/&lt;name&gt;</code> 分支上（离开 main），由实现 issue 指过去。它是主线第 2 步的绕路，但任何纸上很难拍板的设计问题都可以用。</li>
+              <li><strong><code>/research</code></strong> — 把阅读苦力外包给 <strong>后台 agent</strong>：它对照 <strong>primary sources</strong> 调查一个问题，然后在仓库里留下一份带引用的 Markdown。它读的时候你继续干活。它产出的文件是拿 <em>进</em> 主线 <code>/grill-with-docs</code> 的东西 —— research 喂思考，不代替思考。</li>
+              <li><strong><code>/to-questionnaire</code></strong> — 挡住你的东西不在你脑子里、也不在代码库里，而在 <strong>别人脑子里</strong> 时，给对方写一份问卷去填。它是 <code>/grill-me</code> 的反面：不是访谈你关于主题，而是访谈你关于 <strong>发送</strong> —— 寄给谁、你要拿回什么 —— 并把问题对准那个缺口。收回来的材料给 <code>/grill-with-docs</code> 或 <code>/to-spec</code>。</li>
+              <li><strong><code>/wizard</code></strong> — 只属于 <strong>人</strong> 的步骤：开通基础设施、配凭证或 CI secrets、点开不熟的第三方后台、跑一次性迁移或切流。它生成交互式 bash 脚本，打开每个 URL、捕获每个值、写进 <code>.env</code> 和 GitHub secrets —— 于是这套手续不再每次都要再向 agent 解释一遍。Model-invoked，所以 agent 撞上只有你过得去的墙时会自己伸手。如果 agent 自己就能做，它就该自己做；这是给真正需要人在环里的地方。</li>
+              <li><strong><code>/wait-what</code></strong> — 上一条消息没打中时的纠正。在对话中途、在任何其他 skill 里面用，agent 会用你当时缺的上下文、用白话、用 <code>CONTEXT.md</code> 的词汇，把刚才那句话重新讲一遍。它是事后药；<code>/grill-with-docs</code> 是事前预防，因为早早就定下的共享语言才是不让行话冒出来的办法。</li>
+              <li><strong><code>/teach</code></strong> — 跨多个 session 学一个概念，把当前目录当成有状态的工作区。</li>
+              <li><strong><code>/writing-for-agents</code></strong> — 写给 agent 读的文档参考：skills、AGENTS.md、被指向的 docs。</li>
+              </ul>
+              <h5>前置条件</h5>
+              <p><strong><code>/setup-matt-pocock-skills</code></strong> — 第一次走工程 flow 之前跑，配置其他 skill 假定存在的 issue tracker、triage 标签和文档布局。自定义 issue tracker 也可以。</p>
+            </div>
+          </details>
         </article>
       </section>
 
@@ -148,12 +146,12 @@ disable-model-invocation: true
               </tr>
               <tr>
                 <td><code>prototype</code></td>
-                <td>有些问题只能靠“跑起来看”判断，而不是靠嘴说清。</td>
+                <td>有些问题只能靠"跑起来看"判断，靠嘴说不清。</td>
                 <td>回答一个设计问题，再把学习结果 handoff 回主线。</td>
               </tr>
               <tr>
                 <td><code>to-spec</code></td>
-                <td>当共识已足够，才进入“把它写成可交付说明”。</td>
+                <td>当共识已足够，才进入"把它写成可交付说明"。</td>
                 <td>综合当前对话和代码库理解，产出 spec，并提前想清测试 seam。</td>
               </tr>
               <tr>
@@ -169,7 +167,7 @@ disable-model-invocation: true
             </tbody>
           </table>
         </div>
-        <p>这里最容易忽略的一点是：<strong>`implement` 不是单兵作战 skill，它默认站在前面几步已经做过的前提上。</strong></p>
+        <p><strong>`implement` 默认站在前面几步已经做过的前提上。它不是一个独立入口。</strong></p>
       </section>
 
       <section>
@@ -180,12 +178,12 @@ disable-model-invocation: true
             <p>`ask-matt` 明确建议每个 `implement` 尽量从新鲜上下文开始。这样每次实现只吃一小块、已经 agent-ready 的工作。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">ticket 不是水平切片</h3>
-            <p>`to-tickets` 要求的是 vertical slice：一个 ticket 应该打通 schema、API、UI、test 的完整窄路径，而不是“先全做后端，再全做前端”。</p>
+            <h3 class="card-title">ticket 要求垂直切片</h3>
+            <p>`to-tickets` 要求 vertical slice：一个 ticket 打通 schema、API、UI、test 的完整窄路径。"先全做后端，再全做前端"违反这个原则。</p>
           </article>
           <article class="card">
             <h3 class="card-title">blocking edges 让顺序显式化</h3>
-            <p>不凭感觉排先后，把“谁阻塞谁”写出来。这样工作 frontier 才清楚。</p>
+            <p>把"谁阻塞谁"写出来，不凭感觉排先后。工作 frontier 才清楚。</p>
           </article>
         </div>
       </section>
@@ -195,43 +193,43 @@ disable-model-invocation: true
         <div class="grid">
           <article class="card">
             <h3 class="card-title">triage</h3>
-            <p>你的问题不是“我有一个想法”，而是“外面来了一个 issue / PR，我要先判断它值不值得进入主流程”。</p>
+            <p>外面来了一个 issue 或 PR，你先判断它值不值得进入主流程。</p>
           </article>
           <article class="card">
             <h3 class="card-title">diagnosing-bugs</h3>
-            <p>你的问题不是“我们做什么”，而是“到底什么坏了，如何先把 bug 稳定复现”。它的第一原则是 tight feedback loop。</p>
+            <p>到底什么坏了，先把 bug 稳定复现。它的第一原则是 tight feedback loop。</p>
           </article>
           <article class="card">
             <h3 class="card-title">wayfinder</h3>
-            <p>你的问题不是“下一步实现哪块”，而是“这个目标太大、太雾，我连地图都还没有”。它先产出 decisions，不直接产出 deliverables。</p>
+            <p>这个目标太大、太雾，你连地图都还没有。它先产出 decisions，不直接产出 deliverables。</p>
           </article>
         </div>
-        <p>判断法：<strong>当你连“主线该从哪一段开始”都说不清时，通常你需要的不是更快执行，是先走上坡入口。</strong></p>
+        <p>判断法：<strong>连"主线该从哪一段开始"都说不清时，先走上坡入口。</strong></p>
       </section>
 
       <section>
-        <h2>独立技能：不在主线里，不等于不重要</h2>
+        <h2>独立技能：主线之外的技能同样重要</h2>
         <div class="grid">
           <article class="card">
             <h3 class="card-title">独立可用</h3>
             <p>`research`、`prototype`、`to-questionnaire`、`wizard`、`wait-what`、`teach`、`writing-for-agents` 都能单独被拿出来解决特定卡点。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">底层词汇层</h3>
-            <p>`domain-modeling` 和 `codebase-design` 更像“底层语言包”。它们不是主线入口，但上层很多 skill 都靠它们统一说话方式。</p>
+            <h3 class="card-title">词汇层</h3>
+            <p>`domain-modeling` 和 `codebase-design` 是词汇层。上层很多 skill 靠它们统一说话方式。</p>
           </article>
         </div>
       </section>
 
       <section>
-        <h2>phase boundary：什么时候不要急着 compact</h2>
+        <h2>phase boundary：compact 是最后选项</h2>
         <div class="callout">
-          <p><strong>`/compact` 是默认兜底，不是第一反应。</strong></p>
-          <p>`PHASE-BOUNDARIES.md` 把五个选项排成顺序树，第一问永远是：还能不能继续留在当前 session 里？只有前面几项都不合适时，才落到 compact。</p>
+          <p><strong>`/compact` 是默认兜底、最后选项。</strong></p>
+          <p>`PHASE-BOUNDARIES.md` 把五个选项排成顺序树。第一问：还能不能继续留在当前 session 里？前面几项都不合适时，才落到 compact。</p>
         </div>
         <figure class="flow-figure">
           <img src="../assets/flow-phase-boundary.svg" alt="phase boundary 五问顺序树：Continue、clear、handoff、Subagent，否则 compact">
-          <figcaption class="flow-caption">从上往下问，第一个 yes 赢。/compact 坐在树底，不是第一伸手去够的。</figcaption>
+          <figcaption class="flow-caption">从上往下问，第一个 yes 赢。/compact 坐在树底，是最后伸手的选项。</figcaption>
         </figure>
         <div class="table-wrap">
           <table>
@@ -268,95 +266,95 @@ disable-model-invocation: true
         <p class="beat-label">本课权威正文 · 切上下文的顺序树</p>
         <article class="prompt-doc" id="zh-phase-boundaries">
           <h3 class="card-title">PHASE-BOUNDARIES.md（中文全量）</h3>
-          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/PHASE-BOUNDARIES.md">PHASE-BOUNDARIES.md</a> · <code>ask-matt</code> 只列五个选项；这份才是“从上往下问，第一个 yes 赢”的树。0004 讲 <code>handoff</code> 时会链回这里。</p>
-          <pre class="prompt-zh"># Phase boundaries
-
-一个 **phase** 是 session 里的一块工作 —— grilling、implementation、the QA。这个定义故意模糊：当你觉得 *“好，那块做完了”*，一个 phase 就结束了。
-
-**phase boundary** 是两个 phase 之间的空隙，也是这个决定唯一该出现的地方。phase 中途没有决定可做 —— 继续，或把剩下的工作拆给 subagent。在 phase 中途 compact，会让 agent 丢掉线索。
-
-## 五个选项
-
-| 选项 | 它做什么 |
-| ------------ | --------------------------------------------------------------- |
-| **Continue** | 留在这个 session。完全不切上下文。 |
-| **`/clear`** | 清空上下文窗口，从零开始。 |
-| **`/handoff`** | 写一份可携带的 markdown，用它在任何地方播种一个 session。 |
-| **Subagent** | 把任务送到它自己的上下文窗口，拿回一份报告。 |
-| **`/compact`** | 压缩这段上下文，用摘要去播种一个新 session。 |
-
-## 这棵树
-
-在边界上从上往下走。第一个 **yes** 赢。
-
-**1. 还能不能在这个 session 里继续？** 两件事会让答案变成 yes：下一 phase 需要这一 phase 当 **primary source**，或者你还剩足够的 [smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone)（约 15 万 tokens）装得下下一 phase。Grilling → implementation 是标准的 yes：实现要的是推理原文，不是它的摘要。Continue 零成本、零损失，所以先排除它，再谈别的。
-
-**2. 这段上下文对接下来的事无关吗？** 这个 session 里的一切 —— 探索、决策、死胡同 —— 都可以丢掉吗？如果是，**`/clear`**。这是棋盘上最便宜的一步：不花时间，把整个窗口还你。`/clear` 也不是终点 —— 旧 session 仍可 resume。
-
-这步走错的代价是单向的。清掉 *相关* 上下文，你就失去了构建背后的 **为什么**，再怎么回头读 diff 也找不回来。
-
-**3. 你需要交接吗？** `/handoff` 很窄。你只在这些时候需要它：
-
-- 换到 **新 harness**（Claude → Codex），
-- 换到 **新目录** 或仓库，
-- 把工作交给 **同事**，
-- 或在 **phase 中途** 发现一条旁支，又不想带偏正在做的事。
-
-这份清单就是整条条款。`/handoff` 买到的是 **portability** —— 一份能带走的文件。没有东西在旅行，你就不需要它。
-
-**4. 这个任务能 AFK 做完吗？** 范围是否紧到你可以离开键盘、不用掌舵？那就丢给 **subagent**，本 session 不动。自动评审是标准案例：agent 读 diff 再报告，你不需要盯着。
-
-**5. 否则，`/compact`。** 相关上下文、同一 harness、同一目录，而且你还得留在环里 —— 树落在这里，而且经常落在这里。给它一条指令（`/compact we're going to QA this area`），让摘要保住下一 phase 需要的东西。
-
-`/compact` 是 **默认项，不是第一伸手**。它坐在底部，因为上面四个问题都更便宜或更精确。人们从这里起步的失败模式是：新 session 对摘要压扁过的决策自信地错。
-
-## Primary 与 secondary sources
-
-除了 **Continue**，每一步都把 **primary source** 变成 **secondary source** —— 当时发生的 session，被一份摘要替换。这笔交易形状总是一样：
-
-| 来源 | 信息 | 噪音 | 活动空间 |
-| --------------------------------- | ----------- | ----- | ------------ |
-| Primary（Continue） | 完整 | 很多 | 很少 |
-| Secondary（`/compact`、`/handoff`） | 有损 | 更少 | 很多 |
-
-这就是为什么问题 1 排第一。只有留下的成本高于它省下的，你才付这笔有损税。
-
-## 这些是判断题
-
-这些问题不是客观的 —— 每一问都有品味在里面，同一条边界两天可以走出两条路。价值在于 **按顺序** 问它们，在边界上问，而不是在工作中间问。</pre>
+          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/PHASE-BOUNDARIES.md">PHASE-BOUNDARIES.md</a> · <code>ask-matt</code> 只列五个选项；这份才是"从上往下问，第一个 yes 赢"的树。0004 讲 <code>handoff</code> 时会链回这里。</p>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>Phase boundaries</h4>
+              <p>一个 <strong>phase</strong> 是 session 里的一块工作 —— grilling、implementation、the QA。这个定义故意模糊：当你觉得 <em>"好，那块做完了"</em>，一个 phase 就结束了。</p>
+              <p><strong>phase boundary</strong> 是两个 phase 之间的空隙，也是这个决定唯一该出现的地方。phase 中途没有决定可做 —— 继续，或把剩下的工作拆给 subagent。在 phase 中途 compact，会让 agent 丢掉线索。</p>
+              <h5>五个选项</h5>
+              <table>
+              <thead>
+              <tr>
+              <th>选项</th>
+              <th>它做什么</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+              <td><strong>Continue</strong></td>
+              <td>留在这个 session。完全不切上下文。</td>
+              </tr>
+              <tr>
+              <td><strong><code>/clear</code></strong></td>
+              <td>清空上下文窗口，从零开始。</td>
+              </tr>
+              <tr>
+              <td><strong><code>/handoff</code></strong></td>
+              <td>写一份可携带的 markdown，用它在任何地方播种一个 session。</td>
+              </tr>
+              <tr>
+              <td><strong>Subagent</strong></td>
+              <td>把任务送到它自己的上下文窗口，拿回一份报告。</td>
+              </tr>
+              <tr>
+              <td><strong><code>/compact</code></strong></td>
+              <td>压缩这段上下文，用摘要去播种一个新 session。</td>
+              </tr>
+              </tbody>
+              </table>
+              <h5>这棵树</h5>
+              <p>在边界上从上往下走。第一个 <strong>yes</strong> 赢。</p>
+              <p><strong>1. 还能不能在这个 session 里继续？</strong> 两件事会让答案变成 yes：下一 phase 需要这一 phase 当 <strong>primary source</strong>，或者你还剩足够的 <a href="https://www.aihero.dev/ai-coding-dictionary/smart-zone">smart zone</a>（约 15 万 tokens）装得下下一 phase。Grilling → implementation 是标准的 yes：实现要的是推理原文，不是它的摘要。Continue 零成本、零损失，所以先排除它，再谈别的。</p>
+              <p><strong>2. 这段上下文对接下来的事无关吗？</strong> 这个 session 里的一切 —— 探索、决策、死胡同 —— 都可以丢掉吗？如果是，<strong><code>/clear</code></strong>。这是棋盘上最便宜的一步：不花时间，把整个窗口还你。<code>/clear</code> 也不是终点 —— 旧 session 仍可 resume。</p>
+              <p>这步走错的代价是单向的。清掉 <em>相关</em> 上下文，你就失去了构建背后的 <strong>为什么</strong>，再怎么回头读 diff 也找不回来。</p>
+              <p><strong>3. 你需要交接吗？</strong> <code>/handoff</code> 很窄。你只在这些时候需要它：</p>
+              <ul>
+              <li>换到 <strong>新 harness</strong>（Claude → Codex），</li>
+              <li>换到 <strong>新目录</strong> 或仓库，</li>
+              <li>把工作交给 <strong>同事</strong>，</li>
+              <li>或在 <strong>phase 中途</strong> 发现一条旁支，又不想带偏正在做的事。</li>
+              </ul>
+              <p>这份清单就是整条条款。<code>/handoff</code> 买到的是 <strong>portability</strong> —— 一份能带走的文件。没有东西在旅行，你就不需要它。</p>
+              <p><strong>4. 这个任务能 AFK 做完吗？</strong> 范围是否紧到你可以离开键盘、不用掌舵？那就丢给 <strong>subagent</strong>，本 session 不动。自动评审是标准案例：agent 读 diff 再报告，你不需要盯着。</p>
+              <p><strong>5. 否则，<code>/compact</code>。</strong> 相关上下文、同一 harness、同一目录，而且你还得留在环里 —— 树落在这里，而且经常落在这里。给它一条指令（<code>/compact we're going to QA this area</code>），让摘要保住下一 phase 需要的东西。</p>
+              <p><code>/compact</code> 是 <strong>默认项，不是第一伸手</strong>。它坐在底部，因为上面四个问题都更便宜或更精确。人们从这里起步的失败模式是：新 session 对摘要压扁过的决策自信地错。</p>
+              <h5>Primary 与 secondary sources</h5>
+              <p>除了 <strong>Continue</strong>，每一步都把 <strong>primary source</strong> 变成 <strong>secondary source</strong> —— 当时发生的 session，被一份摘要替换。这笔交易形状总是一样：</p>
+              <table>
+              <thead>
+              <tr>
+              <th>来源</th>
+              <th>信息</th>
+              <th>噪音</th>
+              <th>活动空间</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+              <td>Primary（Continue）</td>
+              <td>完整</td>
+              <td>很多</td>
+              <td>很少</td>
+              </tr>
+              <tr>
+              <td>Secondary（<code>/compact</code>、<code>/handoff</code>）</td>
+              <td>有损</td>
+              <td>更少</td>
+              <td>很多</td>
+              </tr>
+              </tbody>
+              </table>
+              <p>这就是为什么问题 1 排第一。只有留下的成本高于它省下的，你才付这笔有损税。</p>
+              <h5>这些是判断题</h5>
+              <p>这些问题不是客观的 —— 每一问都有品味在里面，同一条边界两天可以走出两条路。价值在于 <strong>按顺序</strong> 问它们，在边界上问，而不是在工作中间问。</p>
+            </div>
+          </details>
         </article>
-      </section>
-
-      <section class="quiz">
-        <h2>3 分钟自测</h2>
-        <div class="quiz-list">
-          <div class="quiz-item" data-quiz-answer="先澄清" data-quiz-explanation="`grill-with-docs` 的作用就是先通过 grilling 和 domain-modeling 把问题磨清楚，而不是一开始就把模糊想法写成 spec。">
-            <h3>1. 当一个想法还很模糊时，主线为什么不建议直接从 `to-spec` 开始？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="先澄清">先澄清</button>
-              <button class="quiz-option" type="button" data-choice="先编码">先编码</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="ticket 切片" data-quiz-explanation="多 session 构建要先拆成 tracer-bullet tickets，让每次 implement 都在一块自洽、可验证的 vertical slice 上工作。">
-            <h3>2. 多轮次的大功能实现前，哪一步最能帮助你把每个 session 缩到可控范围？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="ticket 切片">ticket 切片</button>
-              <button class="quiz-option" type="button" data-choice="直接提交">直接提交</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="先继续" data-quiz-explanation="phase boundary 的第一问永远是能不能继续留在当前 session，因为 Continue 不损失 primary source。">
-            <h3>3. 面对 phase boundary，五个选项里最先该排查的是哪一个？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="先 compact">先 compact</button>
-              <button class="quiz-option" type="button" data-choice="先继续">先继续</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-        </div>
       </section>
 
       <section>
@@ -364,15 +362,15 @@ disable-model-invocation: true
         <div class="grid">
           <article class="card">
             <h3 class="card-title">1. ask-matt 是 router</h3>
-            <p>它不是清单，是“当前处境该走哪条流”的判断器。</p>
+            <p>它判断当前处境该走哪条流，不是列出所有 skill。</p>
           </article>
           <article class="card">
             <h3 class="card-title">2. implement 站在前置工作上</h3>
-            <p>它不是从模糊想法直接开干，是吃已经澄清、拆票后的输入。</p>
+            <p>它吃已经澄清、拆票后的输入，不从模糊想法直接开干。</p>
           </article>
           <article class="card">
             <h3 class="card-title">3. on-ramp 解决前置状态</h3>
-            <p>`triage`、`diagnosing-bugs`、`wayfinder` 分别处理不同类型的“还进不了主线”的情况。</p>
+            <p>`triage`、`diagnosing-bugs`、`wayfinder` 分别处理不同类型的"还进不了主线"的情况。</p>
           </article>
           <article class="card">
             <h3 class="card-title">4. compact 不是第一反应</h3>
@@ -383,7 +381,7 @@ disable-model-invocation: true
 
       <section>
         <h2>主资料</h2>
-        <p>这一课最值得亲自对照的，已经嵌在上面：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">ask-matt/SKILL.md</a> 和 <a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/PHASE-BOUNDARIES.md">PHASE-BOUNDARIES.md</a>。下面这些是主线上下一棒的原文入口，精读留给后面的课。</p>
+        <p>这一课最值得亲自对照的，已经嵌在上面：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md">ask-matt/SKILL.md</a> 和 <a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/PHASE-BOUNDARIES.md">PHASE-BOUNDARIES.md</a>。主线上下一棒的原文入口列在这里，精读留给后面的课。</p>
         <ol class="source-list">
           <li><a href="#zh-ask-matt">本课 · ask-matt 中文全文</a></li>
           <li><a href="#zh-phase-boundaries">本课 · PHASE-BOUNDARIES 中文全文</a></li>
@@ -397,7 +395,7 @@ disable-model-invocation: true
         </ol>
       </section>
 
-      <p class="footer-note">如果你想继续顺着主线学，下一课最自然的是精读 `grill-with-docs` 与它背后的 `grilling` / `domain-modeling` 配合；如果你更想学实现侧，也可以转去拆 `to-tickets` 和 `implement` 的接口边界。</p>
+      <p class="footer-note">继续顺着主线学，下一课精读 `grill-with-docs` 与它背后的 `grilling` / `domain-modeling` 配合。想学实现侧，转去拆 `to-tickets` 和 `implement` 的接口边界。</p>
     </main>
   </body>
 </html>

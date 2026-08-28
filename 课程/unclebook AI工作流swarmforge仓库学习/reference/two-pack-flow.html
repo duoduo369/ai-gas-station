@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>two-pack 流程速查</title>
-    <link rel="stylesheet" href="../../assets/course.css">
+    <link rel="stylesheet" href="../assets/course.css">
     <script src="../assets/course-nav.js" defer></script>
-    <script src="../../assets/open-links-new-tab.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
   </head>
   <body>
     <main>
@@ -60,7 +60,8 @@
       <section>
         <h2>启动时实际读什么</h2>
         <p>Codex 吃的是生成文件 <span class="path">.swarmforge/prompts/&lt;role&gt;.md</span>：先递归读宪法文章，再读角色 prompt。two-pack 文章是 workflow / handoffs / engineering（main）+ project（pack）。全文中文在 <a href="../lessons/0002-two-pack-complete-loop.html">0002</a> 按调用顺序展开。</p>
-      </section>
+      <section>
+        <h2>一轮</h2>
         <ol class="source-list">
           <li>New Task → coder（名字即全程 <code>task:</code>）</li>
           <li>coder TDD → <code>git_handoff</code> <code>to: cleaner</code> <code>priority: 50</code>（可能先 <code>AUDIT_REQUIRED</code>）</li>

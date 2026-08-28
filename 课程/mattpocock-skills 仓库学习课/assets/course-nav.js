@@ -47,6 +47,8 @@
   const rootPrefix = "..";
   const lessonPrefix = inLessons ? "." : "../lessons";
   const refPrefix = inReference ? "." : "../reference";
+  const homepageHref = (inLessons ? "." : "../lessons") + "/homepage.html";
+  const sep = '<span class="course-nav-sep" aria-hidden="true">·</span>';
 
   function link(href, label, isCurrent) {
     if (isCurrent) {
@@ -55,7 +57,7 @@
     return '<a href="' + href + '">' + label + "</a>";
   }
 
-  const sep = '<span class="course-nav-sep" aria-hidden="true">·</span>';
+  const homepageLink = link(homepageHref, "首页", current === "homepage.html") + sep;
 
   const lessonLinks = lessons
     .map(function (item) {
@@ -100,8 +102,7 @@
   nav.setAttribute("aria-label", "课程导航");
   nav.innerHTML =
     '<div class="course-nav-row">' +
-    link(rootPrefix + "/README.md", "课程入口", false) +
-    sep +
+    homepageLink +
     lessonLinks +
     "</div>" +
     '<div class="course-nav-row course-nav-refs">' +

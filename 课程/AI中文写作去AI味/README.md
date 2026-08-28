@@ -26,6 +26,8 @@
 1. [AI味的七种痕迹](lessons/0001-ai-flavor-traces.html) — 翻案腔、套话开场、三件套排比、假动作、标点出卖、模型腔词汇、假细节。两轮扫描，先词汇后结构。
 2. [模型、流程与技能矩阵](lessons/0002-model-workflow-skills.html) — 混合模型策略、六步写作流程、四个 skill 各司其职、孙学写作法范例。
 
+课内点名的权威 skill（human-writing、khazix-writer、chinese-ai-humanizer、stop-slop、sun-style-writing）都在对应位置嵌入了中文条文，折叠在"查看完整 prompt"里，复习时不用再翻上游仓库。
+
 ## 速查
 
 - [七痕迹速查](reference/seven-traces-checklist.html) — 两轮扫描清单，打印贴桌上

@@ -4,19 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lesson 0004 · handoff 与上下文交接</title>
-    <link rel="stylesheet" href="../../assets/course.css">
-    <script src="../assets/classify-quiz.js" defer></script>
+    <link rel="stylesheet" href="../assets/course.css">
     <script src="../assets/course-nav.js" defer></script>
-    <script src="../../assets/open-links-new-tab.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
   </head>
   <body>
     <main>
       <section class="hero">
         <p class="eyebrow">Lesson 0004</p>
-        <h1>把 handoff 和“结束当前 session”拆开理解</h1>
-        <p class="lede">这节课把 <code>/handoff</code> 和“结束当前 session”拆开。skill 原文要你写一份可携带的交接文档；当前窗口要不要停，是另一层判断。</p>
+        <h1>把 handoff 和"结束当前 session"拆开理解</h1>
+        <p class="lede">skill 原文要求 `/handoff` 做的事：写一份可携带的交接文档。当前窗口要不要停，是单独的问题。</p>
         <div class="pill-row">
-          <span class="pill">预计 14 分钟</span>
           <span class="pill">目标：会判断 handoff 什么时候该用</span>
           <span class="pill">速查：<a href="../reference/handoff-and-phase-boundaries.html">handoff 速查</a></span>
         </div>
@@ -25,46 +23,49 @@
       <section>
         <h2>先抓一条关键纠偏</h2>
         <div class="callout">
-          <p><strong>`/handoff` 默认是“产物动作”，不是“终止动作”。</strong></p>
-          <p>`handoff` skill 的定义很短也很直接：写一份 handoff document，总结当前对话，保存到系统临时目录，并给下一位 agent 一个 suggested skills 区段。它没有写“写完后必须结束当前 session”或“写完后自动切换到新窗口”。</p>
+          <p><strong>`/handoff` 默认是"产物动作"。它不负责终止当前会话。</strong></p>
+          <p>`handoff` skill 的定义很短：写一份 handoff document，总结当前对话，保存到系统临时目录，并给下一位 agent 一个 suggested skills 区段。skill 正文只要求这些。</p>
         </div>
         <p class="beat-label">本课权威正文 · 交接 skill 全文</p>
         <article class="prompt-doc" id="zh-handoff">
           <h3 class="card-title">handoff/SKILL.md（中文全量）</h3>
           <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md">handoff/SKILL.md</a> · 整份 skill 只承诺写文档。phase boundary 的五选一顺序树已嵌在 <a href="./0002-ask-matt-main-flow-and-onramps.html#zh-phase-boundaries">0002</a>，本课不重复。</p>
-          <pre class="prompt-zh">---
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <pre class="prompt-raw prompt-frontmatter">---
 name: handoff
 description: 把当前对话压缩成一份交接文档，供另一位 agent 接手。
-argument-hint: "下一次会话将主要用来做什么？"
+argument-hint: &quot;下一次会话将主要用来做什么？&quot;
 disable-model-invocation: true
----
-
-写一份 handoff 文档，总结当前对话，让一个全新的 agent 可以继续这项工作。把文件保存到用户操作系统的临时目录，而不是当前工作区。
-
-文档中要包含一个 “suggested skills” 小节，建议 agent 应该调用哪些 skill。
-
-不要重复其他产物里已经记录过的内容（例如 specs、plans、ADRs、issues、commits、diffs）。改为用路径或 URL 引用它们。
-
-删去任何敏感信息，例如 API key、密码或可识别个人身份的信息。
-
-如果用户传入了参数，就把它当作“下一次会话将聚焦什么”的描述，并据此调整这份文档。</pre>
+---</pre>
+            <div class="prompt-md">
+              <p>写一份 handoff 文档，总结当前对话，让一个全新的 agent 可以继续这项工作。把文件保存到用户操作系统的临时目录，而不是当前工作区。</p>
+              <p>文档中要包含一个 “suggested skills” 小节，建议 agent 应该调用哪些 skill。</p>
+              <p>不要重复其他产物里已经记录过的内容（例如 specs、plans、ADRs、issues、commits、diffs）。改为用路径或 URL 引用它们。</p>
+              <p>删去任何敏感信息，例如 API key、密码或可识别个人身份的信息。</p>
+              <p>如果用户传入了参数，就把它当作“下一次会话将聚焦什么”的描述，并据此调整这份文档。</p>
+            </div>
+          </details>
         </article>
       </section>
 
       <section>
-        <h2>为什么你会觉得它“应该不污染当前 session”</h2>
+        <h2>为什么你会觉得它"应该不污染当前 session"</h2>
         <div class="grid">
           <article class="card">
-            <h3 class="card-title">因为 handoff 的直觉语义像“交棒”</h3>
-            <p>一听到 handoff，很自然会联想到“我交出去就不在这里继续了”。这是非常合理的期待。</p>
+            <h3 class="card-title">handoff 的直觉语义像"交棒"</h3>
+            <p>你听到 handoff，自然会想"交出去就不在这里继续了"。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">但 skill 文本只承诺了文档</h3>
-            <p>它承诺的是把当前上下文压成一份 portable markdown，给下一位 agent 用；并没有承诺当前 agent 在这个窗口里停止思考或停止响应。</p>
+            <h3 class="card-title">skill 正文的承诺范围</h3>
+            <p>skill 正文承诺的产出是一份 portable markdown，给下一位 agent 用。当前 agent 在这个窗口里要不要停止思考或停止响应，不在 skill 的承诺范围内。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">所以“继续工作”不违背定义</h3>
-            <p>如果你在当前 session 里又给了后续目标，或者 harness 仍把这个窗口视为主会话，agent 继续做下去在定义上是说得通的。</p>
+            <h3 class="card-title">"继续工作"和 handoff 的定义不冲突</h3>
+            <p>你在当前 session 里又给了后续目标，或者 harness 仍把这个窗口视为主会话，agent 继续做下去，这和 handoff 的定义不冲突。</p>
           </article>
         </div>
       </section>
@@ -113,23 +114,23 @@ disable-model-invocation: true
             </tbody>
           </table>
         </div>
-        <p>这张表里最该记的是：<strong>`/handoff` 解决的是 portability，不是“结束当前会话”本身。</strong> 五个选项怎么按顺序问，见 <a href="./0002-ask-matt-main-flow-and-onramps.html#zh-phase-boundaries">0002 的 PHASE-BOUNDARIES 中文全文</a>。</p>
+        <p>这张表里最该记的是：<strong>`/handoff` 解决的是 portability。它不负责"结束当前会话"本身。</strong> 五个选项怎么按顺序问，见 <a href="./0002-ask-matt-main-flow-and-onramps.html#zh-phase-boundaries">0002 的 PHASE-BOUNDARIES 中文全文</a>。</p>
       </section>
 
       <section>
-        <h2>所以 handoff 应该怎么用</h2>
+        <h2>handoff 应该怎么用</h2>
         <div class="grid">
           <article class="card">
             <h3 class="card-title">换 harness</h3>
-            <p>比如你想从一个 agent 环境切到另一个环境，这时需要一份 portable 文档作为桥。</p>
+            <p>你想从一个 agent 环境切到另一个环境，需要一份 portable 文档作为桥。</p>
           </article>
           <article class="card">
             <h3 class="card-title">换目录或仓库</h3>
-            <p>因为新环境不共享当前 session 的上下文，所以 handoff 的价值一下子变高。</p>
+            <p>新环境不共享当前 session 的上下文，handoff 的价值在这里很高。</p>
           </article>
           <article class="card">
             <h3 class="card-title">交给别人接手</h3>
-            <p>无论是同事还是另一位 agent，都需要一个“拿起来就能继续”的起点文件。</p>
+            <p>无论是同事还是另一位 agent，都需要一个"拿起来就能继续"的起点文件。</p>
           </article>
           <article class="card">
             <h3 class="card-title">主线中途分叉</h3>
@@ -141,14 +142,14 @@ disable-model-invocation: true
       <section>
         <h2>你遇到的现象，应该怎样理解</h2>
         <div class="callout">
-          <p><strong>你输入“`/handoff` + 一段描述”时，这段描述默认是在告诉 agent：请按这个下一阶段焦点来定制 handoff 文档。</strong></p>
-          <p>它不等于“请你现在立刻跳去那个下一阶段”。如果当前窗口里没有额外机制去切走，新 agent 也没有自动被创建，那么当前 agent 继续在原窗口里响应，是完全可能的。</p>
+          <p><strong>你输入"`/handoff` + 一段描述"时，这段描述默认是在告诉 agent：请按这个下一阶段焦点来定制 handoff 文档。</strong></p>
+          <p>这不表示"请你现在立刻跳去那个下一阶段"。当前窗口里没有额外机制去切走，新 agent 也没有自动被创建，当前 agent 继续在原窗口里响应，是常见的结果。</p>
         </div>
-        <p>更直白地说：`/handoff 做 X` 通常表示“为下一位做 X 的 agent 生成一份交接文件”，而不是“你自己现在开始在另一个上下文里做 X”。</p>
+        <p>`/handoff 做 X` 的含义是"为下一位做 X 的 agent 生成一份交接文件"。它不表示"你自己现在开始在另一个上下文里做 X"。</p>
       </section>
 
       <section>
-        <h2>如果你的目标真的是“不污染当前 session”</h2>
+        <h2>如果你的目标真的是"不污染当前 session"</h2>
         <div class="grid">
           <article class="card">
             <h3 class="card-title">目标是完全丢弃当前上下文</h3>
@@ -160,40 +161,8 @@ disable-model-invocation: true
           </article>
           <article class="card">
             <h3 class="card-title">目标是把任务转移给别处</h3>
-            <p>这时才是 `/handoff` 不可替代的位置；但你通常还需要手动去打开新 session、或明确停在这里。</p>
+            <p>这时 `/handoff` 是唯一选择。你通常还需要手动去打开新 session，或明确停在这里。</p>
           </article>
-        </div>
-      </section>
-
-      <section class="quiz">
-        <h2>3 分钟自测</h2>
-        <div class="quiz-list">
-          <div class="quiz-item" data-quiz-answer="交接文档" data-quiz-explanation="`handoff` skill 原文直接要求的是写 handoff document，并保存到系统临时目录。">
-            <h3>1. `/handoff` 默认最核心的产物是什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="交接文档">交接文档</button>
-              <button class="quiz-option" type="button" data-choice="结束会话">结束会话</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="为了 portability" data-quiz-explanation="phase boundaries 里，`/handoff` 的独特价值是 portability：给别的 harness、目录、同事或侧任务带走。">
-            <h3>2. 在 phase boundary 里，`/handoff` 最独特的价值是什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="为了 portability">为了 portability</button>
-              <button class="quiz-option" type="button" data-choice="为了自动退出">为了自动退出</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="不一定会停" data-quiz-explanation="因为 `handoff` 默认不是终止动作，它只负责生成文档；当前窗口是否停下，是另一层行为。">
-            <h3>3. 你在当前 session 里调用 `/handoff` 后，agent 是否一定会停止当前窗口里的工作？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="不一定会停">不一定会停</button>
-              <button class="quiz-option" type="button" data-choice="一定会停">一定会停</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
         </div>
       </section>
 
@@ -202,7 +171,7 @@ disable-model-invocation: true
         <div class="grid">
           <article class="card">
             <h3 class="card-title">1. handoff 是产物</h3>
-            <p>默认首先是 portable handoff document，不是会话终止器。</p>
+            <p>handoff 的默认产出是 portable handoff document。终止会话需要别的操作。</p>
           </article>
           <article class="card">
             <h3 class="card-title">2. 终止当前 session 是另一件事</h3>
@@ -213,8 +182,8 @@ disable-model-invocation: true
             <p>换 harness、换目录、交给别人、分叉旁支，这些都需要它。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">4. `/handoff 做 X` 不等于“现在就切去做 X”</h3>
-            <p>更常见的含义是“请为下一位做 X 的 agent 生成一份交接文档”。</p>
+            <h3 class="card-title">4. `/handoff 做 X` 不表示"现在就切去做 X"</h3>
+            <p>`/handoff 做 X` 的意思是"为下一位做 X 的 agent 生成一份交接文档"。</p>
           </article>
         </div>
       </section>
@@ -229,7 +198,7 @@ disable-model-invocation: true
         </ol>
       </section>
 
-      <p class="footer-note">如果你还想继续追这个点，下一课可以专门讲“什么时候该 Continue、什么时候该 clear、什么时候才值得 compact”，把 phase boundary 的顺序树真正练熟。</p>
+      <p class="footer-note">下一课可以专门讲"什么时候该 Continue、什么时候该 clear、什么时候才值得 compact"，把 phase boundary 的顺序树练熟。</p>
     </main>
   </body>
 </html>

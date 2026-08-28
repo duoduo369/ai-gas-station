@@ -1,0 +1,568 @@
+/* Course chrome. Lessons/reference link ../assets/course.css */
+:root {
+  --bg: #eef3f6;
+  --bg-strong: #f9fbfc;
+  --ink: #1b2430;
+  --muted: #586474;
+  --line: #cfd8e3;
+  --accent: #0e5a6b;
+  --accent-soft: #d8edf2;
+  --accent-strong: #083945;
+  --warm: #c26b2b;
+  --warm-soft: #f8e3d3;
+  --success: #16724a;
+  --danger: #a24129;
+  --shadow: 0 20px 60px rgba(15, 32, 46, 0.10);
+  --max: 960px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Alegreya", "Source Han Serif SC", "Noto Serif SC", Georgia, serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(216, 237, 242, 0.95), transparent 34%),
+    linear-gradient(180deg, #f3f7fa 0%, var(--bg) 45%, #e7edf2 100%);
+  line-height: 1.72;
+}
+
+a {
+  color: var(--accent);
+}
+
+main {
+  width: min(calc(100% - 32px), var(--max));
+  margin: 0 auto;
+  padding: 44px 0 78px;
+}
+
+.course-nav {
+  margin: 0 0 28px;
+  padding: 14px 18px;
+  background: rgba(249, 251, 252, 0.9);
+  border: 1px solid rgba(88, 100, 116, 0.16);
+  border-radius: 18px;
+  font-family: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  box-shadow: var(--shadow);
+}
+
+.course-nav-bottom {
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+
+.course-nav-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 4px;
+}
+
+.course-nav-row + .course-nav-row {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(88, 100, 116, 0.12);
+}
+
+.course-nav-label {
+  margin-right: 4px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.course-nav-sep {
+  margin: 0 4px;
+  color: var(--line);
+}
+
+.course-nav a {
+  color: var(--accent-strong);
+  text-decoration: none;
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+.course-nav a:hover,
+.course-nav a:focus-visible {
+  background: var(--accent-soft);
+  outline: none;
+}
+
+.course-nav-current {
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #f7faf7;
+  font-weight: 600;
+}
+
+.course-nav-muted {
+  color: var(--muted);
+  padding: 2px 6px;
+}
+
+.course-nav-prevnext {
+  justify-content: space-between;
+}
+
+.course-nav-refs {
+  font-size: 0.85rem;
+}
+
+section {
+  margin-top: 34px;
+}
+
+.hero,
+.card,
+.callout,
+.table-wrap,
+.timeline-step {
+  background: rgba(249, 251, 252, 0.88);
+  border: 1px solid rgba(88, 100, 116, 0.18);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+}
+
+.hero,
+.card,
+.callout,
+.timeline-step {
+  padding: 22px 24px;
+}
+
+.hero {
+  background:
+    linear-gradient(145deg, rgba(249, 251, 252, 0.96), rgba(216, 237, 242, 0.88)),
+    linear-gradient(180deg, rgba(194, 107, 43, 0.10), transparent);
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  font-size: 0.84rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--warm);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.16;
+  margin: 0 0 14px;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+h2 {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  margin-top: 44px;
+}
+
+h3 {
+  font-size: 1.08rem;
+  margin-top: 24px;
+}
+
+p,
+li {
+  font-size: 1.03rem;
+}
+
+.lede {
+  font-size: 1.12rem;
+  color: var(--muted);
+}
+
+.grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.prompt-stack {
+  display: grid;
+  gap: 18px;
+}
+
+.prompt-doc {
+  background: rgba(249, 251, 252, 0.88);
+  border: 1px solid rgba(88, 100, 116, 0.18);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 22px 24px;
+}
+
+.card-title {
+  font-size: 1.08rem;
+  margin-bottom: 8px;
+}
+
+.prompt-cap {
+  margin: 0 0 14px;
+  font-size: 0.94rem;
+  color: var(--muted);
+}
+
+.prompt-md,
+.prompt-raw,
+.prompt-zh {
+  margin: 0;
+  padding: 18px 20px;
+  border-radius: 18px;
+  border: 1px solid rgba(14, 90, 107, 0.14);
+  background: rgba(216, 237, 242, 0.34);
+  line-height: 1.82;
+}
+
+.prompt-raw,
+.prompt-zh {
+  white-space: pre-wrap;
+  overflow-x: auto;
+  font: inherit;
+}
+
+.prompt-frontmatter {
+  margin-bottom: 14px;
+}
+
+.prompt-fold {
+  margin-top: 14px;
+}
+
+.prompt-fold[open] {
+  margin-bottom: 0;
+}
+
+.prompt-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  list-style: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 12px 16px;
+  border: 1px solid rgba(14, 90, 107, 0.16);
+  border-radius: 16px;
+  background: rgba(249, 251, 252, 0.92);
+  color: var(--accent-strong);
+  font-family: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", sans-serif;
+  font-size: 0.96rem;
+  font-weight: 600;
+}
+
+.prompt-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.prompt-toggle::after {
+  content: "▾";
+  flex: 0 0 auto;
+  font-size: 0.95rem;
+  color: var(--muted);
+  transition: transform 160ms ease;
+}
+
+.prompt-fold[open] .prompt-toggle::after {
+  transform: rotate(180deg);
+}
+
+.prompt-toggle:hover,
+.prompt-toggle:focus-visible {
+  background: rgba(216, 237, 242, 0.56);
+  outline: none;
+}
+
+.prompt-toggle-open {
+  display: none;
+}
+
+.prompt-fold[open] .prompt-toggle-closed {
+  display: none;
+}
+
+.prompt-fold[open] .prompt-toggle-open {
+  display: inline;
+}
+
+.prompt-fold > .prompt-raw,
+.prompt-fold > .prompt-zh,
+.prompt-fold > .prompt-md,
+.prompt-fold > .prompt-frontmatter {
+  margin-top: 12px;
+}
+
+.prompt-md {
+  font-size: 1rem;
+}
+
+.prompt-md > :first-child {
+  margin-top: 0;
+}
+
+.prompt-md > :last-child {
+  margin-bottom: 0;
+}
+
+.prompt-md h4,
+.prompt-md h5,
+.prompt-md h6 {
+  margin: 1.1em 0 0.55em;
+  line-height: 1.28;
+  font-family: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", sans-serif;
+}
+
+.prompt-md h4 {
+  font-size: 1.08rem;
+}
+
+.prompt-md h5 {
+  font-size: 1rem;
+}
+
+.prompt-md h6 {
+  font-size: 0.94rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.prompt-md p,
+.prompt-md ul,
+.prompt-md ol,
+.prompt-md blockquote,
+.prompt-md pre,
+.prompt-md table {
+  margin: 0.82em 0;
+}
+
+.prompt-md ul,
+.prompt-md ol {
+  padding-left: 1.45em;
+}
+
+.prompt-md li + li {
+  margin-top: 0.32em;
+}
+
+.prompt-md blockquote {
+  padding: 0.85em 1em;
+  border-left: 4px solid rgba(14, 90, 107, 0.38);
+  border-radius: 0 14px 14px 0;
+  background: rgba(249, 251, 252, 0.72);
+  color: var(--accent-strong);
+}
+
+.prompt-md blockquote > :first-child {
+  margin-top: 0;
+}
+
+.prompt-md blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.prompt-md code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.92em;
+  background: rgba(14, 90, 107, 0.08);
+  padding: 0.14rem 0.38rem;
+  border-radius: 0.35rem;
+}
+
+.prompt-md pre {
+  padding: 14px 16px;
+  overflow-x: auto;
+  border-radius: 14px;
+  background: rgba(27, 36, 48, 0.94);
+  color: #f7fafc;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.93rem;
+  line-height: 1.68;
+  white-space: pre-wrap;
+}
+
+.prompt-md pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.prompt-md hr {
+  border: 0;
+  border-top: 1px solid rgba(88, 100, 116, 0.24);
+  margin: 1.1em 0;
+}
+
+.prompt-md table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prompt-md th,
+.prompt-md td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(88, 100, 116, 0.16);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prompt-md th {
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.prompt-md tr:last-child td {
+  border-bottom: none;
+}
+
+.prompt-md a {
+  color: var(--accent-strong);
+}
+
+.diagram {
+  margin: 22px 0 0;
+}
+
+.diagram img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 22px;
+  border: 1px solid rgba(88, 100, 116, 0.18);
+  background: rgba(249, 251, 252, 0.88);
+  box-shadow: var(--shadow);
+}
+
+.diagram figcaption {
+  margin-top: 10px;
+  font-size: 0.94rem;
+  color: var(--muted);
+}
+
+.callout {
+  border-left: 6px solid var(--warm);
+  background: linear-gradient(135deg, rgba(249, 251, 252, 0.96), rgba(248, 227, 211, 0.86));
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(88, 100, 116, 0.16);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+.timeline {
+  display: grid;
+  gap: 14px;
+}
+
+.step-kicker {
+  margin: 0 0 8px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--warm);
+}
+
+.step-title {
+  font-size: 1.12rem;
+  margin-bottom: 8px;
+}
+
+.path {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.94rem;
+  background: rgba(14, 90, 107, 0.08);
+  padding: 0.14rem 0.4rem;
+  border-radius: 0.35rem;
+}
+
+.source-list {
+  padding-left: 20px;
+}
+
+.footer-note {
+  margin-top: 50px;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  main {
+    width: min(calc(100% - 20px), var(--max));
+    padding-top: 26px;
+  }
+
+  .course-nav {
+    padding: 12px 14px;
+  }
+
+  .hero,
+  .card,
+  .callout,
+  .timeline-step,
+  .prompt-doc {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .prompt-zh {
+    padding: 16px;
+  }
+
+  .prompt-md,
+  .prompt-raw {
+    padding: 16px;
+  }
+
+  .prompt-toggle {
+    padding: 11px 14px;
+  }
+
+  .diagram img {
+    border-radius: 18px;
+  }
+
+  th,
+  td {
+    padding: 12px;
+  }
+}

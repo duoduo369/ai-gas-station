@@ -4,10 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lesson 0001 · 先建立 SwarmForge 的地图</title>
-    <link rel="stylesheet" href="../../assets/course.css">
-    <script src="../assets/classify-quiz.js" defer></script>
+    <link rel="stylesheet" href="../assets/course.css">
     <script src="../assets/course-nav.js" defer></script>
-    <script src="../../assets/open-links-new-tab.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
   </head>
   <body>
     <main>
@@ -16,7 +15,6 @@
         <h1>先建立这个系统的地图感</h1>
         <p class="lede">这节课先给 <a href="https://github.com/unclebob/swarm-forge/tree/main/swarmforge"><code>swarmforge/</code></a> 画地图。你要把它看成“共享底座 + 可运行流水线”的编排层，看清 <code>main</code> 和 pack 分支怎么分工，目录里三件套各管什么，一次任务在仪表盘上怎么走。</p>
         <div class="pill-row">
-          <span class="pill">预计 22 分钟</span>
           <span class="pill">目标：建立全局地图</span>
           <span class="pill">回看资料：<a href="../reference/swarmforge-map.html">速查地图</a> · <a href="../reference/glossary.html">术语</a></span>
         </div>
@@ -25,7 +23,7 @@
       <section>
         <h2>先记住一句总判断</h2>
         <div class="callout">
-          <p><strong><code>main</code> 不是拿来直接 <code>./swarm</code> 的工作流，而是共享操作系统。</strong></p>
+          <p><strong><code>main</code> 是共享操作系统。不能在上面直接 <code>./swarm</code>。</strong></p>
           <p>README 的 Intent 写得很直：<code>main</code> 负责说明系统，并携带共享脚本和默认宪法条款。可运行的角色提示、本机宪法和 <code>swarmforge.conf</code> 在 pack 分支上。你点开的 <code>swarmforge/</code> 在 <code>main</code> 上只有三样：宪法文章、交接协议、脚本。</p>
         </div>
       </section>
@@ -82,7 +80,8 @@
             </tbody>
           </table>
         </div>
-        <p>最值钱的规则是：<strong>共享文章文件名是法律。</strong> pack 要加例外，用 <code>project.prompt</code> 或 <code>local-engineering.prompt</code> / <code>local-workflow.prompt</code>，不要提交同名的 <code>engineering.prompt</code>。</p>      </section>
+        <p><strong>共享文章文件名是法律。</strong> pack 要加例外，用 <code>project.prompt</code> 或 <code>local-engineering.prompt</code> / <code>local-workflow.prompt</code>，不要提交同名的 <code>engineering.prompt</code>。</p>
+      </section>
 
       <section id="beat-constitution">
         <p class="beat-label">地图里的 prompt · 实际被读到的法律</p>
@@ -91,165 +90,305 @@
         <article class="prompt-doc">
           <h3 class="card-title">生成文件头两句（中文全量）</h3>
           <p class="prompt-cap">生成逻辑：<a href="https://github.com/unclebob/swarm-forge/blob/main/swarmforge/scripts/swarmforge.bb">swarmforge.bb</a> 的 <code>write-agent-instruction-file!</code>。后面的 Tool Startup 因角色而异，见 0002 起各课。</p>
-          <pre class="prompt-zh">请阅读 swarmforge/constitution.prompt，再递归阅读它指向的每一个文件，并遵守那些指令。
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <pre class="prompt-raw">请阅读 swarmforge/constitution.prompt，再递归阅读它指向的每一个文件，并遵守那些指令。
 请阅读 swarmforge/roles/&lt;role&gt;.prompt，再递归阅读它指向的每一个文件，并遵循那些指令。</pre>
+          </details>
         </article>
         <article class="prompt-doc">
           <h3 class="card-title">constitution.prompt（中文全量）</h3>
           <p class="prompt-cap">原文以 pack 为准，例如 <a href="https://github.com/unclebob/swarm-forge/blob/two-pack/swarmforge/constitution.prompt">two-pack constitution.prompt</a>。它自己几乎没有规则，但声明<strong>本文件优先于文章</strong>：不能只挑角色 prompt、也不能只读其中一篇。</p>
-          <pre class="prompt-zh"># SwarmForge 宪法
-
-本文件优先于各篇文章。
-阅读并遵守 `swarmforge/constitution/articles/` 下的每一个文件。</pre>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>SwarmForge 宪法</h4>
+              <p>本文件优先于各篇文章。<br>
+              阅读并遵守 <code>swarmforge/constitution/articles/</code> 下的每一个文件。</p>
+            </div>
+          </details>
         </article>
         <p>合成后，<code>articles/</code> 里至少有下面三篇（来自 main）。pack 再追加 <code>project.prompt</code> 和可选的 <code>local-*.prompt</code>；那些收窄从 0002 起再读。</p>
 
         <article class="prompt-doc" id="zh-workflow">
           <h3 class="card-title">workflow.prompt（中文全量）</h3>
           <p class="prompt-cap">原文：<a href="https://github.com/unclebob/swarm-forge/blob/main/swarmforge/constitution/articles/workflow.prompt">main workflow.prompt</a> · 管 worktree 边界、commit 署名、草稿纸该写哪。</p>
-          <pre class="prompt-zh"># 工作流规则
-
-## Worktree 纪律
-- 启动时查明并记住分配给本角色的分支或 worktree。
-- 若分配的 worktree 是 `master`：在主项目检出的当前分支上工作；不要指望或创建 `.worktrees/&lt;role&gt;`。
-- 只在分配给你的分支或 worktree 里工作。
-- 除非交接里点名了某分支，或用户明确指示，否则不要检查、diff、合并或以另一条分支为基底。
-- 不要从 agent 的 worktree 里跑 `./swarm` 去修 helper。若 PATH 上没有交接脚本，停下来报告启动失败。
-
-## 宣告
-- 不要在宣告或签到评论里加角色署名。
-
-## 提交说明
-- 每条 git commit message 都要带角色署名，格式：`By &lt;role&gt;.`
-- 例子：
-
-Implement handoff validation
-
-By coder.
-
-- 若漏写，commit-msg hook 会补上 `By &lt;role&gt;.`。不要跳过 hook（`--no-verify`）。
-
-## 临时文件
-- 临时文件用本角色 worktree 里的 `./tmp/`，不要用 `/tmp`。
-- 解析和 dry-check 写到 `./tmp/…`。交接草稿也写在 `./tmp/`。
-- 不要把 `.swarmforge/handoffs/outbox/tmp/` 当草稿纸；那是交接 helper 用的。
-
-## 失败条件
-- 若预期的 git 布局或分配的 worktree 不存在：停下来报告，不要默默在错误的地方干活。</pre>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>工作流规则</h4>
+              <h5>Worktree 纪律</h5>
+              <ul>
+              <li>启动时查明并记住分配给本角色的分支或 worktree。
+              </li>
+              <li>若分配的 worktree 是 <code>master</code>：在主项目检出的当前分支上工作；不要指望或创建 <code>.worktrees/&lt;role&gt;</code>。
+              </li>
+              <li>只在分配给你的分支或 worktree 里工作。
+              </li>
+              <li>除非交接里点名了某分支，或用户明确指示，否则不要检查、diff、合并或以另一条分支为基底。
+              </li>
+              <li>不要从 agent 的 worktree 里跑 <code>./swarm</code> 去修 helper。若 PATH 上没有交接脚本，停下来报告启动失败。
+              </li>
+              </ul>
+              <h5>宣告</h5>
+              <ul>
+              <li>不要在宣告或签到评论里加角色署名。
+              </li>
+              </ul>
+              <h5>提交说明</h5>
+              <ul>
+              <li>每条 git commit message 都要带角色署名，格式：<code>By &lt;role&gt;.</code>
+              </li>
+              <li>例子：
+              </li>
+              </ul>
+              <p>Implement handoff validation</p>
+              <p>By coder.</p>
+              <ul>
+              <li>若漏写，commit-msg hook 会补上 <code>By &lt;role&gt;.</code>。不要跳过 hook（<code>--no-verify</code>）。
+              </li>
+              </ul>
+              <h5>临时文件</h5>
+              <ul>
+              <li>临时文件用本角色 worktree 里的 <code>./tmp/</code>，不要用 <code>/tmp</code>。
+              </li>
+              <li>解析和 dry-check 写到 <code>./tmp/…</code>。交接草稿也写在 <code>./tmp/</code>。
+              </li>
+              <li>不要把 <code>.swarmforge/handoffs/outbox/tmp/</code> 当草稿纸；那是交接 helper 用的。
+              </li>
+              </ul>
+              <h5>失败条件</h5>
+              <ul>
+              <li>若预期的 git 布局或分配的 worktree 不存在：停下来报告，不要默默在错误的地方干活。
+              </li>
+              </ul>
+            </div>
+          </details>
         </article>
 
         <article class="prompt-doc" id="zh-handoffs">
           <h3 class="card-title">handoffs.prompt（中文全量）</h3>
           <p class="prompt-cap">原文：<a href="https://github.com/unclebob/swarm-forge/blob/main/swarmforge/constitution/articles/handoffs.prompt">main handoffs.prompt</a> · 这是 <a href="../reference/glossary.html#git-handoff">git_handoff</a> 的操作说明书。角色 prompt 只决定 to 谁；helper 才填 commit SHA。</p>
-          <pre class="prompt-zh"># 交接规则
-
-## 发送交接
-- 在本角色 worktree 的 `./tmp/` 里写一份只有结构化头的草稿，然后运行 `swarm_handoff.sh &lt;草稿文件&gt;`。
-- `swarm_handoff.sh` 会拒绝 `/tmp` 和 `.swarmforge/handoffs/outbox/tmp/` 里的草稿。
-- `swarm_handoff.sh --help` 打印用法。不要把 `--help` 当成草稿路径传进去。
-- 只允许这两种消息类型：`git_handoff`、`note`。
-- 除非用户、角色 prompt 或宪法明确要求，否则不要发 `note`。
-- 被歧义、矛盾、或测试/规格冲突卡住时：用 `pack_dashboard_request.sh clarify ./tmp/question.txt` 问操作者。不要在窗格里问。除非上面那些权威明确要求，否则不要为此发 `note`。
-- 对 `git_handoff`：先提交，再写草稿。helper 从发送方 worktree 的 HEAD 填写 `commit` 和 `artifacts`；不要手打 SHA。若未设置 `SWARMFORGE_ROLE`，helper 会从 `roles.tsv` 和当前 worktree 推断角色。
-- 若你是带 specifier 的 pack 里的 master：工作就绪就排队 `git_handoff`。不要在窗格里求批准；操作者走 Attention。
-- 不要额外加 git 头（coverage、CRAP、证据）。需要证据时由 helper 来写。
-- `git_handoff` 只写：
-
-type: git_handoff
-to: &lt;role&gt;[,&lt;role&gt;...]
-priority: NN
-task: &lt;短而稳定的任务名&gt;
-
-- 做完入站任务后，无论改了什么，都要向链上下一角色发 `git_handoff`。只改格式、只改清单、只做 audit、只生成元数据，或其他非功能抖动，仍然要向前传。
-- 转发同一任务时保留收到的任务名。
-- master agent 用已有的 New Task / 看板卡片名当 `task:`。不要另起名字。
-- `note` 只写：
-
-type: note
-to: &lt;role&gt;[,&lt;role&gt;...]
-priority: NN
-message: &lt;一行，最多 80 字符&gt;
-
-- 若 `swarm_handoff.sh` 报校验错误：修好草稿再跑。
-- 发送成功后 helper 会删掉草稿。若要手动删过期草稿，用 `rm &lt;文件&gt;`，不要 `rm -f`。
-- 不要写长交接正文。送达载荷由 helper 生成。
-- 不要直接发 tmux 通知。
-- 不要手改、合并、暂存或提交交接运行时状态。
-
-## 接收交接
-- 被通知时运行 `ready_for_next.sh`。未设置 `SWARMFORGE_ROLE` 时，helper 从 `roles.tsv` 和当前 worktree 推断。
-- `ready_for_next.sh` 按该角色配置的接收模式分派到 task 或 batch helper。对 `git_handoff`，它会合并入站 commit（`merge_and_process.sh &lt;sender&gt; &lt;commit&gt;`）。
-- 若 merge 或 ready 报冲突：解决每个冲突文件、`git add`、提交。冲突解决归你。不要发明新的 `git merge`。同一棵树上的并行卡片会冲突，这是预期。
-- 若打印 `NO_TASK`：停止等活。
-- 若打印 `TASK: &lt;path&gt;`：把打印出的 `PAYLOAD` 当任务。
-- 若打印 `TASK_NAME: &lt;name&gt;`：转发该任务时用这个稳定名。
-- 若打印 `BATCH: &lt;path&gt;`：把每条打印出的 `BATCH_ITEM` 按 helper 给出的顺序当作当前 batch 的一部分。
-- 只使用 helper 脚本打印出来的任务信息。
-- 若已经在做一项任务时又来了 tmux 唤醒：忽略它。
-- 任务或 batch 全部完成后运行 `done_with_current.sh`。
-- `note` 也是任务；读完或处理完 note 后，先 `done_with_current.sh`，再接下一个交接。
-- 若 `done_with_current.sh` 打印 `MAIL_WAITING`：作为新一轮再跑 `ready_for_next.sh`。不要把 done 的输出当成下一次 merge。
-- 若 done helper 打印 `NO_TASK`：停止等活。
-- 重启后运行 `ready_for_next.sh` 并按其输出行事。</pre>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>交接规则</h4>
+              <h5>发送交接</h5>
+              <ul>
+              <li>在本角色 worktree 的 <code>./tmp/</code> 里写一份只有结构化头的草稿，然后运行 <code>swarm_handoff.sh &lt;草稿文件&gt;</code>。
+              </li>
+              <li><code>swarm_handoff.sh</code> 会拒绝 <code>/tmp</code> 和 <code>.swarmforge/handoffs/outbox/tmp/</code> 里的草稿。
+              </li>
+              <li><code>swarm_handoff.sh --help</code> 打印用法。不要把 <code>--help</code> 当成草稿路径传进去。
+              </li>
+              <li>只允许这两种消息类型：<code>git_handoff</code>、<code>note</code>。
+              </li>
+              <li>除非用户、角色 prompt 或宪法明确要求，否则不要发 <code>note</code>。
+              </li>
+              <li>被歧义、矛盾、或测试/规格冲突卡住时：用 <code>pack_dashboard_request.sh clarify ./tmp/question.txt</code> 问操作者。不要在窗格里问。除非上面那些权威明确要求，否则不要为此发 <code>note</code>。
+              </li>
+              <li>对 <code>git_handoff</code>：先提交，再写草稿。helper 从发送方 worktree 的 HEAD 填写 <code>commit</code> 和 <code>artifacts</code>；不要手打 SHA。若未设置 <code>SWARMFORGE_ROLE</code>，helper 会从 <code>roles.tsv</code> 和当前 worktree 推断角色。
+              </li>
+              <li>若你是带 specifier 的 pack 里的 master：工作就绪就排队 <code>git_handoff</code>。不要在窗格里求批准；操作者走 Attention。
+              </li>
+              <li>不要额外加 git 头（coverage、CRAP、证据）。需要证据时由 helper 来写。
+              </li>
+              <li><code>git_handoff</code> 只写：
+              </li>
+              </ul>
+              <p>type: git_handoff<br>
+              to: &lt;role&gt;[,&lt;role&gt;...]<br>
+              priority: NN<br>
+              task: &lt;短而稳定的任务名&gt;</p>
+              <ul>
+              <li>做完入站任务后，无论改了什么，都要向链上下一角色发 <code>git_handoff</code>。只改格式、只改清单、只做 audit、只生成元数据，或其他非功能抖动，仍然要向前传。
+              </li>
+              <li>转发同一任务时保留收到的任务名。
+              </li>
+              <li>master agent 用已有的 New Task / 看板卡片名当 <code>task:</code>。不要另起名字。
+              </li>
+              <li><code>note</code> 只写：
+              </li>
+              </ul>
+              <p>type: note<br>
+              to: &lt;role&gt;[,&lt;role&gt;...]<br>
+              priority: NN<br>
+              message: &lt;一行，最多 80 字符&gt;</p>
+              <ul>
+              <li>若 <code>swarm_handoff.sh</code> 报校验错误：修好草稿再跑。
+              </li>
+              <li>发送成功后 helper 会删掉草稿。若要手动删过期草稿，用 <code>rm &lt;文件&gt;</code>，不要 <code>rm -f</code>。
+              </li>
+              <li>不要写长交接正文。送达载荷由 helper 生成。
+              </li>
+              <li>不要直接发 tmux 通知。
+              </li>
+              <li>不要手改、合并、暂存或提交交接运行时状态。
+              </li>
+              </ul>
+              <h5>接收交接</h5>
+              <ul>
+              <li>被通知时运行 <code>ready_for_next.sh</code>。未设置 <code>SWARMFORGE_ROLE</code> 时，helper 从 <code>roles.tsv</code> 和当前 worktree 推断。
+              </li>
+              <li><code>ready_for_next.sh</code> 按该角色配置的接收模式分派到 task 或 batch helper。对 <code>git_handoff</code>，它会合并入站 commit（<code>merge_and_process.sh &lt;sender&gt; &lt;commit&gt;</code>）。
+              </li>
+              <li>若 merge 或 ready 报冲突：解决每个冲突文件、<code>git add</code>、提交。冲突解决归你。不要发明新的 <code>git merge</code>。同一棵树上的并行卡片会冲突，这是预期。
+              </li>
+              <li>若打印 <code>NO_TASK</code>：停止等活。
+              </li>
+              <li>若打印 <code>TASK: &lt;path&gt;</code>：把打印出的 <code>PAYLOAD</code> 当任务。
+              </li>
+              <li>若打印 <code>TASK_NAME: &lt;name&gt;</code>：转发该任务时用这个稳定名。
+              </li>
+              <li>若打印 <code>BATCH: &lt;path&gt;</code>：把每条打印出的 <code>BATCH_ITEM</code> 按 helper 给出的顺序当作当前 batch 的一部分。
+              </li>
+              <li>只使用 helper 脚本打印出来的任务信息。
+              </li>
+              <li>若已经在做一项任务时又来了 tmux 唤醒：忽略它。
+              </li>
+              <li>任务或 batch 全部完成后运行 <code>done_with_current.sh</code>。
+              </li>
+              <li><code>note</code> 也是任务；读完或处理完 note 后，先 <code>done_with_current.sh</code>，再接下一个交接。
+              </li>
+              <li>若 <code>done_with_current.sh</code> 打印 <code>MAIL_WAITING</code>：作为新一轮再跑 <code>ready_for_next.sh</code>。不要把 done 的输出当成下一次 merge。
+              </li>
+              <li>若 done helper 打印 <code>NO_TASK</code>：停止等活。
+              </li>
+              <li>重启后运行 <code>ready_for_next.sh</code> 并按其输出行事。
+              </li>
+              </ul>
+            </div>
+          </details>
         </article>
 
         <article class="prompt-doc" id="zh-engineering">
           <h3 class="card-title">engineering.prompt（中文全量）</h3>
           <p class="prompt-cap">原文：<a href="https://github.com/unclebob/swarm-forge/blob/main/swarmforge/constitution/articles/engineering.prompt">main engineering.prompt</a> · <a href="../reference/glossary.html#gherkin">Gherkin</a> / APS、<a href="../reference/glossary.html#crap">CRAP</a>、DRY、变异测试的安装与跑法都写在这里。pack 可以用 <code>project.prompt</code> 关掉整段验收管线（two-pack 就是这样做的）。</p>
-          <pre class="prompt-zh"># 工程规则
-
-## 启动工具
-- 启动时，按项目语言，直接从列出的 `github.com/unclebob/...` 仓库取得所需 CRAP、变异、DRY 工具的最新版本，并准备好可运行。
-- 安装或构建前，把每个列出的仓库解析到当前能拿到的最新上游版本。
-- 只要当前环境能从 GitHub 全新安装/构建，就不要依赖过期缓存、vendor 或预装副本。
-- 语言工具表：
-  - Go：`go install`；变异 `github.com/unclebob/mutate4go`，CRAP `github.com/unclebob/crap4go`，DRY `github.com/unclebob/dry4go`。
-  - Clojure：Clojure CLI / deps.edn；变异 `github.com/unclebob/clj-mutate`，CRAP `github.com/unclebob/crap4clj`，DRY `github.com/unclebob/dry4clj`。
-  - Java：Maven（`mvn`）；变异 `github.com/unclebob/mutate4java`，CRAP `github.com/unclebob/crap4java`，DRY `github.com/unclebob/dry4java`。
-
-## 语言默认
-- Clojure 项目尽可能用 Babashka。
-- Clojure 或 Babashka 项目写 Speclj specs，不要用 `clojure.test`。
-- 用 `swarm_tool.sh require speclj` 安装 Speclj。缺失则 `swarm_tool.sh ensure speclj`。
-- 若 Speclj spec 文件有改动：运行 `swarm_tool.sh require speclj-structure-check`（缺失则 ensure），在跑测试前检查该 spec 文件。
-- Java 项目不要用 Maven 跑测试；构建专用测试 runner 再跑。
-
-## 设计与可测性
-- 以小的、可评审的增量工作。
-- 选择能支撑当前行为、并为下一步留下清晰选项的最简设计。
-- 测试贴近正在改的行为。
-- 把可测模块与「环境上不适合自动测」的模块分开：打开 GUI、依赖外设、抛环境错误、打系统错误、或在自动测试里挂死的，都算不适合。尽量扩大可测代码，缩小不适合的边界。
-- 只有可测模块才参与会跑测试的工具：单元测试、验收测试、覆盖率、变异测试、CRAP、会调测试的 DRY、属性测试。
-- 属性测试与常规验证分开。除非该角色拥有属性测试验证，或用户明确要求，否则不要把属性测试标签放进常规单元覆盖、Gherkin 验收变异、语言变异、CRAP 或覆盖率命令。
-
-## 验收管线
-- Gherkin 验收测试使用 github.com/unclebob/Acceptance-Pipeline-Specification。
-- APS 提供 `gherkin-parser`、`ir-dry-checker`、`gherkin-mutator`。用项目本地 helper 安装；不要搜 `$HOME` 或 `find` 二进制。
-- 工具启动时，每个需要的 APS 工具先 `swarm_tool.sh require &lt;tool&gt;`；缺失则精确运行 `swarm_tool.sh ensure &lt;tool&gt;`。
-- 双参数形式：
-  - `gherkin-parser &lt;feature&gt; ./tmp/&lt;stem&gt;.json`
-  - `ir-dry-checker &lt;ir&gt; ./tmp/&lt;stem&gt;.dry.json`
-- `gherkin-parser`、`ir-dry-checker`、`gherkin-mutator` 及相关 APS 命令优先用 Babashka 实现。
-- 仅当 Babashka APS 在当前项目环境不可用时，才用 Go 版 APS。
-- 项目自己的验收管线部件是：验收入口生成器、验收运行时、项目 step handler、runner 适配器、便利脚本。
-- Gherkin 验收变异 = 跑 `gherkin-mutator` 去变异 Gherkin 例子值。
-- Gherkin 验收变异必须定期报告进度，好让 agent 区分「正常很长」和「挂死」。
-
-## 验证
-- 跑语言/构建/测试命令前，优先用本 worktree 内的项目本地缓存与配置路径。避免写到项目外、可能触发沙箱或权限问题的默认缓存。
-- 宪法工具一次只跑一个。不要并行跑 CRAP、DRY、覆盖率、语言变异、Gherkin 变异或 structure-check。
-- 有 worker 上限的工具必须用 `--max-workers 4` 或 `--workers 4`。
-- 函数变异相对源清单做差分。不要传 `--mutate-all`。
-- Gherkin 变异相对 feature 清单做差分（`--level hard`）。不要传 `--level full`。
-- 验收生成和验收测试顺序执行。
-- 避免整套语言测试命令与验收生成并行。
-- 项目若有本地验证命令，交接前跑相关的那条。
-
-## 护栏
-- 不要发明项目本地的 CRAP / DRY / 变异 / 覆盖率代理。安装并运行宪法工具。不要把自制的 `bb crap` / `bb coverage` / `bb mutation-count` 当成那些工具。
-- 不要手改变异测试或 Gherkin 验收变异的清单；让获准的变异工具在正常运行中更新清单。
-- 除非任务需要，否则不要提交无关的本地改动或生成物。
-- 不熟悉的命令，先看本地 help 或项目文档再依赖它。</pre>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>工程规则</h4>
+              <h5>启动工具</h5>
+              <ul>
+              <li>启动时，按项目语言，直接从列出的 <code>github.com/unclebob/...</code> 仓库取得所需 CRAP、变异、DRY 工具的最新版本，并准备好可运行。
+              </li>
+              <li>安装或构建前，把每个列出的仓库解析到当前能拿到的最新上游版本。
+              </li>
+              <li>只要当前环境能从 GitHub 全新安装/构建，就不要依赖过期缓存、vendor 或预装副本。
+              </li>
+              <li>语言工具表：
+              <ul>
+              <li>Go：<code>go install</code>；变异 <code>github.com/unclebob/mutate4go</code>，CRAP <code>github.com/unclebob/crap4go</code>，DRY <code>github.com/unclebob/dry4go</code>。
+              </li>
+              <li>Clojure：Clojure CLI / deps.edn；变异 <code>github.com/unclebob/clj-mutate</code>，CRAP <code>github.com/unclebob/crap4clj</code>，DRY <code>github.com/unclebob/dry4clj</code>。
+              </li>
+              <li>Java：Maven（<code>mvn</code>）；变异 <code>github.com/unclebob/mutate4java</code>，CRAP <code>github.com/unclebob/crap4java</code>，DRY <code>github.com/unclebob/dry4java</code>。
+              </li>
+              </ul>
+              </li>
+              </ul>
+              <h5>语言默认</h5>
+              <ul>
+              <li>Clojure 项目尽可能用 Babashka。
+              </li>
+              <li>Clojure 或 Babashka 项目写 Speclj specs，不要用 <code>clojure.test</code>。
+              </li>
+              <li>用 <code>swarm_tool.sh require speclj</code> 安装 Speclj。缺失则 <code>swarm_tool.sh ensure speclj</code>。
+              </li>
+              <li>若 Speclj spec 文件有改动：运行 <code>swarm_tool.sh require speclj-structure-check</code>（缺失则 ensure），在跑测试前检查该 spec 文件。
+              </li>
+              <li>Java 项目不要用 Maven 跑测试；构建专用测试 runner 再跑。
+              </li>
+              </ul>
+              <h5>设计与可测性</h5>
+              <ul>
+              <li>以小的、可评审的增量工作。
+              </li>
+              <li>选择能支撑当前行为、并为下一步留下清晰选项的最简设计。
+              </li>
+              <li>测试贴近正在改的行为。
+              </li>
+              <li>把可测模块与「环境上不适合自动测」的模块分开：打开 GUI、依赖外设、抛环境错误、打系统错误、或在自动测试里挂死的，都算不适合。尽量扩大可测代码，缩小不适合的边界。
+              </li>
+              <li>只有可测模块才参与会跑测试的工具：单元测试、验收测试、覆盖率、变异测试、CRAP、会调测试的 DRY、属性测试。
+              </li>
+              <li>属性测试与常规验证分开。除非该角色拥有属性测试验证，或用户明确要求，否则不要把属性测试标签放进常规单元覆盖、Gherkin 验收变异、语言变异、CRAP 或覆盖率命令。
+              </li>
+              </ul>
+              <h5>验收管线</h5>
+              <ul>
+              <li>Gherkin 验收测试使用 github.com/unclebob/Acceptance-Pipeline-Specification。
+              </li>
+              <li>APS 提供 <code>gherkin-parser</code>、<code>ir-dry-checker</code>、<code>gherkin-mutator</code>。用项目本地 helper 安装；不要搜 <code>$HOME</code> 或 <code>find</code> 二进制。
+              </li>
+              <li>工具启动时，每个需要的 APS 工具先 <code>swarm_tool.sh require &lt;tool&gt;</code>；缺失则精确运行 <code>swarm_tool.sh ensure &lt;tool&gt;</code>。
+              </li>
+              <li>双参数形式：
+              <ul>
+              <li><code>gherkin-parser &lt;feature&gt; ./tmp/&lt;stem&gt;.json</code>
+              </li>
+              <li><code>ir-dry-checker &lt;ir&gt; ./tmp/&lt;stem&gt;.dry.json</code>
+              </li>
+              </ul>
+              </li>
+              <li><code>gherkin-parser</code>、<code>ir-dry-checker</code>、<code>gherkin-mutator</code> 及相关 APS 命令优先用 Babashka 实现。
+              </li>
+              <li>仅当 Babashka APS 在当前项目环境不可用时，才用 Go 版 APS。
+              </li>
+              <li>项目自己的验收管线部件是：验收入口生成器、验收运行时、项目 step handler、runner 适配器、便利脚本。
+              </li>
+              <li>Gherkin 验收变异 = 跑 <code>gherkin-mutator</code> 去变异 Gherkin 例子值。
+              </li>
+              <li>Gherkin 验收变异必须定期报告进度，好让 agent 区分「正常很长」和「挂死」。
+              </li>
+              </ul>
+              <h5>验证</h5>
+              <ul>
+              <li>跑语言/构建/测试命令前，优先用本 worktree 内的项目本地缓存与配置路径。避免写到项目外、可能触发沙箱或权限问题的默认缓存。
+              </li>
+              <li>宪法工具一次只跑一个。不要并行跑 CRAP、DRY、覆盖率、语言变异、Gherkin 变异或 structure-check。
+              </li>
+              <li>有 worker 上限的工具必须用 <code>--max-workers 4</code> 或 <code>--workers 4</code>。
+              </li>
+              <li>函数变异相对源清单做差分。不要传 <code>--mutate-all</code>。
+              </li>
+              <li>Gherkin 变异相对 feature 清单做差分（<code>--level hard</code>）。不要传 <code>--level full</code>。
+              </li>
+              <li>验收生成和验收测试顺序执行。
+              </li>
+              <li>避免整套语言测试命令与验收生成并行。
+              </li>
+              <li>项目若有本地验证命令，交接前跑相关的那条。
+              </li>
+              </ul>
+              <h5>护栏</h5>
+              <ul>
+              <li>不要发明项目本地的 CRAP / DRY / 变异 / 覆盖率代理。安装并运行宪法工具。不要把自制的 <code>bb crap</code> / <code>bb coverage</code> / <code>bb mutation-count</code> 当成那些工具。
+              </li>
+              <li>不要手改变异测试或 Gherkin 验收变异的清单；让获准的变异工具在正常运行中更新清单。
+              </li>
+              <li>除非任务需要，否则不要提交无关的本地改动或生成物。
+              </li>
+              <li>不熟悉的命令，先看本地 help 或项目文档再依赖它。
+              </li>
+              </ul>
+            </div>
+          </details>
         </article>
       </section>
 
@@ -283,15 +422,15 @@ message: &lt;一行，最多 80 字符&gt;
             </tbody>
           </table>
         </div>
-        <p>记忆法：<strong>角色数量跟质量闸数量对齐，不跟「模型越贵越好」对齐。</strong> master agent 是 worktree 为 <code>master</code> 的那个角色：four/six 是 specifier，two-pack 是 coder。New Task 和聊天只跟这个人说话。</p>
+        <p>你可以这样记：<strong>角色数量跟质量闸数量对齐，不跟「模型越贵越好」对齐。</strong> master agent 是 worktree 为 <code>master</code> 的那个角色：four/six 是 specifier，two-pack 是 coder。New Task 和聊天只跟这个人说话。</p>
         <p>同一名字在不同 pack 里职责会变窄或变宽：two-pack 的 <code>cleaner</code> 几乎包办清理、架构和变异加固；six-pack 把这些拆给 <code>cleaner</code>、<code>architect</code>、<code>hardender</code>。先记「这条链上这一棒管什么」，不要假设全仓只有一种 cleaner。</p>
       </section>
 
       <section>
         <h2>角色链里每个人干什么</h2>
-        <p>角色是工种，不是人。每个工种对应一份 <code>roles/&lt;name&gt;.prompt</code>，启动后只做自己 Owns 的事，Does Not Own 的工具不要碰。</p>
+        <p>角色是工种。每个工种对应一份 <code>roles/&lt;name&gt;.prompt</code>，启动后只做自己 Owns 的事，Does Not Own 的工具不要碰。</p>
         <div class="callout">
-          <p><strong>本课是地图：下面只给工种一句话，不嵌角色 prompt 全文。</strong> Owns / Handoff 条文按 pack 在后面课里嵌中文——<a href="./0002-two-pack-complete-loop.html">0002</a>（coder / cleaner）、<a href="./0003-four-pack-complete-loop.html">0003</a>（specifier / coder / refactorer / architect）、<a href="./0004-six-pack-complete-loop.html">0004</a>（六角色，含 hardender / QA）。pack 本地的 <code>project.prompt</code> / <code>local-*.prompt</code> 也在对应课里。</p>
+          <p><strong>本课是地图：下面只给工种一句话，不嵌角色 prompt 全文。</strong> Owns / Handoff 条文按 pack 在后面课里嵌中文。<a href="./0002-two-pack-complete-loop.html">0002</a>（coder / cleaner）、<a href="./0003-four-pack-complete-loop.html">0003</a>（specifier / coder / refactorer / architect）、<a href="./0004-six-pack-complete-loop.html">0004</a>（六角色，含 hardender / QA）。pack 本地的 <code>project.prompt</code> / <code>local-*.prompt</code> 也在对应课里。</p>
         </div>
         <div class="grid">
           <article class="card">
@@ -300,11 +439,12 @@ message: &lt;一行，最多 80 字符&gt;
           </article>
           <article class="card">
             <h3 class="card-title">coder · 实现员</h3>
-            <p>按已批准规格做行为切片：TDD 写单元测试，再写刚好能过的产品代码。four/six 里还要接好验收管线、生成验收测试。不跑 CRAP / DRY / 变异测试——那些交给后面的清理或加固岗。</p>
+            <p>按已批准规格做行为切片：TDD 写单元测试，再写刚好能过的产品代码。four/six 里还要接好验收管线、生成验收测试。不跑 CRAP / DRY / 变异测试。那些交给后面的清理或加固岗。</p>
           </article>
           <article class="card">
             <h3 class="card-title">cleaner · 清理员</h3>
-            <p>行为不变，把刚写的代码收拾干净。two-pack 里它还兼架构审查和变异加固，并批量吃 coder 的交接。six-pack 里它只管局部清理、覆盖率、CRAP≤6、DRY，以及数变异位点；不跑真正的变异测试。</p>          </article>
+            <p>行为不变，把刚写的代码收拾干净。two-pack 里它还兼架构审查和变异加固，并批量吃 coder 的交接。six-pack 里它只管局部清理、覆盖率、CRAP≤6、DRY，以及数变异位点；不跑真正的变异测试。</p>
+          </article>
           <article class="card">
             <h3 class="card-title">refactorer · 重构员</h3>
             <p>只出现在 four-pack，职责接近 six-pack 的 cleaner：保行为、提覆盖、降 CRAP/DRY、必要时拆过大的文件。另加属性测试支架。不引入新功能，不跑变异测试。</p>
@@ -365,7 +505,7 @@ message: &lt;一行，最多 80 字符&gt;
               </tr>
               <tr>
                 <td><a href="../reference/glossary.html#git-handoff">git_handoff</a></td>
-                <td>本项目的交接格式，不是行业通用词。四行头指向一次已提交状态；下游 helper 合并那个 commit。不要把它理解成聊天或 PR 描述。</td>
+                <td>本项目自造的交接格式。四行头指向一次已提交状态；下游 helper 合并那个 commit。不要把它理解成聊天或 PR 描述。</td>
               </tr>
               <tr>
                 <td>Attention</td>
@@ -407,62 +547,13 @@ message: &lt;一行，最多 80 字符&gt;
         </div>
       </section>
 
-      <section class="quiz">
-        <h2>3 分钟自测</h2>
-        <p>先不追求全懂，只检查你有没有抓住最关键的判断轴。</p>
-        <div class="quiz-list">
-          <div class="quiz-item" data-quiz-answer="共享底座" data-quiz-explanation="README 写明 main 是 documentary：共享脚本和核心宪法。可运行的 conf 与角色提示在 pack 分支。">
-            <h3>1. 在 SwarmForge 里，<code>main</code> 更像什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="共享底座">共享底座</button>
-              <button class="quiz-option" type="button" data-choice="可运行包">可运行包</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="质量闸数" data-quiz-explanation="two / four / six 对应你想把多少个质量关注点拆成独立角色，不是按模型品牌来选。">
-            <h3>2. 选 <code>two-pack</code> 还是 <code>six-pack</code>，优先看什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="质量闸数">质量闸数</button>
-              <button class="quiz-option" type="button" data-choice="模型品牌">模型品牌</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="本地叠加" data-quiz-explanation="engineering.prompt / workflow.prompt / handoffs.prompt 只能来自 main。pack 用 local-*.prompt 叠加，不能同名覆盖。">
-            <h3>3. pack 想改共享宪法条款，正确做法是？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="覆盖原文">覆盖原文</button>
-              <button class="quiz-option" type="button" data-choice="本地叠加">本地叠加</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="规格角色" data-quiz-explanation="specifier 拥有外部可见行为规格和 Gherkin；coder 拥有已批准切片的实现。两者不要混岗。">
-            <h3>4. four-pack 里，把用户意图写成 Gherkin 的是哪类角色？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="规格角色">规格角色</button>
-              <button class="quiz-option" type="button" data-choice="编码角色">编码角色</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-          <div class="quiz-item" data-quiz-answer="全部文章" data-quiz-explanation="constitution.prompt 要求阅读并遵守 articles/ 下每一个文件；生成文件头一句是递归读它指向的每一个文件。">
-            <h3>5. constitution.prompt 要求 agent 去读什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="全部文章">全部文章</button>
-              <button class="quiz-option" type="button" data-choice="单篇挑选">单篇挑选</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-        </div>
-      </section>
 
       <section>
         <h2>这一课学完，你至少该带走什么</h2>
         <div class="grid">
           <article class="card">
             <h3 class="card-title">1. 这是编排层</h3>
-            <p>SwarmForge 管角色、worktree、交接和仪表盘，不是又一个聊天机器人。</p>
+            <p>SwarmForge 管角色、worktree、交接和仪表盘。</p>
           </article>
           <article class="card">
             <h3 class="card-title">2. 先抓两层</h3>
@@ -486,7 +577,7 @@ message: &lt;一行，最多 80 字符&gt;
 
       <section>
         <h2>主资料</h2>
-        <p>这一课最值得读的主资料是 <a href="https://github.com/unclebob/swarm-forge/blob/main/README.md">仓库 README</a>。原因很简单：<code>swarmforge/</code> 目录告诉你底座里有什么，README 告诉你它为什么不能单独当可运行工作流来 checkout。</p>
+        <p>这一课对照 <a href="https://github.com/unclebob/swarm-forge/blob/main/README.md">仓库 README</a>。<code>swarmforge/</code> 目录告诉你底座里有什么，README 告诉你它为什么不能单独当可运行工作流来 checkout。</p>
         <ol class="source-list">
           <li><a href="https://github.com/unclebob/swarm-forge/blob/main/README.md">README.md</a></li>
           <li><a href="https://github.com/unclebob/swarm-forge/tree/main/swarmforge">swarmforge/ 目录</a></li>
@@ -501,7 +592,7 @@ message: &lt;一行，最多 80 字符&gt;
         </ol>
       </section>
 
-      <p class="footer-note">有任何地方觉得抽象、像术语堆在一起，下一条直接问我。我会继续把它拆成更贴近你当前理解的版本。</p>
+      <p class="footer-note">有任何地方觉得抽象、像术语堆在一起，下一条直接问我。我会继续把它拆成更具体的版本。</p>
     </main>
   </body>
 </html>

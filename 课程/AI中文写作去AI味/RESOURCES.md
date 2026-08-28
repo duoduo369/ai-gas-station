@@ -27,7 +27,7 @@
 
 ### 4. stop-slop — 英文 Prose 去 AI 味 Skill
 
-- **来源**：本地已安装 skill（`~/.agents/skills/stop-slop/`）
+- **来源**：[hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)（本地已安装 `~/.workbuddy/skills/stop-slop/`）
 - **覆盖**：五维度评分（Directness / Rhythm / Trust / Authenticity / Density）、禁用短语（throat-clearing openers、emphasis crutches、business jargon、adverbs）、禁用结构（binary contrasts、negative listing、dramatic fragmentation、rhetorical setups、false agency、passive voice）、节奏模式检查
 - **什么时候用**：评分框架和结构检查可以迁移到中文写作；35/50 的及格线可以作为改稿标准
 - **注意**：面向英文，但 stop-slop 的核心原则（去套话、去被动、去假动作、去金句、变节奏）是语言无关的。中文的具体禁用词需要从 khazix-writer 和 human-writing 补充

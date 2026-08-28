@@ -4,19 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lesson 0001 · 项目结构与 Skill 地图</title>
-    <link rel="stylesheet" href="../../assets/course.css">
-    <script src="../assets/classify-quiz.js" defer></script>
+    <link rel="stylesheet" href="../assets/course.css">
     <script src="../assets/course-nav.js" defer></script>
-    <script src="../../assets/open-links-new-tab.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
   </head>
   <body>
     <main>
       <section class="hero">
         <p class="eyebrow">Lesson 0001</p>
         <h1>先建立这个仓库的地图感</h1>
-        <p class="lede">这节课先给 <code>mattpocock-skills</code> 画地图。你要看见目录结构、主要分桶、两条分类轴和主线怎么串，不把它读成一堆散落的 <code>SKILL.md</code>。</p>
+        <p class="lede">这节课给 <code>mattpocock-skills</code> 画地图。你要看见目录结构、主要分桶、两条分类轴和主线怎么串，把每个 <code>SKILL.md</code> 放回它所属的结构里。</p>
         <div class="pill-row">
-          <span class="pill">预计 12 分钟</span>
           <span class="pill">目标：建立全局地图</span>
           <span class="pill">回看资料：<a href="../reference/project-map.html">速查地图</a></span>
         </div>
@@ -25,8 +23,8 @@
       <section>
         <h2>先记住一句总判断</h2>
         <div class="callout">
-          <p><strong>这个仓库不是“一个超级技能”，而是一套可组合的小技能系统。</strong></p>
-          <p>所以你理解它的关键，不是逐字背每个 skill，而是先认出它用什么方式把 skills 组织起来：先分 bucket，再分调用方式，再放进一条或几条 flow 里。这个判断来自仓库总览和 `ask-matt` 的流程描述。</p>
+          <p><strong>这个仓库是一套可组合的小技能系统。</strong></p>
+          <p>理解它的方式是先认出它用什么方式把 skills 组织起来：先分 bucket，再分调用方式。每个 skill 再放进一条或几条 flow 里。仓库总览和 <code>ask-matt</code> 的流程描述都指向这个结构。</p>
         </div>
       </section>
 
@@ -35,19 +33,19 @@
         <div class="grid">
           <article class="card">
             <h3 class="card-title">README.md 是总入口</h3>
-            <p>先讲“为什么会有这套 skills”，再讲安装方式、项目哲学和技能总表。你第一次看项目时，这里负责建立全局感。</p>
+            <p>它讲"为什么会有这套 skills"，然后是安装方式、项目哲学和技能总表。你第一次看项目时，从这里建立全局感。</p>
           </article>
           <article class="card">
             <h3 class="card-title">CLAUDE.md 是维护规则</h3>
-            <p>它告诉你 bucket 怎么分、哪些 skill 算 promoted、以及 README、docs、插件 manifest 之间必须保持怎样的同步。</p>
+            <p>它规定 bucket 怎么分、哪些 skill 算 promoted、README、docs、插件 manifest 之间必须保持怎样的同步。</p>
           </article>
           <article class="card">
-            <h3 class="card-title">skills/ 才是主内容区</h3>
-            <p>skill 都在这里，不是随便平铺，是分到 `engineering`、`productivity` 等五个桶里。</p>
+            <h3 class="card-title">skills/ 是主内容区</h3>
+            <p>skill 都在这里，分到 <code>engineering</code>、<code>productivity</code> 等五个桶里。</p>
           </article>
           <article class="card">
             <h3 class="card-title">plugin.json 是发布视角</h3>
-            <p>它不是教学文档，是最直接的“出货清单”：哪些 skill 真会进 Claude 插件，一眼就能看到。</p>
+            <p>它是"出货清单"：哪些 skill 会进 Claude 插件，一眼就能看到。</p>
           </article>
         </div>
       </section>
@@ -67,60 +65,61 @@
               <tr>
                 <td><code>engineering</code></td>
                 <td>工程主线技能</td>
-                <td>和“从想法到交付”的流程最相关，优先看。</td>
+                <td>和"从想法到交付"的流程直接相关，优先看。</td>
               </tr>
               <tr>
                 <td><code>productivity</code></td>
                 <td>通用协作技能</td>
-                <td>像 `teach`、`handoff`、`wait-what` 这种跨场景能力在这里。</td>
+                <td><code>teach</code>、<code>handoff</code>、<code>wait-what</code> 这种跨场景能力在这里。</td>
               </tr>
               <tr>
                 <td><code>misc</code></td>
                 <td>保留区</td>
-                <td>知道它存在即可，不把它当主航道。</td>
+                <td>知道它存在即可，它不在主航道。</td>
               </tr>
               <tr>
                 <td><code>in-progress</code></td>
                 <td>公开试验区</td>
-                <td>适合观察新方向，但不当稳定接口。</td>
+                <td>适合观察新方向，不当稳定接口。</td>
               </tr>
               <tr>
                 <td><code>deprecated</code></td>
                 <td>退役区</td>
-                <td>知道它被放弃了，比精读更重要。</td>
+                <td>知道它被放弃了，不用精读。</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p>这里最值钱的判断不是名字本身，是 <strong>promoted buckets 只有两个：`engineering` 和 `productivity`</strong>。这两个桶必须进顶层 README，也必须进插件 manifest；其他三个桶不能混进去。规则原文就在下面这份维护文件里；<code>ask-matt</code> 全文放到 <a href="./0002-ask-matt-main-flow-and-onramps.html">0002</a>，这一课只建立地图。</p>
+        <p>promoted buckets 只有两个：<strong><code>engineering</code> 和 <code>productivity</code></strong>。这两个桶必须进顶层 README，也必须进插件 manifest。其他三个桶不能混进去。规则原文在下面这份维护文件里。<code>ask-matt</code> 全文放到 <a href="./0002-ask-matt-main-flow-and-onramps.html">0002</a>，这一课只建立地图。</p>
 
         <p class="beat-label">地图里的规则 · 分桶怎么写进仓库</p>
         <article class="prompt-doc" id="zh-claude-md">
           <h3 class="card-title">CLAUDE.md（中文全量）</h3>
           <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/CLAUDE.md">CLAUDE.md</a> · 本课要对照的就是：哪些桶算 promoted、README / 插件清单怎么同步、user-invoked 和 model-invoked 怎么标。</p>
-          <pre class="prompt-zh">Skills 按 bucket 文件夹组织在 `skills/` 下：
-
-- `engineering/` — 日常写代码的工作
-- `productivity/` — 日常非代码工作流工具
-- `misc/` — 留着但很少用，不晋升
-- `in-progress/` — beta：故意公开，欢迎反馈，不打进插件
-- `deprecated/` — 不再使用
-
-`engineering/` 或 `productivity/` 里的每一个 skill（**promoted** buckets）都必须在顶层 `README.md` 有引用，并且在 `.claude-plugin/plugin.json` 的 `skills` 数组里有一条（Claude Code 插件正好只出货 promoted 这一套）。`misc/`、`in-progress/`、`deprecated/` 里的 skill 不得出现在这两处。
-
-安装命令从 `.agents/install-block.md` 原样复制。`.claude-plugin/marketplace.json` 让本仓库成为自己的单插件 marketplace —— 这是安装块里说明的兜底，不是文档写的主路径。改完任一 manifest 后跑 `claude plugin validate . --strict`。为什么做 Claude 插件、暂时不做 Codex 插件，见 `.agents/adr/0002-ship-as-a-claude-code-plugin.md`。
-
-顶层 `README.md` 里每一条 skill 都必须把 skill 名链到它的 `SKILL.md`。
-
-每个 bucket 文件夹都有一份 `README.md`，列出该桶里每一个 skill 和一行描述，skill 名链到 `SKILL.md`。promoted buckets 的 `README.md` 和顶层 `README.md` 把条目分成 **User-invoked** 和 **Model-invoked**；非 promoted bucket 的 `README.md`（`misc/`、`in-progress/`）用扁平列表。
-
-`engineering/` 和 `productivity/` 里的 skill 还有给人看的 docs 页，在 `docs/&lt;bucket&gt;/&lt;skill-name&gt;.md`（docs 树镜像这两个 bucket）。发布 URL 是 `https://aihero.dev/skills-&lt;skill-name&gt;`，与 bucket 无关 —— docs 路径只是仓库组织。当你在 `engineering/` 或 `productivity/` 里新增、改名或改行为时，按 `.agents/writing-docs.md` 创建或重同步 docs 页。完成的页面有四节 — **What it does**、**When to reach for it**、**Common questions**、**It's working if**；`writing-docs.md` 里有模板、节顺序、以及去哪找问题。非 promoted buckets（`misc/`、`in-progress/`、`deprecated/`）的 skill **没有** docs 页。
-
-每一份 `SKILL.md` 要么是 user-invoked（`disable-model-invocation: true` 加上 `agents/openai.yaml` 里的 `policy.allow_implicit_invocation: false`，只有人能触发），要么是 model-invoked（模型或用户都能触发）。见 `.agents/invocation.md`。
-
-`ask-matt` 是路由器：映射每一个用户能触达的 skill，以及它们怎么彼此关联。重同步 docs 页的同一条触发也适用于它：每当你新增、改名、删除、或改变一个用户可达 skill 在流程里的位置，就重读 `ask-matt` 的 `SKILL.md` 并更新它，让地图保持准确 —— 新 skill 从未被提到、或过时 skill 仍被路由到，就是在撒谎的路由器。
-
-要把每一个 skill（重新）链到本机 harness 的 skill 目录（`~/.claude/skills`、`~/.agents/skills`），跑 `scripts/link-skills.sh`。每一项都是指向本仓库的 symlink，所以 `git pull` 会让已安装 skill 保持最新；增删改名之后再跑一次脚本。</pre>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <p>Skills 按 bucket 文件夹组织在 <code>skills/</code> 下：</p>
+              <ul>
+              <li><code>engineering/</code> — 日常写代码的工作</li>
+              <li><code>productivity/</code> — 日常非代码工作流工具</li>
+              <li><code>misc/</code> — 留着但很少用，不晋升</li>
+              <li><code>in-progress/</code> — beta：故意公开，欢迎反馈，不打进插件</li>
+              <li><code>deprecated/</code> — 不再使用</li>
+              </ul>
+              <p><code>engineering/</code> 或 <code>productivity/</code> 里的每一个 skill（<strong>promoted</strong> buckets）都必须在顶层 <code>README.md</code> 有引用，并且在 <code>.claude-plugin/plugin.json</code> 的 <code>skills</code> 数组里有一条（Claude Code 插件正好只出货 promoted 这一套）。<code>misc/</code>、<code>in-progress/</code>、<code>deprecated/</code> 里的 skill 不得出现在这两处。</p>
+              <p>安装命令从 <code>.agents/install-block.md</code> 原样复制。<code>.claude-plugin/marketplace.json</code> 让本仓库成为自己的单插件 marketplace —— 这是安装块里说明的兜底，不是文档写的主路径。改完任一 manifest 后跑 <code>claude plugin validate . --strict</code>。为什么做 Claude 插件、暂时不做 Codex 插件，见 <code>.agents/adr/0002-ship-as-a-claude-code-plugin.md</code>。</p>
+              <p>顶层 <code>README.md</code> 里每一条 skill 都必须把 skill 名链到它的 <code>SKILL.md</code>。</p>
+              <p>每个 bucket 文件夹都有一份 <code>README.md</code>，列出该桶里每一个 skill 和一行描述，skill 名链到 <code>SKILL.md</code>。promoted buckets 的 <code>README.md</code> 和顶层 <code>README.md</code> 把条目分成 <strong>User-invoked</strong> 和 <strong>Model-invoked</strong>；非 promoted bucket 的 <code>README.md</code>（<code>misc/</code>、<code>in-progress/</code>）用扁平列表。</p>
+              <p><code>engineering/</code> 和 <code>productivity/</code> 里的 skill 还有给人看的 docs 页，在 <code>docs/&lt;bucket&gt;/&lt;skill-name&gt;.md</code>（docs 树镜像这两个 bucket）。发布 URL 是 <code>https://aihero.dev/skills-&lt;skill-name&gt;</code>，与 bucket 无关 —— docs 路径只是仓库组织。当你在 <code>engineering/</code> 或 <code>productivity/</code> 里新增、改名或改行为时，按 <code>.agents/writing-docs.md</code> 创建或重同步 docs 页。完成的页面有四节 — <strong>What it does</strong>、<strong>When to reach for it</strong>、<strong>Common questions</strong>、<strong>It's working if</strong>；<code>writing-docs.md</code> 里有模板、节顺序、以及去哪找问题。非 promoted buckets（<code>misc/</code>、<code>in-progress/</code>、<code>deprecated/</code>）的 skill <strong>没有</strong> docs 页。</p>
+              <p>每一份 <code>SKILL.md</code> 要么是 user-invoked（<code>disable-model-invocation: true</code> 加上 <code>agents/openai.yaml</code> 里的 <code>policy.allow_implicit_invocation: false</code>，只有人能触发），要么是 model-invoked（模型或用户都能触发）。见 <code>.agents/invocation.md</code>。</p>
+              <p><code>ask-matt</code> 是路由器：映射每一个用户能触达的 skill，以及它们怎么彼此关联。重同步 docs 页的同一条触发也适用于它：每当你新增、改名、删除、或改变一个用户可达 skill 在流程里的位置，就重读 <code>ask-matt</code> 的 <code>SKILL.md</code> 并更新它，让地图保持准确 —— 新 skill 从未被提到、或过时 skill 仍被路由到，就是在撒谎的路由器。</p>
+              <p>要把每一个 skill（重新）链到本机 harness 的 skill 目录（<code>~/.claude/skills</code>、<code>~/.agents/skills</code>），跑 <code>scripts/link-skills.sh</code>。每一项都是指向本仓库的 symlink，所以 <code>git pull</code> 会让已安装 skill 保持最新；增删改名之后再跑一次脚本。</p>
+            </div>
+          </details>
         </article>
       </section>
 
@@ -129,21 +128,21 @@
         <div class="grid">
           <article class="card">
             <h3 class="card-title">user-invoked</h3>
-            <p>只有用户明确输入时才会走到。它们通常承担“编排流程”的职责，比如 `/ask-matt`、`/grill-with-docs`、`/teach`。</p>
+            <p>只有用户明确输入时才会触发。它们承担"编排流程"的职责，比如 <code>/ask-matt</code>、<code>/grill-with-docs</code>、<code>/teach</code>。</p>
           </article>
           <article class="card">
             <h3 class="card-title">model-invoked</h3>
-            <p>模型自己也可以在合适时机调用。它们更像可复用的底层 discipline，比如 `tdd`、`code-review`、`grilling`。</p>
+            <p>模型在合适时机自己调用。它们是可复用的底层 discipline，比如 <code>tdd</code>、<code>code-review</code>、<code>grilling</code>。</p>
           </article>
         </div>
-        <p>一个很实用的记忆法是：<strong>user-invoked 更像“入口和流程”，model-invoked 更像“方法与约束”。</strong></p>
+        <p>你可以这样记：<strong>user-invoked 是"入口和流程"，model-invoked 是"方法与约束"。</strong></p>
       </section>
 
       <section>
         <h2>第四层：用 ask-matt 把主线串起来</h2>
         <div class="callout">
           <p><strong>主线是：idea → grill-with-docs → to-spec → to-tickets → implement</strong></p>
-          <p>`ask-matt` 最有价值的地方，是它不只是告诉你“仓库里有什么”，而是告诉你“这些 skill 在什么时候接力”。这就是为什么它像路由器，而不是单纯索引。</p>
+          <p><code>ask-matt</code> 告诉你"这些 skill 在什么时候接力"。它像路由器，不是单纯索引。</p>
         </div>
         <figure class="flow-figure">
           <img src="../assets/flow-ask-matt.svg" alt="ask-matt 主线从 idea 经 grill-with-docs、to-spec、to-tickets 到 implement；triage 与 diagnosing-bugs 并入 implement，wayfinder 并入 to-spec；prototype 为绕路">
@@ -152,48 +151,16 @@
         <div class="grid">
           <article class="card">
             <h3 class="card-title">triage</h3>
-            <p>当工作从外部 issue 涌进来，不是你自己发起的想法时，先 triage 再并回主线。</p>
+            <p>当工作从外部 issue 涌进来，先 triage 再并回主线。</p>
           </article>
           <article class="card">
             <h3 class="card-title">diagnosing-bugs</h3>
-            <p>当问题是“出 bug 了”，先建立能可靠变红的反馈回路，再谈修复，而不是直接凭感觉改。</p>
+            <p>当问题是"出 bug 了"，先建立能可靠变红的反馈回路，再谈修复。</p>
           </article>
           <article class="card">
             <h3 class="card-title">wayfinder</h3>
-            <p>当工作大到一个 session 装不下时，先做决策地图，等 fog 被推开后再回到主线。</p>
+            <p>当工作大到一个 session 装不下时，先做决策地图，再回到主线。</p>
           </article>
-        </div>
-      </section>
-
-      <section class="quiz">
-        <h2>3 分钟自测</h2>
-        <p>先不追求全懂，只检查你有没有抓住最关键的判断轴。</p>        <div class="quiz-list">
-          <div class="quiz-item" data-quiz-answer="用户触发" data-quiz-explanation="`teach` 的 frontmatter 带有 `disable-model-invocation: true`，它属于只能由用户显式发起的 skill。">
-            <h3>1. `teach` 默认属于哪类调用方式？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="用户触发">用户触发</button>
-              <button class="quiz-option" type="button" data-choice="模型触发">模型触发</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="不应出现" data-quiz-explanation="`misc`、`in-progress`、`deprecated` 都不该出现在顶层 README 和插件 manifest。主线只有 promoted buckets。">
-            <h3>2. `misc` 里的 skill 对顶层 README 和插件清单来说应该怎样？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="应该出现">应该出现</button>
-              <button class="quiz-option" type="button" data-choice="不应出现">不应出现</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="先转票据" data-quiz-explanation="在多 session 的构建里，`ask-matt` 建议先 `to-spec`，再 `to-tickets`，最后才由 `implement` 按 ticket 去做。">
-            <h3>3. 一个多轮次的大功能构建，在进入 `implement` 前更推荐哪一步？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="直接开写">直接开写</button>
-              <button class="quiz-option" type="button" data-choice="先转票据">先转票据</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
         </div>
       </section>
 
@@ -202,7 +169,7 @@
         <div class="grid">
           <article class="card">
             <h3 class="card-title">1. 这是组合系统</h3>
-            <p>重点不在某一个“神技”，而在 skills 之间的接力关系。</p>
+            <p>skills 之间是接力关系，不是单打独斗。</p>
           </article>
           <article class="card">
             <h3 class="card-title">2. 先抓两条轴</h3>
@@ -210,25 +177,25 @@
           </article>
           <article class="card">
             <h3 class="card-title">3. ask-matt 是地图</h3>
-            <p>它把 README 里的 skill 列表变成了“何时用谁”的流程图。</p>
+            <p>它把 README 里的 skill 列表转化为"何时用谁"的流程图。</p>
           </article>
         </div>
       </section>
 
       <section>
         <h2>下一步怎么学最顺</h2>
-        <p>建议你下一课继续学这三个点中的一个：</p>
+        <p>下一课从这三个方向中选一个继续：</p>
         <ol class="source-list">
-          <li>精读 `ask-matt`，把主流程和各个 on-ramp 串熟。</li>
-          <li>挑一个 user-invoked skill 看它怎么编排底层 skills，例如 `grill-with-docs` 或 `teach`。</li>
-          <li>挑一个 model-invoked skill 看“方法论是怎么被封装的”，例如 `grilling`、`tdd` 或 `code-review`。</li>
+          <li>精读 <code>ask-matt</code>，把主流程和各个 on-ramp 串熟。</li>
+          <li>挑一个 user-invoked skill 看它怎么编排底层 skills，例如 <code>grill-with-docs</code> 或 <code>teach</code>。</li>
+          <li>挑一个 model-invoked skill 看"方法论是怎么被封装的"，例如 <code>grilling</code>、<code>tdd</code> 或 <code>code-review</code>。</li>
         </ol>
-        <p>如果你愿意，我下一轮可以直接带你进 `ask-matt`，把它拆成一张更细的流程图。</p>
+        <p>下一轮我可以直接带你进 <code>ask-matt</code>，把它拆成一张更细的流程图。</p>
       </section>
 
       <section>
         <h2>主资料</h2>
-        <p>这一课最值得亲自对照的是上面嵌进的 <a href="https://github.com/mattpocock/skills/blob/main/CLAUDE.md">CLAUDE.md</a>。下一课才精读 <a href="./0002-ask-matt-main-flow-and-onramps.html">ask-matt 全文</a>：README 告诉你“这里有什么”，`ask-matt` 告诉你“什么时候该走哪条路”。</p>
+        <p>这一课对照上面嵌进的 <a href="https://github.com/mattpocock/skills/blob/main/CLAUDE.md">CLAUDE.md</a>。下一课精读 <a href="./0002-ask-matt-main-flow-and-onramps.html">ask-matt 全文</a>：README 告诉你"这里有什么"，<code>ask-matt</code> 告诉你"什么时候该走哪条路"。</p>
         <ol class="source-list">
           <li><a href="https://github.com/mattpocock/skills/blob/main/README.md">README.md</a></li>
           <li><a href="https://github.com/mattpocock/skills/blob/main/CLAUDE.md">CLAUDE.md</a></li>
@@ -240,7 +207,7 @@
         </ol>
       </section>
 
-      <p class="footer-note">有任何地方觉得抽象、像术语堆在一起，下一条直接问我。我会继续把它拆成更贴近你当前理解的版本。</p>
+      <p class="footer-note">有任何地方觉得抽象、像术语堆在一起，下一条直接问我。我会继续把它拆成更具体的版本。</p>
     </main>
   </body>
 </html>

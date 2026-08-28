@@ -65,6 +65,22 @@
         <pre class="prompt-zh">AI 写作的问题是信任问题。AI 味来自论证结构，不是词汇选择。改掉那些套话句式，读者才会觉得对面是一个具体的人在说话。</pre>
 
         <p>翻案腔的检测最容易：在正文里搜索"不是"、"而是"、"其实"、"实际上"、"真正"。如果它们出现在论证位置而不是事实陈述位置，就是翻案腔。</p>
+
+        <article class="prompt-doc">
+          <h3 class="card-title">human-writing 的原文规则</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/KKKKhazix/human-writing/blob/main/human-writing/SKILL.md">human-writing/SKILL.md</a> · 本课为什么嵌：翻案腔的第一手禁令，比任何二道概括都全。</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>不写翻案腔</h4>
+              <p>翻案腔指先立一个读者并没有的误解，再推翻它给下文抬价。已知外衣有"不是……而是……"、"并非……而是……"、"不在于……而在于……"、"与其说……不如说……"、"表面……实际……"、"看似……实则……"，还有它们的变形："不是A，是B"、"不是A。而是B"、"你以为……其实……"、"回头才发现"、"说到底"、"答案恰恰相反"、"A不重要，重要的是B"。</p>
+              <p>这份清单是举例，不是边界。同一个动作换任何字面都不能写。判断直接从正面下，先给判断，再给依据。只有文章真的用材料走过了从误解到修正的过程，作者的自我修正才可以出现，而且不能套用上面任何一种固定句式。</p>
+            </div>
+          </details>
+        </article>
       </section>
 
       <section>
@@ -87,6 +103,30 @@
         <p>卡兹克的 skill 里列了四种替代开头：叙事启动（"故事是这样的"）、荒诞事实（直接抛一个让人意外的数据或事实）、热点破题（"最近这两天，被一个三宫格 AI 图片刷屏了"）、好奇心驱动（"这两天在网上刷到一张图，很有意思"）。</p>
 
         <p>共同点是：它们都从一个具体的东西开始。一个事件、一个数字、一张图、一句话。不是从一个概念开始。</p>
+
+        <article class="prompt-doc">
+          <h3 class="card-title">khazix-writer 的原文规则</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/KKKKhazix/khazix-skills/blob/main/khazix-writer/SKILL.md">khazix-writer/SKILL.md</a> · 本课为什么嵌：四种替代开头和教科书开头禁令都在这份原文里。</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>开头的几种必杀技</h4>
+              <p>卡兹克的开头永远从一个具体的、当下的事件切入，绝不宏大叙事：</p>
+              <ul>
+                <li><strong>叙事启动</strong>："故事是这样的。""事情是这样的。"简单直接。</li>
+                <li><strong>荒诞事实</strong>：直接抛出一个让人"？？？"的事实。</li>
+                <li><strong>热点破题</strong>："最近这两天，被一个三宫格AI图片给刷屏了。"</li>
+                <li><strong>好奇心驱动</strong>："这两天在网上刷到了一张图，很有意思。"</li>
+              </ul>
+              <h4>教科书开头（绝对禁区）</h4>
+              <p>禁止"在当今AI快速发展的时代"、"随着技术的不断进步"这类空话开头。永远从一个具体的、当下的事件或场景切入。</p>
+              <p>套话同时禁用"首先...其次...最后"、"综上所述"、"值得注意的是"、"不难发现"、"让我们来看看"、"接下来让我们"。</p>
+            </div>
+          </details>
+        </article>
       </section>
 
       <section>
@@ -103,6 +143,24 @@
         <p>stop-slop 的规则是：两项并列可以，三项及以上排比拆掉。第三项必须换一种说法，或者删掉。human-writing 的规定更严：两项为限。</p>
 
         <p>改法：如果确实需要列举多个点，用自然段落叙述，每段推进一个新的角度，而不是用排比句式把三个点叠在一起。</p>
+
+        <article class="prompt-doc">
+          <h3 class="card-title">human-writing 与 stop-slop 的原文规则</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/KKKKhazix/human-writing/blob/main/human-writing/SKILL.md">human-writing/SKILL.md</a> · <a href="https://github.com/hardikpandya/stop-slop">stop-slop</a>（原文英文，此处为中文节译）</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>human-writing：不写三项以上的同构排比</h4>
+              <p>"为什么出发，为什么放弃，爱过什么，怕过什么"这种整齐的克制服，两项为限，第三项必须换一种说法或者删掉。</p>
+              <h4>stop-slop：打破公式化结构（中文节译）</h4>
+              <p>避免二元对照、否定式罗列、戏剧性断句、修辞性铺垫、假动作。</p>
+              <p>变化节奏：混用句子长度。两项胜过三项。段落不要用同一种方式结尾。</p>
+            </div>
+          </details>
+        </article>
       </section>
 
       <section>
@@ -128,6 +186,29 @@
         <pre class="prompt-zh">它把专利交底书的撰写拆成了流水线，从读代码到出 Word，全流程自动化。</pre>
 
         <p>假动作的检测方法：找到每个句子的主语。如果主语不是人，问自己"到底是谁做了这件事"。找到那个人，把它写成主语。</p>
+
+        <article class="prompt-doc">
+          <h3 class="card-title">human-writing 与 stop-slop 的原文规则</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/KKKKhazix/human-writing/blob/main/human-writing/SKILL.md">human-writing/SKILL.md</a> · <a href="https://github.com/hardikpandya/stop-slop">stop-slop</a>（原文英文，此处为中文节译）</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>human-writing：不给抽象名词配具体动词写抒情</h4>
+              <p>时间不会保管细节，焦虑不会显出形状，岁月不会磨平什么。文章真的在写具体事物时不受影响。</p>
+              <h4>stop-slop：用主动语态（中文节译）</h4>
+              <p>每个句子都需要一个人类主语在做什么。不要被动结构。不要让无生命物体做人的动作（比如"投诉变成了一次修复"）。</p>
+              <h4>stop-slop：快速检查（中文节译）</h4>
+              <ul>
+                <li>有被动语态？找到动作的执行者，把它写成主语。</li>
+                <li>无生命的东西在做人的动作（"决策浮现出来"）？说出那个人。</li>
+                <li>有"这不是 X，这是 Y"式对照？直接说 Y。</li>
+              </ul>
+            </div>
+          </details>
+        </article>
       </section>
 
       <section>
@@ -144,6 +225,24 @@
         <p><strong>引号包裹比喻</strong>。AI 喜欢用引号包裹比喻或自造概念，比如"它把"提醒你休息"从功能问题变成了审美问题"。chinese-ai-humanizer 指出这是 AI 的常见习惯。khazix-writer 直接禁了双引号，改用「」或干脆不加。</p>
 
         <p>标点问题的检测最简单：全文搜索 `——`、`：`、`,`、`"`，逐一判断是否必需。</p>
+
+        <article class="prompt-doc">
+          <h3 class="card-title">human-writing 的原文规则</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/KKKKhazix/human-writing/blob/main/human-writing/SKILL.md">human-writing/SKILL.md</a> · 本课为什么嵌：破折号和冒号的完整禁令，命中即不能交稿。</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>不用破折号</h4>
+              <p>不用破折号 <code>—</code>、双破折号 <code>——</code> 和连接号式破折号 <code>–</code>。</p>
+              <h4>冒号只允许一种用法</h4>
+              <p>冒号 <code>：</code> 与 <code>:</code> 只允许一种用法：引出人物的直接原话。"一句话总结：""核心是："这类提示性冒号禁止。网址、代码与机器字段除外。</p>
+              <p>上面几项覆盖标题、小标题、正文、图片说明和引用转述。命中一项就不能交稿。原话命中这些禁令时，改成转述或省略，不能靠引号保留。</p>
+            </div>
+          </details>
+        </article>
       </section>
 
       <section>
@@ -203,6 +302,30 @@
         </div>
 
         <p>检测方法：把这张表放进全文搜索，命中一条改一条。khazix-writer 的 L1 检查就是干这个的。</p>
+
+        <article class="prompt-doc">
+          <h3 class="card-title">khazix-writer 的原文规则</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/KKKKhazix/khazix-skills/blob/main/khazix-writer/SKILL.md">khazix-writer/SKILL.md</a> · 本课为什么嵌：绝对禁用的踩雷词清单，L1-1 扫描的原版。</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>高频踩雷词，绝对禁用</h4>
+              <ul>
+                <li>"说白了" ← AI 特别爱用，一出现立刻暴露</li>
+                <li>"意味着什么？" ← AI 标志性句式</li>
+                <li>"这意味着" ← 同上，换成更口语的表达</li>
+                <li>"本质上" ← 太学术</li>
+                <li>"换句话说" ← 太书面</li>
+                <li>"不可否认" ← 套话</li>
+              </ul>
+              <p>还有一类连带禁令：<strong>假设性例子</strong>。"比如有一次..."这种编造场景是大忌。要用"就像我今天正在搞的xxx"这种正在发生的真实细节。没有真实细节就别硬编，不如写"我自己还没试过，但想想就觉得xxx"。</p>
+              <p><strong>空泛工具名</strong>也是禁区：不说"AI工具"、"某个模型"，要说具体名字，比如 Claude Code、Codex、Seedance 2.0。</p>
+            </div>
+          </details>
+        </article>
       </section>
 
       <section>
@@ -217,6 +340,33 @@
         <p>human-writing 的解法：非虚构文章动笔之前，先凑够五件真材料。一个事实、一个数据、一个场景、一段原话、一个对比——任选五种。凑不够五件，就先别写长稿，去查、去问、或者缩短篇幅。</p>
 
         <p>这个规则听起来苛刻，但它治的是 AI 味的根。AI 味的本质是"手里没东西，嘴上说不停"。有了真材料，你不需要发明假细节。</p>
+
+        <article class="prompt-doc" id="human-writing-material">
+          <h3 class="card-title">human-writing 的原文规则</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/KKKKhazix/human-writing/blob/main/human-writing/SKILL.md">human-writing/SKILL.md</a> · 本课为什么嵌：五件真材料规则和假细节定义的原文，是"痕迹七"的完整依据。</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>第一关先看作品靠什么站住</h4>
+              <p>现实作品靠前两类材料，虚构作品靠第三类材料。混合创作先把两部分分开。</p>
+              <ul>
+                <li>用户明确提供的经历、事实、数字、动作、原话与判断。</li>
+                <li>已经查到并能核验的案例、数据、产品流程、人物经历与时代条件。</li>
+                <li>虚构任务中，作者获准创造的事件、人物动作与场景变化。</li>
+              </ul>
+              <p>现实稿里，模型临时想出的"比如有个人"、没有来源的典型场景、常识推演、抽象观点的后果、比喻与同义改写，都不能拿来撑篇幅。</p>
+              <h4>五件材料规则</h4>
+              <p>非虚构作品计划达到一千二百字时，先在内部逐条写出至少五件具体材料，并注明它来自用户哪句话或哪份可靠来源。只写一个概括性的类别不算。五件材料还要能组成一条实际过程，不能是五句相邻的道理。</p>
+              <p>非虚构稿列不出五件，就先别写长稿。这一轮不能输出标题和长文正文。目标字数、用户催促和"直接写"都不能把材料变多。</p>
+              <p>材料不够时只能选一种处理：事实型题目有公开材料可查，先研究再重新计数；个人体验或私人判断需要用户材料，一次问完最多三个问题；用户明确不许追问时，研究后仍然不足就缩小题目，最多交一篇六百字左右的短答。</p>
+              <h4>不要穿论坛服装</h4>
+              <p>现实稿里，没有来源的精确时间、神态、天气、房间摆设和对白都是假细节。假细节越具体，AI 味越重。虚构稿可以创造这些内容，细节必须跟着人物视角与行动走。</p>
+            </div>
+          </details>
+        </article>
       </section>
 
       <section>
@@ -229,6 +379,47 @@
         <p>第二轮扫结构层（痕迹一、二、三、四、七）。读一遍全文，找翻案腔、套话开场、三件套排比、假动作、假细节。这一步需要人读——AI 可以帮你标出可疑句式，但最终判断要你自己做。</p>
 
         <p>两轮过后，文章会干净很多。</p>
+
+        <article class="prompt-doc">
+          <h3 class="card-title">chinese-ai-humanizer（全文）</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/Wechat-ggGitHub/chinese-ai-humanizer/blob/main/SKILL.md">chinese-ai-humanizer/SKILL.md</a> · 本课为什么嵌：一份可直接照着扫描的中文 AI 痕迹检测清单，篇幅短，全文收入。</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>写作或润色中文时，检查并去除以下 AI 痕迹</h4>
+              <h5>喜欢用不是... 而是... 的句式</h5>
+              <p>例如：不是糊弄人的视觉特效，是真在做物理。</p>
+              <h5>喜欢用" "来包裹某些比喻或名称</h5>
+              <p>例如：它把"提醒你休息"从功能问题变成了审美问题。</p>
+              <h5>喜欢用 —— 符号</h5>
+              <p>比如：视界、光子环、吸积盘、被弯曲的字——都是光线追踪出来的涌现结果，没一个是手动画上去贴上去的。</p>
+              <h5>喜欢滥用比喻</h5>
+              <p>比如：没用任何"重武器"——没 daemon、没 IPC、没文件监听——就靠一个标准的终端转义码和一个 16 位签名，做到了实时、低延迟、零冲突。</p>
+              <h5>简洁表达时，喜欢用不太符合人类表达习惯的句式</h5>
+              <p>比如：安装后就<strong>直接跑</strong>。学完可以<strong>直接挂</strong> LinkedIn 求职。</p>
+              <h5>喜欢用一个疑问句加一个回答</h5>
+              <p>比如：公司里最值钱的是什么？是数据库里那堆表。</p>
+              <h5>数字部分经常用逗号</h5>
+              <p>比如：100,000。正常人类打字不会很精确地中间加逗号。</p>
+              <h5>逗号经常使用英文逗号</h5>
+              <p>比如：某段对话,几秒就出来。</p>
+              <h5>非常喜欢大批量罗列很多名称，不如使用 ... 等等省略</h5>
+              <p>比如：它把网站 Widget、邮件、WhatsApp、Facebook Messenger、Instagram、X、Telegram、LINE、SMS、TikTok 这些渠道全部聚合到一个收件箱里。</p>
+              <p>期望：它把 WhatsApp、Instagram、X、TikTok 等等这些渠道全部聚合到一个收件箱里。</p>
+              <h5>喜欢用"一句话讲清楚："句式</h5>
+              <p>badcase：它干的事情用一句话讲清楚：把任何网页，变成 AI 能直接吃下去的干净 Markdown 或结构化数据。</p>
+              <p>goodcase：它能把任何网页，变成 AI 能直接读取的干净 Markdown 或结构化数据。</p>
+              <h5>喜欢用"这件事"的句式</h5>
+              <p>比如：它把写中国专利交底书这件事拆成了流水线，从读代码到出 Word，全流程自动化。</p>
+              <h5>喜欢用英文标点而不是中文标点</h5>
+              <p>比如：做出 browser-use 的那个团队,最近又开源了一个新项目.</p>
+              <p>期望：做出 browser-use 的那个团队，最近又开源了一个新项目。</p>
+            </div>
+          </details>
+        </article>
       </section>
 
       <section>
@@ -240,7 +431,7 @@
           <li><a href="https://github.com/KKKKhazix/khazix-skills/blob/main/khazix-writer/SKILL.md">khazix-writer</a> — 四层自检体系，L1 硬规则扫描</li>
           <li><a href="https://github.com/KKKKhazix/human-writing/blob/main/human-writing/SKILL.md">human-writing</a> — 翻案腔禁令，材料驱动写作</li>
           <li><a href="https://github.com/Wechat-ggGitHub/chinese-ai-humanizer/blob/main/SKILL.md">chinese-ai-humanizer</a> — 中文 AI 痕迹检测清单</li>
-          <li>stop-slop（本地 skill）— 假动作、排比、节奏模式</li>
+          <li><a href="https://github.com/hardikpandya/stop-slop">stop-slop</a> — 假动作、排比、节奏模式</li>
         </ul>
       </section>
     </main>

@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SwarmForge 术语速查</title>
-    <link rel="stylesheet" href="../../assets/course.css">
+    <link rel="stylesheet" href="../assets/course.css">
     <script src="../assets/course-nav.js" defer></script>
-    <script src="../../assets/open-links-new-tab.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
   </head>
   <body>
     <main>
@@ -200,13 +200,13 @@
             </tbody>
           </table>
         </div>
-        <p>BDD 不是要取代 TDD。在 four/six-pack 里，specifier 用 Gherkin 写<strong>验收规格</strong>（外面看得见的行为），coder 仍用 TDD 写<strong>单元测试</strong>（里面怎么实现）；engineering 宪法也写明：生成的验收测试不能代替单元测试。two-pack 连 Gherkin 都关掉，只剩 coder 的 TDD + cleaner 的质量工具。</p>
-        <p>一句话例子：TDD 可能测「<code>hashPassword</code> 对同一输入总得到同一摘要」；BDD（Gherkin）会写「用户在登录页输入正确密码后，应进入首页」——后者不关心你用的是 bcrypt 还是别的，只关心用户能观察到的结果。</p>
+        <p>four/six-pack 里两套一起用：specifier 用 Gherkin 写<strong>验收规格</strong>（外面看得见的行为），coder 仍用 TDD 写<strong>单元测试</strong>（里面怎么实现）；engineering 宪法也写明：生成的验收测试不能代替单元测试。two-pack 连 Gherkin 都关掉，只剩 coder 的 TDD + cleaner 的质量工具。</p>
+        <p>一句话例子：TDD 可能测「<code>hashPassword</code> 对同一输入总得到同一摘要」；BDD（Gherkin）会写「用户在登录页输入正确密码后，应进入首页」。后者不关心你用的是 bcrypt 还是别的，只关心用户能观察到的结果。</p>
       </section>
 
       <section id="gherkin">
         <h2>Gherkin（通用概念）</h2>
-        <p>Gherkin 是 Cucumber 一系 BDD 工具用的<strong>领域语言</strong>（不是编程语言）：用接近自然语言的句子描述<a href="#bdd">BDD</a>里的可观察行为，而不是点哪个按钮、调哪条 API。权威结构见 <a href="https://cucumber.netlify.app/docs/gherkin/reference/">Cucumber Gherkin Reference</a>。</p>
+        <p>Gherkin 是 Cucumber 一系 BDD 工具用的<strong>领域语言</strong>（不是编程语言）：用接近自然语言的句子描述<a href="#bdd">BDD</a>里的可观察行为。权威结构见 <a href="https://cucumber.netlify.app/docs/gherkin/reference/">Cucumber Gherkin Reference</a>。</p>
         <p>最小例子（登录）：</p>
         <pre class="prompt-zh">Feature: 用户登录
 
@@ -262,7 +262,7 @@
 
       <section id="git-handoff">
         <h2>git_handoff（本项目概念）</h2>
-        <p>这不是 Git 自带的子命令，也不是行业通用词。它是 SwarmForge 规定的<strong>一种交接消息类型</strong>：载荷是发送方 worktree 上<strong>已经提交</strong>的 HEAD，不是聊天记录、不是 PR 描述。完整协议在 <a href="https://github.com/unclebob/swarm-forge/blob/main/swarmforge/handoff-protocol.md">handoff-protocol.md</a>；agent 日常跟的是 <a href="https://github.com/unclebob/swarm-forge/blob/main/swarmforge/constitution/articles/handoffs.prompt">handoffs.prompt</a>。</p>
+        <p><code>git_handoff</code> 是 SwarmForge 规定的<strong>一种交接消息类型</strong>：载荷是发送方 worktree 上<strong>已经提交</strong>的 HEAD。完整协议在 <a href="https://github.com/unclebob/swarm-forge/blob/main/swarmforge/handoff-protocol.md">handoff-protocol.md</a>；agent 日常跟的是 <a href="https://github.com/unclebob/swarm-forge/blob/main/swarmforge/constitution/articles/handoffs.prompt">handoffs.prompt</a>。</p>
         <p>agent 只准写四行头，SHA 由 helper 填：</p>
         <pre class="prompt-zh">type: git_handoff
 to: cleaner

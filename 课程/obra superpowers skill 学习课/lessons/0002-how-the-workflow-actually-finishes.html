@@ -1,381 +1,306 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lesson 0002 · 功能做出来以后，工作流怎么真正收口</title>
-    <link rel="stylesheet" href="../../assets/course.css">
-    <script src="../assets/lesson-quiz.js" defer></script>
-    <script src="../assets/course-nav.js" defer></script>
-    <script src="../../assets/open-links-new-tab.js" defer></script>
-  </head>
-  <body>
-    <main>
-      <section class="hero">
-        <p class="eyebrow">Lesson 0002</p>
-        <h1>功能做出来以后，工作流怎么收口</h1>
-        <p class="lede">这节课补后半程。<code>subagent-driven-development</code> 不只是把功能丢给 subagent，<code>executing-plans</code> 也不是随手接上；review、final review 和 finish 才把这条线收住。</p>
-        <div class="pill-row">
-          <span class="pill">预计 20 分钟</span>
-          <span class="pill">目标：看懂后半程闭环</span>
-          <span class="pill">内嵌关键中文条文</span>
-          <span class="pill">回看资料：<a href="../reference/implementation-loop-and-finish.html">收口速查</a></span>
-        </div>
-      </section>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>功能做出来以后，工作流怎么收口</title>
+<link href="../assets/course.css" rel="stylesheet"/>
+<script defer="" src="../assets/course-nav.js"></script>
+<script defer="" src="../assets/open-links-new-tab.js"></script>
+</head>
+<body>
+<main>
+<section class="hero">
+<p class="eyebrow">后半程</p>
+<h1>功能做出来以后，工作流怎么收口</h1>
+<p class="lede">这一课补后半程。<code>subagent-driven-development</code> 不只是把功能丢给 subagent，<code>executing-plans</code> 也不是随手接上；review、final review 和 finish 才把这条线收住。</p>
+<p>速查：<a href="../reference/implementation-loop-and-finish.html">实现收口</a></p>
+</section>
+<section>
+<h2>先说你最熟悉、也最容易截断的版本</h2>
+<div class="callout">
+<p><strong>常见截断版心智模型：</strong><code>brainstorming</code> 把设计讲清楚 → 自动长出 spec / plan → 叫 subagent 去实现 → 功能看起来能跑 → 人工点一点验收 → 结束。</p>
+<p><strong>Superpowers 的完整版心智模型：</strong>实现只是后半程的开头。完整闭环是“按任务推进实现 → 每任务 review → 全分支 final review → 进入 finish 菜单 → 由人决定 merge / PR / keep”。</p>
+</div>
+<div class="grid">
+<article class="card">
+<h3 class="card-title">为什么会误以为已经结束</h3>
+<p>“功能出现了”给人很强的完成感，尤其 UI 或接口已经能跑的时候，“能演示”很容易被当成“工作流正式收口”。</p>
+</article>
+<article class="card">
+<h3 class="card-title">真正漏掉的是哪些环节</h3>
+<p>漏掉的是 per-task review、whole-branch review，以及 <code>finishing-a-development-branch</code> 提供的正式收口菜单。写代码本身反而很少漏。</p>
+</article>
+</div>
+</section>
+<section>
+<h2>后半程主线</h2>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>真正做的事</th>
+<th>最容易被误解成什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Step 3 之后</td>
+<td>有了 plan，准备进入实现模式</td>
+<td>“后面就是一直写代码”</td>
+</tr>
+<tr>
+<td>SDD / executing-plans</td>
+<td>按任务推进执行</td>
+<td>“随便选一个让它干完”</td>
+</tr>
+<tr>
+<td>Per-task review</td>
+<td>每个任务都过一遍 spec + quality gate</td>
+<td>“做完所有任务再统一看看”</td>
+</tr>
+<tr>
+<td>Whole-branch review</td>
+<td>整条分支再做一次更宽的收尾检查</td>
+<td>“前面都 review 过了，这步可以省”</td>
+</tr>
+<tr>
+<td>finishing-a-development-branch</td>
+<td>跑全量验证、给出整合菜单、按用户选择收口</td>
+<td>“默认就应该自动 merge / 自动提 PR”</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="diagram">
+<img alt="后半程闭环图：plan 后选择执行模式，进入任务执行与 review 循环，再进入 finish 菜单。" src="../assets/implementation-finish-loop.svg"/>
+<figcaption>如果你总在“功能看起来有了”这里停下，这张图能帮你看见自己还困在执行环内部，没走到收口。</figcaption>
+</figure>
+</section>
+<a id="sdd-vs-executing"></a>
+<section>
+<h2>SDD 的骨架</h2>
+<div class="callout">
+<p><strong>SDD 不是把 feature 丢给 subagent。</strong></p>
+<p>它是一整套控制方式：controller 留在上层做协调，每个任务派一个新的 implementer，任务后立刻 review，有问题进 fix loop，全部任务结束后还要做一次 whole-branch review，最后再进入 <code>finishing-a-development-branch</code>。只记住“里面用了 subagent”，等于没学到它的骨架。</p>
+</div>
+<div class="grid">
+<article class="card">
+<h3 class="card-title">Controller 不负责亲自补代码</h3>
+<p>SDD 里 coordinator 的职责是读 plan、派任务、看 report、派 reviewer、记录 ruling，而不是自己在主会话里东补一块西补一块。</p>
+</article>
+<article class="card">
+<h3 class="card-title">粒度是 task，不是 feature</h3>
+<p>默认单位是“每个 task 派一个新实现者”，不是“一次派一个 agent 把整个 feature 做完”。这点决定了它为什么有 per-task review。</p>
+</article>
+<article class="card">
+<h3 class="card-title">收口不在 SDD 内部自动消失</h3>
+<p>SDD 的终点是“把整条分支推进到 final review clean，然后显式调用 <code>finishing-a-development-branch</code>”。</p>
+</article>
+</div>
+<div class="prompt-stack">
+<article class="prompt-doc">
+<h3 class="card-title">subagent-driven-development（中文节选）</h3>
+<p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a> · 本课为什么要直接嵌：你要理解的不是“用了 subagent”，而是它如何把任务推进、review、fix loop 和 finish 接起来。</p>
+<details class="prompt-fold">
+<summary class="prompt-toggle">
+<span class="prompt-toggle-closed">查看完整 prompt</span>
+<span class="prompt-toggle-open">收起 prompt</span>
+</summary>
+<div class="prompt-md">
+<h5>Overview</h5>
+<h6>按实现计划执行时</h6>
+<ul><li>每个任务派一个新的 implementer subagent</li><li>任务完成后做 task review（先看 spec compliance，再看代码质量）</li><li>所有任务完成后，再做一次更宽的 whole-branch review</li></ul>
 
-      <section>
-        <h2>先说你最熟悉、也最容易截断的版本</h2>
-        <div class="callout">
-          <p><strong>常见截断版心智模型：</strong>`brainstorming` 把设计讲清楚 → 自动长出 spec / plan → 叫 subagent 去实现 → 功能看起来能跑 → 人工点一点验收 → 结束。</p>
-          <p><strong>Superpowers 的完整版心智模型：</strong>实现只是后半程的开头，不是结尾。完整闭环是“按任务推进实现 → 每任务 review → 全分支 final review → 进入 finish 菜单 → 由人决定 merge / PR / keep”。</p>
-        </div>
-        <div class="grid">
-          <article class="card">
-            <h3 class="card-title">为什么会误以为已经结束</h3>
-            <p>因为“功能出现了”给人很强的完成感，尤其是 UI 或接口已经能跑的时候，容易把“能演示”误认成“工作流正式收口”。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">真正漏掉的是哪些环节</h3>
-            <p>最常漏掉的不是写代码本身，是 per-task review、whole-branch review，以及 <code>finishing-a-development-branch</code> 提供的正式收口菜单。</p>
-          </article>
-        </div>
-      </section>
+<h5>Core principle</h5>
+<h6>Fresh subagent per task</h6>
+<ul><li>task review（spec + quality）</li><li>broad final review</li></ul>
 
-      <section>
-        <h2>先把后半程主线摆成一张图</h2>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>阶段</th>
-                <th>真正做的事</th>
-                <th>最容易被误解成什么</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Step 3 之后</td>
-                <td>有了 plan，准备进入实现模式</td>
-                <td>“后面就是一直写代码”</td>
-              </tr>
-              <tr>
-                <td>SDD / executing-plans</td>
-                <td>按任务推进执行</td>
-                <td>“随便选一个让它干完”</td>
-              </tr>
-              <tr>
-                <td>Per-task review</td>
-                <td>每个任务都过一遍 spec + quality gate</td>
-                <td>“做完所有任务再统一看看”</td>
-              </tr>
-              <tr>
-                <td>Whole-branch review</td>
-                <td>整条分支再做一次更宽的收尾检查</td>
-                <td>“前面都 review 过了，这步可以省”</td>
-              </tr>
-              <tr>
-                <td>finishing-a-development-branch</td>
-                <td>跑全量验证、给出整合菜单、按用户选择收口</td>
-                <td>“默认就应该自动 merge / 自动提 PR”</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <figure class="diagram">
-          <img src="../assets/implementation-finish-loop.svg" alt="后半程闭环图：plan 后选择执行模式，进入任务执行与 review 循环，再进入 finish 菜单。">
-          <figcaption>如果你总在“功能看起来有了”这里停下，这张图能帮你看见自己只走到了执行环内部，还没正式进入收口。</figcaption>
-        </figure>
-      </section>
+<p>= high quality, fast iteration</p>
+<h5>Continuous execution</h5>
+<p>一旦开始跑 plan，就不要在任务之间反复停下来问“要不要继续”。</p>
+<p>只在少数明确场景下停：不可逆操作、安全敏感操作、工作区外的副作用、或 plan 坏到往前走只能靠猜。</p>
+<h5>The Process（压缩读法）</h5>
+<ol><li>setup：读 plan，建 ledger，检查前置冲突</li><li>派 implementer</li><li>implementer 实现、测试、提交、自查</li><li>派 task reviewer</li><li>review 干净 -&gt; 任务完成</li><li>review 有问题 -&gt; 进入 fix loop</li><li>还有任务 -&gt; 下一个任务</li><li>没有任务了 -&gt; broad final review</li><li>final review clean -&gt; 用 finishing-a-development-branch 正式收口</li></ol>
 
-      <a id="sdd-vs-executing"></a>
-      <section>
-        <h2>第一块重点：SDD 究竟是什么，不是什么</h2>
-        <div class="callout">
-          <p><strong>SDD 不是“把 feature 丢给 subagent”这么简单。</strong></p>
-          <p>它是一整套控制方式：controller 留在上层做协调，每个任务派一个新的 implementer，任务后立刻 review，有问题进 fix loop，全部任务结束后还要做一次 whole-branch review，最后再进入 `finishing-a-development-branch`。只记住“里面用了 subagent”，等于没学到它的骨架。</p>
-        </div>
-        <div class="grid">
-          <article class="card">
-            <h3 class="card-title">Controller 不负责亲自补代码</h3>
-            <p>SDD 里 coordinator 的职责是读 plan、派任务、看 report、派 reviewer、记录 ruling，而不是自己在主会话里东补一块西补一块。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">粒度是 task，不是 feature</h3>
-            <p>默认单位是“每个 task 派一个新实现者”，不是“一次派一个 agent 把整个 feature 做完”。这点决定了它为什么有 per-task review。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">收口不是在 SDD 内部自动消失</h3>
-            <p>SDD 的终点不是“代码都写完了”，而是“把整条分支推进到 final review clean，然后显式调用 `finishing-a-development-branch`”。</p>
-          </article>
-        </div>
-        <div class="prompt-stack">
-          <article class="prompt-doc">
-            <h3 class="card-title">subagent-driven-development（中文节选）</h3>
-            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a> · 本课为什么要直接嵌：你要理解的不是“用了 subagent”，而是它如何把任务推进、review、fix loop 和 finish 接起来。</p>
-            <pre class="prompt-zh">【Overview】
-按实现计划执行时：
-- 每个任务派一个新的 implementer subagent
-- 任务完成后做 task review（先看 spec compliance，再看代码质量）
-- 所有任务完成后，再做一次更宽的 whole-branch review
+<h5>你在这一课该记住的关键句</h5>
+<p>SDD 的骨架不是“subagent 帮你写代码”，而是“任务级 dispatch + 任务级 review + 分支级 final review + 显式 finish”。</p>
+</div>
+</details>
+</article>
+<article class="prompt-doc">
+<h3 class="card-title">executing-plans（中文节选）</h3>
+<p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/executing-plans/SKILL.md">skills/executing-plans/SKILL.md</a> · 本课为什么也要放进来：它能帮你看清楚 SDD 不是唯一执行模式，但它们最后都得接到同一个 finish skill。</p>
+<details class="prompt-fold">
+<summary class="prompt-toggle">
+<span class="prompt-toggle-closed">查看完整 prompt</span>
+<span class="prompt-toggle-open">收起 prompt</span>
+</summary>
+<div class="prompt-md">
+<h5>Overview</h5>
+<p>读取 plan，先做批判性 review，再执行所有任务，完成后汇报。</p>
+<h5>重要说明</h5>
+<h6>如果有 subagents，Superpowers 明确说</h6>
+<p>更推荐用 subagent-driven-development。</p>
+<h5>执行步骤</h5>
+<h6>Step 1：Load and Review Plan</h6>
+<ul><li>先确保在隔离工作空间中</li><li>读 plan</li><li>批判性检查 plan</li><li>有问题先提出来；没问题再继续</li></ul>
 
-【Core principle】
-Fresh subagent per task
-+ task review（spec + quality）
-+ broad final review
-= high quality, fast iteration
+<h6>Step 2：Execute Tasks</h6>
+<ul><li>按 task 逐个执行</li><li>跟着 plan 里的步骤做</li><li>跑验证</li><li>标记完成</li></ul>
 
-【Continuous execution】
-一旦开始跑 plan，就不要在任务之间反复停下来问“要不要继续”。
-只在少数明确场景下停：不可逆操作、安全敏感操作、工作区外的副作用、或 plan 坏到往前走只能靠猜。
+<h6>Step 3：Complete Development</h6>
+<ul><li>所有任务执行并验证后</li><li>明确宣布要使用 finishing-a-development-branch</li><li>然后按那个 skill 的规则正式收口</li></ul>
 
-【The Process（压缩读法）】
-1. setup：读 plan，建 ledger，检查前置冲突
-2. 派 implementer
-3. implementer 实现、测试、提交、自查
-4. 派 task reviewer
-5. review 干净 -> 任务完成
-6. review 有问题 -> 进入 fix loop
-7. 还有任务 -> 下一个任务
-8. 没有任务了 -> broad final review
-9. final review clean -> 用 finishing-a-development-branch 正式收口
+<h5>和 SDD 的差别，当前先抓一句</h5>
+<p>SDD 更强调“任务级 dispatch + review loop”；</p>
+<p>executing-plans 更像“单会话按 plan 顺序推进，遇阻就停下来 ask”。</p>
+</div>
+</details>
+</article>
+</div>
+</section>
+<a id="review-gate"></a>
+<section>
+<h2>Review 是 mandatory gate</h2>
+<div class="callout">
+<p><strong>把 review 理解成“有空补一个”，后半程几乎一定会被你走短。</strong></p>
+<p>Superpowers 写得很明确：在 SDD 里，review 是每个 task 后的 gate；更广义上，major feature 完成后和 merge 之前也都应该 request review。“功能有了”替代不了“review 过了”。</p>
+</div>
+<div class="prompt-stack">
+<article class="prompt-doc">
+<h3 class="card-title">requesting-code-review（中文节选）</h3>
+<p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/SKILL.md">skills/requesting-code-review/SKILL.md</a> · 本课为什么要嵌：这张卡直接回答“什么时候 review 是必须的”。</p>
+<details class="prompt-fold">
+<summary class="prompt-toggle">
+<span class="prompt-toggle-closed">查看完整 prompt</span>
+<span class="prompt-toggle-open">收起 prompt</span>
+</summary>
+<div class="prompt-md">
+<h5>Core principle</h5>
+<p>Review early, review often.</p>
+<h5>Mandatory 什么时候必须 request review</h5>
+<ul>
+<li>在 subagent-driven-development 里，每个 task 完成后</li>
+<li>完成 major feature 之后</li>
+<li>merge 到 main 之前</li>
+</ul>
+<h5>How to Request（当前先抓框架）</h5>
+<ol><li>拿到 diff 的起止范围</li><li>派 code reviewer subagent</li><li>根据反馈处理</li></ol>
+<ul><li>Critical：立刻修</li><li>Important：继续前先修</li><li>Minor：可记录后续处理</li></ul>
 
-【你在这一课该记住的关键句】
-SDD 的骨架不是“subagent 帮你写代码”，而是“任务级 dispatch + 任务级 review + 分支级 final review + 显式 finish”。</pre>
-          </article>
+<h5>你在这一课该记住的点</h5>
+<p>Review 在这里不是社交礼仪，也不是“别人顺手帮你看看”，</p>
+<p>而是一个明确会阻止错误继续向后级联的控制点。</p>
+</div>
+</details>
+</article>
+</div>
+<div class="grid">
+<article class="card">
+<h3 class="card-title">Per-task review</h3>
+<p>把问题锁在局部任务范围内，防止小错误滚进后续任务。</p>
+</article>
+<article class="card">
+<h3 class="card-title">Whole-branch review</h3>
+<p>接住“每个任务单看都还行，合在一起有缝”这类问题。</p>
+</article>
+</div>
+</section>
+<a id="finish-gate"></a>
+<section>
+<h2>Finish skill 把实现完成变成正式收口</h2>
+<div class="callout">
+<p><strong>真正的 finish 不是“我看着差不多，去 merge 吧”。</strong></p>
+<p><code>finishing-a-development-branch</code> 把“收尾”从主观感觉变成一套明确菜单和明确边界：先跑全量测试，再识别当前环境，再由用户选择 merge / PR / keep；只有用户明确要求 discard，才会走删除分支的路径。</p>
+</div>
+<div class="prompt-stack">
+<article class="prompt-doc">
+<h3 class="card-title">finishing-a-development-branch（中文节选）</h3>
+<p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/finishing-a-development-branch/SKILL.md">skills/finishing-a-development-branch/SKILL.md</a> · 本课为什么必须嵌：你提到的“功能有了，验收一下就完事”正是这张卡要纠正的地方。</p>
+<details class="prompt-fold">
+<summary class="prompt-toggle">
+<span class="prompt-toggle-closed">查看完整 prompt</span>
+<span class="prompt-toggle-open">收起 prompt</span>
+</summary>
+<div class="prompt-md">
+<h5>Core principle</h5>
+<p>Verify tests -&gt; Detect environment -&gt; Present options -&gt; Execute choice -&gt; Clean up</p>
+<h5>Step 1：先跑全量测试</h5>
+<h6>如果全量测试失败</h6>
+<ul><li>先停下</li><li>不能直接进入“怎么整合这份工作”的菜单</li></ul>
 
-          <article class="prompt-doc">
-            <h3 class="card-title">executing-plans（中文节选）</h3>
-            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/executing-plans/SKILL.md">skills/executing-plans/SKILL.md</a> · 本课为什么也要放进来：它能帮你看清楚 SDD 不是唯一执行模式，但它们最后都得接到同一个 finish skill。</p>
-            <pre class="prompt-zh">【Overview】
-读取 plan，先做批判性 review，再执行所有任务，完成后汇报。
+<h5>Step 4：把菜单原样交给用户</h5>
+<h6>普通情况要给出 3 个选项</h6>
+<ol><li>本地 merge 回 base branch</li><li>push 并创建 Pull Request</li><li>保留当前分支，之后再处理</li></ol>
 
-【重要说明】
-如果有 subagents，Superpowers 明确说：
-更推荐用 subagent-driven-development。
-
-【执行步骤】
-Step 1：Load and Review Plan
-- 先确保在隔离工作空间中
-- 读 plan
-- 批判性检查 plan
-- 有问题先提出来；没问题再继续
-
-Step 2：Execute Tasks
-- 按 task 逐个执行
-- 跟着 plan 里的步骤做
-- 跑验证
-- 标记完成
-
-Step 3：Complete Development
-- 所有任务执行并验证后
-- 明确宣布要使用 finishing-a-development-branch
-- 然后按那个 skill 的规则正式收口
-
-【和 SDD 的差别，当前先抓一句】
-SDD 更强调“任务级 dispatch + review loop”；
-executing-plans 更像“单会话按 plan 顺序推进，遇阻就停下来 ask”。</pre>
-          </article>
-        </div>
-      </section>
-
-      <a id="review-gate"></a>
-      <section>
-        <h2>第二块重点：Review 不是锦上添花，是 mandatory gate</h2>
-        <div class="callout">
-          <p><strong>如果你把 review 理解成“有空补一个”，后半程几乎一定会被你走短。</strong></p>
-          <p>Superpowers 写得很明确：在 SDD 里，review 是每个 task 后的 gate；在更广义上，major feature 完成后和 merge 之前也都应该 request review。所以“功能有了”不能自动替代“review 过了”。</p>
-        </div>
-        <div class="prompt-stack">
-          <article class="prompt-doc">
-            <h3 class="card-title">requesting-code-review（中文节选）</h3>
-            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/SKILL.md">skills/requesting-code-review/SKILL.md</a> · 本课为什么要嵌：这张卡直接回答“什么时候 review 是必须的”。</p>
-            <pre class="prompt-zh">【Core principle】
-Review early, review often.
-
-【Mandatory 什么时候必须 request review】
-- 在 subagent-driven-development 里，每个 task 完成后
-- 完成 major feature 之后
-- merge 到 main 之前
-
-【How to Request（当前先抓框架）】
-1. 拿到 diff 的起止范围
-2. 派 code reviewer subagent
-3. 根据反馈处理：
-   - Critical：立刻修
-   - Important：继续前先修
-   - Minor：可记录后续处理
-
-【你在这一课该记住的点】
-Review 在这里不是社交礼仪，也不是“别人顺手帮你看看”，
-而是一个明确会阻止错误继续向后级联的控制点。</pre>
-          </article>
-        </div>
-        <div class="grid">
-          <article class="card">
-            <h3 class="card-title">Per-task review</h3>
-            <p>防止小错误滚进后续任务，把问题锁在局部任务范围内。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">Whole-branch review</h3>
-            <p>防止“每个任务单看都还行，但合在一起有缝”的问题漏过去。</p>
-          </article>
-        </div>
-      </section>
-
-      <a id="finish-gate"></a>
-      <section>
-        <h2>第三块重点：Finish skill 负责把“实现完成”变成“正式收口”</h2>
-        <div class="callout">
-          <p><strong>真正的 finish 不是“我看着差不多，去 merge 吧”。</strong></p>
-          <p><code>finishing-a-development-branch</code> 最有价值的地方，是它把“收尾”从主观感觉，变成一套明确菜单和明确边界：先跑全量测试，再识别当前环境，再由用户选择 merge / PR / keep；只有用户明确要求 discard，才会走删除分支的路径。</p>
-        </div>
-        <div class="prompt-stack">
-          <article class="prompt-doc">
-            <h3 class="card-title">finishing-a-development-branch（中文节选）</h3>
-            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/finishing-a-development-branch/SKILL.md">skills/finishing-a-development-branch/SKILL.md</a> · 本课为什么必须嵌：你提到的“功能有了，验收一下就完事”正是这张卡要纠正的地方。</p>
-            <pre class="prompt-zh">【Core principle】
-Verify tests -> Detect environment -> Present options -> Execute choice -> Clean up
-
-【Step 1：先跑全量测试】
-如果全量测试失败：
-- 先停下
-- 不能直接进入“怎么整合这份工作”的菜单
-
-【Step 4：把菜单原样交给用户】
-普通情况要给出 3 个选项：
-1. 本地 merge 回 base branch
-2. push 并创建 Pull Request
-3. 保留当前分支，之后再处理
-
-重点不是背菜单，而是：
-整合决策是人类的，不是 agent 默认替人做主的。
-
-【Discard 只在用户明确要求时才存在】
-如果人明确要丢弃工作，必须先二次确认，并要求输入精确的 `discard`。
-不是“差不多想删掉”就能算。
-
-【Cleanup 也不是想删就删】
-- 只有某些工作树是 Superpowers 自己创建并拥有 cleanup 权的
-- 遇到未提交文件导致删除被拒绝时，不能擅自 `--force`
-- 必须把风险展示给人，再让人选怎么处理
-
-【你在这一课该抓住的点】
-finish skill 的价值不是“给你一个 merge 命令”，
-而是把收口动作变成显式菜单、显式确认、显式 cleanup ownership。</pre>
-          </article>
-        </div>
-      </section>
-
-      <section>
-        <h2>把整条后半程读成一句顺口的话</h2>
-        <div class="callout">
-          <p><strong>有了 plan 以后，不是“叫人实现完就结束”，而是：</strong></p>
-          <p>选执行模式 -> 逐 task 实现 -> 每 task review -> 整分支 final review -> 进入 finish 菜单 -> 由人决定 merge / PR / keep。</p>
-        </div>
-        <p>如果你只把前半句走完，停在“功能看起来有了”，你得到的是一个<strong>可演示状态</strong>；把后半句也走完，才更接近一个<strong>正式收口状态</strong>。</p>
-        <div class="grid">
-          <article class="card">
-            <h3 class="card-title">可演示状态</h3>
-            <p>功能跑起来了，表面体验通过，但 review 边界、整合方式、cleanup 责任都还没明确收束。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">正式收口状态</h3>
-            <p>验证通过、review 过关、分支级检查完成、用户明确做出整合选择，工作才算进入结尾。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="quiz">
-        <h2>4 分钟自测</h2>
-        <p>这组题只检查一个目标：你有没有把“实现完成”和“工作流收口”分开。</p>
-        <div class="quiz-list">
-          <div class="quiz-item" data-quiz-answer="还没正式收口" data-quiz-explanation="功能出现只说明实现阶段有了结果，不代表 per-task review、whole-branch review、finish 菜单这些后半程已经完成。">
-            <h3>1. 一个 feature 已经能点能跑，最准确的判断更接近哪一个？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="还没正式收口">还没正式收口</button>
-              <button class="quiz-option" type="button" data-choice="已经完全结束">已经完全结束</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="每个任务都 review" data-quiz-explanation="SDD 的关键不是只派 subagent，而是每个 task 后都要过一次 review gate。">
-            <h3>2. 在 SDD 的正常节奏里，review 更像哪一种？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="每个任务都 review">每个任务都 review</button>
-              <button class="quiz-option" type="button" data-choice="最后统一 review">最后统一 review</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="更推荐 SDD" data-quiz-explanation="executing-plans 明确写了：如果有 subagents，Superpowers works much better with access to subagents，因此更推荐 SDD。">
-            <h3>3. 如果平台支持 subagents，Superpowers 更推荐哪一种执行模式？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="更推荐 SDD">更推荐 SDD</button>
-              <button class="quiz-option" type="button" data-choice="只用 executing">只用 executing</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="由用户决定" data-quiz-explanation="finishing-a-development-branch 的菜单就是为了把整合决定留给人类，而不是 agent 默认替用户 merge 或提 PR。">
-            <h3>4. merge / PR / keep 这种整合决定，在 finish 阶段默认应该由谁来拍板？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="由用户决定">由用户决定</button>
-              <button class="quiz-option" type="button" data-choice="由 agent 默认决定">由 agent 默认决定</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="不能直接强删" data-quiz-explanation="finish skill 明确要求：如果 cleanup 被未提交文件阻止，不能擅自 `--force`，必须展示风险并让人选处理方式。">
-            <h3>5. cleanup 工作树时如果发现还有未提交文件，正确姿势更接近哪一个？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="不能直接强删">不能直接强删</button>
-              <button class="quiz-option" type="button" data-choice="直接 force 删除">直接 force 删除</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h2>这一课学完，你至少该带走什么</h2>
-        <div class="grid">
-          <article class="card">
-            <h3 class="card-title">1. “功能有了”不等于“工作流结束”</h3>
-            <p>实现完成只是后半程的一部分，不是收口本身。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">2. SDD 的核心是控制环，不只是 subagent</h3>
-            <p>dispatch、review、fix loop、final review、finish 这些东西加在一起，才叫 SDD 的骨架。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">3. Finish skill 把整合决策还给人</h3>
-            <p>merge / PR / keep / discard 都有明确边界，不是 agent 自己顺手决定。</p>
-          </article>
-        </div>
-      </section>
-
-      <section>
-        <h2>下一步怎么学最顺</h2>
-        <p>如果你已经把这节课消化住，下一步最顺的是这两个方向二选一：</p>
-        <ol class="source-list">
-          <li>先去 `0003`，处理“实现跑偏、漏实现、review 指出缺口时到底怎么分流”。</li>
-          <li>再去 `0004`，看人验收时发现 bug，为什么应该切到 `systematic-debugging` 与 `verification-before-completion` 这条线。</li>
-        </ol>
-      </section>
-
-      <section>
-        <h2>主资料</h2>
-        <p>这一课最值得先通读的是 <a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">subagent-driven-development/SKILL.md</a>。它把“为什么实现不能只看功能是否出现、而要看整个执行环有没有闭合”讲得最完整。</p>
-        <ol class="source-list">
-          <li><a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a></li>
-          <li><a href="https://github.com/obra/superpowers/blob/main/skills/executing-plans/SKILL.md">skills/executing-plans/SKILL.md</a></li>
-          <li><a href="https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/SKILL.md">skills/requesting-code-review/SKILL.md</a></li>
-          <li><a href="https://github.com/obra/superpowers/blob/main/skills/finishing-a-development-branch/SKILL.md">skills/finishing-a-development-branch/SKILL.md</a></li>
-          <li><a href="https://github.com/obra/superpowers/blob/main/README.md#the-basic-workflow">README.md · The Basic Workflow</a></li>
-        </ol>
-      </section>
-
-      <p class="footer-note">如果你下一次再看到“功能都有了，为什么它还要继续 review / finish”，就回到这节课，把“可演示状态”和“正式收口状态”这两个词重新对齐一次。</p>
-    </main>
-  </body>
+<h6>重点不是背菜单，而是</h6>
+<p>整合决策是人类的，不是 agent 默认替人做主的。</p>
+<h5>Discard 只在用户明确要求时才存在</h5>
+<p>如果人明确要丢弃工作，必须先二次确认，并要求输入精确的 <code>discard</code>。</p>
+<p>不是“差不多想删掉”就能算。</p>
+<h5>Cleanup 也不是想删就删</h5>
+<ul>
+<li>只有某些工作树是 Superpowers 自己创建并拥有 cleanup 权的</li>
+<li>遇到未提交文件导致删除被拒绝时，不能擅自 <code>--force</code></li>
+<li>必须把风险展示给人，再让人选怎么处理</li>
+</ul>
+<h5>你在这一课该抓住的点</h5>
+<p>finish skill 的价值不是“给你一个 merge 命令”，</p>
+<p>而是把收口动作变成显式菜单、显式确认、显式 cleanup ownership。</p>
+</div>
+</details>
+</article>
+</div>
+</section>
+<section>
+<h2>后半程的一句话版本</h2>
+<div class="callout">
+<p><strong>有了 plan 以后，后面的顺序是：</strong></p>
+<p>选执行模式 → 逐 task 实现 → 每 task review → 整分支 final review → 进入 finish 菜单 → 由人决定 merge / PR / keep。</p>
+</div>
+<p>只走前半句、停在“功能看起来有了”，你得到的是一个<strong>可演示状态</strong>；把后半句也走完，才接近一个<strong>正式收口状态</strong>。</p>
+<div class="grid">
+<article class="card">
+<h3 class="card-title">可演示状态</h3>
+<p>功能跑起来了，表面体验通过，但 review 边界、整合方式、cleanup 责任都还没明确收束。</p>
+</article>
+<article class="card">
+<h3 class="card-title">正式收口状态</h3>
+<p>验证通过、review 过关、分支级检查完成、用户明确做出整合选择，工作才算进入结尾。</p>
+</article>
+</div>
+</section>
+<section>
+<h2>这一课带走什么</h2>
+<div class="grid">
+<article class="card">
+<h3 class="card-title">“功能有了”不等于“工作流结束”</h3>
+<p>实现完成只是后半程的一部分，不是收口本身。</p>
+</article>
+<article class="card">
+<h3 class="card-title">SDD 的核心是控制环</h3>
+<p>dispatch、review、fix loop、final review、finish 加在一起，才叫 SDD 的骨架。subagent 只是其中一个零件。</p>
+</article>
+<article class="card">
+<h3 class="card-title">Finish skill 把整合决策还给人</h3>
+<p>merge / PR / keep / discard 都有明确边界，不由 agent 顺手决定。</p>
+</article>
+</div>
+</section>
+<section>
+<h2>主资料</h2>
+<p>这一课最值得先通读的是 <a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">subagent-driven-development/SKILL.md</a>。它把“为什么实现不能只看功能是否出现、而要看整个执行环有没有闭合”讲得最完整。</p>
+<ol class="source-list">
+<li><a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a></li>
+<li><a href="https://github.com/obra/superpowers/blob/main/skills/executing-plans/SKILL.md">skills/executing-plans/SKILL.md</a></li>
+<li><a href="https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/SKILL.md">skills/requesting-code-review/SKILL.md</a></li>
+<li><a href="https://github.com/obra/superpowers/blob/main/skills/finishing-a-development-branch/SKILL.md">skills/finishing-a-development-branch/SKILL.md</a></li>
+<li><a href="https://github.com/obra/superpowers/blob/main/README.md#the-basic-workflow">README.md · The Basic Workflow</a></li>
+</ol>
+</section>
+</main>
+</body>
 </html>

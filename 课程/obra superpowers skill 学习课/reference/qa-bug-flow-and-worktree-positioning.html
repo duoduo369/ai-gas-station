@@ -4,23 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>验收 bug 流与 worktree 位置速查</title>
-    <link rel="stylesheet" href="../../assets/course.css">
+    <link rel="stylesheet" href="../assets/course.css">
     <script src="../assets/course-nav.js" defer></script>
-    <script src="../../assets/open-links-new-tab.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
   </head>
   <body>
     <main>
       <section class="hero">
-        <p class="eyebrow">Reference</p>
+        <p class="eyebrow">速查</p>
         <h1>验收 bug 流与 worktree 位置速查</h1>
         <p class="lede">这页只回答最后两个现实问题：人验收发现 bug 时怎么切到 debug 流，以及 worktree 到底位于整条工作流的哪一层。</p>
       </section>
 
       <section>
-        <h2>先抓一句总判断</h2>
+        <h2>总判断</h2>
         <div class="callout">
           <p><strong>预期变了：回 spec 分流。</strong></p>
-          <p><strong>预期没变但东西坏了：切 `systematic-debugging`，修完后再走 `verification-before-completion`。</strong></p>
+          <p><strong>预期没变但东西坏了：切 <code>systematic-debugging</code>，修完后再走 <code>verification-before-completion</code>。</strong></p>
         </div>
       </section>
 
@@ -86,10 +86,10 @@
       <section>
         <h2>要看中文条文，回 0004 的这四处</h2>
         <ol class="source-list">
-          <li><a href="../lessons/0004-qa-bug-flow-and-where-worktrees-fit.html#bug-flow">0004 · 发现 bug 后先切线</a></li>
-          <li><a href="../lessons/0004-qa-bug-flow-and-where-worktrees-fit.html#systematic-debugging">0004 · systematic-debugging</a></li>
-          <li><a href="../lessons/0004-qa-bug-flow-and-where-worktrees-fit.html#verification-gate">0004 · verification-before-completion</a></li>
-          <li><a href="../lessons/0004-qa-bug-flow-and-where-worktrees-fit.html#worktree-position">0004 · worktree 在流程里的位置</a></li>
+          <li><a href="../lessons/0004-qa-bug-flow-and-where-worktrees-fit.html#bug-flow">0004 · 发现 bug 时先切线</a></li>
+          <li><a href="../lessons/0004-qa-bug-flow-and-where-worktrees-fit.html#systematic-debugging">0004 · systematic-debugging 不要求先有 spec</a></li>
+          <li><a href="../lessons/0004-qa-bug-flow-and-where-worktrees-fit.html#verification-gate">0004 · 修完以后要 fresh verification</a></li>
+          <li><a href="../lessons/0004-qa-bug-flow-and-where-worktrees-fit.html#worktree-position">0004 · worktree 是环境层</a></li>
         </ol>
       </section>
 

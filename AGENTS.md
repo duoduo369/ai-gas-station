@@ -15,7 +15,7 @@
 - 不建 `资源/`、`主题/`、`plans/`、`收件箱/`。
 - 对象目录与正文文件中文优先；`skills/` 因直接对应 agent skills 保留英文，机制目录也保留英文，如 `playbook/`、`assets/`、`docs/`。
 - 每个对象目录都以 `README.md` 作为索引入口，索引风格参考 awesome 项目。
-- `课程/` 用于多课时、自成体系的 lesson 课程；每门课在自己的子目录中自包含 `README.md`、`lessons/`、`reference/`、`assets/`。共用课件 chrome 在 `课程/assets/`。
+- `课程/` 用于多课时、自成体系的 lesson 课程；每门课在自己的子目录中自包含 `README.md`、`lessons/`、`reference/`、`assets/`。`course.css` 与 `open-links-new-tab.js` 放在该课 `assets/`，页面引用 `../assets/`。
 - 索引条目最小字段 = 名称 + 一句话注释；原始链接与本地笔记链接都可选。
 - 不要主动新建深度笔记；`书籍/` 下的书籍笔记只有在用户明确要求创建某书的 md 时才创建。
 - 本地引用统一使用标准 Markdown 相对路径，不依赖 Obsidian 双链承载关键结构。

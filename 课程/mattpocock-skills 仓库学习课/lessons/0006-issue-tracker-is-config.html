@@ -3,20 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lesson 0006 · Issue tracker 是配置不是平台</title>
-    <link rel="stylesheet" href="../../assets/course.css">
-    <script src="../assets/classify-quiz.js" defer></script>
+    <title>Lesson 0006 · Issue tracker 是一份配置文档</title>
+    <link rel="stylesheet" href="../assets/course.css">
     <script src="../assets/course-nav.js" defer></script>
-    <script src="../../assets/open-links-new-tab.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
   </head>
   <body>
     <main>
       <section class="hero">
         <p class="eyebrow">Lesson 0006</p>
-        <h1>Issue tracker 是配置，不是 GitHub</h1>
-        <p class="lede">这节课只讲 issue tracker 接线。skills 绑定的是 <code>docs/agents/issue-tracker.md</code> 里的流程，不是某个平台；飞书、Jira、Linear 都能走同一条口。</p>
+        <h1>Issue tracker 是一份配置文档</h1>
+        <p class="lede">这节课只讲 issue tracker 接线。skills 绑定的是 <code>docs/agents/issue-tracker.md</code> 里的流程；飞书、Jira、Linear 都能走同一条口。</p>
         <div class="pill-row">
-          <span class="pill">预计 18 分钟</span>
           <span class="pill">目标：会选工作票放哪、共享板放哪</span>
           <span class="pill">速查：<a href="../reference/issue-tracker-is-config.html">tracker 接线速查</a></span>
         </div>
@@ -39,7 +37,7 @@
           </article>
           <article class="card">
             <h3 class="card-title">工作票像分支</h3>
-            <p><code>to-tickets</code> 和 <code>wayfinder</code> 会拆出大量 agent 用的实现票、决策票。它们是开发过程产物，不是团队看板。丢进同一个 GitLab 项目，就会出现你说的：一块板上混着很多 feature 的半成品。</p>
+            <p><code>to-tickets</code> 和 <code>wayfinder</code> 会拆出大量 agent 用的实现票、决策票。它们是开发过程产物。丢进同一个 GitLab 项目，就会出现你说的：一块板上混着很多 feature 的半成品。</p>
           </article>
           <article class="card">
             <h3 class="card-title">仓库自己也承认这件事</h3>
@@ -78,7 +76,7 @@
             </tbody>
           </table>
         </div>
-        <p>Jira 那套「提交末尾带一组 key」就是 merge 时的指针，不是开发过程中的唯一存放处。Skills 官方也写过常见拆分：Linear 管 issue 和规划，GitHub 只管代码和 PR。你可以把同一句换成：<strong>飞书（或 <code>.scratch</code>）管票，GitLab 只管代码和 MR。</strong></p>
+        <p>Jira 那套「提交末尾带一组 key」是 merge 时的指针。Skills 官方也写过常见拆分：Linear 管 issue 和规划，GitHub 只管代码和 PR。你可以把同一句换成：<strong>飞书（或 <code>.scratch</code>）管票，GitLab 只管代码和 MR。</strong></p>
       </section>
 
       <section>
@@ -94,65 +92,97 @@
         <article class="prompt-doc" id="zh-setup-tracker">
           <h3 class="card-title">setup-matt-pocock-skills · Section A 与写出的文件（本课所需小节）</h3>
           <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/setup-matt-pocock-skills/SKILL.md">setup-matt-pocock-skills/SKILL.md</a>。Explore / Confirm 流程全文见原文；本课要的是 tracker 四选一，以及它写进哪。</p>
-          <pre class="prompt-zh">## 它搭的是每仓一份配置
-
-给工程 skills 假定存在的、按仓库走的配置搭好脚手架：
-
-- **Issue tracker** — issue 住在哪（默认 GitHub；本地 markdown 也开箱即用）
-- **Triage labels** — 五个规范 triage 角色用的字符串
-- **Domain docs** — `CONTEXT.md` 和 ADR 住在哪，以及读它们的消费规则
-
-这是一个由 prompt 驱动的 skill，不是确定性脚本。先探索，展示你发现了什么，和用户确认，再写。
-
-**Section A — Issue tracker。**
-
-&gt; 说明：这里的 “issue tracker” 是这个仓库的 issue 住在哪。`to-tickets`、`triage`、`to-spec` 这类 skill 会从那里读、往那里写 —— 它们需要知道该调用 `gh issue create`、在 `.scratch/` 下写 markdown，还是遵循你描述的某种其他工作流。选你真正在这个仓库里跟踪工作的地方。
-
-默认姿态：这些 skill 是为 GitHub 设计的。若 `git remote` 指向 GitHub，就提议那个。若 `git remote` 指向 GitLab（`gitlab.com` 或自建主机），就提议 GitLab。否则（或用户更想要），提供：
-
-- **GitHub** — issue 住在仓库的 GitHub Issues（用 `gh` CLI）
-- **GitLab** — issue 住在仓库的 GitLab Issues（用 `glab` CLI）
-- **Local markdown** — issue 作为文件住在本仓库 `.scratch/&lt;feature&gt;/` 下（适合独唱项目或没有 remote 的仓库）
-- **Other**（Jira、Linear 等） — 请用户用一段话描述工作流；skill 会把它记成自由散文
-
-把选择记进 `docs/agents/issue-tracker.md`。GitHub 和 GitLab 模板带一个 “PRs as a request surface” 开关，默认 **关** —— 保持关掉，也不要主动提起；想把外部 PR 放进 triage 队列的用户可以以后在文件里把开关翻开。
-
-然后用本 skill 文件夹里的种子模板写出 docs 文件：
-
-- issue-tracker-github.md — GitHub
-- issue-tracker-gitlab.md — GitLab
-- issue-tracker-local.md — 本地 markdown
-- triage-labels.md — 标签映射（仅当装了 `triage`）
-- domain.md — 领域文档消费规则 + 布局
-
-对 “other” issue tracker，从用户的描述从头写 `docs/agents/issue-tracker.md`。</pre>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h5>它搭的是每仓一份配置</h5>
+              <p>给工程 skills 假定存在的、按仓库走的配置搭好脚手架：</p>
+              <ul>
+              <li><strong>Issue tracker</strong> — issue 住在哪（默认 GitHub；本地 markdown 也开箱即用）</li>
+              <li><strong>Triage labels</strong> — 五个规范 triage 角色用的字符串</li>
+              <li><strong>Domain docs</strong> — <code>CONTEXT.md</code> 和 ADR 住在哪，以及读它们的消费规则</li>
+              </ul>
+              <p>这是一个由 prompt 驱动的 skill，不是确定性脚本。先探索，展示你发现了什么，和用户确认，再写。</p>
+              <p><strong>Section A — Issue tracker。</strong></p>
+              <blockquote>
+              <p>说明：这里的 “issue tracker” 是这个仓库的 issue 住在哪。<code>to-tickets</code>、<code>triage</code>、<code>to-spec</code> 这类 skill 会从那里读、往那里写 —— 它们需要知道该调用 <code>gh issue create</code>、在 <code>.scratch/</code> 下写 markdown，还是遵循你描述的某种其他工作流。选你真正在这个仓库里跟踪工作的地方。</p>
+              </blockquote>
+              <p>默认姿态：这些 skill 是为 GitHub 设计的。若 <code>git remote</code> 指向 GitHub，就提议那个。若 <code>git remote</code> 指向 GitLab（<code>gitlab.com</code> 或自建主机），就提议 GitLab。否则（或用户更想要），提供：</p>
+              <ul>
+              <li><strong>GitHub</strong> — issue 住在仓库的 GitHub Issues（用 <code>gh</code> CLI）</li>
+              <li><strong>GitLab</strong> — issue 住在仓库的 GitLab Issues（用 <code>glab</code> CLI）</li>
+              <li><strong>Local markdown</strong> — issue 作为文件住在本仓库 <code>.scratch/&lt;feature&gt;/</code> 下（适合独唱项目或没有 remote 的仓库）</li>
+              <li><strong>Other</strong>（Jira、Linear 等） — 请用户用一段话描述工作流；skill 会把它记成自由散文</li>
+              </ul>
+              <p>把选择记进 <code>docs/agents/issue-tracker.md</code>。GitHub 和 GitLab 模板带一个 “PRs as a request surface” 开关，默认 <strong>关</strong> —— 保持关掉，也不要主动提起；想把外部 PR 放进 triage 队列的用户可以以后在文件里把开关翻开。</p>
+              <p>然后用本 skill 文件夹里的种子模板写出 docs 文件：</p>
+              <ul>
+              <li>issue-tracker-github.md — GitHub</li>
+              <li>issue-tracker-gitlab.md — GitLab</li>
+              <li>issue-tracker-local.md — 本地 markdown</li>
+              <li>triage-labels.md — 标签映射（仅当装了 <code>triage</code>）</li>
+              <li>domain.md — 领域文档消费规则 + 布局</li>
+              </ul>
+              <p>对 “other” issue tracker，从用户的描述从头写 <code>docs/agents/issue-tracker.md</code>。</p>
+            </div>
+          </details>
         </article>
         <article class="prompt-doc" id="zh-setup-docs">
           <h3 class="card-title">docs/engineering/setup-matt-pocock-skills.md · 四选一与 Other（本课所需小节）</h3>
-          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/setup-matt-pocock-skills.md">docs/engineering/setup-matt-pocock-skills.md</a>。这是“tracker 是配置不是平台”的人读依据。</p>
-          <pre class="prompt-zh">这些文件是仓库与仓库之间唯一会变的东西。skills 本身到处都一样；它们运行时读 `docs/agents/issue-tracker.md`，并按它说的做。这就是为什么这套东西不绑 GitHub，以及为什么永远不必改任何 skill 文件去把它指到别处。用 “把 skills 接到自定义 issue tracker” 来调用它，对任何你能程序化连上的东西都有效，skills 零改动。
-
-tracker 选项：
-
-| 选项 | issue 住在哪 | 需要 |
-| --- | --- | --- |
-| **GitHub** | 仓库的 GitHub Issues | `gh` CLI |
-| **GitLab** | 仓库的 GitLab Issues | `glab` CLI |
-| **Local markdown** | 本仓库 `.scratch/&lt;feature&gt;/` 下的文件 | 什么都不要 —— 完全没有 remote 也行 |
-| **Other** | 你说的任何地方 | 你描述工作流的一段话 |
-
-前三个作为模板打在 skill 里，开箱即用。本地 markdown 是一等公民选项，不是兜底：没有 remote 的独唱项目被完整支持。有一条 caveat 值得重复：如果你在用 GitHub，就不要再用本地 markdown。它们是替代方案，不是两层。
-
-“Other” 也不是空壳。正是因为它，Jira、Linear、Azure DevOps 和 Beads 都能工作：你描述工作流，skill 把你的散文记进 `docs/agents/issue-tracker.md`，下游 skills 跟着散文走。社区已经这样做过 —— 一种经 MCP 的 Jira 变体、一个长得像 `gh` 的 Gitea CLI、一个手搓的本地仪表盘。
-
-**我必须用 GitHub 吗？**
-
-不必。GitHub、GitLab 和 `.scratch/` 下的本地 markdown 都作为现成模板出货，其他任何东西走 “other” 路径。这是记录里重复最多的问题，大致是这些原话：*“hard locked to github”*、*“can I use GitLab / Jira”*、*“what about Azure DevOps”*。每次的答案都是：tracker 是一个 setup 答案，不是 skill 属性。</pre>
+          <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/setup-matt-pocock-skills.md">docs/engineering/setup-matt-pocock-skills.md</a>。这是“tracker 是配置”的人读依据。</p>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <p>这些文件是仓库与仓库之间唯一会变的东西。skills 本身到处都一样；它们运行时读 <code>docs/agents/issue-tracker.md</code>，并按它说的做。这就是为什么这套东西不绑 GitHub，以及为什么永远不必改任何 skill 文件去把它指到别处。用 “把 skills 接到自定义 issue tracker” 来调用它，对任何你能程序化连上的东西都有效，skills 零改动。</p>
+              <p>tracker 选项：</p>
+              <table>
+              <thead>
+              <tr>
+              <th>选项</th>
+              <th>issue 住在哪</th>
+              <th>需要</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+              <td><strong>GitHub</strong></td>
+              <td>仓库的 GitHub Issues</td>
+              <td><code>gh</code> CLI</td>
+              </tr>
+              <tr>
+              <td><strong>GitLab</strong></td>
+              <td>仓库的 GitLab Issues</td>
+              <td><code>glab</code> CLI</td>
+              </tr>
+              <tr>
+              <td><strong>Local markdown</strong></td>
+              <td>本仓库 <code>.scratch/&lt;feature&gt;/</code> 下的文件</td>
+              <td>什么都不要 —— 完全没有 remote 也行</td>
+              </tr>
+              <tr>
+              <td><strong>Other</strong></td>
+              <td>你说的任何地方</td>
+              <td>你描述工作流的一段话</td>
+              </tr>
+              </tbody>
+              </table>
+              <p>前三个作为模板打在 skill 里，开箱即用。本地 markdown 是一等公民选项，不是兜底：没有 remote 的独唱项目被完整支持。有一条 caveat 值得重复：如果你在用 GitHub，就不要再用本地 markdown。它们是替代方案，不是两层。</p>
+              <p>“Other” 也不是空壳。正是因为它，Jira、Linear、Azure DevOps 和 Beads 都能工作：你描述工作流，skill 把你的散文记进 <code>docs/agents/issue-tracker.md</code>，下游 skills 跟着散文走。社区已经这样做过 —— 一种经 MCP 的 Jira 变体、一个长得像 <code>gh</code> 的 Gitea CLI、一个手搓的本地仪表盘。</p>
+              <p><strong>我必须用 GitHub 吗？</strong></p>
+              <p>不必。GitHub、GitLab 和 <code>.scratch/</code> 下的本地 markdown 都作为现成模板出货，其他任何东西走 “other” 路径。这是记录里重复最多的问题，大致是这些原话：<em>“hard locked to github”</em>、<em>“can I use GitLab / Jira”</em>、<em>“what about Azure DevOps”</em>。每次的答案都是：tracker 是一个 setup 答案，不是 skill 属性。</p>
+            </div>
+          </details>
         </article>
       </section>
 
       <section>
-        <h2>飞书能不能当 tracker：能，但是 Other，不是第四份模板</h2>
+        <h2>飞书能不能当 tracker：能，走 Other 路径</h2>
         <div class="callout">
           <p>官方没有「issue-tracker-feishu.md」。飞书要工作，你得自己把 <code>lark-cli</code> 的调用约定写进 <code>issue-tracker.md</code>。CLI 是真的：飞书团队维护的 <a href="https://github.com/larksuite/cli">larksuite/cli</a> 就是给人和 AI agent 用的，覆盖云文档、Drive 里的 markdown、多维表格、任务、知识库；项目工作项另有 <code>meegle-cli</code>。</p>
         </div>
@@ -193,118 +223,95 @@ tracker 选项：
           </article>
           <article class="card">
             <h3 class="card-title">先别做的</h3>
-            <p>先别为了「有 CLI」就把所有票灌进飞书任务清单——共享清单会重新制造 GitLab 那种混杂。也先别写一个通用飞书 skill 去改 <code>mattpocock-skills</code> 源码；改的是你业务仓库里的 <code>docs/agents/issue-tracker.md</code>。</p>
+            <p>先别为了「有 CLI」就把所有票灌进飞书任务清单。共享清单会重新制造 GitLab 那种混杂。也先别写一个通用飞书 skill 去改 <code>mattpocock-skills</code> 源码；改的是你业务仓库里的 <code>docs/agents/issue-tracker.md</code>。</p>
           </article>
         </div>
         <p class="beat-label">本地模板全文 · GitLab 只换 CLI</p>
         <article class="prompt-doc" id="zh-tracker-local">
           <h3 class="card-title">issue-tracker-local.md（中文全量）</h3>
           <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/setup-matt-pocock-skills/issue-tracker-local.md">issue-tracker-local.md</a> · 这就是 `.scratch/` 作为一等公民 tracker 时，skills 实际去读的那份散文。</p>
-          <pre class="prompt-zh"># Issue tracker: 本地 Markdown
-
-这个仓库的 issue 和 spec 作为 markdown 文件住在 `.scratch/` 里。
-
-## 约定
-
-- 一个功能一个目录：`.scratch/&lt;feature-slug&gt;/`
-- spec 是 `.scratch/&lt;feature-slug&gt;/spec.md`
-- 实现 issue 是一票一个文件，放在 `.scratch/&lt;feature-slug&gt;/issues/&lt;NN&gt;-&lt;slug&gt;.md`，从 `01` 起编号 —— 绝不要合成一个 tickets 文件
-- triage 状态记在每个 issue 文件顶部附近的 `Status:` 行（角色字符串见 `triage-labels.md`）
-- 评论和对话历史追加到文件底部的 `## Comments` 标题下
-
-## 当一个 skill 说 “publish to the issue tracker”
-
-在 `.scratch/&lt;feature-slug&gt;/` 下创建新文件（目录不存在就建）。
-
-## 当一个 skill 说 “fetch the relevant ticket”
-
-读被引用路径上的文件。用户通常会直接传入路径或 issue 编号。
-
-## Wayfinding operations
-
-给 `/wayfinder` 用。**地图** 是一个文件，每张票一个 **child** 文件。
-
-- **Map**：`.scratch/&lt;effort&gt;/map.md` — Notes / Decisions-so-far / Fog 正文。
-- **Child ticket**：`.scratch/&lt;effort&gt;/issues/NN-&lt;slug&gt;.md`，从 `01` 起编号，问题写在正文里。`Type:` 行记录票类型（`research`/`prototype`/`grilling`/`task`）；`Status:` 行记录 `claimed`/`resolved`。
-- **Blocking**：顶部附近一行 `Blocked by: NN, NN`。一张票在它列出的每个文件都是 `resolved` 时 unblocked。
-- **Frontier**：扫描 `.scratch/&lt;effort&gt;/issues/`，找未关闭、未阻塞、未认领的文件；编号小的先赢。
-- **Claim**：先把 `Status: claimed` 写进去再开始任何工作。
-- **Resolve**：在 `## Answer` 标题下追加答案，设 `Status: resolved`，然后给 `map.md` 里的 Decisions-so-far 追加一个 context pointer（gist + 链接）。</pre>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>Issue tracker: 本地 Markdown</h4>
+              <p>这个仓库的 issue 和 spec 作为 markdown 文件住在 <code>.scratch/</code> 里。</p>
+              <h5>约定</h5>
+              <ul>
+              <li>一个功能一个目录：<code>.scratch/&lt;feature-slug&gt;/</code></li>
+              <li>spec 是 <code>.scratch/&lt;feature-slug&gt;/spec.md</code></li>
+              <li>实现 issue 是一票一个文件，放在 <code>.scratch/&lt;feature-slug&gt;/issues/&lt;NN&gt;-&lt;slug&gt;.md</code>，从 <code>01</code> 起编号 —— 绝不要合成一个 tickets 文件</li>
+              <li>triage 状态记在每个 issue 文件顶部附近的 <code>Status:</code> 行（角色字符串见 <code>triage-labels.md</code>）</li>
+              <li>评论和对话历史追加到文件底部的 <code>## Comments</code> 标题下</li>
+              </ul>
+              <h5>当一个 skill 说 “publish to the issue tracker”</h5>
+              <p>在 <code>.scratch/&lt;feature-slug&gt;/</code> 下创建新文件（目录不存在就建）。</p>
+              <h5>当一个 skill 说 “fetch the relevant ticket”</h5>
+              <p>读被引用路径上的文件。用户通常会直接传入路径或 issue 编号。</p>
+              <h5>Wayfinding operations</h5>
+              <p>给 <code>/wayfinder</code> 用。<strong>地图</strong> 是一个文件，每张票一个 <strong>child</strong> 文件。</p>
+              <ul>
+              <li><strong>Map</strong>：<code>.scratch/&lt;effort&gt;/map.md</code> — Notes / Decisions-so-far / Fog 正文。</li>
+              <li><strong>Child ticket</strong>：<code>.scratch/&lt;effort&gt;/issues/NN-&lt;slug&gt;.md</code>，从 <code>01</code> 起编号，问题写在正文里。<code>Type:</code> 行记录票类型（<code>research</code>/<code>prototype</code>/<code>grilling</code>/<code>task</code>）；<code>Status:</code> 行记录 <code>claimed</code>/<code>resolved</code>。</li>
+              <li><strong>Blocking</strong>：顶部附近一行 <code>Blocked by: NN, NN</code>。一张票在它列出的每个文件都是 <code>resolved</code> 时 unblocked。</li>
+              <li><strong>Frontier</strong>：扫描 <code>.scratch/&lt;effort&gt;/issues/</code>，找未关闭、未阻塞、未认领的文件；编号小的先赢。</li>
+              <li><strong>Claim</strong>：先把 <code>Status: claimed</code> 写进去再开始任何工作。</li>
+              <li><strong>Resolve</strong>：在 <code>## Answer</code> 标题下追加答案，设 <code>Status: resolved</code>，然后给 <code>map.md</code> 里的 Decisions-so-far 追加一个 context pointer（gist + 链接）。</li>
+              </ul>
+            </div>
+          </details>
         </article>
         <article class="prompt-doc" id="zh-tracker-gitlab">
           <h3 class="card-title">issue-tracker-gitlab.md · 同一套动词（本课所需小节）</h3>
           <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/engineering/setup-matt-pocock-skills/issue-tracker-gitlab.md">issue-tracker-gitlab.md</a>。对照上一份：publish / fetch / map / blocking / frontier / claim / resolve 一个都不少，只是换成 <code>glab</code>。飞书 Other 也得写出同一套动词。</p>
-          <pre class="prompt-zh"># Issue tracker: GitLab
-
-这个仓库的 issue 和 spec 住在 GitLab issues 里。所有操作使用 `glab` CLI。
-
-## 约定
-
-- **创建 issue**：`glab issue create --title "..." --description "..."`。多行描述用 heredoc。传 `--description -` 打开编辑器。
-- **读 issue**：`glab issue view &lt;number&gt; --comments`。机器可读输出用 `-F json`。
-- **列出 issue**：`glab issue list -F json`，配上合适的 `--label` 过滤。
-- **评论 issue**：`glab issue note &lt;number&gt; --message "..."`。GitLab 把评论叫 “notes”。
-- **打上 / 去掉标签**：`glab issue update &lt;number&gt; --label "..."` / `--unlabel "..."`。
-- **关闭**：`glab issue close &lt;number&gt;`。`glab issue close` 不接受关闭评论，所以先用 `glab issue note` 发说明，再 close。
-- **Merge requests**：GitLab 把 PR 叫 “merge requests”。用 `glab mr create`、`glab mr view`、`glab mr note` 等 —— 和 `gh pr ...` 同形，把 `pr` 换成 `mr`。
-
-仓库从 `git remote -v` 推断 —— 在 clone 里跑时 `glab` 会自动做这件事。
-
-## 当一个 skill 说 “publish to the issue tracker”
-
-创建一个 GitLab issue。
-
-## 当一个 skill 说 “fetch the relevant ticket”
-
-跑 `glab issue view &lt;number&gt; --comments`。
-
-## Wayfinding operations（节选）
-
-给 `/wayfinder` 用。**地图** 是一条 issue，**child** issues 当票。
-
-- **Map**：一条打了 `wayfinder:map` 的 issue，装着 Notes / Decisions-so-far / Fog 正文。
-- **Child ticket**：描述顶部写 `Part of #&lt;map&gt;`，标签 `wayfinder:&lt;type&gt;`。
-- **Blocking**：GitLab 的 **原生 blocking 链接**。用 `/blocked_by #&lt;n&gt;` quick action。免费档没有原生 blocking 时，退回描述顶部的 `Blocked by: #&lt;n&gt;` 行。
-- **Claim**：`glab issue update &lt;n&gt; --assignee @me` —— session 的第一次写入。
-- **Resolve**：`glab issue note` 写下答案，然后 `glab issue close`，再给地图的 Decisions-so-far 追加 context pointer。</pre>
+                    <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>Issue tracker: GitLab</h4>
+              <p>这个仓库的 issue 和 spec 住在 GitLab issues 里。所有操作使用 <code>glab</code> CLI。</p>
+              <h5>约定</h5>
+              <ul>
+              <li><strong>创建 issue</strong>：<code>glab issue create --title "..." --description "..."</code>。多行描述用 heredoc。传 <code>--description -</code> 打开编辑器。</li>
+              <li><strong>读 issue</strong>：<code>glab issue view &lt;number&gt; --comments</code>。机器可读输出用 <code>-F json</code>。</li>
+              <li><strong>列出 issue</strong>：<code>glab issue list -F json</code>，配上合适的 <code>--label</code> 过滤。</li>
+              <li><strong>评论 issue</strong>：<code>glab issue note &lt;number&gt; --message "..."</code>。GitLab 把评论叫 “notes”。</li>
+              <li><strong>打上 / 去掉标签</strong>：<code>glab issue update &lt;number&gt; --label "..."</code> / <code>--unlabel "..."</code>。</li>
+              <li><strong>关闭</strong>：<code>glab issue close &lt;number&gt;</code>。<code>glab issue close</code> 不接受关闭评论，所以先用 <code>glab issue note</code> 发说明，再 close。</li>
+              <li><strong>Merge requests</strong>：GitLab 把 PR 叫 “merge requests”。用 <code>glab mr create</code>、<code>glab mr view</code>、<code>glab mr note</code> 等 —— 和 <code>gh pr ...</code> 同形，把 <code>pr</code> 换成 <code>mr</code>。</li>
+              </ul>
+              <p>仓库从 <code>git remote -v</code> 推断 —— 在 clone 里跑时 <code>glab</code> 会自动做这件事。</p>
+              <h5>当一个 skill 说 “publish to the issue tracker”</h5>
+              <p>创建一个 GitLab issue。</p>
+              <h5>当一个 skill 说 “fetch the relevant ticket”</h5>
+              <p>跑 <code>glab issue view &lt;number&gt; --comments</code>。</p>
+              <h5>Wayfinding operations（节选）</h5>
+              <p>给 <code>/wayfinder</code> 用。<strong>地图</strong> 是一条 issue，<strong>child</strong> issues 当票。</p>
+              <ul>
+              <li><strong>Map</strong>：一条打了 <code>wayfinder:map</code> 的 issue，装着 Notes / Decisions-so-far / Fog 正文。</li>
+              <li><strong>Child ticket</strong>：描述顶部写 <code>Part of #&lt;map&gt;</code>，标签 <code>wayfinder:&lt;type&gt;</code>。</li>
+              <li><strong>Blocking</strong>：GitLab 的 <strong>原生 blocking 链接</strong>。用 <code>/blocked_by #&lt;n&gt;</code> quick action。免费档没有原生 blocking 时，退回描述顶部的 <code>Blocked by: #&lt;n&gt;</code> 行。</li>
+              <li><strong>Claim</strong>：<code>glab issue update &lt;n&gt; --assignee @me</code> —— session 的第一次写入。</li>
+              <li><strong>Resolve</strong>：<code>glab issue note</code> 写下答案，然后 <code>glab issue close</code>，再给地图的 Decisions-so-far 追加 context pointer。</li>
+              </ul>
+            </div>
+          </details>
         </article>
         <article class="prompt-doc" id="zh-wayfinder-tracker-caveat">
           <h3 class="card-title">docs/engineering/wayfinder.md · 任意 tracker，以及意外持久化（本课所需小节）</h3>
           <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/docs/engineering/wayfinder.md">docs/engineering/wayfinder.md</a> 关于 tracker 的 FAQ。技能正文已嵌在 <a href="./0003-grilling-vs-grill-with-docs-vs-wayfinder.html#zh-wayfinder">0003</a>。</p>
-          <pre class="prompt-zh">不必 —— 任何 issue tracker 都行。GitHub 是支持最好的路径，因为它的原生 sub-issues 和 blocking 关系让 frontier 不用打开地图就能看见；GitLab、Linear、Jira 和本地 markdown 都有人在用。两条老实的 caveat。没有原生 blocking 的 tracker，意味着依赖图要从文本推断，需要人手修正。而本地 markdown 把产物放进你的仓库，这并不被推荐：把这些材料存在仓库里，往往导致意外持久化。开源维护者撞上的是反面问题 —— 公开 tracker 被 agent 生成的规划票填满 —— 于是往往还是选择本地 markdown。</pre>
+                                        <details class="prompt-fold">
+                      <summary class="prompt-toggle">
+                        <span class="prompt-toggle-closed">查看完整 prompt</span>
+                        <span class="prompt-toggle-open">收起 prompt</span>
+                      </summary>
+                      <pre class="prompt-raw">不必 —— 任何 issue tracker 都行。GitHub 是支持最好的路径，因为它的原生 sub-issues 和 blocking 关系让 frontier 不用打开地图就能看见；GitLab、Linear、Jira 和本地 markdown 都有人在用。两条老实的 caveat。没有原生 blocking 的 tracker，意味着依赖图要从文本推断，需要人手修正。而本地 markdown 把产物放进你的仓库，这并不被推荐：把这些材料存在仓库里，往往导致意外持久化。开源维护者撞上的是反面问题 —— 公开 tracker 被 agent 生成的规划票填满 —— 于是往往还是选择本地 markdown。</pre>
+                    </details>
         </article>
-      </section>
-
-      <section>
-        <h2>快速练习</h2>
-        <div class="quiz" data-quiz>
-          <div class="quiz-item" data-quiz-answer="读配置文档" data-quiz-explanation="skills 运行时读 docs/agents/issue-tracker.md。换飞书或 Jira 是改这份散文，不是改 SKILL.md。">
-            <h3>1. 要把票发到飞书而不是 GitHub，你改什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="改 skill 源码">改 skill 源码</button>
-              <button class="quiz-option" type="button" data-choice="读配置文档">读配置文档</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="私人工作分支" data-quiz-explanation="to-tickets / wayfinder 的产物是过程工件，对应 git 里的私人分支。共享 GitLab 板对应的是主干和外来工单。">
-            <h3>2. 本地 <code>.scratch</code> 里拆出来的实现票，更像 git 的哪一层？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="团队共享主干">团队共享主干</button>
-              <button class="quiz-option" type="button" data-choice="私人工作分支">私人工作分支</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="合码再挂链接" data-quiz-explanation="Jira key、飞书 spec 链接都是 merge 时的指针。开发过程把每张票都开到共享板上，才会乱。">
-            <h3>3. 「提交里附一组 spec / ticket 链接」应该发生在何时？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="拆票立刻公开">拆票立刻公开</button>
-              <button class="quiz-option" type="button" data-choice="合码再挂链接">合码再挂链接</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-        </div>
       </section>
 
       <section>

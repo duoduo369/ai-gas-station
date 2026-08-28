@@ -56,11 +56,11 @@
 <table>
   <tr>
     <td align="center" width="50%" valign="top">
-      <a href="./mattpocock-skills 仓库学习课/lessons/0001-repo-structure-and-skill-map.html">
+      <a href="./mattpocock-skills 仓库学习课/lessons/homepage.html">
         <img src="../assets/image/2026-08-27-course-cover-matt-skills.jpg" alt="mattpocock/skills 仓库学习课" width="100%">
       </a>
       <p>
-        <a href="./mattpocock-skills 仓库学习课/lessons/0001-repo-structure-and-skill-map.html"><strong>mattpocock/skills 仓库学习课</strong></a><br>
+        <a href="./mattpocock-skills 仓库学习课/lessons/homepage.html"><strong>mattpocock/skills 仓库学习课</strong></a><br>
         以 <code>mattpocock/skills</code> 为对象，先画仓库地图，再顺着 <code>ask-matt</code> 主流程往下读。
       </p>
     </td>
@@ -76,11 +76,11 @@
   </tr>
   <tr>
     <td align="center" width="50%" valign="top">
-      <a href="./unclebook AI工作流swarmforge仓库学习/lessons/0001-swarmforge-map.html">
+      <a href="./unclebook AI工作流swarmforge仓库学习/lessons/homepage.html">
         <img src="../assets/image/2026-08-27-course-cover-swarmforge.jpg" alt="Uncle Bob SwarmForge 工作流课" width="100%">
       </a>
       <p>
-        <a href="./unclebook AI工作流swarmforge仓库学习/lessons/0001-swarmforge-map.html"><strong>Uncle Bob SwarmForge 工作流课</strong></a><br>
+        <a href="./unclebook AI工作流swarmforge仓库学习/lessons/homepage.html"><strong>Uncle Bob SwarmForge 工作流课</strong></a><br>
         以 <code>unclebob/swarm-forge</code> 的 <code>swarmforge/</code> 为对象，先分清 main 底座和 pack 流水线，再把 two / four / six 三套 pack 走完。
       </p>
     </td>

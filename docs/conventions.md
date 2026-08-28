@@ -39,8 +39,8 @@
   - `README.md`：课程入口与 lesson 索引
   - `lessons/`：具体课件 HTML
   - `reference/`：速查页、地图页等回看材料
-  - `assets/`：该课的课表导航、测验脚本与局部图
-  共用样式与外链脚本在 `课程/assets/`（`course.css`、`open-links-new-tab.js`）。lesson / reference 引用 `../../assets/`。搬走一门课时，把这两份拷进该课 `assets/` 并改回 `../assets/`。写课覆盖层见 [playbook/teach-me.md](../playbook/teach-me.md)。
+  - `assets/`：该课的 `course.css`、`open-links-new-tab.js`、课表导航与局部图
+  lesson / reference 引用 `../assets/`。写课覆盖层见 [playbook/teach-me.md](../playbook/teach-me.md)。
 
 ## 书籍笔记
 
@@ -89,7 +89,7 @@
 - `assets/` 按类型分子目录，不在根目录平铺。书籍封面统一放 `assets/cover/`，文件名用书名，不必套「日期 + 英文短语」；普通图片放 `assets/image/`。后续同类附件（如 css）同样按类型建目录。
 - 其他附件文件名采用“日期 + 英文短语”的方式，例如 `2026-08-obsidian-plugin-screenshot.png`。
 - 附件是补充材料，不替代正文内容。
-- 例外：`课程/` 下的单门课程为了保持课件可携带、可迁移，允许在课程子目录中自带 `assets/`，只存该课的课表导航、测验脚本与局部图。各课共用的 `course.css` 与外链脚本放在 `课程/assets/`。
+- 例外：`课程/` 下的单门课程为了保持课件可携带、可迁移，在课程子目录中自带 `assets/`（样式、外链脚本、课表导航、局部图）。
 
 ## GitHub 与 Obsidian 兼容
 

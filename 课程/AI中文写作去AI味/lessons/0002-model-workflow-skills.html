@@ -100,7 +100,7 @@
 
         <h3>第二步：材料准备</h3>
 
-        <p>human-writing 的核心规则是，非虚构长文动笔之前，先凑够五件真材料。一个事实、一个数据、一个场景、一段原话、一个对比，任选五种。</p>
+        <p>human-writing 的核心规则是，非虚构长文动笔之前，先凑够五件真材料。一个事实、一个数据、一个场景、一段原话、一个对比，任选五种。<a href="./0001-ai-flavor-traces.html#human-writing-material">完整规则已在 0001 的"痕迹七"里嵌过</a>，这里不再重复贴。</p>
 
         <p>凑不够五件，就别写长稿。去查材料、去问人、或者缩短到 600 字以内。这条规则听起来苛刻，但它治的是 AI 味的根。AI 味就是"手里没东西，嘴上说不停"。</p>
 
@@ -114,6 +114,29 @@
 
         <p>这一步用强推理模型（Claude / GPT）。</p>
 
+        <article class="prompt-doc">
+          <h3 class="card-title">khazix-writer 的原文规则：HKR 质检</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/KKKKhazix/khazix-skills/blob/main/khazix-writer/SKILL.md">khazix-writer/SKILL.md</a> · 本课为什么嵌：HKR 是"人调角度"时的直接判断工具，原文很短，整段收入。</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>第一步：理解素材与选题判断</h4>
+              <p>用户可能给你任何形式的输入：产品 brief、新闻链接、PDF、语音转文字、散乱想法、一段开头加几个要点。先吃透素材，再判断选题质量。</p>
+              <p>一个好选题要通过 HKR 质检：</p>
+              <ul>
+                <li><strong>H（Happy）</strong>：足够有趣、有悬念吗？标题和开头能让人好奇想点开吗？</li>
+                <li><strong>K（Knowledge）</strong>：有信息量吗？看完能学到新东西吗？</li>
+                <li><strong>R（Resonance）</strong>：能戳中情绪吗？让人"对对对我也这么想"？</li>
+              </ul>
+              <p>S 级选题三项兼备，及格选题至少占两项。如果素材的选题方向明显只占一项或一项都没有，主动跟用户沟通调整方向。</p>
+              <p>如果素材信息不够（只有一个主题没有具体要点），主动问用户要更多信息："你大概想讲哪几个点？有没有什么自己的经历想放进去？有没有什么让你特别兴奋或者特别想吐槽的地方？"</p>
+            </div>
+          </details>
+        </article>
+
         <h3>第四步：初稿</h3>
 
         <p>按大纲逐段展开。每段给 AI 明确的指令，这一段要讲什么、用什么材料、不要用什么句式。</p>
@@ -121,6 +144,46 @@
         <p>这一步用国产模型。中文语感好，生成的初稿更接近最终成品。如果文章需要特定的文学风格，比如孙学写作法的白描、短句、物件承载情感，在这一步把对应的 skill 指令给 AI。</p>
 
         <p>初稿写完之后，<strong>人做二次改写</strong>。加入自己的声音、打破节奏、补充只有你知道的细节。khazix-writer 的协作流程里明确写了这一步。AI 提供素材和启发，人负责第一手观察和核心创意角度。初稿是 AI 写的，但最终的声音必须是你自己的。</p>
+
+        <article class="prompt-doc">
+          <h3 class="card-title">khazix-writer 的原文规则：AI 的角色边界</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/KKKKhazix/khazix-skills/blob/main/khazix-writer/SKILL.md">khazix-writer/SKILL.md</a> · 本课为什么嵌：这是"AI 协作写作"的分工总纲，第四步和第六步的判断都从这里来。</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>第二步：明确 AI 的角色边界</h4>
+              <p>这个 skill 是一个文风生成器，不是替代你思考的工具。AI 最大的价值不是生成内容，而是提供素材和启发。</p>
+              <h5>AI 擅长做的（放心交给 AI）</h5>
+              <ul>
+                <li><strong>找证据和佐证</strong>：给出一个观点后，让 AI 在历史、学术、文化中找到能支撑（和反驳）这个观点的论据。</li>
+                <li><strong>找类比和比喻</strong>：需要比喻解释抽象概念时，AI 可以提供多个候选让你挑。</li>
+                <li><strong>按确定的角度扩写</strong>：你已经想好了核心角度和每段的标题，AI 负责填充论述和细节。</li>
+                <li><strong>补充学科背景知识</strong>：格式塔心理学、荣格阴影理论、因果语言模型原理这些，AI 可以帮你准确表述。</li>
+                <li><strong>梳理逻辑和结构建议</strong>：写到一半不确定某一段放哪最好，AI 可以帮你调整。</li>
+              </ul>
+              <h5>AI 做了会暴露的（必须人来）</h5>
+              <ul>
+                <li><strong>第一手观察和真实经历</strong>：买 9.9 的 DeepSeek、花 499 找人上门装 OpenClaw、凌晨三点偷偷起床去网吧。这些不可能用 AI 编造，一编就假。</li>
+                <li><strong>核心创意角度</strong>：从"淘宝卖 DeepSeek"联想到"北京折叠"。这种让文章真正立住的创意灵感，AI 给不了。AI 可以提供很多候选，但最终那个"对，就是这个！"的判断必须是你自己的。</li>
+                <li><strong>情绪的真实表达</strong>：用"我当时就愣住了"而不是"我当时很震撼"。前者是体感记忆，后者是知识性描述。</li>
+                <li><strong>数据到人物的同理心转换</strong>：从"1000 个已付款"想象出那个四五线城市刚毕业的学生的完整人生，这种温度需要作者真心去感受。</li>
+              </ul>
+              <h5>理想的协作流程</h5>
+              <pre>人：提供素材 + 核心观点 + 个人经历 + 情绪节点
+ ↓
+AI：补充背景知识 + 找证据类比 + 结构建议 + 按角度扩写
+ ↓
+人：二次改写（加入自己的声音、打破节奏、补充真实细节）
+ ↓
+AI：按四层自检体系检查 → 输出修改建议
+ ↓
+人：终审和定稿</pre>
+            </div>
+          </details>
+        </article>
 
         <h3>第五步：改稿</h3>
 
@@ -130,7 +193,134 @@
 
         <p><strong>第二轮：结构层扫描</strong>。人读一遍全文，找翻案腔、套话开场、三件套排比、假动作、假细节。stop-slop 的五维评分（Directness / Rhythm / Trust / Authenticity / Density）可以作为改稿标准。低于 35/50 就再改一稿。</p>
 
+        <article class="prompt-doc">
+          <h3 class="card-title">stop-slop 的原文规则（中文全文翻译）</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/hardikpandya/stop-slop">hardikpandya/stop-slop</a>（原文英文，此处为中文全文翻译）· 本课为什么嵌：五维评分和八条核心规则是全课程唯一直接套用的评分框架。</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>Stop Slop：从散文中消除可预测的 AI 写作模式</h4>
+              <h5>核心规则</h5>
+              <ol>
+                <li><strong>删掉填充短语。</strong>去掉清嗓子式开头、强调拐杖词和所有副词。</li>
+                <li><strong>打破公式化结构。</strong>避免二元对照、否定式罗列、戏剧性断句、修辞性铺垫、假动作。</li>
+                <li><strong>用主动语态。</strong>每个句子都需要一个人类主语在做什么。不要被动结构，不要让无生命物体做人的动作。</li>
+                <li><strong>写具体。</strong>不要模糊断言（"原因是结构性的"）。说出具体的东西。不要用懒惰的极端词（"每个""总是""从不"）干模糊的活。</li>
+                <li><strong>把读者放进现场。</strong>不要隔空旁白式的声音。"你"胜过"人们"。具体胜过抽象。</li>
+                <li><strong>变化节奏。</strong>混用句子长度。两项胜过三项。段落用不同的方式结尾。不用破折号。</li>
+                <li><strong>信任读者。</strong>直接陈述事实。省掉软化、辩护、手把手。</li>
+                <li><strong>删掉金句。</strong>如果听起来像可以单独摘引的引语，重写它。</li>
+              </ol>
+              <h5>快速检查</h5>
+              <ul>
+                <li>有任何副词？删掉。</li>
+                <li>有被动语态？找到动作执行者，让它当主语。</li>
+                <li>无生命的东西在做人的动作（"决策浮现出来"）？说出那个人。</li>
+                <li>句子以 Wh- 词开头？重构它。</li>
+                <li>有"下面就是/这就是"式清嗓？直接说到点子上。</li>
+                <li>有"不是 X，是 Y"式对照？直接说 Y。</li>
+                <li>连续三个句子长度相同？打断一个。</li>
+                <li>段落以打点的单行短句结尾？换个方式。</li>
+                <li>任何地方有破折号？删掉。</li>
+                <li>模糊断言（"影响是显著的"）？说出具体的影响。</li>
+                <li>隔空旁白（"没有人设计过这个"）？把读者放进场景。</li>
+                <li>元连接词（"这篇文章的其余部分……"）？删掉，让文章自己流动。</li>
+              </ul>
+              <h5>评分</h5>
+              <p>每个维度按 1–10 打分：</p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>维度</th>
+                    <th>问题</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Directness 直接</td>
+                    <td>在陈述还是宣布？</td>
+                  </tr>
+                  <tr>
+                    <td>Rhythm 节奏</td>
+                    <td>有变化还是节拍器？</td>
+                  </tr>
+                  <tr>
+                    <td>Trust 信任</td>
+                    <td>尊重读者智力吗？</td>
+                  </tr>
+                  <tr>
+                    <td>Authenticity 真实</td>
+                    <td>听起来像人吗？</td>
+                  </tr>
+                  <tr>
+                    <td>Density 密度</td>
+                    <td>有什么可以删掉？</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p>低于 35/50：返工。</p>
+            </div>
+          </details>
+        </article>
+
         <p>改稿中间可以插入一次 <strong>grill</strong>。把文章给 AI，让它追问每个观点的依据是什么、有没有假细节、有没有段落读完之后什么也没留下。grill 把问题逼出来，你自己判断要不要改。</p>
+
+        <article class="prompt-doc">
+          <h3 class="card-title">khazix-writer 的原文规则：四层自检体系（L1 + L4）</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/KKKKhazix/khazix-skills/blob/main/khazix-writer/SKILL.md">khazix-writer/SKILL.md</a> · 本课为什么嵌：课程改稿的两轮扫描，第一轮对应 L1 硬规则，第二轮对应 L4 活人感终审。L2 风格一致性与 L3 内容质量属于卡兹克个人风格适配，本课不展开。</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>L1 硬性规则检查（自动扫描层）</h4>
+              <p>这一层检查的是绝对不能违反的规则，类似代码的语法检查。任何一项不通过就必须修复，没有例外。</p>
+              <h5>L1-1 禁用词扫描</h5>
+              <p>全文搜索以下词汇，出现则必须替换：</p>
+              <ul>
+                <li>"说白了" → 换成"坦率的讲"、"其实就是"</li>
+                <li>"意味着什么" / "这意味着" → 换成"那结果会怎样呢"、"所以呢"</li>
+                <li>"本质上" → 换成"说到底"、"其实"</li>
+                <li>"换句话说" → 换成"你想想看"、"也就是说"</li>
+                <li>"不可否认" → 直接删掉，换成正面陈述</li>
+                <li>"综上所述" / "总的来说" → 换成具体的回扣句</li>
+                <li>"首先...其次...最后" → 用自然的转场词替代</li>
+                <li>"值得注意的是" / "不难发现" → 删掉，直接说</li>
+              </ul>
+              <h5>L1-2 禁用标点扫描</h5>
+              <ul>
+                <li>冒号"：" → 用逗号替代</li>
+                <li>破折号"——" → 用逗号或句号替代</li>
+                <li>双引号""或"" → 用「」替代，或直接不加引号</li>
+              </ul>
+              <h5>L1-3 结构性套话扫描</h5>
+              <ul>
+                <li>"让我们来看看..." / "接下来让我们..."</li>
+                <li>"在当今...的时代" / "随着...的发展"</li>
+                <li>连续使用 bullet point 罗列观点（超过 3 个就需要改成散文叙述）</li>
+                <li>大段加粗（超过 2 行的加粗几乎肯定是过度结构化）</li>
+              </ul>
+              <h5>L1-4 工具名检查</h5>
+              <p>确认所有提到的 AI 工具/产品都使用了具体名称，没有出现"AI工具""某个模型""相关技术"等空泛表述。</p>
+              <p><strong>通过标准</strong>：以上四项扫描零命中。<strong>修复方式</strong>：逐个替换。</p>
+              <h4>L4 活人感终审（最终人格层）</h4>
+              <p>这是最重要也是最主观的一层。以读者的视角通读全文，回答一个核心问题：<strong>"读完这篇文章，我感觉是一个有见识的普通人在认真跟我聊一件打动他的事，还是一个 AI 在给我输出信息？"</strong></p>
+              <h5>L4-1 温度感</h5>
+              <p>文中的情绪表达是体感记忆（"我当时就愣住了""鼻子一酸"）还是知识性描述（"我感到非常震撼"）？如果有人物描写，这个人物是否让你"能感觉到他的体温"？</p>
+              <h5>L4-2 独特性</h5>
+              <p>这篇文章是否有"只有这个作者才会写出来的角度"？还是换一个 AI 博主也能写出差不多的东西？</p>
+              <h5>L4-3 姿态检查</h5>
+              <p>文章的语气是不是"一个有见识的普通人在认真聊一件打动他的事"？有没有不自觉地滑入"导师在教学生"或"品牌在做营销"的姿态？</p>
+              <h5>L4-4 心流检查</h5>
+              <p>从头到尾读，有没有哪个地方你的注意力断掉了？需要回头理解逻辑？如果有，那里就是需要修复的节奏问题。</p>
+              <p><strong>通过标准</strong>：L4-1 到 L4-4 整体感觉"这像是真人写的"。<strong>修复方式</strong>：把"AI 味重"的段落找出来，想象作者本人会怎么说这段话，然后用更口语、更私人、更不完美的方式重写。</p>
+            </div>
+          </details>
+        </article>
 
         <h3>第六步：定稿</h3>
 
@@ -144,6 +334,23 @@
         </ul>
 
         <p>human-writing 的交稿规则是只交作品，不展示内部提纲和检查过程。定稿就是定稿，不需要附带"我是怎么写的"。</p>
+
+        <article class="prompt-doc">
+          <h3 class="card-title">human-writing 的原文规则：交稿</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/KKKKhazix/human-writing/blob/main/human-writing/SKILL.md">human-writing/SKILL.md</a> · 本课为什么嵌：定稿环节的收尾纪律，原文很短，整段收入。</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>交稿</h4>
+              <p>用户只要作品，就只交作品。不要展示内部提纲、规则检查和创作过程。</p>
+              <p>来源的处理只有一条规则：全靠公开材料写成的事实稿，在文末列出对结论重要的少数来源；个人经历和观点稿不附。用户另有要求时听用户的。不把检索笔记塞进正文。</p>
+              <p>只服务当前作品。不建立长期作者画像，不生成个人规则库，不创建新的个人写作 Skill。</p>
+            </div>
+          </details>
+        </article>
       </section>
 
       <section>
@@ -215,6 +422,38 @@
         <p>这套写法不限于爱情故事。它的本质是一种叙事哲学，用物质世界的精确细节，传递精神世界的模糊情感。创业故事、亲情回忆、职场叙事、旅行见闻，都可以用。</p>
 
         <p>sun-style-writing 的十四项检查清单值得单独拿出来看。它展示了一个好的风格 skill 应该具备的自我检查能力，不只是"写的时候注意"，它要求"写完逐项核查"。你做自己的风格 skill 时，也应该有一份这样的清单。</p>
+
+        <article class="prompt-doc">
+          <h3 class="card-title">sun-style-writing 的原文规则：写作检查清单</h3>
+          <p class="prompt-cap">原文：<a href="https://github.com/KKKKhazix/sun-style-writing/blob/main/sun-style-writing/SKILL.md">sun-style-writing/SKILL.md</a> · 本课为什么嵌：这份十四项清单就是"风格 skill 的自检能力"范本，可直接套用在任何文学性叙事稿上。</p>
+          <details class="prompt-fold">
+            <summary class="prompt-toggle">
+              <span class="prompt-toggle-closed">查看完整 prompt</span>
+              <span class="prompt-toggle-open">收起 prompt</span>
+            </summary>
+            <div class="prompt-md">
+              <h4>核心哲学</h4>
+              <p><strong>永远不要告诉读者该怎么感受。你只负责摆事实、给细节、留空白。情绪是读者自己生长出来的。</strong>越是要紧的时刻，你越要克制、越要冷、越要退后一步，用一个无关紧要的细节——一根指甲、一卷胶带、一个清洁工——来替你完成那一击。</p>
+              <h4>写作检查清单（完成初稿后逐项核查）</h4>
+              <ol>
+                <li><strong><code>---</code> 分隔符数量是否合理？</strong>数一下全文有多少个 <code>---</code>。如果超过 8 个，你几乎一定在切碎故事。把 <code>---</code> 留给真正的阶段转折。</li>
+                <li><strong>每个大段（两个 <code>---</code> 之间）是否足够厚实？</strong>每段至少八百字。如果某段只有三五百字，要么它还没展开够，要么它应该和前后的段合并。</li>
+                <li><strong>场景是否沉下去了？</strong>找到你写得最用心的那个场景，检查它有没有具体到"你站在那个房间里能闻到什么"的程度。</li>
+                <li><strong>开头三句话是否建立了反差/悬念？</strong>如果读者读完三句没有被钩住，重写。</li>
+                <li><strong>全文有没有直接描述情绪的句子？</strong>搜索"难过""伤心""开心""愤怒""绝望""幸福"等词，全部删除，用动作/细节替代。</li>
+                <li><strong>数字是否足够精确？</strong>材料支持时，把"很多""很久""很大"换成真实数字；记不清时保留模糊，不制造假精确。</li>
+                <li><strong>如果使用贯穿全文的物件，它回来时意义是否发生了变化？</strong>没有合适物件就不要硬塞。</li>
+                <li><strong>对话是否足够短？</strong>单句对话占对话总量的 80% 以上。</li>
+                <li><strong>关键情感是否由动作、沉默或留白承载，而不是被直接解释？</strong></li>
+                <li><strong>如果使用旁观者镜头，他的动作是否真的照见了主线？</strong></li>
+                <li><strong>如果采用回环，结尾是否让开头换了一个意思？</strong>没有真正的回声就不要硬扣。</li>
+                <li><strong>全文零感叹号？</strong></li>
+                <li><strong>有没有不必要的解释？</strong>如果你发现自己在解释"为什么这很重要"或"这意味着什么"，删掉。</li>
+                <li><strong>技巧是不是用多了？</strong>如果读者先看见技法，再看见人物，删掉最显眼的那一个。</li>
+              </ol>
+            </div>
+          </details>
+        </article>
       </section>
 
       <section>
@@ -233,7 +472,7 @@
         <ul>
           <li><a href="https://github.com/KKKKhazix/khazix-skills/blob/main/khazix-writer/SKILL.md">khazix-writer</a> — 完整写作流程、四层自检、五种文章原型</li>
           <li><a href="https://github.com/KKKKhazix/human-writing/blob/main/human-writing/SKILL.md">human-writing</a> — 材料驱动写作、硬禁词、翻案腔禁令</li>
-          <li>stop-slop（本地 skill）— 五维评分、假动作、节奏检查</li>
+          <li><a href="https://github.com/hardikpandya/stop-slop">stop-slop</a> — 五维评分、假动作、节奏检查</li>
           <li><a href="https://github.com/KKKKhazix/sun-style-writing/blob/main/sun-style-writing/SKILL.md">sun-style-writing</a> — 孙学写作法，白描、数字、物件、留白、蒙太奇</li>
           <li><a href="https://dify.ai/blog/beyond-translation-an-ai-workflow-for-high-quality-chinese-technical-content">Dify Blog: Beyond Translation</a> — 混合工作流实践</li>
         </ul>

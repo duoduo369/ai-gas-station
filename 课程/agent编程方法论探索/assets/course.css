@@ -1,4 +1,4 @@
-/* Shared course chrome. Lessons/reference link ../../assets/course.css */
+/* Course chrome. Lessons/reference link ../assets/course.css */
 :root {
   --bg: #eef3f6;
   --bg-strong: #f9fbfc;
@@ -220,16 +220,222 @@ li {
   color: var(--muted);
 }
 
+.prompt-md,
+.prompt-raw,
 .prompt-zh {
   margin: 0;
   padding: 18px 20px;
-  white-space: pre-wrap;
-  overflow-x: auto;
   border-radius: 18px;
   border: 1px solid rgba(14, 90, 107, 0.14);
   background: rgba(216, 237, 242, 0.34);
-  font: inherit;
   line-height: 1.82;
+}
+
+.prompt-raw,
+.prompt-zh {
+  white-space: pre-wrap;
+  overflow-x: auto;
+  font: inherit;
+}
+
+.prompt-frontmatter {
+  margin-bottom: 14px;
+}
+
+.prompt-fold {
+  margin-top: 14px;
+}
+
+.prompt-fold[open] {
+  margin-bottom: 0;
+}
+
+.prompt-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  list-style: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 12px 16px;
+  border: 1px solid rgba(14, 90, 107, 0.16);
+  border-radius: 16px;
+  background: rgba(249, 251, 252, 0.92);
+  color: var(--accent-strong);
+  font-family: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", sans-serif;
+  font-size: 0.96rem;
+  font-weight: 600;
+}
+
+.prompt-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.prompt-toggle::after {
+  content: "▾";
+  flex: 0 0 auto;
+  font-size: 0.95rem;
+  color: var(--muted);
+  transition: transform 160ms ease;
+}
+
+.prompt-fold[open] .prompt-toggle::after {
+  transform: rotate(180deg);
+}
+
+.prompt-toggle:hover,
+.prompt-toggle:focus-visible {
+  background: rgba(216, 237, 242, 0.56);
+  outline: none;
+}
+
+.prompt-toggle-open {
+  display: none;
+}
+
+.prompt-fold[open] .prompt-toggle-closed {
+  display: none;
+}
+
+.prompt-fold[open] .prompt-toggle-open {
+  display: inline;
+}
+
+.prompt-fold > .prompt-raw,
+.prompt-fold > .prompt-zh,
+.prompt-fold > .prompt-md,
+.prompt-fold > .prompt-frontmatter {
+  margin-top: 12px;
+}
+
+.prompt-md {
+  font-size: 1rem;
+}
+
+.prompt-md > :first-child {
+  margin-top: 0;
+}
+
+.prompt-md > :last-child {
+  margin-bottom: 0;
+}
+
+.prompt-md h4,
+.prompt-md h5,
+.prompt-md h6 {
+  margin: 1.1em 0 0.55em;
+  line-height: 1.28;
+  font-family: "Source Han Sans SC", "Noto Sans SC", "PingFang SC", sans-serif;
+}
+
+.prompt-md h4 {
+  font-size: 1.08rem;
+}
+
+.prompt-md h5 {
+  font-size: 1rem;
+}
+
+.prompt-md h6 {
+  font-size: 0.94rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.prompt-md p,
+.prompt-md ul,
+.prompt-md ol,
+.prompt-md blockquote,
+.prompt-md pre,
+.prompt-md table {
+  margin: 0.82em 0;
+}
+
+.prompt-md ul,
+.prompt-md ol {
+  padding-left: 1.45em;
+}
+
+.prompt-md li + li {
+  margin-top: 0.32em;
+}
+
+.prompt-md blockquote {
+  padding: 0.85em 1em;
+  border-left: 4px solid rgba(14, 90, 107, 0.38);
+  border-radius: 0 14px 14px 0;
+  background: rgba(249, 251, 252, 0.72);
+  color: var(--accent-strong);
+}
+
+.prompt-md blockquote > :first-child {
+  margin-top: 0;
+}
+
+.prompt-md blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.prompt-md code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.92em;
+  background: rgba(14, 90, 107, 0.08);
+  padding: 0.14rem 0.38rem;
+  border-radius: 0.35rem;
+}
+
+.prompt-md pre {
+  padding: 14px 16px;
+  overflow-x: auto;
+  border-radius: 14px;
+  background: rgba(27, 36, 48, 0.94);
+  color: #f7fafc;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.93rem;
+  line-height: 1.68;
+  white-space: pre-wrap;
+}
+
+.prompt-md pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.prompt-md hr {
+  border: 0;
+  border-top: 1px solid rgba(88, 100, 116, 0.24);
+  margin: 1.1em 0;
+}
+
+.prompt-md table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prompt-md th,
+.prompt-md td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(88, 100, 116, 0.16);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prompt-md th {
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.prompt-md tr:last-child td {
+  border-bottom: none;
+}
+
+.prompt-md a {
+  color: var(--accent-strong);
 }
 
 .diagram {
@@ -413,6 +619,15 @@ tr:last-child td {
 
   .prompt-zh {
     padding: 16px;
+  }
+
+  .prompt-md,
+  .prompt-raw {
+    padding: 16px;
+  }
+
+  .prompt-toggle {
+    padding: 11px 14px;
   }
 
   .diagram img {

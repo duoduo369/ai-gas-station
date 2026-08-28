@@ -1,286 +1,221 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lesson 0003 · 实现跑偏时，补任务、改计划，还是回到 spec</title>
-    <link rel="stylesheet" href="../../assets/course.css">
-    <script src="../assets/lesson-quiz.js" defer></script>
-    <script src="../assets/course-nav.js" defer></script>
-    <script src="../../assets/open-links-new-tab.js" defer></script>
-  </head>
-  <body>
-    <main>
-      <section class="hero">
-        <p class="eyebrow">Lesson 0003</p>
-        <h1>实现跑偏时，补任务、改计划，还是回到 spec</h1>
-        <p class="lede">这节课专看实现跑偏。agent 跑过一轮、甚至报了 success 以后，reviewer 或人还会看到缺口。你得分清这是实现问题、plan 问题，还是 spec 变了。</p>
-        <div class="pill-row">
-          <span class="pill">预计 18 分钟</span>
-          <span class="pill">目标：学会跑偏分流</span>
-          <span class="pill">内嵌关键中文条文</span>
-          <span class="pill">回看资料：<a href="../reference/implementation-drift-decision-map.html">分流速查</a></span>
-        </div>
-      </section>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>跑偏时，改实现、改 plan，还是回 spec</title>
+<link href="../assets/course.css" rel="stylesheet"/>
+<script defer="" src="../assets/course-nav.js"></script>
+<script defer="" src="../assets/open-links-new-tab.js"></script>
+</head>
+<body>
+<main>
+<section class="hero">
+<p class="eyebrow">跑偏分流</p>
+<h1>跑偏时，改实现、改 plan，还是回 spec</h1>
+<p class="lede">这一课专看实现跑偏。agent 跑过一轮、甚至报了 success 以后，reviewer 或人还会看到缺口。你得分清这是实现问题、plan 问题，还是 spec 变了。</p>
+<p>速查：<a href="../reference/implementation-drift-decision-map.html">跑偏分流</a></p>
+</section>
+<section>
+<h2>先分清跑偏在哪一层</h2>
+<div class="callout">
+<p><strong>发现跑偏时，“再补一点代码”和“干脆重开一份 spec”都可能对，也都可能错。</strong></p>
+<p>先判断错的是实现、plan 还是 spec，后面的力气才用得对。分不清这三层，就容易在错误的层级上反复返工。</p>
+</div>
+<div class="grid">
+<article class="card">
+<h3 class="card-title">实现层错</h3>
+<p>spec 还是对的，plan 也大体对，只是实际代码没跟上，或者漏掉了某个 task 的交付。</p>
+</article>
+<article class="card">
+<h3 class="card-title">plan 层错</h3>
+<p>spec 是对的，但任务拆分、顺序、接口传递、约束传递出了问题，导致实现层拿到的是残缺要求。</p>
+</article>
+<article class="card">
+<h3 class="card-title">spec 层错</h3>
+<p>需求边界已经变了，或者你回头才发现原 spec 本来就写漏、写错、写得不够 authoritative。</p>
+</article>
+</div>
+</section>
+<section>
+<h2>分流图</h2>
+<figure class="diagram">
+<img alt="实现跑偏和漏实现时的分流图，判断是实现缺口、plan 缺口，还是 spec 需要修订。" src="../assets/drift-decision-tree.svg"/>
+<figcaption>先问“spec 还对吗”，如果还对，再问“plan 有没有把要求传到底”。这两个判断合起来，才决定你是在补实现、修 plan，还是该回 spec。</figcaption>
+</figure>
+</section>
+<a id="authority-order"></a>
+<section>
+<h2>先认清谁是 authority</h2>
+<div class="callout">
+<p><strong>当实现和要求打架时，看的不是谁最后说了 done，而是 authority 顺序。</strong></p>
+<p>在 Superpowers 这套写法里：<strong>spec 是 binding authority，plan 是 spec 的 argument，implementation report 不是 authority，只是状态报告。</strong> 这句话决定了你发现跑偏后应该怎么分流。</p>
+</div>
+<div class="prompt-stack">
+<article class="prompt-doc">
+<h3 class="card-title">subagent-driven-development（中文节选）</h3>
+<p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a> · 本课为什么先读：它直接写了 spec、plan、execution 之间谁是上位 authority。</p>
+<details class="prompt-fold">
+<summary class="prompt-toggle">
+<span class="prompt-toggle-closed">查看完整 prompt</span>
+<span class="prompt-toggle-open">收起 prompt</span>
+</summary>
+<div class="prompt-md">
+<h5>关于 authority 的关键句</h5>
+<p>如果 plan 里引用了 Spec，就要把 Spec 一起读。</p>
+<p>因为 Spec 是 authority，plan 是它的 argument。</p>
+<h6>当 plan 内部互相冲突时</h6>
+<ul><li>不要直接跟着某一段字面跑</li><li>要拿 spec 作为绑定 authority 去裁决</li></ul>
 
-      <section>
-        <h2>先把最常见误区说破</h2>
-        <div class="callout">
-          <p><strong>最常见误区是：一发现跑偏，就本能地“再补一点代码”或者“干脆重开一份 spec”。</strong></p>
-          <p>这两种反应都可能对，也都可能错。关键在先判断：<strong>错的是实现、是 plan，还是 spec 本身</strong>。分不清这三层，后面就很容易在错误层级上用力。</p>
-        </div>
-        <div class="grid">
-          <article class="card">
-            <h3 class="card-title">实现层错</h3>
-            <p>spec 还是对的，plan 也大体对，只是实际代码没跟上，或者漏掉了某个 task 的交付。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">plan 层错</h3>
-            <p>spec 是对的，但任务拆分、顺序、接口传递、约束传递出了问题，导致实现层拿到的是残缺要求。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">spec 层错</h3>
-            <p>需求边界已经变了，或者你回头才发现原 spec 本来就写漏、写错、写得不够 authoritative。</p>
-          </article>
-        </div>
-      </section>
+<h5>Pre-flight 与 rulings</h5>
+<h6>在执行前就应该扫描</h6>
+<ul><li>task 之间是否互相矛盾</li><li>task 是否违背 Global Constraints</li></ul>
 
-      <section>
-        <h2>先看总分流图</h2>
-        <figure class="diagram">
-          <img src="../assets/drift-decision-tree.svg" alt="实现跑偏和漏实现时的分流图，判断是实现缺口、plan 缺口，还是 spec 需要修订。">
-          <figcaption>先问“spec 还对吗”，如果还对，再继续问“plan 有没有把要求传到底”。这两个判断合起来，才决定你是在补实现、修 plan，还是该回 spec。</figcaption>
-        </figure>
-      </section>
+<p>如果发现冲突，不是沉默跳过，而是要明确做 ruling。</p>
+<h5>Review loop 里的关键句</h5>
+<p>如果 reviewer 报出的问题和 plan 文本冲突，</p>
+<p>你不能因为“plan 是这么写的”就自动忽略 reviewer；</p>
+<p>而是要回到 spec，看哪个才是 authoritative 的。</p>
+<h5>你在这一课该记住的句子</h5>
+<p>实现汇报“我做完了”不构成 authority。</p>
+<p>spec 才是定义预期行为的上位文本。</p>
+</div>
+</details>
+</article>
+<article class="prompt-doc">
+<h3 class="card-title">verification-before-completion（中文节选）</h3>
+<p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md">skills/verification-before-completion/SKILL.md</a> · 本课为什么要嵌：它能直接帮你拆掉“agent 说 success 了，所以应该已经满足 spec”这个错觉。</p>
+<details class="prompt-fold">
+<summary class="prompt-toggle">
+<span class="prompt-toggle-closed">查看完整 prompt</span>
+<span class="prompt-toggle-open">收起 prompt</span>
+</summary>
+<div class="prompt-md">
+<h5>Core principle</h5>
+<p>Evidence before claims, always.</p>
+<h5>铁律</h5>
+<p>NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE</p>
+<h5>针对需求达成的关键模式</h5>
+<h6>如果你要声称“requirements met”</h6>
+<ul><li>不是只看 tests passing</li><li>而是要重新对照 plan / requirements</li><li>一项一项核对</li><li>再报告 gaps 或 completion</li></ul>
 
-      <a id="authority-order"></a>
-      <section>
-        <h2>第一块重点：先认清谁是 authority</h2>
-        <div class="callout">
-          <p><strong>当实现和要求打架时，默认不是“谁最后说了 done 谁赢”，而是看 authority 顺序。</strong></p>
-          <p>在 Superpowers 这套写法里，核心一句是：<strong>spec 是 binding authority，plan 是 spec 的 argument，implementation report 不是 authority，只是状态报告。</strong> 这句话已经决定了你发现跑偏后应该怎么分流。</p>
-        </div>
-        <div class="prompt-stack">
-          <article class="prompt-doc">
-            <h3 class="card-title">subagent-driven-development（中文节选）</h3>
-            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a> · 本课为什么先读：它直接写了 spec、plan、execution 之间谁是上位 authority。</p>
-            <pre class="prompt-zh">【关于 authority 的关键句】
-如果 plan 里引用了 Spec，就要把 Spec 一起读。
-因为 Spec 是 authority，plan 是它的 argument。
+<h5>常见失败</h5>
+<p>Agent reported "success"</p>
+<p>≠ requirements met</p>
+<h5>你在这一课该记住的点</h5>
+<p>“它说做完了”只是信号，不是裁决。</p>
+<p>裁决来自新鲜验证，以及对 spec / plan 的逐项回看。</p>
+</div>
+</details>
+</article>
+</div>
+</section>
+<a id="three-cases"></a>
+<section>
+<h2>三种情况</h2>
+<div class="grid">
+<article class="card">
+<h3 class="card-title">情况 A：spec 对，plan 也基本对</h3>
+<p>这是最典型的“实现缺口”。不需要新开 spec。做法是补 task、补实现、重跑 review，然后继续当前 feature 的收口流程。</p>
+</article>
+<article class="card">
+<h3 class="card-title">情况 B：spec 对，但 plan 不够</h3>
+<p>比如 task 粒度拆坏了、顺序不对、关键约束没下传到 implementer。先修 plan 或补 plan 中缺的任务，再继续执行，不要先补代码。</p>
+</article>
+<article class="card">
+<h3 class="card-title">情况 C：spec 本身不再 authoritative</h3>
+<p>如果你回头发现“真正想要的行为”已经变了，或原 spec 写漏了边界，就不要继续在旧 spec 上缝缝补补。先修 spec，再刷新 plan，然后恢复执行。</p>
+</article>
+</div>
+<div class="callout">
+<p><strong>一句话判断：行为边界没变，不必新开 spec；行为边界变了，就要回到 spec 层。</strong></p>
+<p>“新开 spec”也不一定意味着非得另起一份全新文档。很多时候是修订当前 spec、补一段 addendum、或者重新确认 design section。但只要行为定义层变了，就不要假装它只是“实现层小修小补”。</p>
+</div>
+</section>
+<a id="review-feedback"></a>
+<section>
+<h2>review 指出缺口时先验证</h2>
+<div class="callout">
+<p><strong>review 发现缺口，不等于 reviewer 一定对，也不等于你该立刻把所有意见全做了。</strong></p>
+<p>更稳的节奏是：先完整读完反馈，判断它说的是 spec 缺口、plan 缺口，还是实现缺口；有不清楚的地方先 ask；建议和当前 codebase reality 或 spec 冲突时，先验证或 push back，再动手。</p>
+</div>
+<div class="prompt-stack">
+<article class="prompt-doc">
+<h3 class="card-title">receiving-code-review（中文节选）</h3>
+<p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/receiving-code-review/SKILL.md">skills/receiving-code-review/SKILL.md</a> · 本课为什么要嵌：它正好回答“review 指出缺口后，到底是立刻改，还是先澄清 / 先验证”。</p>
+<details class="prompt-fold">
+<summary class="prompt-toggle">
+<span class="prompt-toggle-closed">查看完整 prompt</span>
+<span class="prompt-toggle-open">收起 prompt</span>
+</summary>
+<div class="prompt-md">
+<h5>Core principle</h5>
+<p>Verify before implementing.</p>
+<p>Ask before assuming.</p>
+<h5>收到 review 的响应顺序</h5>
+<ol><li>READ：先完整读反馈</li><li>UNDERSTAND：用自己的话复述，或者先 ask</li><li>VERIFY：对照 codebase reality 检查</li><li>EVALUATE：对这个代码库来说技术上成立吗？</li><li>RESPOND：技术性确认，或有根据地 push back</li><li>IMPLEMENT：一项一项改，每项都验证</li></ol>
 
-当 plan 内部互相冲突时：
-- 不要直接跟着某一段字面跑
-- 要拿 spec 作为绑定 authority 去裁决
+<h5>处理不清楚的 feedback</h5>
+<h6>如果有任何条目不清楚</h6>
+<ul><li>先停</li><li>不要实现一半再回头问</li><li>先把不清楚的点问明白</li></ul>
 
-【Pre-flight 与 rulings】
-在执行前就应该扫描：
-- task 之间是否互相矛盾
-- task 是否违背 Global Constraints
+<h5>外部 reviewer 的建议</h5>
+<h6>在实现前要先检查</h6>
+<ul><li>对 THIS codebase 技术上是否正确</li><li>会不会破坏既有功能</li><li>当前实现是不是有上下文原因</li><li>是否与人类先前的设计决策冲突</li></ul>
 
-如果发现冲突，不是沉默跳过，而是要明确做 ruling。
-
-【Review loop 里的关键句】
-如果 reviewer 报出的问题和 plan 文本冲突，
-你不能因为“plan 是这么写的”就自动忽略 reviewer；
-而是要回到 spec，看哪个才是 authoritative 的。
-
-【你在这一课该记住的句子】
-实现汇报“我做完了”不构成 authority。
-spec 才是定义预期行为的上位文本。</pre>
-          </article>
-
-          <article class="prompt-doc">
-            <h3 class="card-title">verification-before-completion（中文节选）</h3>
-            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md">skills/verification-before-completion/SKILL.md</a> · 本课为什么要嵌：它能直接帮你拆掉“agent 说 success 了，所以应该已经满足 spec”这个错觉。</p>
-            <pre class="prompt-zh">【Core principle】
-Evidence before claims, always.
-
-【铁律】
-NO COMPLETION CLAIMS WITHOUT FRESH VERIFICATION EVIDENCE
-
-【针对需求达成的关键模式】
-如果你要声称“requirements met”：
-- 不是只看 tests passing
-- 而是要重新对照 plan / requirements
-- 一项一项核对
-- 再报告 gaps 或 completion
-
-【常见失败】
-Agent reported "success"
-≠ requirements met
-
-【你在这一课该记住的点】
-“它说做完了”只是信号，不是裁决。
-裁决来自新鲜验证，以及对 spec / plan 的逐项回看。</pre>
-          </article>
-        </div>
-      </section>
-
-      <a id="three-cases"></a>
-      <section>
-        <h2>第二块重点：三种情况，三种处理</h2>
-        <div class="grid">
-          <article class="card">
-            <h3 class="card-title">情况 A：spec 对，plan 也基本对</h3>
-            <p>这是最典型的“实现缺口”。此时不需要新开 spec。做法更像是：补 task、补实现、重跑 review，然后继续当前 feature 的收口流程。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">情况 B：spec 对，但 plan 不够</h3>
-            <p>比如 task 粒度拆坏了、顺序不对、关键约束没下传到 implementer。先修 plan 或补 plan 中缺的任务，再继续执行，不要先补代码。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">情况 C：spec 本身不再 authoritative</h3>
-            <p>如果你回头发现“真正想要的行为”已经变了，或原 spec 写漏了边界，那就不要继续在旧 spec 上缝缝补补。先修 spec，再刷新 plan，然后再恢复执行。</p>
-          </article>
-        </div>
-        <div class="callout">
-          <p><strong>一句话判断：</strong>行为边界没变，不必新开 spec；行为边界变了，就要回到 spec 层。</p>
-          <p>“新开 spec”也不一定意味着非得另起一份全新文档。很多时候是修订当前 spec、补一段 addendum、或者重新确认 design section。但只要行为定义层变了，就不要假装它只是“实现层小修小补”。</p>
-        </div>
-      </section>
-
-      <a id="review-feedback"></a>
-      <section>
-        <h2>第三块重点：review 指出缺口时，先验证，别立刻讨好式实现</h2>
-        <div class="callout">
-          <p><strong>review 发现缺口，不自动等于 reviewer 一定对，也不自动等于你应该立刻把所有意见全做了。</strong></p>
-          <p>更稳的节奏是：先完整读完反馈，先判断它说的是 spec 缺口、plan 缺口，还是实现缺口；如果有不清楚的地方，先 ask；如果建议和当前 codebase reality 或 spec 冲突，先验证或 push back，再动手。</p>
-        </div>
-        <div class="prompt-stack">
-          <article class="prompt-doc">
-            <h3 class="card-title">receiving-code-review（中文节选）</h3>
-            <p class="prompt-cap">原文：<a href="https://github.com/obra/superpowers/blob/main/skills/receiving-code-review/SKILL.md">skills/receiving-code-review/SKILL.md</a> · 本课为什么要嵌：它正好回答“review 指出缺口后，到底是立刻改，还是先澄清 / 先验证”。</p>
-            <pre class="prompt-zh">【Core principle】
-Verify before implementing.
-Ask before assuming.
-
-【收到 review 的响应顺序】
-1. READ：先完整读反馈
-2. UNDERSTAND：用自己的话复述，或者先 ask
-3. VERIFY：对照 codebase reality 检查
-4. EVALUATE：对这个代码库来说技术上成立吗？
-5. RESPOND：技术性确认，或有根据地 push back
-6. IMPLEMENT：一项一项改，每项都验证
-
-【处理不清楚的 feedback】
-如果有任何条目不清楚：
-- 先停
-- 不要实现一半再回头问
-- 先把不清楚的点问明白
-
-【外部 reviewer 的建议】
-在实现前要先检查：
-- 对 THIS codebase 技术上是否正确
-- 会不会破坏既有功能
-- 当前实现是不是有上下文原因
-- 是否与人类先前的设计决策冲突
-
-【你在这一课该记住的点】
-review 指出缺口，不是“表演性同意”的起点，
-而是“重新验证自己是否站在对的 authority 层” 的起点。</pre>
-          </article>
-        </div>
-      </section>
-
-      <section>
-        <h2>最容易用错力气的 3 个现场</h2>
-        <div class="grid">
-          <article class="card">
-            <h3 class="card-title">现场 1：agent 说 done，但人一看功能少一块</h3>
-            <p>先不要重开 spec。先问：原 spec 里是不是本来就写了这块？如果写了，那大概率是实现缺口或 plan 缺口。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">现场 2：review 说“这不满足要求”</h3>
-            <p>先定位 reviewer 指的是哪一层要求。若 reviewer 说的要求不在 spec 里，那要讨论的是 spec 边界，不是马上讨好式补实现。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">现场 3：人验收后改口，说真正想要的是另一种行为</h3>
-            <p>这已经不是“补一个小洞”的级别，而是行为定义层发生变化。先修 spec，再谈后续任务怎么重排。</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="quiz">
-        <h2>4 分钟自测</h2>
-        <p>这组题只检查一个目标：你能不能分清“改实现”“改 plan”“回 spec”这三种动作。</p>
-        <div class="quiz-list">
-          <div class="quiz-item" data-quiz-answer="先看 spec 还对不对" data-quiz-explanation="发现跑偏后最先要判断 authority 层：spec 还对吗。只有先分清错在 spec、plan 还是实现，后面的动作才不会用错层。">
-            <h3>1. 发现实现跑偏后，第一反应最该是什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="先看 spec 还对不对">先看 spec 还对不对</button>
-              <button class="quiz-option" type="button" data-choice="先补一点代码">先补一点代码</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="不一定要新 spec" data-quiz-explanation="如果行为边界没变，只是实现没跟上，那通常是实现缺口或 plan 缺口，不必本能地新开 spec。">
-            <h3>2. reviewer 指出“少实现了一块”，最准确的默认判断更接近哪一个？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="不一定要新 spec">不一定要新 spec</button>
-              <button class="quiz-option" type="button" data-choice="一定重开 spec">一定重开 spec</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="先澄清再实现" data-quiz-explanation="receiving-code-review 明确要求：有不清楚的 feedback 时先停、先问，不要实现一半再回头补问。">
-            <h3>3. review 反馈里有两条你没完全看懂，正确姿势更接近哪一个？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="先澄清再实现">先澄清再实现</button>
-              <button class="quiz-option" type="button" data-choice="先改懂的那几条">先改懂的那几条</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-
-          <div class="quiz-item" data-quiz-answer="先修 spec 再刷新 plan" data-quiz-explanation="当真正想要的行为边界变了，旧 spec 已不再 authoritative，这时应该先修 spec，再刷新 plan。">
-            <h3>4. 人验收后确认“真正想要的行为”已经变了，这时更合适的动作是什么？</h3>
-            <div class="options">
-              <button class="quiz-option" type="button" data-choice="先修 spec 再刷新 plan">先修 spec 再刷新 plan</button>
-              <button class="quiz-option" type="button" data-choice="直接补实现就好">直接补实现就好</button>
-            </div>
-            <p class="feedback" aria-live="polite"></p>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h2>这一课学完，你至少该带走什么</h2>
-        <div class="grid">
-          <article class="card">
-            <h3 class="card-title">1. 先分层，再补洞</h3>
-            <p>发现缺口后，第一件事不是修，是先判断错在实现、plan，还是 spec。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">2. agent 报 done 不是 authority</h3>
-            <p>它只是状态报告，不构成“已经满足 requirements”的裁决。</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">3. review 反馈要验证，不要表演性接单</h3>
-            <p>有不清楚的先 ask，有冲突的先 verify，必要时 push back。</p>
-          </article>
-        </div>
-      </section>
-
-      <section>
-        <h2>下一步怎么学最顺</h2>
-        <p>这节课后，最自然的下一课就是 bug 流：</p>
-        <ol class="source-list">
-          <li>人验收时发现 bug，为什么不应该继续沿 feature 流硬补，而要切到 `systematic-debugging`。</li>
-          <li>`systematic-debugging` 和 `verification-before-completion` 怎样接上，才能从“修了”走到“真的修好”。</li>
-        </ol>
-      </section>
-
-      <section>
-        <h2>主资料</h2>
-        <p>这一课最值得先通读的是 <a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">subagent-driven-development/SKILL.md</a>。“spec 是 authority、plan 是 argument” 这条判断，几乎决定了这节课里所有分流动作的起点。</p>
-        <ol class="source-list">
-          <li><a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a></li>
-          <li><a href="https://github.com/obra/superpowers/blob/main/skills/receiving-code-review/SKILL.md">skills/receiving-code-review/SKILL.md</a></li>
-          <li><a href="https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md">skills/verification-before-completion/SKILL.md</a></li>
-          <li><a href="https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/SKILL.md">skills/requesting-code-review/SKILL.md</a></li>
-        </ol>
-      </section>
-
-      <p class="footer-note">如果你下一次又想在跑偏后直接补代码，就先回到这节课，问自己一句：我现在修的是实现层，还是其实已经该回到 spec 层？</p>
-    </main>
-  </body>
+<h5>你在这一课该记住的点</h5>
+<p>review 指出缺口，不是“表演性同意”的起点，</p>
+<p>而是“重新验证自己是否站在对的 authority 层” 的起点。</p>
+</div>
+</details>
+</article>
+</div>
+</section>
+<section>
+<h2>容易用错力气的三个现场</h2>
+<div class="grid">
+<article class="card">
+<h3 class="card-title">现场 1：agent 说 done，但人一看功能少一块</h3>
+<p>先不要重开 spec。先问：原 spec 里是不是本来就写了这块？写了的话，大概率是实现缺口或 plan 缺口。</p>
+</article>
+<article class="card">
+<h3 class="card-title">现场 2：review 说“这不满足要求”</h3>
+<p>先定位 reviewer 指的是哪一层要求。若 reviewer 说的要求不在 spec 里，要讨论的是 spec 边界，不是马上讨好式补实现。</p>
+</article>
+<article class="card">
+<h3 class="card-title">现场 3：人验收后改口，说真正想要的是另一种行为</h3>
+<p>这已经不是“补一个小洞”的级别，而是行为定义层发生变化。先修 spec，再谈后续任务怎么重排。</p>
+</article>
+</div>
+</section>
+<section>
+<h2>这一课带走什么</h2>
+<div class="grid">
+<article class="card">
+<h3 class="card-title">先分层，再补洞</h3>
+<p>发现缺口后，第一件事不是修，是判断错在实现、plan 还是 spec。</p>
+</article>
+<article class="card">
+<h3 class="card-title">agent 报 done 不是 authority</h3>
+<p>它只是状态报告，不构成“已经满足 requirements”的裁决。</p>
+</article>
+<article class="card">
+<h3 class="card-title">review 反馈要验证</h3>
+<p>有不清楚的先 ask，有冲突的先 verify，必要时 push back。别表演性接单。</p>
+</article>
+</div>
+</section>
+<section>
+<h2>主资料</h2>
+<p>这一课最值得先通读的是 <a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">subagent-driven-development/SKILL.md</a>。“spec 是 authority、plan 是 argument” 这条判断，几乎决定了这节课里所有分流动作的起点。</p>
+<ol class="source-list">
+<li><a href="https://github.com/obra/superpowers/blob/main/skills/subagent-driven-development/SKILL.md">skills/subagent-driven-development/SKILL.md</a></li>
+<li><a href="https://github.com/obra/superpowers/blob/main/skills/receiving-code-review/SKILL.md">skills/receiving-code-review/SKILL.md</a></li>
+<li><a href="https://github.com/obra/superpowers/blob/main/skills/verification-before-completion/SKILL.md">skills/verification-before-completion/SKILL.md</a></li>
+<li><a href="https://github.com/obra/superpowers/blob/main/skills/requesting-code-review/SKILL.md">skills/requesting-code-review/SKILL.md</a></li>
+</ol>
+</section>
+</main>
+</body>
 </html>
