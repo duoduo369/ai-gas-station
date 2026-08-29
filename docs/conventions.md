@@ -35,7 +35,7 @@
 - `技能拆解/` 下已经单开的具体 skill 学习文档，默认采用“顶部导航 + 主体拆解 + 底部附录”的自包含结构：顶部保留原始 skill、目录索引、文内附录跳转；底部保留原始 `SKILL.md`，若原文不是中文则再补一段中文翻译。
 - `skills/` 下的项目级 skill 采用“一 skill 一目录”的结构：`skills/<bucket>/<skill-name>/`。主入口写在 `SKILL.md`；只有在这条 skill 真的需要下沉 reference 时，才创建 `reference/`，并使用有意义的文件名承接补充规则。
 - `skills/README.md` 是项目级 skills 总索引，不按学习对象目录的 README 规则要求“按主题分节”；它可以直接按生命周期桶组织入口。`skills/stable/README.md` 与 `skills/in-process/README.md` 默认列出各自桶内条目，并为每条提供名称、一句话简介和手动调用示例。
-- `书籍/` 下已经单开的书籍笔记，新增或重建时统一走 [`../skills/in-process/add-book/SKILL.md`](../skills/in-process/add-book/SKILL.md)；本文件不再重复正文结构、导读写法和证据规则。
+- `书籍/` 下已经单开的技术书笔记，新增时统一调用 `/add-book`；本文件不再重复正文结构、导读写法和证据规则。
 - `技能拆解/` 只收与 agent skills 直接相关的学习经验，不承接泛化工具收藏或通用工作流。
 - `skills/` 只收已经进入项目级 skill 生命周期的协作资产；新的可复用方法优先通过 `skills/stable/idea-to-skill/` 进入 `skills/in-process/`。
 - `概念/` 只收不依附于单一本资源或单个 skill 的概念解释、术语拆解与机制理解。
@@ -50,7 +50,7 @@
 
 `书籍/` 下的正文文件是书籍笔记，不是普通深度笔记的自由发挥。术语见 [CONTEXT.md](../CONTEXT.md)。
 
-- 新增或重建技术书笔记时，统一使用 [`../skills/in-process/add-book/SKILL.md`](../skills/in-process/add-book/SKILL.md)。
+- 新增技术书笔记时，统一调用 `/add-book`。
 - 本文件只保留共通的命名、链接、附件与封面引用规则，不再在这里重复正文结构、导读写法、证据要求或 AI 只读区细节。
 - 封面未开口引用前，不找图、不生成封面、不写图片语法；用户把图放到 `assets/cover/` 并明确要求引用后，再在标题下补 `![书名封面](../assets/cover/书名.ext)`。
 
