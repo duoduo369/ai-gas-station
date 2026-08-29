@@ -1,18 +1,18 @@
 ---
-name: teach-embed-authoritative-zh
-description: 把课里点名的权威 prompt 或 skill 中文嵌进 lesson HTML，并保留原文外链。
+name: add-prompt-to-skill-lessons
+description: 把要精读的 prompt 或 skill 正文加进课程 lesson，并转成适合阅读的静态 HTML 块。
 disable-model-invocation: true
 ---
 
-# teach-embed-authoritative-zh
+# add-prompt-to-skill-lessons
 
-把 teach 系课程里需要精读的权威正文嵌进对应 lesson HTML，默认做成可折叠的中文结构块。
+把 lesson 里点名要精读的 prompt / skill 正文加进页面，并保持原文外链。
 
 ## Before you start
 
-- 先读 [`../../../AGENTS.md`](../../../AGENTS.md)、[`../../../CONTEXT.md`](../../../CONTEXT.md)、[`../../../docs/conventions.md`](../../../docs/conventions.md) 和 [`./NOTES.md`](./NOTES.md)。
-- 先确认这节课真要学条文；如果只是地图课、讨论课或索引课，就不要硬嵌全文。
+- 先确认这节课真要精读条文；如果只是地图课、讨论课或索引课，就不要硬嵌全文。
 - 先列出本课要嵌的权威来源与稳定外链；没有高信任原文时先停下，不要凭记忆补全文。
+- 先读 [`./reference/html-block-rules.md`](./reference/html-block-rules.md)。
 
 ## Steps
 
@@ -29,4 +29,3 @@ disable-model-invocation: true
 
 - 确认所有本地链接都指向现有文件，所有外链都指向稳定原文。
 - 确认嵌套列表、表格、FAQ 等复杂段落没有塌成 Markdown 源码。
-- 把本次嵌入来源、边界和例外记到 [`NOTES.md`](./NOTES.md)。

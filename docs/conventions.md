@@ -23,7 +23,7 @@
 
 - 每个对象目录的 `README.md` 是该目录的人类入口和 AI 快速路由入口。
 - `README.md` 顶部允许有 3–8 行策展说明，说明“收什么、不收什么、怎么用”。
-- `README.md` 主体按主题分小节组织，不采用纯扁平列表，也不按状态分区。
+- 对象目录的 `README.md` 主体按主题分小节组织，不采用纯扁平列表，也不按状态分区。
 - 每条索引条目最少包含：
   - 名称
   - 一句话注释
@@ -33,7 +33,8 @@
 - 并非每条索引都要单独建正文。`书籍/` 下的书籍笔记只有在用户明确要求创建某书的 md 时才创建；其他对象目录仍默认：已经形成明确学习收获、摘录或实践记录时才单开正文，否则只保留索引条目。
 - 对来自外部资源的正文文件，若已经单开笔记，正文开头应尽量保留可点击的原始入口；`技能拆解/` 下的具体 skill 学习文档默认在标题下补 `原始 skill` 链接，并建议同时补回目录索引的本地链接。
 - `技能拆解/` 下已经单开的具体 skill 学习文档，默认采用“顶部导航 + 主体拆解 + 底部附录”的自包含结构：顶部保留原始 skill、目录索引、文内附录跳转；底部保留原始 `SKILL.md`，若原文不是中文则再补一段中文翻译。
-- `skills/` 下的项目级 skill 采用“一 skill 一目录”的结构：`skills/<bucket>/<skill-name>/`。主入口写在 `SKILL.md`，长说明、边界与试跑记录下沉到 `NOTES.md`。
+- `skills/` 下的项目级 skill 采用“一 skill 一目录”的结构：`skills/<bucket>/<skill-name>/`。主入口写在 `SKILL.md`；只有在这条 skill 真的需要下沉 reference 时，才创建 `reference/`，并使用有意义的文件名承接补充规则。
+- `skills/README.md` 是项目级 skills 总索引，不按学习对象目录的 README 规则要求“按主题分节”；它可以直接按生命周期桶组织入口。`skills/stable/README.md` 与 `skills/in-process/README.md` 默认列出各自桶内条目，并为每条提供名称、一句话简介和手动调用示例。
 - `书籍/` 下已经单开的书籍笔记，默认采用三区结构：书目信息、个人阅读记录、导读区。只有用户明确要求创建某书的 md 时才创建，创建时一次生成三区。
 - `技能拆解/` 只收与 agent skills 直接相关的学习经验，不承接泛化工具收藏或通用工作流。
 - `skills/` 只收已经进入项目级 skill 生命周期的协作资产；新的可复用方法优先通过 `skills/stable/idea-to-skill/` 进入 `skills/in-process/`。
@@ -43,7 +44,7 @@
   - `lessons/`：具体课件 HTML
   - `reference/`：速查页、地图页等回看材料
   - `assets/`：该课的 `course.css`、`open-links-new-tab.js`、课表导航与局部图
-  lesson / reference 引用 `../assets/`。写课覆盖层由外部 [teach-me](https://github.com/duoduo369/teach-me) skill 承担；课内嵌入权威正文时，再看 [`../skills/in-process/teach-embed-authoritative-zh/SKILL.md`](../skills/in-process/teach-embed-authoritative-zh/SKILL.md)。
+  lesson / reference 引用 `../assets/`。写课覆盖层由外部 [teach-me](https://github.com/duoduo369/teach-me) skill 承担；课内嵌入权威正文时，再看 [`../skills/in-process/add-prompt-to-skill-lessons/SKILL.md`](../skills/in-process/add-prompt-to-skill-lessons/SKILL.md)。
 
 ## 书籍笔记
 

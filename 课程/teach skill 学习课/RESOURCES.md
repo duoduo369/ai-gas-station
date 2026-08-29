@@ -16,7 +16,7 @@
   学习记录格式。Use for: 什么才算“学会了”、什么只是“讲过了”。
 - [duoduo369/teach-me](https://github.com/duoduo369/teach-me)
   本库写课覆盖层。Use for: 文件放哪、共用 chrome、导航、配图、标题、`/stop-slop`。
-- [teach-embed-authoritative-zh](../../skills/in-process/teach-embed-authoritative-zh/SKILL.md)
+- [add-prompt-to-skill-lessons](../../skills/in-process/add-prompt-to-skill-lessons/SKILL.md)
   精读课分支。Use for: 课里点名的 skill / prompt 要把中文嵌进 HTML。
 
 ## Wisdom (Communities)
