@@ -8,6 +8,7 @@
 - [in-process](./in-process/README.md) - 正在试跑、迁移或收口的候选 skill。
 
 如果你手上有一个“已经值得下次再用”的方法，不要先写散文式方法文档。先调用 [`idea-to-skill`](./stable/idea-to-skill/SKILL.md)，把它送进 `skills/in-process/`。
+如果某个候选 skill 已经过真实验证，已经能作为标准入口推荐，再调用 [`release-skill`](./in-process/release-skill/SKILL.md) 把它从 `in-process` 提升到 `stable`。
 
 ## stable
 
@@ -19,6 +20,7 @@
 - [`add-book`](./in-process/add-book/SKILL.md) - 按本仓库技术书笔记规范创建新书籍 md，补齐可查书目信息，生成导读并同步维护书籍索引；手动调用：`/add-book`
 - [`carbon-writer`](./in-process/carbon-writer/SKILL.md) - 为本仓库的课程、学习文章和技术观察起草或重写判断感清楚的非虚构稿件；手动调用：`/carbon-writer`
 - [`gen-cover-prompt`](./in-process/gen-cover-prompt/SKILL.md) - 按课程或书籍信息整理封面 brief，并调用 `jimeng-image-prompt-crafter` 生成即梦可用 Prompt；手动调用：`/gen-cover-prompt`
+- [`release-skill`](./in-process/release-skill/SKILL.md) - 把一个已经验证过的候选 skill 提升到 stable，并同步更新生命周期入口；手动调用：`/release-skill`
 
 ## 本机安装约定
 

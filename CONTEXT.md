@@ -32,6 +32,10 @@ _Avoid_: 稳定标准入口, 一次性灵感
 指 `skills/stable/` 里的 project-level skill。它已经能作为仓库里的标准调用入口被推荐使用。
 _Avoid_: 尚未验证的候选稿, 只是历史方法说明
 
+**skill release**:
+指把一个已经过真实验证、并且在移动目录后仍保持自包含的候选 skill，从 `skills/in-process/` 提升到 `skills/stable/`，并同步更新生命周期入口的动作。
+_Avoid_: 自动放行, 边 release 边顺手修, 批量迁移
+
 **唯一事实源**:
 针对某一类协作对象、结构或流程拥有定义权的单一入口，通常是对应的 project-level skill；其他文档只负责把人和 agent 路由过去，不再并行维护另一套细则。
 _Avoid_: 多份并行规范, 散落约定, 谁都算准
