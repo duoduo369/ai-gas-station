@@ -14,12 +14,12 @@ disable-model-invocation: true
 
 - 先读 [`./reference/nonfiction-checklist.md`](./reference/nonfiction-checklist.md)。
 - 先读 [`./reference/ai-boundary.md`](./reference/ai-boundary.md)，先把“AI 能做什么、不能硬编什么、哪些东西必须来自人或证据”分清。
+- 先读 [`./reference/review-layers.md`](./reference/review-layers.md)，把硬约束、结构推进、证据边界和活人感终审分层看，不要混成一句“再润色一下”。
 - 先确认场景真的属于本仓库的非虚构写作；具体适用范围与排除项都以 checklist 为准，不在主文件里重复展开。
 - 先锁定入口模式：`from-scratch`（从材料起稿）或 `rewrite`（重写现有草稿）。
 - 如果这次是长稿、判断密度高的稿子，或带明显“选题 / 观点 / evidence”压力的稿子，再读：
   - [`./reference/hkr.md`](./reference/hkr.md)
   - [`./reference/evidence-discipline.md`](./reference/evidence-discipline.md)
-  - [`./reference/review-layers.md`](./reference/review-layers.md)
 - 如果是书籍导读、资源解读这类伴读型内容，再读 [`./reference/book-guide.md`](./reference/book-guide.md)，不把它写成抽象书评。
 
 ## Steps
