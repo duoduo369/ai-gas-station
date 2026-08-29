@@ -28,8 +28,9 @@
 
 - `整体结构`、`仓库入口`、`从哪里开始` -> [README.md](./README.md)
 - `术语`、`对象目录`、`索引`、`深度笔记`、`书籍笔记` -> [CONTEXT.md](./CONTEXT.md)
-- `命名`、`链接`、`附件规则`、`README 写法`、`书籍笔记骨架`、`导读写法` -> [docs/conventions.md](./docs/conventions.md)
+- `命名`、`链接`、`附件规则`、`README 写法` -> [docs/conventions.md](./docs/conventions.md)
 - `书`、`阅读笔记`、`书摘`、`作者相关内容`、`书籍索引` -> [书籍/README.md](./书籍/README.md)
+- `添加书籍`、`新建书籍笔记`、`add-book`、`技术书导读` -> [skills/in-process/add-book/SKILL.md](./skills/in-process/add-book/SKILL.md)
 - `演讲`、`播客`、`访谈`、`分享` -> [演讲/README.md](./演讲/README.md)
 - `项目级 skill`、`候选 skill`、`stable skill`、`idea-to-skill`、`skills 生命周期`、`skills 目录` -> [skills/README.md](./skills/README.md)
 - `skill 学习`、`agent skill 拆解`、`技能经验`、`技能拆解` -> [技能拆解/README.md](./技能拆解/README.md)
@@ -55,8 +56,7 @@
 - `概念/` 收不依附于单一本资源或单个 skill 的概念解释、术语拆解与机制理解。
 - `课程/` 收多课时、带 lesson 结构的课程化内容；单条概念解释、单个 skill 学习卡或单本资源笔记不要塞进这里。
 - 写课、改课件、续课时：先走上游 teach，再按外部 `teach-me` skill 的约定落到本仓库课程结构里；如果是精读课，再补 [`add-prompt-to-skill-lessons`](./skills/in-process/add-prompt-to-skill-lessons/SKILL.md)。
-- 不要主动新建书籍笔记；只有用户明确要求创建某书的 md 时才创建，并按 [docs/conventions.md](./docs/conventions.md) 一次生成三区：书目信息不放封面，阅读记录只放空壳，导读用程序员视角写一篇、不另开「程序员要点」。
-- 不得修改书籍笔记中的「个人阅读记录」区；封面只在用户把图放到 `assets/cover/` 并要求引用后才写入书目信息。
+- 不要主动新建书籍笔记；只有用户明确要求创建某书的 md 时才创建。涉及新增技术书笔记时，统一使用 [`add-book`](./skills/in-process/add-book/SKILL.md)；具体结构、证据要求、只读区和导读写法都以该 skill 为准，这里不重复展开。
 - 其他对象目录仍默认：没有明确学习收获、摘录或实践记录时，停在索引条目，不单开正文。
 - 涉及命名、链接、附件、索引写法时，先对照 [docs/conventions.md](./docs/conventions.md)。
 - 涉及方法沉淀时，先判断它是不是项目级可调用资产；如果是，优先进入 `skills/` 生命周期。
