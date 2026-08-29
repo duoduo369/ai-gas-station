@@ -11,4 +11,4 @@
   - 0006 嵌 setup 的 tracker 决策、`issue-tracker-local.md` 全文、GitLab 模板同形节、docs 里 Other / 意外持久化相关节
 - 用户在 Windows；GitHub 外链可打开原文。
 - 流程插图用课程内 SVG（保证 skill 名与中文准确）：`flow-ask-matt.svg`、`flow-phase-boundary.svg`、`flow-grilling-family.svg`、`flow-branch-qa.svg`。0006 的 tracker 配置是对照表，没有加图。
-- 2026-08 重写：六课正文按 teach-me 的中文写作指南清理翻案腔 / AI 高频词 / 破折号。2026-08-28 再按 `add-prompt-to-skill-lessons` 收尾：默认改成 `details.prompt-fold` 折叠，Markdown 类 prompt 预先转成 `div.prompt-md`，带 frontmatter 的 `SKILL.md` 拆成 `pre.prompt-raw` + `div.prompt-md`，只有必须逐行对照的短示例保留原样代码块。新增 `lessons/homepage.html` 首页，封面复制到 `assets/cover/cover.jpg`（源图 `assets/image/2026-08-27-course-cover-matt-skills.jpg`）；`course-nav.js` 导航加入首页链接；README 顶部用封面图链接到首页。
+- 2026-08 重写：六课正文按 teach-me 的中文写作指南清理翻案腔 / AI 高频词 / 破折号。2026-08-28 再按 `add-prompt-to-skill-lessons` 收尾：默认改成 `details.prompt-fold` 折叠，Markdown 类 prompt 预先转成 `div.prompt-md`，带 frontmatter 的 `SKILL.md` 拆成 `pre.prompt-raw` + `div.prompt-md`，只有必须逐行对照的短示例保留原样代码块。新增 `lessons/homepage.html` 首页，封面复制到 `assets/cover/cover.jpg`（源图 `../../assets/cover/mattskill课程.jpg`）；`course-nav.js` 导航加入首页链接；README 顶部用封面图链接到首页。

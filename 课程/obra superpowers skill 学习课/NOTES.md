@@ -17,7 +17,7 @@
 - 2026-08-28 整门课用 `teach-me` skill 重写（上游 `teach` 生成的版本已替换）。改动范围：删除全部 quiz 模块与 `lesson-quiz.js`；删除“Lesson 000X”页面标签、“预计 xx 分钟”pill-row、“下一步怎么学最顺”section、结尾“有问题问我”式 footer-note；hero 收敛成 eyebrow + h1 + lede + 速查链接；正文按中文写作指南去 AI 味。
 - 重写硬约束：嵌入课内的 skill prompt 中文翻译一律保留条文含义，不改成正文式转述。去味只作用于 AI 自己写的讲解正文。
 - 2026-08-28 再按 `add-prompt-to-skill-lessons` 收尾：四节课里的权威正文统一改成 `details.prompt-fold` 默认折叠，原来的整块 `pre.prompt-zh` 改为 `div.prompt-md` 结构块，避免把长条文直接平铺在页面里。
-- 资源引用改成本课自包含：`course.css` 与 `open-links-new-tab.js` 已复制到本课 `assets/`，所有页面统一用 `../assets/` 路径（不再依赖 `../../assets/` 共享位置）。封面图复制自 `assets/image/2026-08-27-course-cover-superpowers.jpg`，放在本课 `assets/cover/cover.jpg`。
+- 资源引用改成本课自包含：`course.css` 与 `open-links-new-tab.js` 已复制到本课 `assets/`，所有页面统一用 `../assets/` 路径（不再依赖 `../../assets/` 共享位置）。封面图复制自 `../../assets/cover/Superpowers课程.jpg`，放在本课 `assets/cover/cover.jpg`。
 - 新增 `lessons/homepage.html`（封面图 + 标题 + 简介），`course-nav.js` 导航首项加了“首页”。
 - 2026-08-28 收尾修改：homepage 删掉封面图下方的“内容”和“速查”两个模块，只留 hero + 封面图（导航已覆盖全部链接）；`course-nav.js` 去掉“课程入口”README 引用，导航结构为“首页 · 0001地图 · 0002收口 · 0003跑偏 · 0004终课 / 速查…”。
 - 标题按“桌面宽度一行放得下”收短，0004 原标题过长已改为“验收 bug 流与 worktree 的位置”。

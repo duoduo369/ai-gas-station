@@ -32,7 +32,7 @@
   <tr>
     <td align="center" width="50%" valign="top">
       <a href="./agent编程方法论探索/lessons/0001-agent-failure-modes.html">
-        <img src="../assets/image/2026-08-27-course-cover-agent-methodology.jpg" alt="Agent 编程方法论探索" width="100%">
+        <img src="../assets/cover/agent编程方法论探索.jpg" alt="Agent 编程方法论探索" width="100%">
       </a>
       <p>
         <a href="./agent编程方法论探索/lessons/0001-agent-failure-modes.html"><strong>Agent 编程方法论探索</strong></a><br>
@@ -57,7 +57,7 @@
   <tr>
     <td align="center" width="50%" valign="top">
       <a href="./mattpocock-skills 仓库学习课/lessons/homepage.html">
-        <img src="../assets/image/2026-08-27-course-cover-matt-skills.jpg" alt="mattpocock/skills 仓库学习课" width="100%">
+        <img src="../assets/cover/mattskill课程.jpg" alt="mattpocock/skills 仓库学习课" width="100%">
       </a>
       <p>
         <a href="./mattpocock-skills 仓库学习课/lessons/homepage.html"><strong>mattpocock/skills 仓库学习课</strong></a><br>
@@ -66,7 +66,7 @@
     </td>
     <td align="center" width="50%" valign="top">
       <a href="./obra superpowers skill 学习课/lessons/0001-repo-map-and-basic-workflow.html">
-        <img src="../assets/image/2026-08-27-course-cover-superpowers.jpg" alt="Superpowers skill 学习课" width="100%">
+        <img src="../assets/cover/Superpowers课程.jpg" alt="Superpowers skill 学习课" width="100%">
       </a>
       <p>
         <a href="./obra superpowers skill 学习课/lessons/0001-repo-map-and-basic-workflow.html"><strong>Superpowers skill 学习课</strong></a><br>
@@ -77,7 +77,7 @@
   <tr>
     <td align="center" width="50%" valign="top">
       <a href="./unclebook AI工作流swarmforge仓库学习/lessons/homepage.html">
-        <img src="../assets/image/2026-08-27-course-cover-swarmforge.jpg" alt="Uncle Bob SwarmForge 工作流课" width="100%">
+        <img src="../assets/cover/bobskill课程.jpg" alt="Uncle Bob SwarmForge 工作流课" width="100%">
       </a>
       <p>
         <a href="./unclebook AI工作流swarmforge仓库学习/lessons/homepage.html"><strong>Uncle Bob SwarmForge 工作流课</strong></a><br>
