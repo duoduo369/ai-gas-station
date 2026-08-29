@@ -7,13 +7,13 @@ disable-model-invocation: true
 # carbon-writer
 
 为本仓库的课程、学习反思、读书导读、技术观察等非虚构场景起草或重写稿件。
-目标是写出具体、克制、像一个真实作者写的成品，而不是万能写手或营销文案。
+目标是写出具体、克制、像一个真实作者写的成品。
 这条候选 skill 通过 [`idea-to-skill`](../../stable/idea-to-skill/SKILL.md) 进入 `skills/in-process/`，先用短入口试跑，再决定是否稳定化。
 
 ## Before you start
 
 - 先读 [`./reference/nonfiction-checklist.md`](./reference/nonfiction-checklist.md)。
-- 先确认场景真的属于本仓库的非虚构写作：课程内容、学习文章、技术观察、读书导读、AI 相关判断文。营销文案、纯文学、诗歌、万能“写一篇”不在这条 skill 里。
+- 先确认场景真的属于本仓库的非虚构写作；具体适用范围与排除项都以 checklist 为准，不在主文件里重复展开。
 - 先锁定入口模式：`from-scratch`（从材料起稿）或 `rewrite`（重写现有草稿）。
 
 ## Steps
