@@ -1,7 +1,7 @@
 # ask-matt 主流程与上坡入口
 
 > 原始 skill：[ask-matt](https://github.com/mattpocock/skills/blob/main/skills/engineering/ask-matt/SKILL.md)
-> 目录索引：[skills/README.md](./README.md)
+> 目录索引：[技能拆解/README.md](./README.md)
 
 ## 先记一句
 

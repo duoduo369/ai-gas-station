@@ -9,7 +9,7 @@
 
 这门课拆 Uncle Bob 的 SwarmForge。你先看清 `main` 上共享的 `swarmforge/` 管什么，再从 two-pack 开始，把一条可运行 pack **整台走完**。交接协议和角色条文跟着 pack 一起看。
 
-课内已经按 [teach 课件加厚方法](../../playbook/teach-课件-嵌入权威中文prompt.md) 把本课要对照的权威正文嵌成中文（原文只留 GitHub 外链）；正文默认折叠，点开即可看完整 prompt，复习时不必再翻上游仓库。
+课内已经按 [teach-embed-authoritative-zh](../../skills/in-process/teach-embed-authoritative-zh/SKILL.md) 把本课要对照的权威正文嵌成中文（原文只留 GitHub 外链）；正文默认折叠，点开即可看完整 prompt，复习时不必再翻上游仓库。
 
 课程包做成自包含结构：
 

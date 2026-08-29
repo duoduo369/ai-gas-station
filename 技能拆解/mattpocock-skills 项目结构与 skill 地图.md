@@ -1,7 +1,7 @@
 # mattpocock-skills 项目结构与 skill 地图
 
 > 原始仓库：[mattpocock/skills](https://github.com/mattpocock/skills)
-> 目录索引：[skills/README.md](./README.md)
+> 目录索引：[技能拆解/README.md](./README.md)
 
 ## 这是什么仓库
 
@@ -103,4 +103,4 @@
 
 - 单独拆 `ask-matt` 的主流程与各个 on-ramp。
 - 对 `teach`、`grilling`、`writing-for-agents` 这种已经有方法感的 skill 做更细的学习卡。
-- 提炼一个“如何阅读 skills 仓库”的 playbook，等积累的样本更多后再决定是否进入 `playbook/`。
+- 提炼一个“如何阅读 skills 仓库”的候选 project-level skill，等积累的样本更多后再决定是否送进 `skills/in-process/`。

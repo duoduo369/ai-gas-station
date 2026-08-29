@@ -80,8 +80,8 @@
 
 相关参考：
 
-- [handoff 学习拆解](../skills/handoff 学习拆解.md)
-- [grilling 学习拆解](../skills/grilling 学习拆解.md)
+- [handoff 学习拆解](../技能拆解/handoff 学习拆解.md)
+- [grilling 学习拆解](../技能拆解/grilling 学习拆解.md)
 
 ## 一个简单判断法
 

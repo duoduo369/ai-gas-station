@@ -21,6 +21,6 @@
 
 ## Out of scope
 
-- 现在不把这套 skills 接到本知识库的 playbook，也不改 fork。
+- 现在不把这套 skills 直接提炼成本知识库的项目级 skill，也不改 fork。
 - 不把每个 skill 都做成逐字翻译课；只嵌本课要学员对照着做的权威正文。
 - 不单独做飞书 Base 接线草稿，除非用户明确要下一课写。

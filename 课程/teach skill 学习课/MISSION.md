@@ -8,7 +8,7 @@
 - 打开一个教学工作区时，能指认 `MISSION.md`、`RESOURCES.md`、`lessons/`、`reference/`、`learning-records/`、`NOTES.md` 各自干什么
 - 能判断一课是否挂在使命上、有没有引用、回看该翻 lesson 还是 reference
 - 能写出第一句 `/teach`：主题或 GitHub 地址、已知和缺口、指定资料、目录落点
-- 知道本库存课时还要再套 `playbook/teach-me.md`，不是把文件直接摊在仓库根目录
+- 知道本库存课时还会再套外部 `teach-me` skill 的覆盖层，不是把文件直接摊在仓库根目录
 
 ## Constraints
 - 只要一节课，不展开成多课时教育学
