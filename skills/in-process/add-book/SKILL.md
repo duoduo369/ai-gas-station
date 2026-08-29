@@ -15,10 +15,7 @@ disable-model-invocation: true
 - 先读 [`../../../AGENTS.md`](../../../AGENTS.md)、[`../../../docs/conventions.md`](../../../docs/conventions.md) 和 [`../../../书籍/README.md`](../../../书籍/README.md)。
 - 先确认这次真的是新书，而不是补写已有书籍笔记；如果 `书籍/` 下已经有同名 md，停下来说明，不重复新建。
 - 去重和索引落点只看 [`../../../书籍/README.md`](../../../书籍/README.md) 与目标文件是否存在；不要为了“学风格”去扫 `书籍/` 下已经存在的正文文件。
-- 写正文前必须走 [`../carbon-writer/SKILL.md`](../carbon-writer/SKILL.md)，并补读：
-  - [`../carbon-writer/reference/book-guide.md`](../carbon-writer/reference/book-guide.md)
-  - [`../carbon-writer/reference/evidence-discipline.md`](../carbon-writer/reference/evidence-discipline.md)
-  - [`../carbon-writer/reference/nonfiction-checklist.md`](../carbon-writer/reference/nonfiction-checklist.md)
+- 写正文前必须走 [`../carbon-writer/SKILL.md`](../carbon-writer/SKILL.md)，并在调用时明确这是一次技术书导读写作：要启用它的导读分支、证据纪律、中文自然度检查，以及分层审校，而不是只拿它随手起稿。
 - “对当下 Agent 编程的启发”必须基于搜索和思考生成，不得把“听起来合理”硬写成现在仍成立的结论。
 
 ## Steps
@@ -55,7 +52,7 @@ disable-model-invocation: true
 4. 生成“对当下 Agent 编程的启发”。
    完成标准：这一节始终存在，并且只围绕当下 Agent 编程及其相邻的 AI 协作 / 软件工程启发来写，不硬往上靠。`### 已验证的启发` 里只放有证据支撑的观点，并为每一条给出可回看的出处；详细展开最多 5 条，更多可简短补充。`### 可能仍有价值的推断` 只放基于材料和证据延伸出来、但暂时还不能写成事实的推断。如果当前确实没有证据支撑的直接启发，就在 `### 已验证的启发` 下明确写：`暂未看到有证据支撑的直接启发。`
 5. 用 `carbon-writer` 生成导读。
-   完成标准：已经先按 [`../carbon-writer/SKILL.md`](../carbon-writer/SKILL.md) 的 `from-scratch` 入口压实材料，再按 [`../carbon-writer/reference/book-guide.md`](../carbon-writer/reference/book-guide.md) 处理成伴读，不写成抽象书评。导读至少已经说清：这本书在处理什么问题、今天最容易被误解成什么、为什么值得当前读者读、第一次阅读该抓哪几根线。只有章节差异真的会影响阅读路径时，才补 `### 按章导读`；这一块默认写成“章节 / 建议 / 原因 / 与今天的关系”的决策表，而不是章节摘要。
+   完成标准：已经先按 [`../carbon-writer/SKILL.md`](../carbon-writer/SKILL.md) 的 `from-scratch` 入口压实材料，并明确要求它按技术书导读分支来写伴读，不写成抽象书评。导读至少已经说清：这本书在处理什么问题、今天最容易被误解成什么、为什么值得当前读者读、第一次阅读该抓哪几根线。只有章节差异真的会影响阅读路径时，才补 `### 按章导读`；这一块默认写成“章节 / 建议 / 原因 / 与今天的关系”的决策表，而不是章节摘要。
 6. 更新书籍索引。
    完成标准：[`../../../书籍/README.md`](../../../书籍/README.md) 已经新增对应条目，至少包含名称和一句话注释；如果正文已创建，再补上本地笔记链接。
 
