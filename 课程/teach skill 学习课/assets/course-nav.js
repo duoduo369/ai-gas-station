@@ -15,10 +15,12 @@
   const current = basename(path);
 
   const lessons = [
-    { file: "0001-teach-workspace-and-how-to-invoke.html", label: "0001 工作区" },
+    { file: "0001-teach-me-overlay-and-course-workspace.html", label: "0001 teach-me 覆盖层" },
+    { file: "0002-teach-workspace-and-how-to-invoke.html", label: "0002 teach 工作区" },
   ];
 
   const refs = [
+    { file: "teach-me-course-overlay-map.html", label: "teach-me 覆盖层" },
     { file: "teach-workspace-map.html", label: "工作区速查" },
   ];
 
@@ -31,12 +33,12 @@
     refFiles[item.file] = true;
   });
 
-  const inLessons = /\/lessons\//i.test(path) || !!lessonFiles[current];
+  const inLessons = /\/lessons\//i.test(path) || !!lessonFiles[current] || current === "homepage.html";
   const inReference = /\/reference\//i.test(path) || !!refFiles[current];
 
-  const rootPrefix = "..";
   const lessonPrefix = inLessons ? "." : "../lessons";
   const refPrefix = inReference ? "." : "../reference";
+  const homepageHref = (inLessons ? "." : "../lessons") + "/homepage.html";
 
   function link(href, label, isCurrent) {
     if (isCurrent) {
@@ -46,6 +48,7 @@
   }
 
   const sep = '<span class="course-nav-sep" aria-hidden="true">·</span>';
+  const homepageLink = link(homepageHref, "首页", current === "homepage.html") + sep;
 
   const lessonLinks = lessons
     .map(function (item) {
@@ -90,14 +93,15 @@
   nav.setAttribute("aria-label", "课程导航");
   nav.innerHTML =
     '<div class="course-nav-row">' +
-    link(rootPrefix + "/README.md", "课程入口", false) +
-    sep +
+    homepageLink +
     lessonLinks +
     "</div>" +
-    '<div class="course-nav-row course-nav-refs">' +
-    '<span class="course-nav-label">速查</span>' +
-    refLinks +
-    "</div>" +
+    (refs.length > 0
+      ? '<div class="course-nav-row course-nav-refs">' +
+        '<span class="course-nav-label">速查</span>' +
+        refLinks +
+        "</div>"
+      : "") +
     prevNext;
 
   function mount() {

@@ -7,12 +7,12 @@
 <table>
   <tr>
     <td align="center" valign="top">
-      <a href="./teach skill 学习课/lessons/0001-teach-workspace-and-how-to-invoke.html">
+      <a href="./teach skill 学习课/lessons/homepage.html">
         <img src="../assets/cover/teachskill课程.jpg" alt="teach skill 学习课" width="100%">
       </a>
       <p>
-        <a href="./teach skill 学习课/lessons/0001-teach-workspace-and-how-to-invoke.html"><strong>teach skill 学习课</strong></a><br>
-        用 <code>/teach</code> 学 teach 本身：工作区七件套、何时调用、本库 <code>teach-me</code> 覆盖层。一节课收口。
+        <a href="./teach skill 学习课/lessons/homepage.html"><strong>teach skill 学习课</strong></a><br>
+        先讲本库常用的 <code>teach-me</code> 覆盖层，再讲上游 <code>/teach</code> 的工作区与调用时机。两节收口。
       </p>
     </td>
   </tr>

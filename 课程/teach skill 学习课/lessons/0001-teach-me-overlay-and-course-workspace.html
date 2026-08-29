@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lesson 0001 · 先认清 teach-me：它怎样把课写成中文 HTML</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Lesson 0001</p>
+        <h1>先认清 teach-me：它怎样把课写成中文 HTML</h1>
+        <p class="lede"><code>teach-me</code> 把上游 <code>teach</code> 的教学工作区保留下来，再把本库课程怎么落成中文 HTML 说死。你先懂这层，后面再看 <code>/teach</code>，整门课的样子才对得上。</p>
+        <div class="pill-row">
+          <span class="pill">预计 12 分钟</span>
+          <span class="pill">目标：分清 teach-me 和 teach</span>
+          <span class="pill">下一课：<a href="./0002-teach-workspace-and-how-to-invoke.html">0002 teach 工作区</a></span>
+          <span class="pill">回看：<a href="../reference/teach-me-course-overlay-map.html">teach-me 覆盖层速查</a></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>先记住这一句</h2>
+        <div class="callout">
+          <p><strong><code>teach</code> 管“这门课为什么学、怎么续”；<code>teach-me</code> 管“这门课在这个仓库里长成什么样”。</strong></p>
+          <p><a href="https://github.com/duoduo369/teach-me/blob/main/SKILL.md">teach-me SKILL.md</a> 把工作区、资料、lesson、reference、learning-record 继续沿用上游 <code>teach</code>。它再额外规定三件事：正文要写成中文 HTML，写前先读写作和 HTML 指南，多课时要维护 <span class="path">course-nav.js</span>。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>这张卡多管了哪些事</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>层</th>
+                <th>上游 teach</th>
+                <th>teach-me 在本库加的约束</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>工作区</td>
+                <td>当前目录就是教学工作区，连续性落在文件里</td>
+                <td>课程工作区通常落在 <span class="path">课程/某课/</span>，lesson、reference、assets 都在这门课里收口</td>
+              </tr>
+              <tr>
+                <td>文章</td>
+                <td>lesson 是主产物，一课一事</td>
+                <td>lesson 必须是中文 HTML，头部挂本课 <span class="path">course.css</span>、<span class="path">open-links-new-tab.js</span>、<span class="path">course-nav.js</span></td>
+              </tr>
+              <tr>
+                <td>写法</td>
+                <td>知识围着技能来，判断挂在使命上</td>
+                <td>写前先读 <a href="https://github.com/duoduo369/teach-me/blob/main/reference/chinese-writing-guide.md">中文写作指南</a>，正文去翻译腔、去 AI 味、每段推进一步</td>
+              </tr>
+              <tr>
+                <td>配图</td>
+                <td>上游没把图的开关单列出来</td>
+                <td>先问用户要不要配图。默认不加，只有关系靠文字不容易一眼看懂时才加</td>
+              </tr>
+              <tr>
+                <td>导航</td>
+                <td>工作区能续课，连续性主要靠文件</td>
+                <td>课数大于 1 时，必须维护 <a href="https://github.com/duoduo369/teach-me/blob/main/reference/nav-guide.md">course-nav.js</a>，补顶部导航和底部上一课 / 下一课</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>所以这门课把 <code>teach-me</code> 放在第一课。你现在看到的课程外观、目录落点和导航顺序，都是它先定的；第二课再回去讲上游 <code>/teach</code> 的工作区哲学和调用时机。</p>
+      </section>
+
+      <section>
+        <h2>工作流现在是五步</h2>
+        <div class="timeline">
+          <article class="timeline-step">
+            <p class="step-kicker">1</p>
+            <h3 class="step-title">先把使命钉住</h3>
+            <p><span class="path">MISSION.md</span> 空着，就先追问为什么学。使命模糊，比没有使命更糟。这条在 <a href="https://github.com/duoduo369/teach-me/blob/main/SKILL.md">teach-me SKILL.md</a> 里写得很硬。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">2</p>
+            <h3 class="step-title">先填 RESOURCES，再出课</h3>
+            <p>至少 2 到 3 条高信任资料。每条写清覆盖什么、什么时候用。资料不够，就停在 <span class="path">RESOURCES.md</span>，不要用模型记忆硬讲。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">3</p>
+            <h3 class="step-title">先问要不要配图</h3>
+            <p>默认不加图。你点头了，再只给那些文字一眼讲不清关系的地方加图。这个开关是 teach-me 比上游 teach 更具体的一层。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">4</p>
+            <h3 class="step-title">写成能直接打开的 HTML</h3>
+            <p>写之前读 <a href="https://github.com/duoduo369/teach-me/blob/main/reference/chinese-writing-guide.md">中文写作指南</a> 和 <a href="https://github.com/duoduo369/teach-me/blob/main/reference/html-guide.md">HTML 指南</a>。hero、section、表格、卡片、提示框都有固定写法。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">5</p>
+            <h3 class="step-title">压出速查，再维护导航</h3>
+            <p>值得回看的内容压进 <span class="path">reference/</span>。课数变成两篇以上，就更新 <span class="path">course-nav.js</span>，让 lesson 和 reference 能前后串起来。</p>
+          </article>
+        </div>
+      </section>
+
+      <a id="embedded-skill"></a>
+      <section>
+        <h2>对着条文看：teach-me 真正要求你做什么</h2>
+        <p>这节课真正要嵌进来的有两类材料：<code>teach-me SKILL.md</code> 里关于工作区和流程的正文，以及三份 guide 里直接决定页面形状的规则。完整 guide 全文继续留外链，不把整份说明都塞进这一课。</p>
+        <div class="prompt-stack">
+          <article class="prompt-doc">
+            <h3 class="card-title">teach-me SKILL.md（工作区与流程）</h3>
+            <p class="prompt-cap">原文：<a href="https://github.com/duoduo369/teach-me/blob/main/SKILL.md">duoduo369/teach-me · SKILL.md</a> · 这段决定工作区里有哪些文件，以及 lesson 之前必须先做什么。</p>
+            <details class="prompt-fold">
+              <summary class="prompt-toggle">
+                <span class="prompt-toggle-closed">展开中文正文</span>
+                <span class="prompt-toggle-open">收起中文正文</span>
+              </summary>
+              <pre class="prompt-raw prompt-frontmatter">---
+name: teach-me
+description: 用中文生成 HTML 学习资料——读起来像人写的，没有翻译腔和 AI 味。
+disable-model-invocation: true
+argument-hint: "想学什么？"
+---</pre>
+              <div class="prompt-md">
+                <h4>教学工作区</h4>
+                <p>当前目录就是教学工作区。学习状态落在这些文件里：</p>
+                <ul>
+                  <li><code>MISSION.md</code>：为什么学这个。所有教学决策都从这里出发。</li>
+                  <li><code>RESOURCES.md</code>：高信任资料清单。课里的判断从这里引，不用参数化知识胡编。</li>
+                  <li><code>./lessons/*.html</code>：学习文章。一篇讲清一件事，是教学工作区的主产物。</li>
+                  <li><code>./reference/*.html</code>：速查页。从文章里压出来的精华。以后回看走这里。</li>
+                  <li><code>./learning-records/*.md</code>：学习记录。记录非显然的学会的东西，用来算下一篇文章该写什么。</li>
+                  <li><code>./assets/*</code>：该课程的可复用组件。导航脚本放这里。</li>
+                  <li><code>NOTES.md</code>：草稿。记录用户偏好、工作笔记。</li>
+                </ul>
+                <h4>工作流</h4>
+                <ol>
+                  <li>先确认 <code>MISSION.md</code>。使命空着时先追问为什么学。</li>
+                  <li>先确认 <code>RESOURCES.md</code>。至少要有 2 到 3 条高信任资料，缺口写进 <code>Gaps</code>。</li>
+                  <li>先问要不要配图。默认不加图。</li>
+                  <li>写文章前先读 <code>chinese-writing-guide.md</code> 和 <code>html-guide.md</code>。</li>
+                  <li>写完后按需压 <code>reference</code>，课程大于一篇时再维护导航。</li>
+                </ol>
+              </div>
+            </details>
+          </article>
+
+          <article class="prompt-doc">
+            <h3 class="card-title">三份 guide 把“课长什么样”说死</h3>
+            <p class="prompt-cap">原文：<a href="https://github.com/duoduo369/teach-me/blob/main/reference/chinese-writing-guide.md">写作指南</a>、<a href="https://github.com/duoduo369/teach-me/blob/main/reference/html-guide.md">HTML 指南</a>、<a href="https://github.com/duoduo369/teach-me/blob/main/reference/nav-guide.md">导航指南</a>。</p>
+            <details class="prompt-fold">
+              <summary class="prompt-toggle">
+                <span class="prompt-toggle-closed">展开本课要用的规则</span>
+                <span class="prompt-toggle-open">收起本课要用的规则</span>
+              </summary>
+              <div class="prompt-md">
+                <h4>中文写作指南</h4>
+                <ul>
+                  <li>像个懂行的人在跟朋友解释一件事。</li>
+                  <li>每段都带来新东西。删掉这一段，读者就该少知道一点东西。</li>
+                  <li>教学文本先说结论，再展开。不要铺垫三段才到重点。</li>
+                </ul>
+                <h4>HTML 指南</h4>
+                <ul>
+                  <li>hero 只放 <code>eyebrow</code>、<code>h1</code>、<code>lede</code>。</li>
+                  <li>正文每节一个 <code>h2</code> 起头。</li>
+                  <li>表格放在 <code>div.table-wrap</code> 里。</li>
+                  <li>权威正文嵌入 lesson 时，用静态 HTML 块，不把 Markdown 源码直接摊给读者看。</li>
+                </ul>
+                <h4>导航指南</h4>
+                <ul>
+                  <li><code>course-nav.js</code> 必须是完整可执行脚本，不只是数据。</li>
+                  <li>顶部要有课程导航。</li>
+                  <li>lesson 页底部要有上一课 / 下一课。</li>
+                  <li>当前页高亮用 <code>aria-current="page"</code>。</li>
+                </ul>
+              </div>
+            </details>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>你在这个仓库里该怎么开口</h2>
+        <p>这张卡最适合拿来写本库的课程包。课程目录、课内样式、导航脚本、reference 入口都已经是它要的形状。你开口时，把主题、目录落点和写作约束一次说完，后面返工最少。</p>
+        <div class="prompt-stack">
+          <article class="prompt-doc">
+            <h3 class="card-title">新开一门课</h3>
+            <p class="prompt-cap">对象是一张 skill 卡。先把工作区和约束说死，再让它去补 MISSION 和 RESOURCES。</p>
+            <pre class="prompt-zh">$teach-me 我想学 https://github.com/duoduo369/teach-me
+
+这门课写到 课程/teach skill 学习课/ 里，不要摊到仓库根目录。
+先补 MISSION.md 和 RESOURCES.md，再写第一课。
+正文用中文 HTML。不要页内测验。默认不额外配图。</pre>
+          </article>
+
+          <article class="prompt-doc">
+            <h3 class="card-title">继续已有课程</h3>
+            <p class="prompt-cap">课程已经有两篇以上时，这一句会顺带逼它维护导航。</p>
+            <pre class="prompt-zh">$teach-me 继续这门课
+
+先读 lessons/、reference/、MISSION.md、RESOURCES.md 和 NOTES.md。
+下一课只讲一件事，保持中文 HTML。
+如果课序变了，同步更新 course-nav.js 和课程 README。</pre>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>这一课学完，你该带走什么</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">1. teach-me 先定成片形状</h3>
+            <p>它先把中文写法、HTML 结构、课程目录和导航约束讲清楚。你在本库里写课，先看它。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2. 上游 teach 还在底下</h3>
+            <p>使命、资料、lesson、reference、learning-record 还是上游那套工作区。第二课再回去把那层拆开。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3. 先资料，后正文</h3>
+            <p>没有 RESOURCES 就别写课。没有用户点头，默认不加图。teach-me 把这两个闸门放到了流程前面。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">4. 多课时一定维护导航</h3>
+            <p>lesson 超过一篇，<span class="path">course-nav.js</span> 就要补齐顶部导航和底部上一课 / 下一课。课序改了，也要一起改。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <p>这一课请你先读 <a href="https://github.com/duoduo369/teach-me/blob/main/SKILL.md">teach-me SKILL.md</a>。它比仓库目录更能直接告诉你：为什么这门课先讲它，课程工作区里要落哪些文件，以及课数变多后导航为什么必须一起维护。</p>
+      </section>
+
+      <p class="footer-note">下一课回到上游 <code>/teach</code>。你会看到工作区七件套、调用边界和第一句怎么写，然后把两层规则扣在一起。</p>
+    </main>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-# teach skill Resources
+# teach / teach-me Resources
 
 ## Knowledge
 
@@ -8,6 +8,14 @@
   给人读的说明。Use for: 何时伸手、和 wait-what / grill-me / research 的分工、常见坑、怎样算它在工作。
 - [teach on skills.sh](https://www.skills.sh/mattpocock/skills/teach)
   安装入口与 skill 正文镜像。Use for: `npx skills add` 以及和仓库对照。
+- [teach-me SKILL.md](https://github.com/duoduo369/teach-me/blob/main/SKILL.md)
+  本库课程覆盖层的执行卡。Use for: 工作区文件、配图开关、lesson / reference / learning-record、续课与导航。
+- [teach-me chinese-writing-guide.md](https://github.com/duoduo369/teach-me/blob/main/reference/chinese-writing-guide.md)
+  中文写作约束。Use for: 去翻译腔、去 AI 味、段落推进、自检清单。
+- [teach-me html-guide.md](https://github.com/duoduo369/teach-me/blob/main/reference/html-guide.md)
+  文章结构约束。Use for: hero、section、表格、卡片、prompt 块、配图规则。
+- [teach-me nav-guide.md](https://github.com/duoduo369/teach-me/blob/main/reference/nav-guide.md)
+  多课时导航约束。Use for: `course-nav.js`、当前页高亮、上一课 / 下一课、reference 导航。
 - [MISSION-FORMAT.md](https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/MISSION-FORMAT.md)
   使命文件格式。Use for: Why / Success / Constraints / Out of scope 怎么写短。
 - [RESOURCES-FORMAT.md](https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/RESOURCES-FORMAT.md)
@@ -15,7 +23,7 @@
 - [LEARNING-RECORD-FORMAT.md](https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/LEARNING-RECORD-FORMAT.md)
   学习记录格式。Use for: 什么才算“学会了”、什么只是“讲过了”。
 - [duoduo369/teach-me](https://github.com/duoduo369/teach-me)
-  本库写课覆盖层。Use for: 文件放哪、共用 chrome、导航、配图、标题、`/stop-slop`。
+  本库写课覆盖层仓库入口。Use for: 总览这套中文 HTML 课程约束，以及和本仓库课程目录对照。
 - [add-prompt-to-skill-lessons](../../skills/in-process/add-prompt-to-skill-lessons/SKILL.md)
   精读课分支。Use for: 课里点名的 skill / prompt 要把中文嵌进 HTML。
 

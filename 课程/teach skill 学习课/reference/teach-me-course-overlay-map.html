@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>teach-me 覆盖层速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>teach-me 覆盖层速查</h1>
+        <p class="lede">先回看这一页。分清它给上游 <code>teach</code> 多加了什么：中文写法、HTML 结构、配图开关、导航维护和课程目录落点。</p>
+      </section>
+
+      <section>
+        <h2>先抓四个结论</h2>
+        <ul class="source-list">
+          <li><code>teach</code> 管教学工作区为什么学、怎么续。<code>teach-me</code> 管这门课在本库里怎样落成中文 HTML。</li>
+          <li><span class="path">MISSION.md</span> 和 <span class="path">RESOURCES.md</span> 先于 lesson。资料不够，就停。</li>
+          <li>配图默认关。只有文字一眼讲不清关系时才开。</li>
+          <li>课数大于 1 时，<span class="path">assets/course-nav.js</span> 必须跟着维护。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>teach 和 teach-me 怎么分工</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>问题</th>
+                <th>看哪张卡</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>为什么学、成功标准、下一课该接什么</td>
+                <td><code>teach</code></td>
+              </tr>
+              <tr>
+                <td>课程目录放哪、lesson 和 reference 怎么命名</td>
+                <td><code>teach-me</code></td>
+              </tr>
+              <tr>
+                <td>正文该怎么写得像人、怎么去 AI 味</td>
+                <td><code>teach-me</code> 的写作指南</td>
+              </tr>
+              <tr>
+                <td>多课时导航怎么做</td>
+                <td><code>teach-me</code> 的导航指南</td>
+              </tr>
+              <tr>
+                <td>什么时候该打 <code>/teach</code>，什么时候直接问</td>
+                <td><code>teach</code> 的人读 docs</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>teach-me 的五步工作流</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>步骤</th>
+                <th>动作</th>
+                <th>卡住时怎么办</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>确认 <span class="path">MISSION.md</span></td>
+                <td>理由模糊就继续追问，不先写课</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>确认 <span class="path">RESOURCES.md</span></td>
+                <td>至少 2 到 3 条高信任资料；不够就写 Gaps</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>问配图</td>
+                <td>用户没说，就按默认不加图</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>写 lesson HTML</td>
+                <td>先读中文写作指南和 HTML 指南</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>压 reference，更新导航</td>
+                <td>课数变多或顺序变化时，一起改 <span class="path">course-nav.js</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>你要盯住的文件</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>路径</th>
+                <th>作用</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="path">lessons/0001-*.html</span></td>
+                <td>主产物。一课一事。桌面和手机都能直接打开读。</td>
+              </tr>
+              <tr>
+                <td><span class="path">reference/*.html</span></td>
+                <td>压缩精华。以后回看先翻这里。</td>
+              </tr>
+              <tr>
+                <td><span class="path">assets/course.css</span></td>
+                <td>课程共用样式。lesson 和 reference 都引用它。</td>
+              </tr>
+              <tr>
+                <td><span class="path">assets/open-links-new-tab.js</span></td>
+                <td>外链统一新开标签。</td>
+              </tr>
+              <tr>
+                <td><span class="path">assets/course-nav.js</span></td>
+                <td>课程导航。当前页高亮，lesson 页补上一课 / 下一课。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <p>先读 <a href="https://github.com/duoduo369/teach-me/blob/main/SKILL.md">teach-me SKILL.md</a>，再按需翻 <a href="https://github.com/duoduo369/teach-me/blob/main/reference/chinese-writing-guide.md">写作指南</a>、<a href="https://github.com/duoduo369/teach-me/blob/main/reference/html-guide.md">HTML 指南</a>、<a href="https://github.com/duoduo369/teach-me/blob/main/reference/nav-guide.md">导航指南</a>。</p>
+      </section>
+    </main>
+  </body>
+</html>
