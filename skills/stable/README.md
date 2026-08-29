@@ -10,4 +10,5 @@
 - [`carbon-writer`](./carbon-writer/SKILL.md) - 为本仓库的课程、学习文章和技术观察起草或重写判断感清楚的非虚构稿件；手动调用：`/carbon-writer`
 - [`gen-cover-prompt`](./gen-cover-prompt/SKILL.md) - 按课程或书籍信息整理封面 brief，并调用 `jimeng-image-prompt-crafter` 生成即梦可用 Prompt；手动调用：`/gen-cover-prompt`
 - [`idea-to-skill`](./idea-to-skill/SKILL.md) - 新项目级 skill 的自举入口：把可复用方法压成候选 skill；手动调用：`/idea-to-skill`
+- [`polish-readme`](./polish-readme/SKILL.md) - 在书籍封面或课程入口更新后，同步刷新根 README、课程 README 与书籍 README 的展示层；手动调用：`/polish-readme`
 - [`release-skill`](./release-skill/SKILL.md) - 把一个已经验证过的候选 skill 提升到 stable，并同步更新生命周期入口；手动调用：`/release-skill`

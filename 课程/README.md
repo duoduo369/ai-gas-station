@@ -1,19 +1,12 @@
 # 课程
 
-多课时、可以独立回看的课程包。clone 到本地后，进对应课程的 `lessons/` 目录，用浏览器按编号打开 HTML 就能学。
-
-每门课都有：
-
-- `lessons/`：按课时排的 HTML 课件
-- `reference/`：回看用的速查页
-
-点封面或标题会打开该课第一份 HTML。
+多课时、可以独立回看的课程包。点封面或标题会打开该课第一份 HTML；也可以进对应课程的 `lessons/` 目录，按编号直接打开课件学习。建议用 Obsidian，打开“文件与连接”里的“检测所有类型文件”，直接在课程目录里找到各课 `lessons/` 下的 HTML。课程目前主要用 [teach-me](https://github.com/duoduo369/teach-me) 这个 skill 生成。
 
 ## Skill 精读课
 
 <table>
   <tr>
-    <td align="center" width="50%" valign="top">
+    <td align="center" valign="top">
       <a href="./teach skill 学习课/lessons/0001-teach-workspace-and-how-to-invoke.html">
         <img src="../assets/cover/teachskill课程.jpg" alt="teach skill 学习课" width="100%">
       </a>
@@ -22,7 +15,6 @@
         用 <code>/teach</code> 学 teach 本身：工作区七件套、何时调用、本库 <code>teach-me</code> 覆盖层。一节课收口。
       </p>
     </td>
-    <td width="50%"></td>
   </tr>
 </table>
 
@@ -55,7 +47,7 @@
 
 <table>
   <tr>
-    <td align="center" width="50%" valign="top">
+    <td align="center" width="33.33%" valign="top">
       <a href="./mattpocock-skills 仓库学习课/lessons/homepage.html">
         <img src="../assets/cover/mattskill课程.jpg" alt="mattpocock/skills 仓库学习课" width="100%">
       </a>
@@ -64,7 +56,7 @@
         以 <code>mattpocock/skills</code> 为对象，先画仓库地图，再顺着 <code>ask-matt</code> 主流程往下读。
       </p>
     </td>
-    <td align="center" width="50%" valign="top">
+    <td align="center" width="33.33%" valign="top">
       <a href="./obra superpowers skill 学习课/lessons/0001-repo-map-and-basic-workflow.html">
         <img src="../assets/cover/Superpowers课程.jpg" alt="Superpowers skill 学习课" width="100%">
       </a>
@@ -73,9 +65,7 @@
         以 <code>obra/superpowers</code> 为对象，先画出 skills 库、harness 接线和七步工作流的地图，再往下读关键 skill。
       </p>
     </td>
-  </tr>
-  <tr>
-    <td align="center" width="50%" valign="top">
+    <td align="center" width="33.33%" valign="top">
       <a href="./unclebook AI工作流swarmforge仓库学习/lessons/homepage.html">
         <img src="../assets/cover/bobskill课程.jpg" alt="Uncle Bob SwarmForge 工作流课" width="100%">
       </a>
@@ -84,6 +74,5 @@
         以 <code>unclebob/swarm-forge</code> 的 <code>swarmforge/</code> 为对象，先分清 main 底座和 pack 流水线，再把 two / four / six 三套 pack 走完。
       </p>
     </td>
-    <td width="50%"></td>
   </tr>
 </table>

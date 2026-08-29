@@ -10,9 +10,37 @@
 
 ## 软件工程与项目管理
 
-- 《人月神话》 - Frederick P. Brooks Jr.：别只记住“人月不可互换”，更该看概念完整性、系统产品成本和“没有银弹”的整条主线。[阅读笔记](./人月神话.md)
-- 《软件设计的哲学》（第 2 版） - John Ousterhout：别把它读成代码风格书，更该盯复杂度到底被消灭了，还是只是被搬到接口和调用方。[阅读笔记](./软件设计的哲学.md)
-- 《领域驱动设计》 - Eric Evans：别把 DDD 读成战术名词表，更该盯统一语言、模型落地与边界上下文这三根主线。[阅读笔记](./领域驱动设计.md)
+<table>
+  <tr>
+    <td align="center" width="33.33%" valign="top">
+      <a href="./人月神话.md">
+        <img src="../assets/cover/人月神话.jpg" alt="人月神话" width="100%">
+      </a>
+      <p>
+        <a href="./人月神话.md"><strong>人月神话</strong></a><br>
+        Frederick P. Brooks Jr.：别只记住“人月不可互换”，更该看概念完整性、系统产品成本和“没有银弹”的整条主线。
+      </p>
+    </td>
+    <td align="center" width="33.33%" valign="top">
+      <a href="./软件设计的哲学.md">
+        <img src="../assets/cover/软件设计的哲学.jpg" alt="软件设计的哲学" width="100%">
+      </a>
+      <p>
+        <a href="./软件设计的哲学.md"><strong>软件设计的哲学</strong></a><br>
+        John Ousterhout：别把它读成代码风格书，更该盯复杂度到底被消灭了，还是只是被搬到接口和调用方。
+      </p>
+    </td>
+    <td align="center" width="33.33%" valign="top">
+      <a href="./领域驱动设计.md">
+        <img src="../assets/cover/领域驱动设计.jpg" alt="领域驱动设计" width="100%">
+      </a>
+      <p>
+        <a href="./领域驱动设计.md"><strong>领域驱动设计</strong></a><br>
+        Eric Evans：别把 DDD 读成战术名词表，更该盯统一语言、模型落地与边界上下文这三根主线。
+      </p>
+    </td>
+  </tr>
+</table>
 
 ## 产品、思维与写作
 
