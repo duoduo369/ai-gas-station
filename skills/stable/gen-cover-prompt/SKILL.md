@@ -13,6 +13,7 @@ disable-model-invocation: true
 
 - 先确定对象类型：`course` 或 `book`。
 - `course` 分支先读 [`./reference/course-cover.md`](./reference/course-cover.md)；`book` 分支先读 [`./reference/book-cover.md`](./reference/book-cover.md)。
+- 如果用户没明确给比例，默认按 `4:3` 出封面 brief 和 Prompt；只有用户明确给了别的比例或落点，再按用户要求覆盖。
 - 先确认这次要的是“生成 Prompt”，不是“顺手把图片接回仓库”；只有用户明确要求接回入口时，才额外处理落图和链接。
 - 只收齐这一轮真正相关的源材料；不要默认把 `AGENTS.md`、`CONTEXT.md`、`docs/conventions.md` 整坨装进上下文。
 
