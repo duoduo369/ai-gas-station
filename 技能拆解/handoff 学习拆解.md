@@ -1,7 +1,7 @@
 # handoff 学习拆解
 
 > 原始 skill：[handoff](https://github.com/mattpocock/skills/blob/main/skills/productivity/handoff/SKILL.md)
-> 目录索引：[skills/README.md](./README.md)
+> 目录索引：[技能拆解/README.md](./README.md)
 > 快速跳转：[跳到原文附录](#skill-source-md) · [跳到中文附录](#skill-source-zh)
 
 ## 这是什么
@@ -45,7 +45,7 @@ skill 明确要求删掉 API key、密码、PII 等敏感信息。也就是说�
 不适合：
 
 - 仓库里已经有完整、最新、结构化的正式文档，而且下一位 agent 直接看那个就够。
-- 只是想留长期知识沉淀，此时更应该写到正式笔记或 playbook。
+- 只是想留长期知识沉淀，此时更应该写到正式笔记或项目级 skill。
 
 ## 对我的启发
 

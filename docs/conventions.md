@@ -6,17 +6,18 @@
 ## 结构
 
 - 第一版采用“对象目录 + 横切目录”的混合结构。
-- 对象目录只有：`书籍/`、`演讲/`、`skills/`、`概念/`、`课程/`。
-- 横切目录保留：`playbook/`、`assets/`、`docs/`。
+- 对象目录只有：`书籍/`、`演讲/`、`技能拆解/`、`概念/`、`课程/`。
+- 顶层 `skills/` 是项目级 skills 容器，不属于学习对象目录；当前固定分 `in-process/` 与 `stable/` 两个生命周期桶。
+- 横切目录保留：`assets/`、`docs/`。
 - 不额外建立 `资源/` 作为总索引层；对象目录自己承载索引和深度笔记。
 
 ## 命名
 
-- 对象目录默认使用中文命名；`skills/` 因直接对应 agent skills 保留英文。
+- 对象目录默认使用中文命名；项目级 `skills/` 因直接对应 checked-in agent skills 保留英文。
 - 对象目录中的索引文件固定命名为 `README.md`。
 - 正文文件默认直接使用自然中文标题。
 - 只有在同名冲突或确实需要表达时间语义时，才给正文文件加日期前缀。
-- 机制性目录保留英文：`playbook/`、`assets/`、`docs/`。
+- 机制性目录保留英文：`assets/`、`docs/`。
 
 ## 索引与正文
 
@@ -30,17 +31,19 @@
   - 原始链接
   - 本地笔记链接
 - 并非每条索引都要单独建正文。`书籍/` 下的书籍笔记只有在用户明确要求创建某书的 md 时才创建；其他对象目录仍默认：已经形成明确学习收获、摘录或实践记录时才单开正文，否则只保留索引条目。
-- 对来自外部资源的正文文件，若已经单开笔记，正文开头应尽量保留可点击的原始入口；`skills/` 下的具体 skill 学习文档默认在标题下补 `原始 skill` 链接，并建议同时补回目录索引的本地链接。
-- `skills/` 下已经单开的具体 skill 学习文档，默认采用“顶部导航 + 主体拆解 + 底部附录”的自包含结构：顶部保留原始 skill、目录索引、文内附录跳转；底部保留原始 `SKILL.md`，若原文不是中文则再补一段中文翻译。
+- 对来自外部资源的正文文件，若已经单开笔记，正文开头应尽量保留可点击的原始入口；`技能拆解/` 下的具体 skill 学习文档默认在标题下补 `原始 skill` 链接，并建议同时补回目录索引的本地链接。
+- `技能拆解/` 下已经单开的具体 skill 学习文档，默认采用“顶部导航 + 主体拆解 + 底部附录”的自包含结构：顶部保留原始 skill、目录索引、文内附录跳转；底部保留原始 `SKILL.md`，若原文不是中文则再补一段中文翻译。
+- `skills/` 下的项目级 skill 采用“一 skill 一目录”的结构：`skills/<bucket>/<skill-name>/`。主入口写在 `SKILL.md`，长说明、边界与试跑记录下沉到 `NOTES.md`。
 - `书籍/` 下已经单开的书籍笔记，默认采用三区结构：书目信息、个人阅读记录、导读区。只有用户明确要求创建某书的 md 时才创建，创建时一次生成三区。
-- `skills/` 只收与 agent skills 直接相关的学习经验，不承接泛化工具收藏或通用工作流。
+- `技能拆解/` 只收与 agent skills 直接相关的学习经验，不承接泛化工具收藏或通用工作流。
+- `skills/` 只收已经进入项目级 skill 生命周期的协作资产；新的可复用方法优先通过 `skills/stable/idea-to-skill/` 进入 `skills/in-process/`。
 - `概念/` 只收不依附于单一本资源或单个 skill 的概念解释、术语拆解与机制理解。
 - `课程/` 只收自成体系的课程包，而不是零散笔记。每门课默认在自己的子目录下自包含：
   - `README.md`：课程入口与 lesson 索引
   - `lessons/`：具体课件 HTML
   - `reference/`：速查页、地图页等回看材料
   - `assets/`：该课的 `course.css`、`open-links-new-tab.js`、课表导航与局部图
-  lesson / reference 引用 `../assets/`。写课覆盖层见 [playbook/teach-me.md](../playbook/teach-me.md)。
+  lesson / reference 引用 `../assets/`。写课覆盖层由外部 [teach-me](https://github.com/duoduo369/teach-me) skill 承担；课内嵌入权威正文时，再看 [`../skills/in-process/teach-embed-authoritative-zh/SKILL.md`](../skills/in-process/teach-embed-authoritative-zh/SKILL.md)。
 
 ## 书籍笔记
 

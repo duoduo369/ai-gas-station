@@ -54,7 +54,7 @@
 - [AGENTS.md](../AGENTS.md)
 - [CONTEXT.md](../CONTEXT.md)
 - [docs/conventions.md](../docs/conventions.md)
-- [handoff 学习拆解](../skills/handoff 学习拆解.md)
+- [handoff 学习拆解](../技能拆解/handoff 学习拆解.md)
 
 像 `superpowers`、`wayfinder`、`handoff` 这一类方法或 skill，真正解决的也不只是“让模型更会写”，而是帮助团队把关键上下文和工作约束沉到环境里。
 

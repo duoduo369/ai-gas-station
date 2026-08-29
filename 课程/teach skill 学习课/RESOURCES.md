@@ -14,9 +14,9 @@
   资料清单格式。Use for: Knowledge / Wisdom 分组，以及为什么每条都要写“何时用”。
 - [LEARNING-RECORD-FORMAT.md](https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/LEARNING-RECORD-FORMAT.md)
   学习记录格式。Use for: 什么才算“学会了”、什么只是“讲过了”。
-- [playbook/teach-me.md](../../playbook/teach-me.md)
+- [duoduo369/teach-me](https://github.com/duoduo369/teach-me)
   本库写课覆盖层。Use for: 文件放哪、共用 chrome、导航、配图、标题、`/stop-slop`。
-- [playbook/teach 课件：嵌入权威中文 prompt](../../playbook/teach-课件-嵌入权威中文prompt.md)
+- [teach-embed-authoritative-zh](../../skills/in-process/teach-embed-authoritative-zh/SKILL.md)
   精读课分支。Use for: 课里点名的 skill / prompt 要把中文嵌进 HTML。
 
 ## Wisdom (Communities)

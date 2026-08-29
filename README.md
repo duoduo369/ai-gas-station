@@ -4,6 +4,11 @@
 
 收藏值得留的入口，写下自己的理解，留下下次还能用的方法。
 
+## 现在这套结构怎么分
+
+- [skills](./skills/README.md) - 项目级 skills 生命周期入口；新的候选 skill 先走 `in-process`，稳定后进 `stable`
+- [技能拆解](./技能拆解/README.md) - 外部 skill 与 skill 仓库的学习、拆解、实践与复盘
+
 ## 课程
 
 clone 到本地后，点封面或标题会打开该课第一份 HTML。也可以进对应课程的 `lessons/` 目录，按编号直接打开课件学习。
@@ -98,6 +103,6 @@ clone 到本地后，点封面或标题会打开该课第一份 HTML。也可以
 
 - [书籍](./书籍/README.md) - 书的索引与单本笔记
 - [演讲](./演讲/README.md) - 演讲、分享、播客
-- [skills](./skills/README.md) - agent skills 的拆解与实践
+- [skills](./skills/README.md) - 项目级 skills 生命周期与调用入口
+- [技能拆解](./技能拆解/README.md) - 外部 agent skills 的学习、拆解与实践
 - [概念](./概念/README.md) - 术语与机制解释
-- [playbook](./playbook/README.md) - 下次还能直接复用的方法

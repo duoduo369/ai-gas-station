@@ -1,7 +1,7 @@
 # writing-for-agents 学习拆解
 
 > 原始 skill：[writing-for-agents](https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL.md)
-> 目录索引：[skills/README.md](./README.md)
+> 目录索引：[技能拆解/README.md](./README.md)
 > 快速跳转：[跳到原文附录](#skill-source-md) · [跳到中文附录](#skill-source-zh)
 
 ## 这是什么
@@ -111,7 +111,7 @@ description: Writing documents for agents. Use when creating or editing skills, 
 
 Reference for writing any document an agent consumes: a skill, an `AGENTS.md` / `CLAUDE.md`, a doc reached by a pointer. The packaging differs; the writing does not: the same levers make each one predictable, since the agent takes the same _process_ every run rather than producing the same output.
 
-When the document you're writing is a skill, read [`SKILL-MECHANICS.md`](SKILL-MECHANICS.md) for frontmatter, invocation choice, and router skills.
+When the document you're writing is a skill, read [`SKILL-MECHANICS.md`](https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL-MECHANICS.md) for frontmatter, invocation choice, and router skills.
 
 ## Context pointers
 
@@ -162,7 +162,7 @@ The strongest criteria are both checkable and exhaustive.
 Splitting one document into two spends one of the two loads, so split only when the cut earns it:
 
 - **By sequence**: split a run of steps where the post-completion steps tempt the agent to rush the one in front of it. Keeping them out of view drives more legwork on the current task. Beware the reverse: merging sequences exposes each step's later steps to what follows, inviting premature completion.
-- **By invocation**, skill-specific: see [`SKILL-MECHANICS.md`](SKILL-MECHANICS.md).
+- **By invocation**, skill-specific: see [`SKILL-MECHANICS.md`](https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL-MECHANICS.md).
 
 ## Leading words
 
@@ -198,7 +198,7 @@ description: 为 agent 写文档。适用于创建或编辑 skill，或修改 AG
 
 这是一份为任何会被 agent 消费的文档而写的参考：包括 skill、`AGENTS.md` / `CLAUDE.md`，以及通过 pointer 抵达的文档。包装形式可以不同；写法本身并不不同：让这些文档可预测的杠杆是同一套，因为 agent 每次运行拿的是同一套 _process_，而不是每次产出完全相同的输出。
 
-当你写的是一个 skill 时，先阅读 [`SKILL-MECHANICS.md`](SKILL-MECHANICS.md)，了解 frontmatter、invocation 选择，以及 router skill 的写法。
+当你写的是一个 skill 时，先阅读 [`SKILL-MECHANICS.md`](https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL-MECHANICS.md)，了解 frontmatter、invocation 选择，以及 router skill 的写法。
 
 ## Context pointers
 
@@ -254,7 +254,7 @@ description: 为 agent 写文档。适用于创建或编辑 skill，或修改 AG
 把一份文档拆成两份，会消耗两种 load 里的其中一种，所以只有当这个切口真的值得时才拆：
 
 - **按 sequence 拆**：当某一串步骤里，post-completion steps 会诱使 agent 抢跑当前这一步时，就按 sequence 拆开。把后面的内容藏出视野，会逼出更多针对当前任务的 legwork。也要小心反方向：把几个 sequence 合并在一起，会让每一步后面的步骤暴露给后续内容，从而诱发 premature completion。
-- **按 invocation 拆**：这是 skill 特有的切法，见 [`SKILL-MECHANICS.md`](SKILL-MECHANICS.md)。
+- **按 invocation 拆**：这是 skill 特有的切法，见 [`SKILL-MECHANICS.md`](https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL-MECHANICS.md)。
 
 ## Leading words
 

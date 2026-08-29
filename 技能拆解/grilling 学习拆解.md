@@ -1,7 +1,7 @@
 # grilling 学习拆解
 
 > 原始 skill：[grilling](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md)
-> 目录索引：[skills/README.md](./README.md)
+> 目录索引：[技能拆解/README.md](./README.md)
 > 快速跳转：[跳到原文附录](#skill-source-md) · [跳到中文附录](#skill-source-zh)
 
 ## 这是什么

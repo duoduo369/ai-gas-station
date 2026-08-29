@@ -20,6 +20,6 @@
 
 ## Out of scope
 
-- 现在不部署、不改 fork、不把 SwarmForge 接到本仓库的 playbook。
+- 现在不部署、不改 fork、不把 SwarmForge 直接提炼成本仓库的项目级 skill。
 - 不精读 `pack_web.bb` 仪表盘实现细节，直到至少走完一个 pack 的完整闭环。
 - 不展开 Uncle Bob 的 CRAP / mutation / DRY 工具链实现，只先知道它们被写进共享 engineering 宪法。

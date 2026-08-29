@@ -16,7 +16,7 @@
 
 - 简体中文；讨论课，不精读某个 skill / prompt。
 - 读者可能拿去技术分享，不假设对方上过本库三门仓库精读课。
-- 课内无测验、无问答模块；不套「嵌入权威中文」那条精读课 playbook。
+- 课内无测验、无问答模块；不套 `teach-embed-authoritative-zh` 这条精读课 skill。
 - 讨论锚定到约 2026-08 的社区沉积，RESOURCES 标明时点。
 - 引文用短判断句 + 稳定外链；GitHub 链上游，不写本机绝对路径。
 
@@ -25,4 +25,4 @@
 - 推荐、安装或配置任何 skill / 插件 / harness。
 - 把 SDLC 做成专课，或把 Claude playbook 当第一节大纲。
 - 把 Spec Kit、OpenSpec、BMAD 等做成第四套主对照。
-- 改写已有三门仓库精读课，或把结论写入 playbook。
+- 改写已有三门仓库精读课，或把结论直接提炼成项目级 skill。

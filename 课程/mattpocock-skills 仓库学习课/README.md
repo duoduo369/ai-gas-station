@@ -9,7 +9,7 @@
 
 这门课拆 `mattpocock/skills`。你先画仓库地图，再沿最关键的流程和 skill 往下读，不用一口气把所有 `SKILL.md` 背完。
 
-课内已经按 [teach 课件加厚方法](../../playbook/teach-课件-嵌入权威中文prompt.md) 把本课要对照的权威正文嵌成中文（原文只留 GitHub 外链）；正文默认折叠，点开即可看完整 prompt，复习时不必再翻上游仓库。
+课内已经按 [teach-embed-authoritative-zh](../../skills/in-process/teach-embed-authoritative-zh/SKILL.md) 把本课要对照的权威正文嵌成中文（原文只留 GitHub 外链）；正文默认折叠，点开即可看完整 prompt，复习时不必再翻上游仓库。
 
 课程包做成自包含结构：
 
