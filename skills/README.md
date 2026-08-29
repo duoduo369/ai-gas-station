@@ -16,13 +16,14 @@
 ## in-process
 
 - [`add-prompt-to-skill-lessons`](./in-process/add-prompt-to-skill-lessons/SKILL.md) - 把要精读的 prompt / skill 正文加进课程 lesson，并转成适合阅读的静态 HTML 块；手动调用：`/add-prompt-to-skill-lessons`
+- [`add-book`](./in-process/add-book/SKILL.md) - 按本仓库技术书笔记规范创建新书籍 md，补齐可查书目信息，生成导读并同步维护书籍索引；手动调用：`/add-book`
 - [`carbon-writer`](./in-process/carbon-writer/SKILL.md) - 为本仓库的课程、学习文章和技术观察起草或重写判断感清楚的非虚构稿件；手动调用：`/carbon-writer`
 - [`gen-cover-prompt`](./in-process/gen-cover-prompt/SKILL.md) - 按课程或书籍信息整理封面 brief，并调用 `jimeng-image-prompt-crafter` 生成即梦可用 Prompt；手动调用：`/gen-cover-prompt`
 
 ## 本机安装约定
 
 - 项目内开发中的 skill，主文件仍然留在这个仓库里，不额外复制一份到别的工作目录。
-- 本机安装时，统一接到用户级 skills 目录，例如 `~/.codex/skills/<skill-name>/`；不要把开发中的 skill 装进某个具体 app、repo 或临时工作目录。
+- 本机安装时，统一接到用户级 skills 目录，例如 `~/.agents/skills/<skill-name>/`；不要把开发中的 skill 装进某个具体 app、repo 或临时工作目录。
 - 开发期优先用 junction / symlink 之类的 link，把用户级入口指回项目内的 skill 目录。这样仓库里一改，本机调用就能立刻跟上，不需要反复重装。
 
 ## 维护约定
