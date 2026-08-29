@@ -7,14 +7,23 @@ skills/
   in-process/
     <skill-slug>/
       SKILL.md
-      reference/
-        <meaningful-name>.md
 ```
 
 - `<skill-slug>` 默认使用英文 kebab-case。
 - invoke 名称默认与 slug 一致；只有用户明确要求时再分开。
 - `SKILL.md` 负责“什么时候用、按什么顺序做、做到哪里算完成”。
 - `reference/` 只在这条 skill 真的需要 disclosed reference 时才创建；文件名要直接表达内容，例如 `html-block-rules.md`、`course-cover.md`、`book-cover.md`。
+
+如果这条 skill 需要下沉补充规则，再额外补成：
+
+```text
+skills/
+  in-process/
+    <skill-slug>/
+      SKILL.md
+      reference/
+        <meaningful-name>.md
+```
 
 候选 `SKILL.md` 基本形状：
 
