@@ -27,7 +27,7 @@
 ## 分支路由
 
 - `整体结构`、`仓库入口`、`从哪里开始` -> [README.md](./README.md)
-- `术语`、`对象目录`、`索引`、`深度笔记`、`书籍笔记`、`playbook` 历史含义 -> [CONTEXT.md](./CONTEXT.md)
+- `术语`、`对象目录`、`索引`、`深度笔记`、`书籍笔记` -> [CONTEXT.md](./CONTEXT.md)
 - `命名`、`链接`、`附件规则`、`README 写法`、`书籍笔记骨架`、`导读写法` -> [docs/conventions.md](./docs/conventions.md)
 - `书`、`阅读笔记`、`书摘`、`作者相关内容`、`书籍索引` -> [书籍/README.md](./书籍/README.md)
 - `演讲`、`播客`、`访谈`、`分享` -> [演讲/README.md](./演讲/README.md)
@@ -36,8 +36,8 @@
 - `概念`、`名词解释`、`机制解释`、`agent 是什么`、`token 是什么` -> [概念/README.md](./概念/README.md)
 - `课程`、`lesson`、`教程`、`学习课`、`课件` -> [课程/README.md](./课程/README.md)
 - `teach`、`课件 chrome`、`导航条`、`课程样式`、`课件口吻` -> [课程/teach skill 学习课/README.md](./课程/teach skill 学习课/README.md)
-- `精读课`、`嵌入权威中文`、`prompt 折叠块`、`skill 条文进课件` -> [skills/in-process/teach-embed-authoritative-zh/SKILL.md](./skills/in-process/teach-embed-authoritative-zh/SKILL.md)
-- `课程封面`、`README 入口图`、`可点击封面`、`封面 Prompt` -> [skills/in-process/readme-course-cover/SKILL.md](./skills/in-process/readme-course-cover/SKILL.md)
+- `精读课`、`嵌入权威中文`、`prompt 折叠块`、`skill 条文进课件` -> [skills/in-process/add-prompt-to-skill-lessons/SKILL.md](./skills/in-process/add-prompt-to-skill-lessons/SKILL.md)
+- `课程封面`、`书籍封面`、`README 入口图`、`可点击封面`、`封面 Prompt` -> [skills/in-process/gen-cover-prompt/SKILL.md](./skills/in-process/gen-cover-prompt/SKILL.md)
 - `方法`、`流程`、`套路`、`准则`、`可复用经验` -> [skills/README.md](./skills/README.md)
 - `截图`、`PDF`、`讲义`、`附件` -> [assets/README.md](./assets/README.md)
 - `扩目录`、`改顶层结构`、`新增机制`、`结构分歧` -> [docs/conventions.md](./docs/conventions.md)
@@ -54,7 +54,7 @@
 - `skills/` 只收已经进入项目级 skill 生命周期的协作资产；新候选 skill 默认走 `skills/stable/idea-to-skill/`，落到 `skills/in-process/`。
 - `概念/` 收不依附于单一本资源或单个 skill 的概念解释、术语拆解与机制理解。
 - `课程/` 收多课时、带 lesson 结构的课程化内容；单条概念解释、单个 skill 学习卡或单本资源笔记不要塞进这里。
-- 写课、改课件、续课时：先走上游 teach，再按外部 `teach-me` skill 的约定落到本仓库课程结构里；如果是精读课，再补 [`teach-embed-authoritative-zh`](./skills/in-process/teach-embed-authoritative-zh/SKILL.md)。
+- 写课、改课件、续课时：先走上游 teach，再按外部 `teach-me` skill 的约定落到本仓库课程结构里；如果是精读课，再补 [`add-prompt-to-skill-lessons`](./skills/in-process/add-prompt-to-skill-lessons/SKILL.md)。
 - 不要主动新建书籍笔记；只有用户明确要求创建某书的 md 时才创建，并按 [docs/conventions.md](./docs/conventions.md) 一次生成三区：书目信息不放封面，阅读记录只放空壳，导读用程序员视角写一篇、不另开「程序员要点」。
 - 不得修改书籍笔记中的「个人阅读记录」区；封面只在用户把图放到 `assets/cover/` 并要求引用后才写入书目信息。
 - 其他对象目录仍默认：没有明确学习收获、摘录或实践记录时，停在索引条目，不单开正文。

@@ -5,11 +5,11 @@
 
 ## 当前条目
 
-- [`teach-embed-authoritative-zh`](./teach-embed-authoritative-zh/SKILL.md) - 把课里点名的权威 prompt / skill 中文嵌进 lesson HTML；手动调用：`/teach-embed-authoritative-zh`
-- [`readme-course-cover`](./readme-course-cover/SKILL.md) - 为课程生成 README 可点击封面入口所需的封面 Prompt 和接入方式；手动调用：`/readme-course-cover`
+- [`add-prompt-to-skill-lessons`](./add-prompt-to-skill-lessons/SKILL.md) - 把要精读的 prompt / skill 正文加进课程 lesson，并转成适合阅读的静态 HTML 块；手动调用：`/add-prompt-to-skill-lessons`
+- [`gen-cover-prompt`](./gen-cover-prompt/SKILL.md) - 按课程或书籍信息整理封面 brief，并调用 `jimeng-image-prompt-crafter` 生成即梦可用 Prompt；手动调用：`/gen-cover-prompt`
 
 ## 进入门槛
 
 - 这个方法已经不是一次性描述，而是下次很可能还会再用。
 - 触发时机、核心动作和完成标准已经能压成一个短的 `SKILL.md`。
-- 长说明、边界和迁移备注可以下沉到同目录 `NOTES.md`，而不是塞满主 skill。
+- 只有在主文件之外确实还需要 disclosed reference 时，才补 `reference/`，不要默认创建通用备注文件。

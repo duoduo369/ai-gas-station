@@ -16,7 +16,7 @@
 
 - 简体中文；讨论课，不精读某个 skill / prompt。
 - 读者可能拿去技术分享，不假设对方上过本库三门仓库精读课。
-- 课内无测验、无问答模块；不套 `teach-embed-authoritative-zh` 这条精读课 skill。
+- 课内无测验、无问答模块；不套 `add-prompt-to-skill-lessons` 这条精读课 skill。
 - 讨论锚定到约 2026-08 的社区沉积，RESOURCES 标明时点。
 - 引文用短判断句 + 稳定外链；GitHub 链上游，不写本机绝对路径。
 

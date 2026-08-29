@@ -11,16 +11,16 @@
 
 ## stable
 
-- [`idea-to-skill`](./stable/idea-to-skill/SKILL.md) - 把可复用方法变成候选 project-level skill，或把旧 `playbook/` 条目迁进 `skills/in-process/`；手动调用：`/idea-to-skill`
+- [`idea-to-skill`](./stable/idea-to-skill/SKILL.md) - 把可复用方法整理成候选 project-level skill；手动调用：`/idea-to-skill`
 
 ## in-process
 
-- [`teach-embed-authoritative-zh`](./in-process/teach-embed-authoritative-zh/SKILL.md) - 把课里点名的权威 prompt / skill 中文嵌进 lesson HTML，并保留原文外链；手动调用：`/teach-embed-authoritative-zh`
-- [`readme-course-cover`](./in-process/readme-course-cover/SKILL.md) - 为课程生成 README 可点击封面入口所需的封面 Prompt 和接入方式；手动调用：`/readme-course-cover`
+- [`add-prompt-to-skill-lessons`](./in-process/add-prompt-to-skill-lessons/SKILL.md) - 把要精读的 prompt / skill 正文加进课程 lesson，并转成适合阅读的静态 HTML 块；手动调用：`/add-prompt-to-skill-lessons`
+- [`gen-cover-prompt`](./in-process/gen-cover-prompt/SKILL.md) - 按课程或书籍信息整理封面 brief，并调用 `jimeng-image-prompt-crafter` 生成即梦可用 Prompt；手动调用：`/gen-cover-prompt`
 
 ## 维护约定
 
 - `skills/` 采用 `skills/<bucket>/<skill-name>/` 的一 skill 一目录形态。
 - 候选 skill 与稳定 skill 默认都是 user-invoked；只有明确值得支付 context load 时，才考虑 model-invoked。
-- 每个 skill 至少包含 `SKILL.md`；边界、试跑记录、迁移备注与长说明下沉到同目录的 `NOTES.md`。
+- 每个 skill 至少包含 `SKILL.md`；只有在主文件之外确实还需要 disclosed reference 时，才补 `reference/`，并使用有意义的文件名。
 - 纯学习拆解、上游 skill 阅读笔记与仓库地图统一放到 [`../技能拆解/README.md`](../技能拆解/README.md)。

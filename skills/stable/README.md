@@ -5,4 +5,4 @@
 
 ## 当前条目
 
-- [`idea-to-skill`](./idea-to-skill/SKILL.md) - 新项目级 skill 的自举入口：把可复用方法写成候选 skill，或把旧 `playbook/` 条目迁入 `in-process`
+- [`idea-to-skill`](./idea-to-skill/SKILL.md) - 新项目级 skill 的自举入口：把可复用方法压成候选 skill；手动调用：`/idea-to-skill`
