@@ -8,7 +8,6 @@ disable-model-invocation: true
 
 为本仓库的课程、学习文章、技术观察、书籍导读、资源解读等非虚构场景起草或重写稿件。
 目标不是把文字写得“像会写”，而是写出判断清楚、证据边界明确、中文自然的成品。
-这条候选 skill 通过 [`idea-to-skill`](../../stable/idea-to-skill/SKILL.md) 进入 `skills/in-process/`，先用短入口试跑，再决定是否稳定化。
 
 ## Before you start
 
