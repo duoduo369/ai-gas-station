@@ -35,5 +35,5 @@
 - 文内跳转优先使用显式锚点，例如 `<a id="skill-source-md"></a>` 与 `[跳到原文附录](#skill-source-md)`，保证 Obsidian 与 GitHub 的跳转都稳定。
 - 对 user-invoked skill，要特别记清它解决的具体卡点；对 model-invoked skill，要特别记清触发词、边界和为什么值得常驻描述。
 - 当一个 skill 已经带出稳定的概念、词汇表或方法论时，可以给它配一篇同层级参考文档，而不是把所有解释都塞回 `SKILL.md`。
-- 如果文档重心已经转成跨多个 skill 的概念解释或机制说明，就应转入 [`../概念/README.md`](../概念/README.md)，不要继续堆在这里。
+- 如果文档重心已经转成跨多个 skill 的 AI 编程方法论解释或机制说明，就应转入 [`../AI编程方法论/README.md`](../AI编程方法论/README.md)，不要继续堆在这里。
 - 如果某个方法已经从“学习对象”变成“本项目里要被反复调用的协作资产”，就调用 `idea-to-skill` 把它迁进 [`../skills/README.md`](../skills/README.md)。

@@ -10,7 +10,7 @@
 ## 全局不变量
 
 - 顶层结构采用“对象目录 + 横切目录”混合方式。
-- 对象目录只有：`书籍/`、`演讲/`、`技能拆解/`、`概念/`、`课程/`。
+- 对象目录只有：`书籍/`、`演讲/`、`技能拆解/`、`AI编程方法论/`、`摘录与启发/`、`课程/`。
 - 顶层 `skills/` 是项目级 skills 容器，只收已经进入 `in-process/` 或 `stable/` 生命周期的协作资产。
 - 横切目录保留：`assets/`、`docs/`。
 - 不建 `资源/`、`主题/`、`plans/`、`收件箱/`。
@@ -34,7 +34,8 @@
 - `演讲`、`播客`、`访谈`、`分享` -> [演讲/README.md](./演讲/README.md)
 - `项目级 skill`、`候选 skill`、`stable skill`、`idea-to-skill`、`skills 生命周期`、`skills 目录` -> [skills/README.md](./skills/README.md)
 - `skill 学习`、`agent skill 拆解`、`技能经验`、`技能拆解` -> [技能拆解/README.md](./技能拆解/README.md)
-- `概念`、`名词解释`、`机制解释`、`agent 是什么`、`token 是什么` -> [概念/README.md](./概念/README.md)
+- `AI编程方法论`、`方法论`、`名词解释`、`机制解释`、`agent 是什么`、`session`、`token` -> [AI编程方法论/README.md](./AI编程方法论/README.md)
+- `摘录与启发`、`摘录`、`启发`、`感悟`、`评论区`、`好的话` -> [摘录与启发/README.md](./摘录与启发/README.md)
 - `课程`、`lesson`、`教程`、`学习课`、`课件` -> [课程/README.md](./课程/README.md)
 - `teach`、`课件 chrome`、`导航条`、`课程样式`、`课件口吻` -> [课程/teach skill 学习课/README.md](./课程/teach skill 学习课/README.md)
 - `精读课`、`嵌入权威中文`、`prompt 折叠块`、`skill 条文进课件` -> [skills/in-process/add-prompt-to-skill-lessons/SKILL.md](./skills/in-process/add-prompt-to-skill-lessons/SKILL.md)
@@ -50,11 +51,12 @@
 
 ## 默认动作
 
-- 收录内容时：先判断属于 `书籍/`、`演讲/`、`技能拆解/`、`概念/`、`课程/` 还是项目级 `skills/`，再修改对应 `README.md` 索引。
+- 收录内容时：先判断属于 `书籍/`、`演讲/`、`技能拆解/`、`AI编程方法论/`、`摘录与启发/`、`课程/` 还是项目级 `skills/`，再修改对应 `README.md` 索引。
 - `技能拆解/` 只收与 agent skills 直接相关的学习、拆解、踩坑和复用经验；不作为泛化工具目录。
 - `skills/` 只收已经进入项目级 skill 生命周期的协作资产；新候选 skill 默认走 `skills/stable/idea-to-skill/`，落到 `skills/in-process/`。
-- `概念/` 收不依附于单一本资源或单个 skill 的概念解释、术语拆解与机制理解。
-- `课程/` 收多课时、带 lesson 结构的课程化内容；单条概念解释、单个 skill 学习卡或单本资源笔记不要塞进这里。
+- `AI编程方法论/` 收已经长成成型解释的 AI 编程、agent 协作与相关工程判断；它讲方法、机制和边界，不收零散摘录。
+- `摘录与启发/` 收值得长期保留的一条摘录、评论或轻启发；允许一文件一卡，也允许纯摘录，但不收临时待办或情绪碎片。
+- `课程/` 收多课时、带 lesson 结构的课程化内容；单篇 AI 编程方法论文、单个 skill 学习卡或单本资源笔记不要塞进这里。
 - 写课、改课件、续课时：先走上游 teach，再按外部 `teach-me` skill 的约定落到本仓库课程结构里；如果是精读课，再补 [`add-prompt-to-skill-lessons`](./skills/in-process/add-prompt-to-skill-lessons/SKILL.md)。
 - 不要主动新建书籍笔记；只有用户明确要求创建某书的 md 时才创建。涉及新增技术书笔记时，统一使用 [`add-book`](./skills/in-process/add-book/SKILL.md)；具体结构、证据要求、只读区和导读写法都以该 skill 为准，这里不重复展开。
 - 其他对象目录仍默认：没有明确学习收获、摘录或实践记录时，停在索引条目，不单开正文。
