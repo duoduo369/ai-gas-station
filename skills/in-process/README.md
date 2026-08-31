@@ -6,6 +6,7 @@
 
 ## 当前条目
 
+- [`add-note`](./add-note/SKILL.md) - 把用户贴来的摘录或启发原样落到 `摘录与启发/`，并同步更新索引；手动调用：`/add-note`
 - [`add-prompt-to-skill-lessons`](./add-prompt-to-skill-lessons/SKILL.md) - 把要精读的 prompt / skill 正文加进课程 lesson，并转成适合阅读的静态 HTML 块；手动调用：`/add-prompt-to-skill-lessons`
 
 ## 进入门槛
