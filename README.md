@@ -44,6 +44,8 @@
 
 > clone 到本地后，点封面或标题会打开该课第一份 HTML，也可以进对应课程的 `lessons/` 目录按编号直接打开课件学习。
 >
+> GitHub 直接查看课程可以在 [这里](https://duoduo369.github.io/ai-gas-station/%E8%AF%BE%E7%A8%8B/) 查看。
+>
 > 完整课表见 [课程](./课程/README.md)。建议用 Obsidian，打开“文件与连接”里的“检测所有类型文件”；课程目前主要用 [teach-me](https://github.com/duoduo369/teach-me) 这个 skill 生成。
 
 AI 会放大产出，也会放大混乱；这些课更在意怎样少走弯路，而不是怎样多堆几个 prompt。
