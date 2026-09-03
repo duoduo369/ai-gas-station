@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WorkBuddy skill 结构速查</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Reference</p>
+        <h1>WorkBuddy skill 结构速查</h1>
+        <p class="lede">回看这一页就够了。先抓 WorkBuddy 的最小骨架，再看它和 OpenAI Skills、Claude Code Skills 分别有什么区别。</p>
+        <div class="pill-row">
+          <span class="pill">lesson：<a href="../lessons/0001-workbuddy-skill-structure-and-cross-vendor-comparison.html">0001 结构对照课</a></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>先抓四个结论</h2>
+        <ul class="source-list">
+          <li>WorkBuddy skill 的最小单位不是一句 prompt，而是一包文件：<code>SKILL.md</code> 在中间，<code>references / scripts / templates</code> 在旁边；真正提交到开放平台时，还要把这包内容打成 <code>zip</code>。</li>
+          <li>WorkBuddy 文档把 frontmatter 字段单独钉住了，尤其要求 <code>description</code>、<code>description_zh</code>、<code>description_en</code>、<code>version</code>、<code>author</code>。</li>
+          <li>像 <code>writing-for-agents</code> 这样的 skill 不是另一种平台格式，它们在写法层帮你决定 description 怎么触发、正文和 reference 怎么分层。</li>
+          <li>OpenAI Skills 更像“API 里挂一个版本化文件包”，Claude Code Skills 更像“本地开发环境里的按需流程扩展”。</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>WorkBuddy 的最小骨架</h2>
+        <pre class="prompt-zh">my-skill/
+├── SKILL.md
+├── references/
+│   └── best-practices.md
+├── scripts/
+│   └── tool-index.js
+└── templates/
+    └── report-template.md</pre>
+        <p>WorkBuddy 这页文档真正固定的，是 <code>SKILL.md</code> 和三类子目录。正文里写步骤，知识补充下沉到 <code>references/</code>，运行时逻辑放 <code>scripts/</code>，模板骨架放 <code>templates/</code>。真正提交到开放平台时，再把这一整包目录打成 <code>zip</code>。</p>
+      </section>
+
+      <section>
+        <h2>Frontmatter 速查</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>字段</th>
+                <th>是否必填</th>
+                <th>你该怎么理解</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>name</code></td>
+                <td>否</td>
+                <td>技能标识。没有也能成立，但通常还是会写。</td>
+              </tr>
+              <tr>
+                <td><code>description</code></td>
+                <td>是</td>
+                <td>写清用途和触发词。这里最值得借 <code>writing-for-agents</code> 这类 skill 来压缩上下文负担。</td>
+              </tr>
+              <tr>
+                <td><code>description_zh</code> / <code>description_en</code></td>
+                <td>是</td>
+                <td>WorkBuddy 比较突出的地方：它把中英双语简介也当成结构的一部分。</td>
+              </tr>
+              <tr>
+                <td><code>allowed-tools</code></td>
+                <td>否</td>
+                <td>工具白名单。</td>
+              </tr>
+              <tr>
+                <td><code>version</code></td>
+                <td>是</td>
+                <td>版本号。</td>
+              </tr>
+              <tr>
+                <td><code>disable-model-invocation</code></td>
+                <td>否</td>
+                <td><code>true</code> 时不自动触发，只能手动调。</td>
+              </tr>
+              <tr>
+                <td><code>user-invocable</code></td>
+                <td>否</td>
+                <td><code>false</code> 时对用户隐藏，只给 AI 内部用。</td>
+              </tr>
+              <tr>
+                <td><code>author</code></td>
+                <td>是</td>
+                <td>合作方名称。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>三家对照</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>问题</th>
+                <th>WorkBuddy</th>
+                <th>OpenAI Skills</th>
+                <th>Claude Code Skills</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>skill 主单位</td>
+                <td><code>SKILL.md</code> + 固定子目录</td>
+                <td>版本化文件包 + <code>SKILL.md</code> manifest</td>
+                <td><code>.claude/skills/&lt;name&gt;/SKILL.md</code></td>
+              </tr>
+              <tr>
+                <td>模型先看到什么</td>
+                <td>frontmatter，尤其三段 description</td>
+                <td><code>name / description / path</code></td>
+                <td>技能名和描述</td>
+              </tr>
+              <tr>
+                <td>支持文件组织</td>
+                <td>文档直接点名 <code>references / scripts / templates</code></td>
+                <td>文件包自由放，没固定目录名</td>
+                <td>skill 目录里自由放文件，还能动态注入上下文</td>
+              </tr>
+              <tr>
+                <td>skill 外的边界</td>
+                <td>这页文档没展开</td>
+                <td>更偏 API 挂载层</td>
+                <td>长期规则进 <code>CLAUDE.md</code>，专门 worker 另走 subagents</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>写卡时怎么用 writing-for-agents</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">description 先写触发分支</h3>
+            <p>别先写自我介绍，先写什么情况该触发这张卡。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">正文只留每次都要执行的步骤</h3>
+            <p>每条分支都要读的，留在 <code>SKILL.md</code>。只部分场景才用的，再下沉。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">知识和执行分开</h3>
+            <p>静态知识进 <code>references/</code>，真的要跑的逻辑才进 <code>scripts/</code>。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">模板别假装是脚本</h3>
+            <p>只负责复用骨架、不负责运行的，才放 <code>templates/</code>。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <p>先读 <a href="https://open.workbuddy.cn/docs/skill">WorkBuddy 技能文档</a>，再读 <a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL.md">writing-for-agents</a> 与 <a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL-MECHANICS.md">SKILL-MECHANICS</a>，最后回看 <a href="https://developers.openai.com/api/docs/guides/tools-skills">OpenAI Skills</a> 和 <a href="https://code.claude.com/docs/en/skills">Claude Code Skills</a>。</p>
+      </section>
+    </main>
+  </body>
+</html>

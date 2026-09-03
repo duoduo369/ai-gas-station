@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lesson 0001 · 腾讯 WorkBuddy skill 的结构，和常见 skill 结构有什么区别</title>
+    <link rel="stylesheet" href="../assets/course.css">
+    <script src="../assets/course-nav.js" defer></script>
+    <script src="../assets/open-links-new-tab.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Lesson 0001</p>
+        <h1>腾讯 WorkBuddy skill 的结构，和常见 skill 结构有什么区别</h1>
+        <p class="lede">这节先不写卡，先拆骨架。你要先看清 WorkBuddy 到底把什么写死了，再看像 <code>writing-for-agents</code> 这样的 skill 能帮你改哪一层，最后再把 OpenAI Skills 和 Claude Code Skills 拉进来对照。</p>
+        <div class="pill-row">
+          <span class="pill">目标：分清结构层和写法层</span>
+          <span class="pill">回看：<a href="../reference/workbuddy-skill-structure-map.html">结构速查</a></span>
+        </div>
+      </section>
+
+      <section>
+        <h2>先记住这一句</h2>
+        <div class="callout">
+          <p><strong>WorkBuddy、OpenAI、Claude 都有 skill，但它们不在同一层发力。WorkBuddy 先管平台包结构，OpenAI 先管 API 挂载，Claude Code 先管本地开发环境里的按需流程扩展。像 <code>writing-for-agents</code> 这样的 skill 则根本不是平台格式，它们是帮你生成或改写 skill 正文的方法层工具。</strong></p>
+          <p>如果你把这几样东西混成一团，最常见的后果就是：一会儿把长期规则误写进 skill，一会儿把补充知识硬塞进正文，一会儿又以为“多几个子目录”就是所谓行业标准。</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>先分层，再看差异</h2>
+        <p>先看这张图。上面一层是写法层，下面一层才是平台实现。这个顺序很关键，因为你之后真要写 WorkBuddy skill 时，正文怎么写稳，可以借像 <code>writing-for-agents</code> 这样的 skill；而这个 skill 包最后要提交成什么形状，才是 WorkBuddy 文档管的事。</p>
+        <figure class="diagram">
+          <img src="../assets/skill-structure-comparison.svg" alt="同样叫 skill，三家其实在不同层发力">
+          <figcaption>最容易混淆的是“结构”和“写法”。这张图把它们拆成了上下两层。</figcaption>
+        </figure>
+      </section>
+
+      <section>
+        <h2>WorkBuddy 官方文档真正写死了什么</h2>
+        <p>WorkBuddy 这页文档给你的，不是一套抽象理念，而是很具体的骨架：<code>SKILL.md</code> 在中间，frontmatter 要有固定字段，旁边还有三类子资源目录。你先把这套骨架看成“平台包结构”，后面很多判断才不容易跑偏。</p>
+        <figure class="diagram">
+          <img src="../assets/workbuddy-skill-stack.svg" alt="腾讯 WorkBuddy skill 的基础结构">
+          <figcaption><code>SKILL.md</code> 负责步骤，<code>references / scripts / templates</code> 负责下沉知识、运行时逻辑和复用骨架。</figcaption>
+        </figure>
+        <div class="callout">
+          <p><strong>别漏掉最后的发布形态：</strong> WorkBuddy skill 不是你本地目录摆好就结束了。开放平台文档明确提到，创建技能时会提交 <code>zip</code> 包；如果平台解析失败，就回到这套基础结构和子资源目录排查。也就是说，你最终交付的是一个按约定组织好的 skill 包，再打成 <code>zip</code> 上传到平台。</p>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>部件</th>
+                <th>WorkBuddy 文档怎么说</th>
+                <th>你该怎么理解</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Frontmatter</td>
+                <td>至少把 <code>description</code>、<code>description_zh</code>、<code>description_en</code>、<code>version</code>、<code>author</code> 写出来</td>
+                <td>平台把“触发词 + 双语简介 + 作者版本”都当成结构的一部分</td>
+              </tr>
+              <tr>
+                <td><code>references/</code></td>
+                <td>放补充知识文档，正文里通过 <code>@references/...</code> 引用</td>
+                <td>协议、字段、示例数据、最佳实践别都塞在正文里</td>
+              </tr>
+              <tr>
+                <td><code>scripts/</code></td>
+                <td>放执行中要调用的脚本</td>
+                <td>真的有运行时逻辑时再放脚本，不要把模板也伪装成脚本</td>
+              </tr>
+              <tr>
+                <td><code>templates/</code></td>
+                <td>放可复用模板脚本或配置文件</td>
+                <td>它是骨架，不是运行逻辑</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>对着原文看：WorkBuddy 这页最值得你盯住哪里</h2>
+        <p>这节课不是全文精读 WorkBuddy 文档，所以我只把真正会影响你以后写卡的部分压进来：frontmatter 字段和三类子目录。它们决定的是结构边界，不是风格。</p>
+        <div class="prompt-stack">
+          <article class="prompt-doc">
+            <h3 class="card-title">WorkBuddy 技能文档：frontmatter 与子目录</h3>
+            <p class="prompt-cap">原文：<a href="https://open.workbuddy.cn/docs/skill">WorkBuddy 开放平台 · 技能</a>。这段够你判断最小骨架，不必把整页都背下来。</p>
+            <details class="prompt-fold">
+              <summary class="prompt-toggle">
+                <span class="prompt-toggle-closed">展开中文拆解</span>
+                <span class="prompt-toggle-open">收起中文拆解</span>
+              </summary>
+              <pre class="prompt-raw prompt-frontmatter">---
+name: your-skill
+description: 写清用途和触发词
+description_zh: 简短中文介绍
+description_en: Short English description
+version: 1.0.0
+author: your-name
+---</pre>
+              <div class="prompt-md">
+                <h4>Frontmatter 字段</h4>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>字段</th>
+                      <th>必填</th>
+                      <th>作用</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>name</code></td>
+                      <td>否</td>
+                      <td>技能标识。</td>
+                    </tr>
+                    <tr>
+                      <td><code>description</code></td>
+                      <td>是</td>
+                      <td>写清用途和触发词。</td>
+                    </tr>
+                    <tr>
+                      <td><code>description_zh</code></td>
+                      <td>是</td>
+                      <td>简短中文介绍。</td>
+                    </tr>
+                    <tr>
+                      <td><code>description_en</code></td>
+                      <td>是</td>
+                      <td>简短英文介绍。</td>
+                    </tr>
+                    <tr>
+                      <td><code>allowed-tools</code></td>
+                      <td>否</td>
+                      <td>工具白名单。</td>
+                    </tr>
+                    <tr>
+                      <td><code>version</code></td>
+                      <td>是</td>
+                      <td>版本号。</td>
+                    </tr>
+                    <tr>
+                      <td><code>disable-model-invocation</code></td>
+                      <td>否</td>
+                      <td><code>true</code> 时 AI 不自动触发，只能手动调。</td>
+                    </tr>
+                    <tr>
+                      <td><code>user-invocable</code></td>
+                      <td>否</td>
+                      <td><code>false</code> 时只给 AI 内部使用。</td>
+                    </tr>
+                    <tr>
+                      <td><code>author</code></td>
+                      <td>是</td>
+                      <td>合作方名称。</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h4>三类子目录</h4>
+                <ul>
+                  <li><code>references/</code>：补充知识文档，适合字段说明、协议、示例数据、最佳实践。</li>
+                  <li><code>scripts/</code>：执行中真正要调用的脚本，适合外部 API、批量处理、特定运行时逻辑。</li>
+                  <li><code>templates/</code>：可复用模板，适合脚手架、报告模版、标准化流程片段。</li>
+                </ul>
+              </div>
+            </details>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>像 <code>writing-for-agents</code> 这样的 skill 帮你改的，不是目录，是写法</h2>
+        <p>如果 WorkBuddy 这页回答的是“这包文件要长什么样”，那像 <code>writing-for-agents</code> 这样的 skill 回答的是“你写进 <code>SKILL.md</code> 的那些字，怎样才更稳”。它们一直在做两件事：减少始终加载的上下文成本，以及减少 agent 在执行时的分心和漂移。</p>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">Context pointer</h3>
+            <p>description 不是简介那么简单，它是一个指针。它决定模型什么时候会去读这张卡，触发不触发，靠的是指针措辞，不是正文质量。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">两种负担</h3>
+            <p>一类是上下文负担：永远挂在窗口里的文字会持续耗 token。另一类是认知负担：人要记住有哪些卡、什么时候该叫它们。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">信息层级</h3>
+            <p>每次都要执行的步骤留在正文。只在部分分支才会碰到的知识，下沉到外部 reference。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">调用方式也是结构判断</h3>
+            <p>自动触发不是默认更高级。只有模型必须自己发现、或别的 skill 必须能 reach 到它时，自动触发才值得付上下文成本。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>把用到的 skill 直接压进来</h2>
+        <p>你要求这门课把 <code>writing-for-agents</code> 加厚进去，所以这里不只留外链，而是把这节课真正用到的两块正文压成静态 HTML：一块讲 description、分层和减负，一块讲 skill 到底该自动触发还是手动调用。</p>
+        <div class="prompt-stack">
+          <article class="prompt-doc">
+            <h3 class="card-title"><code>writing-for-agents</code>：正文写法</h3>
+            <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL.md">writing-for-agents · SKILL.md</a></p>
+            <details class="prompt-fold">
+              <summary class="prompt-toggle">
+                <span class="prompt-toggle-closed">展开中文正文</span>
+                <span class="prompt-toggle-open">收起中文正文</span>
+              </summary>
+              <pre class="prompt-raw prompt-frontmatter">---
+name: writing-for-agents
+description: Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.
+---</pre>
+              <div class="prompt-md">
+                <h4>1. description 是指针，不是介绍词</h4>
+                <p>一张卡能不能被模型可靠地 reach 到，先看 description 说得准不准。指针的措辞应该把触发分支写在前面，而不是先写身份介绍。</p>
+                <h4>2. 永远挂在窗口里的字最贵</h4>
+                <p>始终加载的 description、AGENTS 行、CLAUDE 规则都在持续占上下文。只有需要每次都看的东西，才值得留在这一层。</p>
+                <h4>3. 把步骤和参考材料拆开</h4>
+                <p>正文里放顺序动作。只在部分分支才需要、而且可以按需查阅的事实、定义、规则，下沉成 reference 文件。</p>
+                <h4>4. completion criteria 要清楚</h4>
+                <p>每一步最好都有能判断“做完没做完”的边界。边界模糊，模型就容易为了赶下一步而过早结束。</p>
+                <h4>5. leading words 要真能挂住行为</h4>
+                <p>如果一个词能稳定唤起同一种执行方式，它就值钱。反过来，只是“更认真一点”这类默认就会做的空话，通常是 no-op。</p>
+              </div>
+            </details>
+          </article>
+
+          <article class="prompt-doc">
+            <h3 class="card-title"><code>SKILL-MECHANICS</code>：自动触发还是手动调用</h3>
+            <p class="prompt-cap">原文：<a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL-MECHANICS.md">SKILL-MECHANICS.md</a></p>
+            <details class="prompt-fold">
+              <summary class="prompt-toggle">
+                <span class="prompt-toggle-closed">展开中文正文</span>
+                <span class="prompt-toggle-open">收起中文正文</span>
+              </summary>
+              <div class="prompt-md">
+                <h4>1. 自动触发，换来的是发现能力</h4>
+                <p>如果模型必须自己发现这张卡，或者别的卡必须能 reach 到它，那就保留 description，让它留在上下文里。</p>
+                <h4>2. 手动调用，换来的是零上下文税</h4>
+                <p>如果这张卡只会由人显式叫起，就把它做成手动调用。这样模型平时不用一直背着它。</p>
+                <h4>3. 共享 reference 不一定要做成另一张 skill</h4>
+                <p>如果两张手动卡都需要同一份知识，最好的落点往往是普通 reference 文件，而不是再造一张无法自动 reach 的 skill。</p>
+                <h4>4. router skill 解决的是“人记不住那么多卡”</h4>
+                <p>卡很多、而且大多需要手动调用时，router skill 可以替人做索引。它不能代替触发，但能降低认知负担。</p>
+              </div>
+            </details>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>把三家放在一张表里，你就不容易再混</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>问题</th>
+                <th>WorkBuddy</th>
+                <th>OpenAI Skills</th>
+                <th>Claude Code Skills</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>skill 主单位是什么</td>
+                <td>一包以 <code>SKILL.md</code> 为中心的文件，旁边点名了三类子目录</td>
+                <td>一个版本化文件包，<code>SKILL.md</code> 是 manifest</td>
+                <td>本地目录里的 <code>.claude/skills/&lt;name&gt;/SKILL.md</code></td>
+              </tr>
+              <tr>
+                <td>模型先看到什么</td>
+                <td>frontmatter，尤其三段 description</td>
+                <td><code>name</code>、<code>description</code>、<code>path</code> 会进 prompt 上下文</td>
+                <td>skill 名和描述会进技能列表，Claude 用它决定是否自动加载</td>
+              </tr>
+              <tr>
+                <td>支持文件怎么组织</td>
+                <td>文档直接命名 <code>references / scripts / templates</code></td>
+                <td>文件包里可以放任意文件，没有固定目录名</td>
+                <td>skill 目录里也能放 supporting files，还支持动态上下文注入</td>
+              </tr>
+              <tr>
+                <td>手动 / 自动调用怎么管</td>
+                <td>frontmatter 有 <code>disable-model-invocation</code> 与 <code>user-invocable</code></td>
+                <td>可以明确提示“use the X skill”，平台也会根据 metadata 决定是否调用</td>
+                <td>既支持自动加载，也支持 <code>/skill-name</code> 手动调；还能在设置里改可见性</td>
+              </tr>
+              <tr>
+                <td>skill 之外的长期规则放哪</td>
+                <td>这页文档没展开</td>
+                <td>更偏工具环境挂载，没有单独强调长期规则文件</td>
+                <td>长期规则放 <code>CLAUDE.md</code>，需要独立上下文的 worker 另走 subagents</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>你会发现，WorkBuddy 和 OpenAI 在“skill 是一包文件”这件事上更接近，Claude Code 则更强调“skill 是本地开发工作流的一种扩展点”。所以你如果拿 Claude 的 <code>CLAUDE.md</code> 去对比 WorkBuddy 的 <code>SKILL.md</code>，本来就不是一层东西。</p>
+      </section>
+
+      <section>
+        <h2>如果你要写第一张 WorkBuddy skill，<code>writing-for-agents</code> 会怎么落地</h2>
+        <div class="timeline">
+          <article class="timeline-step">
+            <p class="step-kicker">1</p>
+            <h3 class="step-title">先写 description，不要先写身份介绍</h3>
+            <p>把触发分支写在最前面，让模型知道什么情况下该 reach 这张卡。WorkBuddy 既然还要求中英双语，那中文和英文最好都保持同一触发边界。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">2</p>
+            <h3 class="step-title">正文只留每次都要执行的动作</h3>
+            <p>比如“先读什么，再做什么，做到什么算完成”。如果一大段知识只在部分分支才用得上，就不要一直压在正文里。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">3</p>
+            <h3 class="step-title">把事实和运行时逻辑拆开</h3>
+            <p>字段定义、协议、最佳实践进 <code>references/</code>。真正需要执行的脚本逻辑再进 <code>scripts/</code>。别把两类东西混在一张卡里。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">4</p>
+            <h3 class="step-title">只在需要时才自动触发</h3>
+            <p>如果这张卡就是手工工具，把 <code>disable-model-invocation: true</code> 打开，反而更省上下文税。自动触发不是默认更高级，而是更贵。</p>
+          </article>
+          <article class="timeline-step">
+            <p class="step-kicker">5</p>
+            <h3 class="step-title">模板最后再放</h3>
+            <p>只有当你真的有可复用骨架时，才建 <code>templates/</code>。没有就别为了目录完整而预建空壳。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>这一课学完，你该带走什么</h2>
+        <div class="grid">
+          <article class="card">
+            <h3 class="card-title">1. WorkBuddy 先定包结构</h3>
+            <p>它最有辨识度的地方，是 frontmatter 的固定字段、<code>references / scripts / templates</code> 这三类目录，以及最后要把整包内容打成 <code>zip</code> 提交到开放平台。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">2. <code>writing-for-agents</code> 定写法</h3>
+            <p>它帮你判断 description 怎么触发、正文和 reference 怎么分层，不负责平台目录长什么样。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">3. OpenAI 和 Claude 不是同一参考物</h3>
+            <p>一个偏 API 挂载，一个偏本地开发环境扩展。拿它们对照 WorkBuddy 时，要先对齐比较层。</p>
+          </article>
+          <article class="card">
+            <h3 class="card-title">4. 自动触发不是默认更好</h3>
+            <p>会不会自动触发，本质上是上下文预算和发现能力的交换。</p>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>主资料</h2>
+        <p>这节课至少要回头读四份原文：<a href="https://open.workbuddy.cn/docs/skill">WorkBuddy 技能文档</a>、<a href="https://github.com/mattpocock/skills/blob/main/skills/productivity/writing-for-agents/SKILL.md">writing-for-agents</a>、<a href="https://developers.openai.com/api/docs/guides/tools-skills">OpenAI Skills</a>、<a href="https://code.claude.com/docs/en/skills">Claude Code Skills</a>。如果你继续往“为什么 Claude 里还有 <code>CLAUDE.md</code> 和 subagents”追，就再补读 <a href="https://code.claude.com/docs/en/memory">memory</a> 和 <a href="https://code.claude.com/docs/en/sub-agents">subagents</a>。</p>
+      </section>
+
+      <p class="footer-note">下一篇最自然的接法，是把这张结构图落成第一张 WorkBuddy skill 草稿：先写 description，再判断哪些知识该下沉，最后把 <code>references / scripts / templates</code> 只建到需要的那几层。</p>
+    </main>
+  </body>
+</html>

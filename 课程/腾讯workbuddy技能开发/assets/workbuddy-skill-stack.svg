@@ -1,0 +1,77 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">腾讯 WorkBuddy skill 的基础结构</title>
+  <desc id="desc">以 SKILL.md 为中心，左侧是 frontmatter，右侧是 references、scripts、templates 三类补充目录。</desc>
+  <defs>
+    <style>
+      .bg { fill: #f9fbfc; }
+      .box { fill: #ffffff; stroke: #0e5a6b; stroke-width: 2; rx: 20; }
+      .soft { fill: #d8edf2; stroke: #0e5a6b; stroke-width: 2; rx: 20; }
+      .warm { fill: #f8e3d3; stroke: #c26b2b; stroke-width: 2; rx: 20; }
+      .title { font: 700 30px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .label { font: 700 18px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .text { font: 15px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #1b2430; }
+      .small { font: 14px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #586474; }
+      .arrow { stroke: #0e5a6b; stroke-width: 3; fill: none; marker-end: url(#m); }
+    </style>
+    <marker id="m" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0e5a6b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="760" rx="28"/>
+  <text x="48" y="54" class="title">先把 WorkBuddy skill 看成一包文件，不只是一段提示词</text>
+  <text x="48" y="84" class="small">平台真正固定下来的，是 SKILL.md 的 frontmatter 和三类子资源目录。正文怎么写得稳，可以再借 writing-for-agents 这类 skill。</text>
+
+  <rect class="warm" x="48" y="146" width="280" height="414"/>
+  <text x="76" y="186" class="label">Frontmatter</text>
+  <text x="76" y="220" class="text">必填</text>
+  <text x="76" y="252" class="small">description</text>
+  <text x="76" y="280" class="small">description_zh</text>
+  <text x="76" y="308" class="small">description_en</text>
+  <text x="76" y="336" class="small">version</text>
+  <text x="76" y="364" class="small">author</text>
+  <text x="76" y="410" class="text">可选</text>
+  <text x="76" y="442" class="small">name</text>
+  <text x="76" y="470" class="small">allowed-tools</text>
+  <text x="76" y="498" class="small">disable-model-invocation</text>
+  <text x="76" y="526" class="small">user-invocable</text>
+
+  <rect class="soft" x="378" y="146" width="430" height="414"/>
+  <text x="406" y="186" class="label">SKILL.md 正文</text>
+  <text x="406" y="226" class="text">这里写执行步骤和判断顺序</text>
+  <text x="406" y="258" class="small">用户触发什么事</text>
+  <text x="406" y="286" class="small">先做哪些动作</text>
+  <text x="406" y="314" class="small">每步何时算完成</text>
+  <text x="406" y="342" class="small">哪些材料必须内联</text>
+  <text x="406" y="370" class="small">哪些材料可以下沉</text>
+  <rect class="box" x="406" y="410" width="374" height="110"/>
+  <text x="432" y="448" class="text">一句话记法</text>
+  <text x="432" y="480" class="small">WorkBuddy 负责“包长什么样”</text>
+  <text x="432" y="508" class="small">writing-for-agents 负责“正文怎么写才稳”</text>
+
+  <rect class="warm" x="858" y="146" width="294" height="114"/>
+  <text x="886" y="184" class="label">references/</text>
+  <text x="886" y="216" class="small">补充知识文档</text>
+  <text x="886" y="242" class="small">适合协议、字段、最佳实践</text>
+
+  <rect class="warm" x="858" y="294" width="294" height="114"/>
+  <text x="886" y="332" class="label">scripts/</text>
+  <text x="886" y="364" class="small">执行时要跑的脚本</text>
+  <text x="886" y="390" class="small">适合调用 API、批处理、数据处理</text>
+
+  <rect class="warm" x="858" y="442" width="294" height="118"/>
+  <text x="886" y="480" class="label">templates/</text>
+  <text x="886" y="512" class="small">可复用模板</text>
+  <text x="886" y="538" class="small">适合脚手架、报告模版、标准流程片段</text>
+
+  <path class="arrow" d="M328 352 C348 352 348 352 378 352"/>
+  <path class="arrow" d="M808 204 C828 204 828 204 858 204"/>
+  <path class="arrow" d="M808 352 C828 352 828 352 858 352"/>
+  <path class="arrow" d="M808 500 C828 500 828 500 858 500"/>
+
+  <rect class="box" x="48" y="608" width="1104" height="124"/>
+  <text x="76" y="646" class="label">怎么判断该放哪</text>
+  <text x="76" y="678" class="text">每次都要读、每次都按同一顺序执行的，留在 SKILL.md 正文。</text>
+  <text x="76" y="704" class="text">只有部分分支才需要、而且读者以后可能单独回看的，放 references。</text>
+  <text x="76" y="730" class="text">真正要跑的运行时逻辑，才放 scripts。只是复用骨架、不负责执行的，再放 templates。</text>
+</svg>

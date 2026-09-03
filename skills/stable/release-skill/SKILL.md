@@ -23,7 +23,7 @@ disable-model-invocation: true
 2. 执行人类放行判断。
    完成标准：已经拿到人的明确判断：这条候选 skill 已经过真实使用验证，现在可以作为标准入口推荐；如果还没有明确的通过结论，或人明确说暂不 release，就停下报告，不继续后面的步骤。
 3. 检查目标 skill 在移动目录后是否仍然自包含。
-   完成标准：已经检查 `SKILL.md` 及其 `reference/`（如果存在）里的本地相对链接；把目录从 `skills/in-process/<skill-slug>/` 挪到 `skills/stable/<skill-slug>/` 后，保留下来的链接仍然都指向现有目标，不会因为桶变化直接失效。
+   完成标准：已经检查 `SKILL.md` 及其 `references/`（如果存在）里的本地相对链接；把目录从 `skills/in-process/<skill-slug>/` 挪到 `skills/stable/<skill-slug>/` 后，保留下来的链接仍然都指向现有目标，不会因为桶变化直接失效。
 4. 不通过就报告并停止。
    完成标准：只要自包含检查没过，就已经明确说明缺口，并保持目录、生命周期入口和用户级 skill 链接原样不动；不要一边 release 一边顺手修。
 5. 通过后再执行 release 并同步入口。

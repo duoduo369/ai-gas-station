@@ -12,7 +12,7 @@ disable-model-invocation: true
 
 - 先确认这节课真要精读条文；如果只是地图课、讨论课或索引课，就不要硬嵌全文。
 - 先列出本课要嵌的权威来源与稳定外链；没有高信任原文时先停下，不要凭记忆补全文。
-- 先读 [`./reference/html-block-rules.md`](./reference/html-block-rules.md)。
+- 先读 [`./references/html-block-rules.md`](./references/html-block-rules.md)。
 
 ## Steps
 

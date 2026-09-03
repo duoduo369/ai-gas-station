@@ -1,0 +1,86 @@
+<svg width="1200" height="820" viewBox="0 0 1200 820" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">同样叫 skill，三家其实在不同层发力</title>
+  <desc id="desc">上层是 writing-for-agents 的写法层，下面对比 WorkBuddy、OpenAI Skills、Claude Code Skills 的结构侧重点。</desc>
+  <defs>
+    <style>
+      .bg { fill: #f9fbfc; }
+      .title { font: 700 30px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .small { font: 14px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #586474; }
+      .head { fill: #d8edf2; stroke: #0e5a6b; stroke-width: 2; rx: 18; }
+      .axis { fill: #f8e3d3; stroke: #c26b2b; stroke-width: 2; rx: 18; }
+      .cell { fill: #ffffff; stroke: #0e5a6b; stroke-width: 2; rx: 18; }
+      .overlay { fill: #eef3f6; stroke: #083945; stroke-width: 2; rx: 18; }
+      .label { font: 700 18px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #083945; }
+      .text { font: 15px "Noto Sans SC", "Microsoft YaHei", sans-serif; fill: #1b2430; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="820" rx="28"/>
+  <text x="48" y="52" class="title">先分层，再谈差异</text>
+  <text x="48" y="82" class="small">WorkBuddy、OpenAI、Claude 都有 skill，但一个偏平台包结构，一个偏 API 挂载，一个偏本地开发环境扩展。writing-for-agents 这类 skill 不属于平台格式，它们落在上面的写法层。</text>
+
+  <rect class="overlay" x="48" y="118" width="1104" height="98"/>
+  <text x="78" y="156" class="label">写法层：生成或改写 skill 的 skill</text>
+  <text x="78" y="190" class="text">例如 writing-for-agents。它们决定 description 怎么触发、正文和 reference 怎么分层、什么时候为了省上下文改成手动调用。</text>
+
+  <rect class="axis" x="48" y="254" width="210" height="56"/>
+  <text x="76" y="290" class="label">比较轴</text>
+  <rect class="head" x="274" y="254" width="286" height="56"/>
+  <text x="356" y="290" class="label">WorkBuddy</text>
+  <rect class="head" x="576" y="254" width="286" height="56"/>
+  <text x="676" y="290" class="label">OpenAI Skills</text>
+  <rect class="head" x="878" y="254" width="274" height="56"/>
+  <text x="942" y="290" class="label">Claude Code Skills</text>
+
+  <rect class="axis" x="48" y="326" width="210" height="100"/>
+  <text x="76" y="368" class="label">skill 的主单位</text>
+  <text x="76" y="398" class="small">它先把什么固定下来</text>
+  <rect class="cell" x="274" y="326" width="286" height="100"/>
+  <text x="298" y="368" class="text">`SKILL.md` + 固定子目录</text>
+  <text x="298" y="396" class="small">平台文档直接点名</text>
+  <rect class="cell" x="576" y="326" width="286" height="100"/>
+  <text x="600" y="368" class="text">版本化文件包</text>
+  <text x="600" y="396" class="small">`SKILL.md` 是 manifest</text>
+  <rect class="cell" x="878" y="326" width="274" height="100"/>
+  <text x="902" y="368" class="text">`.claude/skills/&lt;name&gt;/SKILL.md`</text>
+  <text x="902" y="396" class="small">和命令体验合并</text>
+
+  <rect class="axis" x="48" y="442" width="210" height="104"/>
+  <text x="76" y="484" class="label">总是先暴露给模型的</text>
+  <text x="76" y="514" class="small">用于决定会不会触发</text>
+  <rect class="cell" x="274" y="442" width="286" height="104"/>
+  <text x="298" y="484" class="text">frontmatter</text>
+  <text x="298" y="512" class="small">尤其 `description` / `description_zh` / `description_en`</text>
+  <rect class="cell" x="576" y="442" width="286" height="104"/>
+  <text x="600" y="484" class="text">`name`、`description`、`path`</text>
+  <text x="600" y="512" class="small">平台把它们加进 prompt 上下文</text>
+  <rect class="cell" x="878" y="442" width="274" height="104"/>
+  <text x="902" y="484" class="text">skill 列表里的名称和描述</text>
+  <text x="902" y="512" class="small">Claude 用描述决定是否自动加载</text>
+
+  <rect class="axis" x="48" y="562" width="210" height="104"/>
+  <text x="76" y="604" class="label">支持文件怎么组织</text>
+  <text x="76" y="634" class="small">reference、脚本、模板</text>
+  <rect class="cell" x="274" y="562" width="286" height="104"/>
+  <text x="298" y="604" class="text">文档把三类目录单独命名</text>
+  <text x="298" y="632" class="small">`references / scripts / templates`</text>
+  <rect class="cell" x="576" y="562" width="286" height="104"/>
+  <text x="600" y="604" class="text">文件包里可放任意文件</text>
+  <text x="600" y="632" class="small">没有固定目录名要求</text>
+  <rect class="cell" x="878" y="562" width="274" height="104"/>
+  <text x="902" y="604" class="text">skill 目录里自由放 supporting files</text>
+  <text x="902" y="632" class="small">还支持动态上下文注入</text>
+
+  <rect class="axis" x="48" y="682" width="210" height="104"/>
+  <text x="76" y="724" class="label">skill 之外的边界</text>
+  <text x="76" y="754" class="small">长期规则放哪</text>
+  <rect class="cell" x="274" y="682" width="286" height="104"/>
+  <text x="298" y="724" class="text">这页文档没展开长期记忆层</text>
+  <text x="298" y="752" class="small">更像平台打包规范页</text>
+  <rect class="cell" x="576" y="682" width="286" height="104"/>
+  <text x="600" y="724" class="text">skill 通过 shell 环境挂载</text>
+  <text x="600" y="752" class="small">更偏 API 运行时接入</text>
+  <rect class="cell" x="878" y="682" width="274" height="104"/>
+  <text x="902" y="724" class="text">长期规则进 `CLAUDE.md`</text>
+  <text x="902" y="752" class="small">专门 worker 另走 subagents</text>
+</svg>

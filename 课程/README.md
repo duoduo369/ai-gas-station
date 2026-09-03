@@ -18,6 +18,22 @@
   </tr>
 </table>
 
+## 平台 Skill 开发课
+
+<table>
+  <tr>
+    <td align="center" valign="top">
+      <a href="./腾讯workbuddy技能开发/lessons/homepage.html">
+        <img src="./腾讯workbuddy技能开发/assets/cover/腾讯workbuddy技能开发.jpg" alt="腾讯 WorkBuddy 技能开发" width="100%">
+      </a>
+      <p>
+        <a href="./腾讯workbuddy技能开发/lessons/homepage.html"><strong>腾讯 WorkBuddy 技能开发</strong></a><br>
+        先拆 WorkBuddy 官方 skill 结构，再把 <code>writing-for-agents</code> 压上去，最后和 OpenAI Skills、Claude Code Skills 做结构对照。
+      </p>
+    </td>
+  </tr>
+</table>
+
 ## 方法论讨论课
 
 <table>

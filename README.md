@@ -62,6 +62,15 @@ AI 会放大产出，也会放大混乱；这些课更在意怎样少走弯路�
       </p>
     </td>
     <td align="center" width="33.33%" valign="top">
+      <a href="./课程/腾讯workbuddy技能开发/lessons/homepage.html">
+        <img src="./课程/腾讯workbuddy技能开发/assets/cover/腾讯workbuddy技能开发.jpg" alt="腾讯 WorkBuddy 技能开发" width="100%">
+      </a>
+      <p>
+        <a href="./课程/腾讯workbuddy技能开发/lessons/homepage.html"><strong>腾讯 WorkBuddy 技能开发</strong></a><br>
+        先拆 WorkBuddy 官方 skill 结构，再把 <code>writing-for-agents</code> 压上去，最后和 OpenAI Skills、Claude Code Skills 做结构对照。
+      </p>
+    </td>
+    <td align="center" width="33.33%" valign="top">
       <a href="./课程/agent编程方法论探索/lessons/0001-agent-failure-modes.html">
         <img src="./assets/cover/agent编程方法论探索.jpg" alt="Agent 编程方法论探索" width="100%">
       </a>
@@ -70,6 +79,8 @@ AI 会放大产出，也会放大混乱；这些课更在意怎样少走弯路�
         用 Matt / Superpowers / SwarmForge 三套方法讨论纪律落点，也讨论 spec 是入口还是工件。
       </p>
     </td>
+  </tr>
+  <tr>
     <td align="center" width="33.33%" valign="top">
       <a href="./课程/AI中文写作去AI味/lessons/0001-ai-flavor-traces.html">
         <img src="./assets/cover/写作去ai味.jpg" alt="AI 中文写作去 AI 味" width="100%">

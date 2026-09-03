@@ -13,4 +13,4 @@
 
 - 这个方法已经不是一次性描述，而是下次很可能还会再用。
 - 触发时机、核心动作和完成标准已经能压成一个短的 `SKILL.md`。
-- 只有在主文件之外确实还需要 disclosed reference 时，才补 `reference/`，不要默认创建通用备注文件。
+- 只有在主文件之外确实还需要 disclosed reference 时，才补 `references/`，不要默认创建通用备注文件。

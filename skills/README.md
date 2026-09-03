@@ -34,5 +34,5 @@
 
 - `skills/` 采用 `skills/<bucket>/<skill-name>/` 的一 skill 一目录形态。
 - 候选 skill 与稳定 skill 默认都是 user-invoked；只有明确值得支付 context load 时，才考虑 model-invoked。
-- 每个 skill 至少包含 `SKILL.md`；只有在主文件之外确实还需要 disclosed reference 时，才补 `reference/`，并使用有意义的文件名。
+- 每个 skill 至少包含 `SKILL.md`；只有在主文件之外确实还需要 disclosed reference 时，才补 `references/`，并使用有意义的文件名。
 - 纯学习拆解、上游 skill 阅读笔记与仓库地图统一放到 [`../技能拆解/README.md`](../技能拆解/README.md)。
